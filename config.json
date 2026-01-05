@@ -1,0 +1,14 @@
+{
+  "port": 2000,
+  "enableTLS": false,
+  "tls": {
+    "key": "path/to/key.pem",
+    "cert": "path/to/cert.pem"
+  },
+  "messageMapping": {
+    "OP001": "Response message for OP001",
+    "OP002": "Response message for OP002",
+    "OP003": "Response message for OP003"
+  }
+}
+

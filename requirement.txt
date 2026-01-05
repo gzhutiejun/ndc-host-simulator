@@ -1,0 +1,6 @@
+Create a Host simulator in Javascript and implement the following requirements:
+1. It is written in Javascript and running with Node Javascript;
+2. It is a  TCP/IP server, listen connection from a client and response with a pre-defined message;
+3. Provide a message mapping configuation in JSON format, each item has a opcode and response message; 
+4. When a message received, it extract opcode from the message, and pick a pre-defined response message, send back to the client.
+5. It provide a switch or configuration to turn on/off TLS 1.2, TLS is disabled by default.
