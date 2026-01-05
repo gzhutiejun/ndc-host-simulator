@@ -6,9 +6,8 @@
     "cert": "path/to/cert.pem"
   },
   "messageMapping": {
-    "OP001": "Response message for OP001",
-    "OP002": "Response message for OP002",
-    "OP003": "Response message for OP003"
+    "GIS": "1<FS><FS><FS>1",
+    "OOS": "1<FS><FS><FS>2"
   }
 }
 
