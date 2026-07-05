@@ -13,6 +13,11 @@
       "handler": "withdrawal"
     },
     {
+      "name": "balance-inquiry",
+      "match": { "messageClass": "1", "subClass": "1", "field": { "index": 7, "startsWith": "C" } },
+      "handler": "balance"
+    },
+    {
       "name": "ready9-go-in-service",
       "match": { "messageClass": "2", "field": { "index": 3, "startsWith": "9" } },
       "handler": "goInService"
@@ -36,15 +41,32 @@
   "withdrawal": {
     "cassettes": [50, 100, 500, 1000],
     "approvedNextState": "123",
+    "declineNextState": "048",
+    "maxAmount": null,
     "returnCard": "0",
     "amountFieldIndex": 8,
     "printerFlag": "1",
     "includeCam": false,
     "camArc": "00",
-    "onDispenseError": "decline",
     "receipt": {
       "screen": "",
       "printerData": "<GS>1  CASH WITHDRAWAL<LF>  AED <AMOUNT><LF>  <PAN><LF>  <DATE> <TIME><LF>  REF <RECNO><LF><FF>"
+    },
+    "declineReceipt": {
+      "screen": "",
+      "printerData": "<GS>1  WITHDRAWAL DECLINED<LF>  AED <AMOUNT><LF>  <DATE> <TIME><LF><FF>"
+    }
+  },
+  "balance": {
+    "nextState": "074",
+    "amount": "5000.00",
+    "returnCard": "0",
+    "printerFlag": "1",
+    "includeCam": false,
+    "camArc": "00",
+    "receipt": {
+      "screen": "074075<ESC>[20;80m<SI>FG      <BALANCE> ",
+      "printerData": "<GS>1  BALANCE INQUIRY<LF>  AVAIL BAL: AED <BALANCE><LF>  <DATE> <TIME><LF><FF>"
     }
   }
 }
