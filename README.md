@@ -48,6 +48,28 @@ npm test           # 跑单元/端到端测试（node --test）
 > 对 ReadyB(`B`)/TerminalState(`F`)/设备状态(`12`) 不应答。TransactionRequest→TransactionReply
 > 属后续子项目，默认配置暂不含。
 
+## 取款交易流程（子项目 2a）
+
+收到取款 TransactionRequest（类 `1`/子 `1`，且请求 field[7]==`"ADC     "`）时，simulator
+默认批准并返回 TransactionReply（类 `4`）：下一状态 `123`、按金额贪心分解出的 `fieldG`
+出钞指令、退卡、最小凭条。
+
+`config.json` 的 `withdrawal` 块：
+
+- **cassettes**：磁箱面额（低→高，对应 fieldG 的 C1..C4），默认 `[50,100,500,1000]`。
+- **approvedNextState**：批准后 ATM 跳转的状态号（默认 `"123"`）。
+- **amountFieldIndex**：请求里金额字段索引（默认 `8`）。
+- **returnCard** / **printerFlag**：退卡标志 / 打印标志。
+- **includeCam** / **camArc**：是否在 reply 追加 CAM/EMV 缓冲及授权响应码（默认关）。
+- **receipt.screen** / **receipt.printerData**：屏幕/凭条模板，支持占位符
+  `<AMOUNT> <PAN> <DATE> <TIME> <RECNO> <LUNO>` 与控制字 `<LF> <FF> <SO> <SI> <GS> <FS>`。
+
+> **需用真实 ATM 校准的项**（种子取自 AJMN1301 抓包，终端相关）：
+> ① 取款识别谓词 `field[7]=="ADC     "` 与金额索引 `8`；② 出钞用贪心分解（金额吻合但
+> 与真实主机的混钞不同，ATM 应可接受任意合法组合）；③ **CAM/EMV 缓冲默认关闭**——真实
+> 取款 reply 带含 ARPC 密文（tag 91）的 CAM，离线无法计算该密文；若目标 ATM 需要芯片卡
+> 在线发卡行认证，需另行提供。余额/转账等其它交易类型属后续子项目 2b。
+
 ## 录包
 
 每条收/发报文都会打印 hex dump 并追加到 `captures/session-<时间戳>.log`，
