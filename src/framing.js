@@ -25,4 +25,12 @@ function createDecoder() {
   };
 }
 
-module.exports = { encodeLength, createDecoder, MAX_FRAME };
+function encodeText(str) {
+  return Buffer.from(str, 'latin1');
+}
+
+function decodeText(buf) {
+  return buf.toString('latin1');
+}
+
+module.exports = { encodeLength, createDecoder, MAX_FRAME, encodeText, decodeText };

@@ -41,3 +41,17 @@ test('decoder handles length header split across chunks', () => {
   const frames = d.push(full.subarray(1));
   assert.strictEqual(frames[0].toString('latin1'), 'XY');
 });
+
+const { encodeText, decodeText } = require('../src/framing');
+
+test('encodeText/decodeText round-trip all bytes 0x00-0xFF (字节保真)', () => {
+  const bytes = Buffer.from(Array.from({ length: 256 }, (_, i) => i));
+  const str = decodeText(bytes);
+  const back = encodeText(str);
+  assert.deepStrictEqual([...back], [...bytes]);
+});
+
+test('decodeText preserves control chars', () => {
+  const buf = Buffer.from([0x32, 0x32, 0x1c, 0x39]); // "22" FS "9"
+  assert.strictEqual(decodeText(buf), '22\x1c9');
+});
