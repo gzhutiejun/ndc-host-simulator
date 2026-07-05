@@ -8,6 +8,11 @@
   },
   "rules": [
     {
+      "name": "withdrawal-request",
+      "match": { "messageClass": "1", "subClass": "1", "field": { "index": 7, "equals": "ADC     " } },
+      "handler": "withdrawal"
+    },
+    {
       "name": "ready9-go-in-service",
       "match": { "messageClass": "2", "field": { "index": 3, "startsWith": "9" } },
       "handler": "goInService"
@@ -27,5 +32,19 @@
       "match": { "messageClass": "1", "subClass": "2" },
       "noReply": true
     }
-  ]
+  ],
+  "withdrawal": {
+    "cassettes": [50, 100, 500, 1000],
+    "approvedNextState": "123",
+    "returnCard": "0",
+    "amountFieldIndex": 8,
+    "printerFlag": "1",
+    "includeCam": false,
+    "camArc": "00",
+    "onDispenseError": "decline",
+    "receipt": {
+      "screen": "",
+      "printerData": "<GS>1  CASH WITHDRAWAL<LF>  AED <AMOUNT><LF>  <PAN><LF>  <DATE> <TIME><LF>  REF <RECNO><LF><FF>"
+    }
+  }
 }

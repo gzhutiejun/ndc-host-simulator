@@ -25,7 +25,7 @@ function matches(match, parsed) {
   return true;
 }
 
-function createEngine({ rules = [], handlers = {} } = {}) {
+function createEngine({ rules = [], handlers = {}, now = () => new Date() } = {}) {
   return {
     respond(parsed, session) {
       const rule = rules.find((r) => matches(r.match, parsed));
@@ -40,7 +40,7 @@ function createEngine({ rules = [], handlers = {} } = {}) {
         if (typeof fn !== 'function') {
           throw new Error(`Rule "${rule.name}" references unknown handler "${rule.handler}"`);
         }
-        return { payload: fn(parsed, session, { applyTemplate, ctx, constants }), rule: rule.name };
+        return { payload: fn(parsed, session, { applyTemplate, ctx, constants, now }), rule: rule.name };
       }
       if (rule.template != null) return { payload: applyTemplate(rule.template, ctx), rule: rule.name };
       throw new Error(`Rule "${rule.name}" matched but defines no template, handler, or noReply`);

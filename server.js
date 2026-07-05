@@ -8,12 +8,15 @@ const { createSession } = require('./src/session');
 const { createEngine } = require('./src/engine');
 const { createLogger } = require('./src/logging');
 const goInService = require('./src/handlers/goInService');
-
-const handlers = { goInService };
+const makeWithdrawal = require('./src/handlers/withdrawal');
 
 function createApp(config) {
   const captureDir = config.captureDir || path.join(__dirname, 'captures');
   const responseDelayMs = config.responseDelayMs || 0;
+  const handlers = {
+    goInService,
+    withdrawal: makeWithdrawal(config.withdrawal || {}),
+  };
   const engine = createEngine({ rules: config.rules || [], handlers });
   const logger = createLogger({ dir: captureDir });
 
