@@ -1,6 +1,6 @@
 const { breakdown } = require('../dispense');
 const { buildTransactionReply } = require('../ndc/transactionReply');
-const { extractWithdrawal } = require('../ndc/transactionRequest');
+const { extractRequest } = require('../ndc/transactionRequest');
 const { applyReceipt, fmtAmount, fmtDate, fmtTime, buildCam } = require('../ndc/receipt');
 
 module.exports = function makeWithdrawal(cfg = {}) {
@@ -14,7 +14,7 @@ module.exports = function makeWithdrawal(cfg = {}) {
   const receipt = cfg.receipt || { screen: '', printerData: '' };
 
   return function withdrawal(parsed, session, helpers) {
-    const req = extractWithdrawal(parsed, { amountFieldIndex });
+    const req = extractRequest(parsed, { amountFieldIndex });
     if (req.amount == null) return null;
     const disp = breakdown(req.amount, cassettes);
     if (!disp.ok) return null;

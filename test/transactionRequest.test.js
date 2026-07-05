@@ -1,6 +1,6 @@
 const test = require('node:test');
 const assert = require('node:assert');
-const { extractWithdrawal } = require('../src/ndc/transactionRequest');
+const { extractRequest } = require('../src/ndc/transactionRequest');
 const { parse } = require('../src/ndc/parser');
 const { encodeText } = require('../src/framing');
 const { FS } = require('../src/constants');
@@ -17,20 +17,20 @@ function balanceReq() {
 }
 
 test('extracts amount, luno and MCN from a withdrawal request', () => {
-  const r = extractWithdrawal(withdrawalReq());
+  const r = extractRequest(withdrawalReq());
   assert.strictEqual(r.amount, 300);
   assert.strictEqual(r.luno, '000');
   assert.strictEqual(r.mcn, '5'); // field[4]='15' → 第2字符 '5'
 });
 
 test('balance request has null amount (empty field[8])', () => {
-  const r = extractWithdrawal(balanceReq());
+  const r = extractRequest(balanceReq());
   assert.strictEqual(r.amount, null);
 });
 
 test('respects a custom amountFieldIndex', () => {
   const p = parse(encodeText(['11', '000', '', '', '19', 'x', 'x', 'x', 'x', '00000750'].join(FS)));
-  const r = extractWithdrawal(p, { amountFieldIndex: 9 });
+  const r = extractRequest(p, { amountFieldIndex: 9 });
   assert.strictEqual(r.amount, 750);
   assert.strictEqual(r.mcn, '9');
 });
