@@ -1,4 +1,4 @@
-function extractWithdrawal(parsed, config = {}) {
+function extractRequest(parsed, config = {}) {
   const amountFieldIndex = config.amountFieldIndex != null ? config.amountFieldIndex : 8;
   const fields = parsed.fields || [];
   const amountRaw = fields[amountFieldIndex];
@@ -14,4 +14,4 @@ function extractWithdrawal(parsed, config = {}) {
   };
 }
 
-module.exports = { extractWithdrawal };
+module.exports = { extractRequest };

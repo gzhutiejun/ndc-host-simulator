@@ -70,6 +70,24 @@ npm test           # 跑单元/端到端测试（node --test）
 > 取款 reply 带含 ARPC 密文（tag 91）的 CAM，离线无法计算该密文；若目标 ATM 需要芯片卡
 > 在线发卡行认证，需另行提供。余额/转账等其它交易类型属后续子项目 2b。
 
+## 余额查询与取款拒绝（子项目 2b）
+
+**余额查询**：收到查询类请求（field[7] 以 `C` 开头）时，返回 class-4 reply：下一状态 `074`、
+**不出钞**（fieldG 空）、屏幕字段带**可配的固定余额**。`config.json` 的 `balance` 块：
+
+- **nextState**：查询后 ATM 跳转状态（默认 `"074"`）。
+- **amount**：返回的固定余额（默认 `"5000.00"`），填入 screen/printer 模板的 `<BALANCE>`。
+- **returnCard** / **printerFlag** / **includeCam** / **camArc**：同取款。
+- **receipt.screen** / **receipt.printerData**：屏幕/凭条模板，支持 `<BALANCE> <PAN> <DATE> <TIME> <RECNO> <LUNO>` 与控制字 `<LF> <FF> <ESC> <SO> <SI> <GS>`。
+
+**取款拒绝**：`withdrawal` 块新增 `maxAmount`（默认 `null`=不主动限额）与 `declineNextState`
+（默认 `"048"`）、`declineReceipt`。当取款金额超过 `maxAmount`，或金额无法用磁箱面额凑出时，
+返回 class-4 **拒绝** reply：`declineNextState`、**不出钞**、拒绝凭条、不带 CAM。
+
+> **需真 ATM 校准**：余额识别用 `field[7] startsWith "C"` 粗匹配整个查询族，next-state 统一
+> `074`（真实中 077/151/134 因子类型而异）；余额 screen 模板（含 `<ESC>[20;80m<SI>FG` 定位）
+> 与 decline next-state `048` 均为抓包种子。其它交易类型（转账/存款/改密）属后续子项目。
+
 ## 录包
 
 每条收/发报文都会打印 hex dump 并追加到 `captures/session-<时间戳>.log`，
