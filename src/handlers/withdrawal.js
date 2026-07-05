@@ -23,7 +23,6 @@ function applyReceipt(tpl, values) {
     .replace(/<SO>/g, C.SO)
     .replace(/<SI>/g, C.SI)
     .replace(/<GS>/g, C.GS)
-    .replace(/<FS>/g, C.FS)
     .replace(/<AMOUNT>/g, values.amount)
     .replace(/<PAN>/g, values.pan)
     .replace(/<DATE>/g, values.date)
@@ -39,12 +38,12 @@ function arcToHex(arc) {
 
 module.exports = function makeWithdrawal(cfg = {}) {
   const cassettes = cfg.cassettes || [50, 100, 500, 1000];
-  const approvedNextState = cfg.approvedNextState || '123';
-  const returnCard = cfg.returnCard || '0';
-  const printerFlag = cfg.printerFlag || '1';
+  const approvedNextState = cfg.approvedNextState != null ? cfg.approvedNextState : '123';
+  const returnCard = cfg.returnCard != null ? cfg.returnCard : '0';
+  const printerFlag = cfg.printerFlag != null ? cfg.printerFlag : '1';
   const amountFieldIndex = cfg.amountFieldIndex != null ? cfg.amountFieldIndex : 8;
   const includeCam = cfg.includeCam === true;
-  const camArc = cfg.camArc || '00';
+  const camArc = cfg.camArc != null ? cfg.camArc : '00';
   const receipt = cfg.receipt || { screen: '', printerData: '' };
 
   return function withdrawal(parsed, session, helpers) {

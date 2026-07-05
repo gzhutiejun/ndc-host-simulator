@@ -45,8 +45,8 @@ npm test           # 跑单元/端到端测试（node --test）
   - `noReply: true`：匹配到但**主机不应答**（如 ReadyB 心跳、设备状态）。与"未匹配"区分——不会告警。
 
 > 默认规则依据真实 ATM（AJMN1301）抓包：主机对 Ready9(`2x`+描述符`9`) 回 go-in-service，
-> 对 ReadyB(`B`)/TerminalState(`F`)/设备状态(`12`) 不应答。TransactionRequest→TransactionReply
-> 属后续子项目，默认配置暂不含。
+> 对 ReadyB(`B`)/TerminalState(`F`)/设备状态(`12`) 不应答。取款（`ADC`）TransactionRequest→TransactionReply
+> 已在默认配置中支持（详见"取款交易流程"节）；余额/转账等其它交易类型属后续子项目，默认配置暂不含。
 
 ## 取款交易流程（子项目 2a）
 
@@ -62,7 +62,7 @@ npm test           # 跑单元/端到端测试（node --test）
 - **returnCard** / **printerFlag**：退卡标志 / 打印标志。
 - **includeCam** / **camArc**：是否在 reply 追加 CAM/EMV 缓冲及授权响应码（默认关）。
 - **receipt.screen** / **receipt.printerData**：屏幕/凭条模板，支持占位符
-  `<AMOUNT> <PAN> <DATE> <TIME> <RECNO> <LUNO>` 与控制字 `<LF> <FF> <SO> <SI> <GS> <FS>`。
+  `<AMOUNT> <PAN> <DATE> <TIME> <RECNO> <LUNO>` 与控制字 `<LF> <FF> <SO> <SI> <GS>`。
 
 > **需用真实 ATM 校准的项**（种子取自 AJMN1301 抓包，终端相关）：
 > ① 取款识别谓词 `field[7]=="ADC     "` 与金额索引 `8`；② 出钞用贪心分解（金额吻合但

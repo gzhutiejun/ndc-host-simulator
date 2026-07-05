@@ -57,3 +57,13 @@ test('includeCam appends a CAM buffer with ARC', () => {
   assert.ok(f[7].startsWith('5CAM'));
   assert.ok(f[7].endsWith('3030')); // ARC '00' → hex 3030
 });
+
+test('shipped config.json receipt template renders without FS corruption and substitutes amount', () => {
+  const cfg = JSON.parse(require('node:fs').readFileSync(require('node:path').join(__dirname, '..', 'config.json'), 'utf8')).withdrawal;
+  const handler = makeWithdrawal(cfg);
+  const out = handler(withdrawalReq('00000300'), createSession(), helpers);
+  assert.strictEqual(out.split(FS)[0], '4');
+  const printer = out.split(FS)[6];
+  assert.ok(printer.includes('CASH WITHDRAWAL'));
+  assert.ok(printer.includes('AED 300.00'));
+});

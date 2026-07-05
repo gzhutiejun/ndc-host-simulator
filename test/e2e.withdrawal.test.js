@@ -8,7 +8,7 @@ const { createApp } = require('../server');
 const { FS } = require('../src/constants');
 const { encodeLength, createDecoder } = require('../src/framing');
 
-test('withdrawal request gets an approved reply (next-state 123 + fieldG) end-to-end', async () => {
+test('withdrawal request gets an approved reply (next-state 123 + fieldG) end-to-end', { timeout: 5000 }, async () => {
   const capDir = fs.mkdtempSync(path.join(os.tmpdir(), 'ndc-wd-'));
   const app = createApp({
     enableTLS: false,
