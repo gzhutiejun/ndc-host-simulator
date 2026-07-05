@@ -1,122 +1,79 @@
 # NDC Host Simulator
 
-A TCP/IP server simulator written in Node.js that listens for client connections and responds with pre-defined messages based on opcode mapping.
+用 Node.js 编写的 ATM 主机（host）模拟器，模拟与 NCR/Atleos APTRA Activate ATM 应用
+之间的 **NDC+ over TCP** 通讯，能自动应答 ATM 发来的 NDC 报文。零第三方依赖。
 
-## Features
+## 协议
 
-- TCP/IP server implementation
-- Message mapping configuration via JSON
-- Opcode-based message routing
-- Optional TLS 1.2 support (disabled by default)
-- Configurable port and settings
+- 帧格式：`[2 字节大端长度 N][N 字节 payload]`（N 不含长度头本身）。
+- payload 为字符流，控制字符分隔：FS=0x1C、GS=0x1D、RS=0x1E、ETX=0x03。
+- 报文首字符=消息类，次字符=子类。ATM→host：`1`=非请求状态、`2`=请求状态；
+  host→ATM：`1`=终端命令、`4`=交易应答。
 
-## Requirements
+## 运行
 
-- Node.js 12.0.0 or higher
+```bash
+npm start          # 读 config.json 启动
+npm test           # 跑单元/端到端测试（node --test）
+```
 
-## Installation
+真实 ATM 默认连 `127.0.0.1:2000`，与本模拟器默认端口一致。
 
-No additional dependencies required - uses Node.js built-in modules only.
-
-## Configuration
-
-Edit `config.json` to configure the server:
+## 配置（config.json）
 
 ```json
 {
-  "port": 8080,
+  "port": 2000,
   "enableTLS": false,
-  "tls": {
-    "key": "path/to/key.pem",
-    "cert": "path/to/cert.pem"
-  },
-  "messageMapping": {
-    "OP001": "Response message for OP001",
-    "OP002": "Response message for OP002",
-    "OP003": "Response message for OP003"
-  }
+  "responseDelayMs": 0,
+  "tls": { "key": "path/to/key.pem", "cert": "path/to/cert.pem" },
+  "rules": [
+    { "name": "ready9-go-in-service",
+      "match": { "messageClass": "2", "field": { "index": 3, "startsWith": "9" } },
+      "handler": "goInService" }
+  ]
 }
 ```
 
-### Configuration Options
+- **port**：监听端口（默认 2000）。
+- **enableTLS**：是否启用 TLS 1.2（默认 false）。启用时需配置 `tls.key`/`tls.cert`。
+- **responseDelayMs**：应答延迟毫秒（默认 0）。
+- **rules**：应答规则，按顺序匹配第一条命中的：
+  - `match`：谓词，可含 `messageClass`、`subClass`、`type`、`field:{index,equals|startsWith}`；空对象总是匹配。
+  - `template`：应答模板，支持占位符 `<FS> <GS> <SO> <SI> <LUNO> <TVN>`。
+  - `handler`：JS 处理器名（见 `src/handlers/`），用于需要计算/状态的应答，与 `template` 二选一。
+  - `noReply: true`：匹配到但**主机不应答**（如 ReadyB 心跳、设备状态）。与"未匹配"区分——不会告警。
 
-- **port**: TCP/IP port number to listen on (default: 8080)
-- **enableTLS**: Set to `true` to enable TLS 1.2, `false` to disable (default: false)
-- **tls.key**: Path to TLS private key file (required when TLS is enabled)
-- **tls.cert**: Path to TLS certificate file (required when TLS is enabled)
-- **messageMapping**: Object mapping opcodes to response messages
+> 默认规则依据真实 ATM（AJMN1301）抓包：主机对 Ready9(`2x`+描述符`9`) 回 go-in-service，
+> 对 ReadyB(`B`)/TerminalState(`F`)/设备状态(`12`) 不应答。TransactionRequest→TransactionReply
+> 属后续子项目，默认配置暂不含。
 
-## Usage
+## 录包
 
-### Start the server
+每条收/发报文都会打印 hex dump 并追加到 `captures/session-<时间戳>.log`，
+用于分析真实 ATM 报文、迭代应答规则。
 
-```bash
-node server.js
-```
+## TLS（可选）
 
-Or using npm:
-
-```bash
-npm start
-```
-
-### Message Format
-
-The server extracts the opcode from incoming messages in the following order:
-
-1. **JSON format**: If the message is valid JSON with an `opcode` field, it uses that value
-2. **String format**: Otherwise, it extracts the first 5 characters as the opcode
-
-You can customize the opcode extraction logic in `server.js` by modifying the `extractOpcode()` function.
-
-### Example Client Connection
-
-```javascript
-const net = require('net');
-
-const client = net.createConnection({ port: 8080 }, () => {
-  console.log('Connected to server');
-  client.write('OP001');
-});
-
-client.on('data', (data) => {
-  console.log('Response:', data.toString());
-  client.end();
-});
-
-client.on('end', () => {
-  console.log('Disconnected from server');
-});
-```
-
-## TLS Support
-
-To enable TLS 1.2:
-
-1. Set `enableTLS` to `true` in `config.json`
-2. Provide valid TLS certificate and key file paths
-3. Ensure the certificate and key files are accessible
-
-Example with self-signed certificate (for testing):
+生成自签证书用于测试：
 
 ```bash
 openssl req -x509 -newkey rsa:2048 -keyout key.pem -out cert.pem -days 365 -nodes
 ```
 
-Then update `config.json`:
+然后把 `enableTLS` 设为 `true` 并填好 `tls.key`/`tls.cert` 路径。
 
-```json
-{
-  "port": 8080,
-  "enableTLS": true,
-  "tls": {
-    "key": "./key.pem",
-    "cert": "./cert.pem"
-  },
-  "messageMapping": {
-    "OP001": "TLS Response for OP001"
-  }
-}
+## 结构
+
+```
+server.js          入口 + 装配层（createApp）
+src/transport.js   TCP/TLS 服务器
+src/framing.js     长度分帧 + 流式拆帧 + latin1 文本编解码
+src/ndc/parser.js  NDC 报文解析 + 分类
+src/engine.js      混合应答引擎（规则 + 模板 + handler）
+src/session.js     每连接会话状态
+src/logging.js     hex dump + 录包
+src/handlers/      JS 处理器（如 goInService）
 ```
 
 ## License

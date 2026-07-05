@@ -1,13 +1,31 @@
 {
   "port": 2000,
   "enableTLS": false,
+  "responseDelayMs": 0,
   "tls": {
     "key": "path/to/key.pem",
     "cert": "path/to/cert.pem"
   },
-  "messageMapping": {
-    "GIS": "1<FS><FS><FS>1",
-    "OOS": "1<FS><FS><FS>2"
-  }
+  "rules": [
+    {
+      "name": "ready9-go-in-service",
+      "match": { "messageClass": "2", "field": { "index": 3, "startsWith": "9" } },
+      "handler": "goInService"
+    },
+    {
+      "name": "ready-b-idle-no-reply",
+      "match": { "messageClass": "2", "field": { "index": 3, "startsWith": "B" } },
+      "noReply": true
+    },
+    {
+      "name": "terminal-state-no-reply",
+      "match": { "messageClass": "2", "field": { "index": 3, "startsWith": "F" } },
+      "noReply": true
+    },
+    {
+      "name": "unsolicited-status-no-reply",
+      "match": { "messageClass": "1", "subClass": "2" },
+      "noReply": true
+    }
+  ]
 }
-
