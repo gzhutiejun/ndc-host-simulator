@@ -580,10 +580,15 @@ git commit -m "feat: add per-connection session state"
 - Produces: `src/engine.js` 导出
   - `applyTemplate(template: string, ctx: object): string` —— 替换占位符 `<FS> <GS> <SO> <SI>`（来自 constants）以及 `<LUNO> <TVN>`（来自 ctx）。未知占位符原样保留。
   - `matches(match: object, parsed: ParsedMessage): boolean` —— 支持字段：`messageClass`、`subClass`、`type`、`field:{index, equals?, startsWith?}`。全部提供的条件都满足才返回 true。空 `match`（`{}`）视为总是匹配。
-  - `createEngine({ rules, handlers }): { respond(parsed, session): string|null }`
-    - `respond`：按顺序找第一条 `matches` 命中的规则。命中带 `template` 的 → `applyTemplate(template, ctx)`；命中带 `handler` 的 → `handlers[rule.handler](parsed, session, helpers)`（helpers 见下）。无命中返回 `null`。
+  - `createEngine({ rules, handlers }): { respond(parsed, session): { payload: string|null, rule: string|null } }`
+    - `respond`：按顺序找第一条 `matches` 命中的规则，返回 `{ payload, rule }`：
+      - 无命中 → `{ payload: null, rule: null }`（真正的"未识别"）
+      - 命中带 `noReply: true` 的 → `{ payload: null, rule: rule.name }`（**匹配到但主机不应答**，如 ReadyB 心跳/设备状态；与未识别区分开）
+      - 命中带 `template` 的 → `{ payload: applyTemplate(template, ctx), rule: rule.name }`
+      - 命中带 `handler` 的 → `{ payload: handlers[rule.handler](parsed, session, helpers), rule: rule.name }`
     - `ctx`：`{ luno: session.luno || parsed.luno || '', tvn: String(session.tvn) }`
     - `helpers`：`{ applyTemplate, ctx, constants }`（handler 用它来套模板/取控制字符）
+    - **依据真实抓包**：AJMN1301 的 9263 条报文里，主机对 ReadyB(`2x`+`fields[3]`起始 `B`) 和设备状态(`12`) 从不应答（3800+ 条），只对 Ready9(`9`)/TerminalState(`F`) 回终端命令，对 TxnRequest(`11`) 回 TxnReply(`4`)。故 `noReply` 是一等公民。
 
 - [ ] **Step 1: 写失败测试**
 
@@ -617,12 +622,13 @@ test('matches checks class, subClass, type and field predicates', () => {
 
 test('respond picks first matching template rule', () => {
   const engine = createEngine({
-    rules: [{ name: 'gis', match: { messageClass: '2' }, template: '1<FS><FS><FS>1' }],
+    rules: [{ name: 'gis', match: { messageClass: '2', field: { index: 3, startsWith: '9' } }, template: '1<FS><FS><FS>1' }],
     handlers: {},
   });
   const p = parse(encodeText('22' + FS + '123' + FS + FS + '9'));
   const out = engine.respond(p, createSession());
-  assert.strictEqual(out, '1' + FS + FS + FS + '1');
+  assert.strictEqual(out.payload, '1' + FS + FS + FS + '1');
+  assert.strictEqual(out.rule, 'gis');
 });
 
 test('respond dispatches to a handler', () => {
@@ -634,13 +640,27 @@ test('respond dispatches to a handler', () => {
   });
   const p = parse(encodeText('22' + FS + '777' + FS + FS + '9'));
   const out = engine.respond(p, createSession());
-  assert.strictEqual(out, 'X777');
+  assert.strictEqual(out.payload, 'X777');
 });
 
-test('respond returns null when no rule matches', () => {
+test('respond honours noReply rule (matched but silent)', () => {
+  // 真实主机对 ReadyB 心跳不应答，但仍是"匹配到"，不能当未识别
+  const engine = createEngine({
+    rules: [{ name: 'ready-b-idle', match: { messageClass: '2', field: { index: 3, startsWith: 'B' } }, noReply: true }],
+    handlers: {},
+  });
+  const p = parse(encodeText('22' + FS + '000' + FS + FS + 'B'));
+  const out = engine.respond(p, createSession());
+  assert.strictEqual(out.payload, null);
+  assert.strictEqual(out.rule, 'ready-b-idle');
+});
+
+test('respond returns null rule when no rule matches (真正未识别)', () => {
   const engine = createEngine({ rules: [{ name: 'x', match: { messageClass: '9' }, template: 'Z' }], handlers: {} });
   const p = parse(encodeText('22' + FS + '123'));
-  assert.strictEqual(engine.respond(p, createSession()), null);
+  const out = engine.respond(p, createSession());
+  assert.strictEqual(out.payload, null);
+  assert.strictEqual(out.rule, null);
 });
 ```
 
@@ -685,7 +705,8 @@ function createEngine({ rules = [], handlers = {} } = {}) {
   return {
     respond(parsed, session) {
       const rule = rules.find((r) => matches(r.match, parsed));
-      if (!rule) return null;
+      if (!rule) return { payload: null, rule: null };
+      if (rule.noReply === true) return { payload: null, rule: rule.name };
       const ctx = {
         luno: (session && session.luno) || parsed.luno || '',
         tvn: session ? String(session.tvn) : '0',
@@ -695,10 +716,10 @@ function createEngine({ rules = [], handlers = {} } = {}) {
         if (typeof fn !== 'function') {
           throw new Error(`Rule "${rule.name}" references unknown handler "${rule.handler}"`);
         }
-        return fn(parsed, session, { applyTemplate, ctx, constants });
+        return { payload: fn(parsed, session, { applyTemplate, ctx, constants }), rule: rule.name };
       }
-      if (rule.template != null) return applyTemplate(rule.template, ctx);
-      return null;
+      if (rule.template != null) return { payload: applyTemplate(rule.template, ctx), rule: rule.name };
+      return { payload: null, rule: rule.name };
     },
   };
 }
@@ -709,7 +730,7 @@ module.exports = { applyTemplate, matches, createEngine };
 - [ ] **Step 4: 运行测试确认通过**
 
 Run: `node --test test/engine.test.js`
-Expected: PASS（5 tests）
+Expected: PASS（6 tests）
 
 - [ ] **Step 5: 提交**
 
@@ -1008,7 +1029,7 @@ git commit -m "feat: add TCP/TLS transport factory"
 **Interfaces:**
 - Consumes: 以上所有 src 模块
 - Produces: `server.js` 导出 `createApp(config): { server, start(port) }` 以便端到端测试可用；同时保留 `require.main === module` 时直接启动的行为。
-  - `createApp` 装配：每个连接建 `createSession()` + `createDecoder()`；`data` 事件 → 拆帧 → 逐帧 `parse` → `logger.record('RECV', ...)` → `session.remember` → `engine.respond` → 若非 null：`logger.record('SEND', ...)` → 延迟 `config.responseDelayMs`（默认 0）后 `socket.write(encodeLength(encodeText(resp)))`；null 则记 `logger.record('RECV', ..., {rule:'UNMATCHED'})` 已含原报文，不再写回。
+  - `createApp` 装配：每个连接建 `createSession()` + `createDecoder()`；`data` 事件 → 拆帧 → 逐帧 `parse` → `session.remember` → `engine.respond` 得 `{payload, rule}` → `logger.record('RECV', ..., {rule})` → 分三种情况：`rule==null`（未识别）告警不回写；`payload==null`（匹配到 noReply，如 ReadyB 心跳）静默不回写；否则 `logger.record('SEND', ...)` 后延迟 `config.responseDelayMs`（默认 0）`socket.write(encodeLength(encodeText(payload)))`。
 
 - [ ] **Step 1: 写失败的端到端测试**
 
@@ -1031,7 +1052,7 @@ test('ATM solicited status gets a Go-In-Service reply end-to-end', async () => {
     enableTLS: false,
     responseDelayMs: 0,
     captureDir: capDir,
-    rules: [{ name: 'gis', match: { messageClass: '2' }, handler: 'goInService' }],
+    rules: [{ name: 'ready9-go-in-service', match: { messageClass: '2', field: { index: 3, startsWith: '9' } }, handler: 'goInService' }],
   });
   await new Promise((resolve) => app.server.listen(0, resolve));
   const port = app.server.address().port;
@@ -1102,22 +1123,28 @@ function createApp(config) {
       for (const payload of frames) {
         const parsed = parse(payload);
         session.remember(parsed);
-        let resp = null;
+        let result = { payload: null, rule: null };
         try {
-          resp = engine.respond(parsed, session);
+          result = engine.respond(parsed, session);
         } catch (err) {
           console.error(`Engine error: ${err.message}`);
         }
         logger.record('RECV', payload, {
           type: parsed.type,
-          rule: resp == null ? 'UNMATCHED' : 'matched',
+          rule: result.rule == null ? 'UNMATCHED' : result.rule,
         });
-        if (resp == null) {
+        if (result.rule == null) {
+          // 真正未识别：完整 hex 已录，明确告警，不静默丢弃
           console.error(`No rule matched for ${parsed.type} — see capture for full hex`);
           continue;
         }
-        const out = encodeLength(encodeText(resp));
-        logger.record('SEND', encodeText(resp), { type: parsed.type });
+        if (result.payload == null) {
+          // 匹配到 noReply 规则（如 ReadyB 心跳/设备状态）：正常无应答，不告警
+          continue;
+        }
+        const bytes = encodeText(result.payload);
+        logger.record('SEND', bytes, { type: parsed.type, rule: result.rule });
+        const out = encodeLength(bytes);
         setTimeout(() => {
           if (!socket.destroyed) socket.write(out);
         }, responseDelayMs);
@@ -1157,7 +1184,9 @@ Expected: PASS（1 test）
 
 - [ ] **Step 5: 迁移 config.json**
 
-用以下内容整体替换 `config.json`：
+用以下内容整体替换 `config.json`。规则依据 AJMN1301 真实抓包的主机行为：Ready9 回
+go-in-service；ReadyB 心跳、TerminalState(F)、设备状态(12) 主机不应答（`noReply`）。
+（TransactionRequest→TransactionReply 属子项目 2，此处不含。）
 
 ```json
 {
@@ -1170,9 +1199,24 @@ Expected: PASS（1 test）
   },
   "rules": [
     {
-      "name": "solicited-status-go-in-service",
-      "match": { "messageClass": "2" },
+      "name": "ready9-go-in-service",
+      "match": { "messageClass": "2", "field": { "index": 3, "startsWith": "9" } },
       "handler": "goInService"
+    },
+    {
+      "name": "ready-b-idle-no-reply",
+      "match": { "messageClass": "2", "field": { "index": 3, "startsWith": "B" } },
+      "noReply": true
+    },
+    {
+      "name": "terminal-state-no-reply",
+      "match": { "messageClass": "2", "field": { "index": 3, "startsWith": "F" } },
+      "noReply": true
+    },
+    {
+      "name": "unsolicited-status-no-reply",
+      "match": { "messageClass": "1", "subClass": "2" },
+      "noReply": true
     }
   ]
 }
@@ -1232,6 +1276,11 @@ npm test           # 跑单元/端到端测试（node --test）
   - `match`：谓词，可含 `messageClass`、`subClass`、`type`、`field:{index,equals|startsWith}`；空对象总是匹配。
   - `template`：应答模板，支持占位符 `<FS> <GS> <SO> <SI> <LUNO> <TVN>`。
   - `handler`：JS 处理器名（见 `src/handlers/`），用于需要计算/状态的应答，与 `template` 二选一。
+  - `noReply: true`：匹配到但**主机不应答**（如 ReadyB 心跳、设备状态）。与"未匹配"区分——不会告警。
+
+> 默认规则依据真实 ATM（AJMN1301）抓包：主机对 Ready9(`2x`+描述符`9`) 回 go-in-service，
+> 对 ReadyB(`B`)/TerminalState(`F`)/设备状态(`12`) 不应答。TransactionRequest→TransactionReply
+> 属后续子项目，默认配置暂不含。
 
 ## 录包
 
@@ -1286,7 +1335,7 @@ git commit -m "feat: wire modular NDC host simulator with config migration and e
 - §3.1 transport → Task 9 ✅
 - §3.1 framing（分帧 + 缓冲拆帧 + win-1252/latin1 编解码）→ Task 2、3 ✅（编解码用 latin1，Global Constraints 已说明理由，替代 spec 里 win-1252 的模糊点）
 - §3.1 ndc/parser（解析 + classify + 保留空字段）→ Task 4 ✅
-- §3.1 engine（混合式：规则匹配 + 占位符 + handler）→ Task 6 ✅
+- §3.1 engine（混合式：规则匹配 + 占位符 + handler + noReply）→ Task 6 ✅（新增 `noReply` 一等公民 + `respond` 返回 `{payload,rule}`，依据真实抓包区分"匹配到但不回"与"未识别"）
 - §3.1 session → Task 5 ✅
 - §3.1 logging（hex dump + 录包 + 可配置延迟）→ Task 8（延迟在 Task 10 装配处接入 `responseDelayMs`）✅
 - §3.1 handlers/goInService → Task 7 ✅
