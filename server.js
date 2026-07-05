@@ -32,33 +32,37 @@ function createApp(config) {
         return;
       }
       for (const payload of frames) {
-        const parsed = parse(payload);
-        session.remember(parsed);
-        let result = { payload: null, rule: null };
         try {
-          result = engine.respond(parsed, session);
+          const parsed = parse(payload);
+          session.remember(parsed);
+          let result = { payload: null, rule: null };
+          try {
+            result = engine.respond(parsed, session);
+          } catch (err) {
+            console.error(`Engine error: ${err.message}`);
+          }
+          logger.record('RECV', payload, {
+            type: parsed.type,
+            rule: result.rule == null ? 'UNMATCHED' : result.rule,
+          });
+          if (result.rule == null) {
+            // 真正未识别：完整 hex 已录，明确告警，不静默丢弃
+            console.error(`No rule matched for ${parsed.type} — see capture for full hex`);
+            continue;
+          }
+          if (result.payload == null) {
+            // 匹配到 noReply 规则（如 ReadyB 心跳/设备状态）：正常无应答，不告警
+            continue;
+          }
+          const bytes = encodeText(result.payload);
+          logger.record('SEND', bytes, { type: parsed.type, rule: result.rule });
+          const out = encodeLength(bytes);
+          setTimeout(() => {
+            if (!socket.destroyed) socket.write(out);
+          }, responseDelayMs);
         } catch (err) {
-          console.error(`Engine error: ${err.message}`);
+          console.error(`Frame processing error (frame skipped): ${err.message}`);
         }
-        logger.record('RECV', payload, {
-          type: parsed.type,
-          rule: result.rule == null ? 'UNMATCHED' : result.rule,
-        });
-        if (result.rule == null) {
-          // 真正未识别：完整 hex 已录，明确告警，不静默丢弃
-          console.error(`No rule matched for ${parsed.type} — see capture for full hex`);
-          continue;
-        }
-        if (result.payload == null) {
-          // 匹配到 noReply 规则（如 ReadyB 心跳/设备状态）：正常无应答，不告警
-          continue;
-        }
-        const bytes = encodeText(result.payload);
-        logger.record('SEND', bytes, { type: parsed.type, rule: result.rule });
-        const out = encodeLength(bytes);
-        setTimeout(() => {
-          if (!socket.destroyed) socket.write(out);
-        }, responseDelayMs);
       }
     });
 

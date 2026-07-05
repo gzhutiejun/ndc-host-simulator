@@ -65,3 +65,15 @@ test('respond returns null rule when no rule matches (真正未识别)', () => {
   assert.strictEqual(out.payload, null);
   assert.strictEqual(out.rule, null);
 });
+
+test('respond throws for a matched rule with no template, handler, or noReply', () => {
+  const engine = createEngine({
+    rules: [{ name: 'bad-rule', match: { messageClass: '2' } }],
+    handlers: {},
+  });
+  const p = parse(encodeText('22' + FS + '123'));
+  assert.throws(
+    () => engine.respond(p, createSession()),
+    /defines no template/
+  );
+});

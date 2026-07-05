@@ -43,7 +43,7 @@ function createEngine({ rules = [], handlers = {} } = {}) {
         return { payload: fn(parsed, session, { applyTemplate, ctx, constants }), rule: rule.name };
       }
       if (rule.template != null) return { payload: applyTemplate(rule.template, ctx), rule: rule.name };
-      return { payload: null, rule: rule.name };
+      throw new Error(`Rule "${rule.name}" matched but defines no template, handler, or noReply`);
     },
   };
 }

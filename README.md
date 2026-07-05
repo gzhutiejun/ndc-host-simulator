@@ -28,8 +28,8 @@ npm test           # 跑单元/端到端测试（node --test）
   "responseDelayMs": 0,
   "tls": { "key": "path/to/key.pem", "cert": "path/to/cert.pem" },
   "rules": [
-    { "name": "solicited-status-go-in-service",
-      "match": { "messageClass": "2" },
+    { "name": "ready9-go-in-service",
+      "match": { "messageClass": "2", "field": { "index": 3, "startsWith": "9" } },
       "handler": "goInService" }
   ]
 }

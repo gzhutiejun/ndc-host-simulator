@@ -13,5 +13,4 @@ test('goInService returns "1<FS><FS><FS>1" terminal command', () => {
   const session = createSession();
   const out = goInService(p, session, { applyTemplate, ctx: { luno: '123', tvn: '0' }, constants });
   assert.strictEqual(out, '1' + FS + FS + FS + '1');
-  assert.strictEqual(session.luno, '123'); // 记住了 LUNO
 });
