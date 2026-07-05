@@ -4,7 +4,8 @@
   "description": "TCP/IP Host Simulator with message mapping and TLS support",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "node --test"
   },
   "keywords": [
     "tcp",
