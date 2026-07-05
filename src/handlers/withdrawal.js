@@ -21,6 +21,7 @@ module.exports = function makeWithdrawal(cfg = {}) {
     if (req.amount == null) return null;
 
     const now = helpers.now ? helpers.now() : new Date();
+    // values (含 recno=nextTvn()) 在 decline 判定前构造，使拒绝凭条也带流水号
     const values = {
       amount: fmtAmount(req.amount),
       pan: req.panMasked,

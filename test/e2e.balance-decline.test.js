@@ -19,6 +19,7 @@ function sendFrame(port, payload) {
       if (frames.length) { resolve(frames[0].toString('latin1')); client.end(); }
     });
     client.on('error', reject);
+    client.on('close', () => reject(new Error('socket closed with no frame')));
   });
 }
 
