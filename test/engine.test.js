@@ -77,3 +77,15 @@ test('respond throws for a matched rule with no template, handler, or noReply', 
     /defines no template/
   );
 });
+
+test('respond injects an overridable now() into handler helpers', () => {
+  const fixed = new Date('2026-07-05T09:52:00Z');
+  const engine = createEngine({
+    rules: [{ name: 'clock', match: { messageClass: '2' }, handler: 'clock' }],
+    handlers: { clock: (parsed, session, helpers) => helpers.now().toISOString() },
+    now: () => fixed,
+  });
+  const p = parse(encodeText('22' + FS + '000' + FS + FS + '9'));
+  const out = engine.respond(p, createSession());
+  assert.strictEqual(out.payload, '2026-07-05T09:52:00.000Z');
+});
