@@ -19,6 +19,8 @@ function createApp(config) {
     goInService,
     withdrawal: makeWithdrawal(config.withdrawal || {}),
     balance: makeBalance(config.balance || {}),
+    familyD: makeGeneric(config.familyD || { nextState: '698' }),
+    familyI: makeGeneric(config.familyI || { nextState: '175' }),
     generic: makeGeneric(config.generic || {}),
   };
   const engine = createEngine({ rules: config.rules || [], handlers });
