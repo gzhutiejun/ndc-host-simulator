@@ -100,7 +100,7 @@ npm test           # 跑单元/端到端测试（node --test）
 
 **通用兜底**：任何未被取款(A)/余额(C)匹配的 class1-sub1 TxnRequest（改密 `D*`→698、`I*`、空 opcode
 等）由 `generic` handler 应答一个安全的 class-4"取消/无法完成"reply：下一状态 `048`（可配）、
-**不出钞**（fieldG 空）、退卡、不带 CAM。这保证**没有任何交易请求被晾着直到超时**。`config.json`
+**不出钞**（fieldG 空）、退卡、不带 CAM。这让**几乎所有未识别的交易请求都有明确应答**、不再超时。`config.json`
 的 `generic` 块：
 
 - **nextState**：兜底后 ATM 跳转状态（默认 `"048"`，复用取款拒绝的安全状态）。
@@ -111,6 +111,13 @@ npm test           # 跑单元/端到端测试（node --test）
 **规则优先级**（engine 取首个匹配）：`withdrawal-request`(A) → `balance-inquiry`(C) →
 `generic-fallback`(class1-sub1 兜底，必须最后)。generic 是 sub1，与 `unsolicited-status-no-reply`(sub2)
 不冲突。
+
+> **已知边界（兜底覆盖不到的一处）**：兜底只接住"未匹配任何 handler 规则"的请求。若一个 A 族取款
+> 请求**缺失/非数字金额**，它已先命中 `withdrawal-request` 规则、由取款 handler 返回 `null`——引擎按
+> 首个匹配已锁定该规则、不会再落到 `generic-fallback`，server 把"规则命中但 payload 为 null"当作
+> noReply，故此请求仍无应答会超时。放宽到 A 族后此边界从仅 `ADC` 扩到整个 `A*`（概率仍极低：正常
+> NDC 取款必带金额）。修复需改取款 handler（对不可解析金额回 decline）或让 handler 的 null 结果落到
+> 下一条规则——均超出 2c 范围，留作后续。
 
 > **需真 ATM 校准**：通用兜底的 next-state `048` 与凭条模板为抓包种子；各交易族（转账/存款/改密/
 > 对账单）的**专用**语义（专用 next-state、专用屏幕、改密确认等）属后续子项目，现统一落到兜底。
