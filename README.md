@@ -112,12 +112,11 @@ npm test           # 跑单元/端到端测试（node --test）
 `generic-fallback`(class1-sub1 兜底，必须最后)。generic 是 sub1，与 `unsolicited-status-no-reply`(sub2)
 不冲突。
 
-> **已知边界（兜底覆盖不到的一处）**：兜底只接住"未匹配任何 handler 规则"的请求。若一个 A 族取款
-> 请求**缺失/非数字金额**，它已先命中 `withdrawal-request` 规则、由取款 handler 返回 `null`——引擎按
-> 首个匹配已锁定该规则、不会再落到 `generic-fallback`，server 把"规则命中但 payload 为 null"当作
-> noReply，故此请求仍无应答会超时。放宽到 A 族后此边界从仅 `ADC` 扩到整个 `A*`（概率仍极低：正常
-> NDC 取款必带金额）。修复需改取款 handler（对不可解析金额回 decline）或让 handler 的 null 结果落到
-> 下一条规则——均超出 2c 范围，留作后续。
+> **已闭合（子项目 2d）**：A 族取款请求**缺失/非数字金额**时，`withdrawal` handler 返回 `null`，
+> 引擎现会**落到下一条匹配规则**（不再"首个匹配即锁定"），最终由 `generic-fallback` 回一个安全的
+> 048 取消应答，不再静默超时。残余边界仅在**移除 `generic-fallback` 兜底规则**时存在——此时全部
+> handler 返回 `null` 的 class1-sub1 请求会静默无应答。**要保证任何 TxnRequest 必有应答，须保留
+> class1-sub1 的兜底规则。**
 
 > **需真 ATM 校准**：通用兜底的 next-state `048` 与凭条模板为抓包种子；各交易族（转账/存款/改密/
 > 对账单）的**专用**语义（专用 next-state、专用屏幕、改密确认等）属后续子项目，现统一落到兜底。

@@ -89,3 +89,63 @@ test('respond injects an overridable now() into handler helpers', () => {
   const out = engine.respond(p, createSession());
   assert.strictEqual(out.payload, '2026-07-05T09:52:00.000Z');
 });
+
+test('respond falls through to the next rule when a handler returns null', () => {
+  const engine = createEngine({
+    rules: [
+      { name: 'a', match: { messageClass: '2' }, handler: 'nullH' },
+      { name: 'b', match: { messageClass: '2' }, handler: 'okH' },
+    ],
+    handlers: { nullH: () => null, okH: () => 'REPLY' },
+  });
+  const p = parse(encodeText('22' + FS + '000'));
+  const out = engine.respond(p, createSession());
+  assert.strictEqual(out.payload, 'REPLY');
+  assert.strictEqual(out.rule, 'b');
+});
+
+test('respond returns null payload with the last matched rule name when every handler returns null', () => {
+  const engine = createEngine({
+    rules: [
+      { name: 'a', match: { messageClass: '2' }, handler: 'nullH' },
+      { name: 'b', match: { messageClass: '2' }, handler: 'nullH' },
+    ],
+    handlers: { nullH: () => null },
+  });
+  const p = parse(encodeText('22' + FS + '000'));
+  const out = engine.respond(p, createSession());
+  assert.strictEqual(out.payload, null);
+  assert.strictEqual(out.rule, 'b');
+});
+
+test('respond stops at a noReply rule and does not fall through to later rules', () => {
+  let reached = false;
+  const engine = createEngine({
+    rules: [
+      { name: 'silent', match: { messageClass: '2' }, noReply: true },
+      { name: 'after', match: { messageClass: '2' }, handler: 'mark' },
+    ],
+    handlers: { mark: () => { reached = true; return 'X'; } },
+  });
+  const p = parse(encodeText('22' + FS + '000'));
+  const out = engine.respond(p, createSession());
+  assert.strictEqual(out.payload, null);
+  assert.strictEqual(out.rule, 'silent');
+  assert.strictEqual(reached, false);
+});
+
+test('respond stops at the first handler that returns a payload (later rules untouched)', () => {
+  let reached = false;
+  const engine = createEngine({
+    rules: [
+      { name: 'first', match: { messageClass: '2' }, handler: 'okH' },
+      { name: 'second', match: { messageClass: '2' }, handler: 'mark' },
+    ],
+    handlers: { okH: () => 'FIRST', mark: () => { reached = true; return 'SECOND'; } },
+  });
+  const p = parse(encodeText('22' + FS + '000'));
+  const out = engine.respond(p, createSession());
+  assert.strictEqual(out.payload, 'FIRST');
+  assert.strictEqual(out.rule, 'first');
+  assert.strictEqual(reached, false);
+});

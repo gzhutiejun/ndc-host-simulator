@@ -60,3 +60,15 @@ test('non A/C TxnRequest (D-family) gets a 048 generic fallback reply, no dispen
   assert.strictEqual(f[4], '');    // no dispense
   await new Promise((resolve) => app.server.close(resolve));
 });
+
+test('A-family withdrawal with an empty amount falls through to the 048 generic fallback (no timeout)', { timeout: 5000 }, async () => {
+  const app = makeApp();
+  await new Promise((resolve) => app.server.listen(0, resolve));
+  // field[7]='A       ' 命中 withdrawal 规则，但 field[8] 金额为空 → withdrawal handler 返回 null
+  const reply = await sendFrame(app.server.address().port, ['11', '000', '', '', '15', ';X=X?', '', 'A       ', ''].join(FS));
+  const f = reply.split(FS);
+  assert.strictEqual(f[0], '4');   // TransactionReply
+  assert.strictEqual(f[3], '048'); // generic 安全取消，而非无应答超时
+  assert.strictEqual(f[4], '');    // fieldG 空，不出钞
+  await new Promise((resolve) => app.server.close(resolve));
+});
