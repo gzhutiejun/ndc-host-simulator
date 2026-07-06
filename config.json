@@ -18,6 +18,16 @@
       "handler": "balance"
     },
     {
+      "name": "d-family-reply",
+      "match": { "messageClass": "1", "subClass": "1", "field": { "index": 7, "startsWith": "D" } },
+      "handler": "familyD"
+    },
+    {
+      "name": "i-family-reply",
+      "match": { "messageClass": "1", "subClass": "1", "field": { "index": 7, "startsWith": "I" } },
+      "handler": "familyI"
+    },
+    {
       "name": "generic-fallback",
       "match": { "messageClass": "1", "subClass": "1" },
       "handler": "generic"
@@ -84,5 +94,21 @@
       "screen": "",
       "printerData": "<GS>1  TRANSACTION CANCELLED<LF>  <DATE> <TIME><LF><FF>"
     }
+  },
+  "familyD": {
+    "nextState": "698",
+    "returnCard": "0",
+    "printerFlag": "1",
+    "includeCam": false,
+    "camArc": "00",
+    "receipt": { "screen": "", "printerData": "<GS>1  PIN CHANGE<LF>  <DATE> <TIME><LF><FF>" }
+  },
+  "familyI": {
+    "nextState": "175",
+    "returnCard": "0",
+    "printerFlag": "1",
+    "includeCam": false,
+    "camArc": "00",
+    "receipt": { "screen": "", "printerData": "<GS>1  TRANSACTION<LF>  <DATE> <TIME><LF><FF>" }
   }
 }

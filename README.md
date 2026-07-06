@@ -121,6 +121,26 @@ npm test           # 跑单元/端到端测试（node --test）
 > **需真 ATM 校准**：通用兜底的 next-state `048` 与凭条模板为抓包种子；各交易族（转账/存款/改密/
 > 对账单）的**专用**语义（专用 next-state、专用屏幕、改密确认等）属后续子项目，现统一落到兜底。
 
+## I / D 交易族专用 next-state（子项目 2e）
+
+抓包（AJMN1301，9263 条 request→紧邻 reply 配对）实测：请求 `field[7]` 首字符分族后，除已覆盖的
+A（取款）/C（查询）外，仅 **I 族**与 **D 族**有干净、100% 一致的单一应答 next-state：
+
+- **I 族（15/15）→ next-state `175`**
+- **D 族（2/2）→ next-state `698`**（疑似改密确认；代码不硬断言语义）
+
+故这两族不再落通用兜底的 048，而由各自专用应答处理：复用 `generic` handler（已由 `nextState`
+参数化）再实例化 `familyI`（175）、`familyD`（698）两个实例，行为同兜底——class-4、fieldG 空
+（不出钞）、退卡、无 CAM、永不返回 null——仅 next-state 不同。规则顺序：
+
+```
+withdrawal-request (A) → balance-inquiry (C) → d-family-reply (D,698) → i-family-reply (I,175) → generic-fallback (048, 兜底最后)
+```
+
+> C 族子类型（`074/151/077/471`…）随真实账户状态分流（同一 opcode 既→074 又→151），无真实余额/
+> 账户状态无法确定性复现，未纳入；A 族各拒绝态同理。`familyD`/`familyI` 的 next-state 为抓包实测，
+> screen/printer 模板为 seed，**需真 ATM 校准**。
+
 ## 录包
 
 每条收/发报文都会打印 hex dump 并追加到 `captures/session-<时间戳>.log`，
