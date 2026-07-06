@@ -88,6 +88,33 @@ npm test           # 跑单元/端到端测试（node --test）
 > `074`（真实中 077/151/134 因子类型而异）；余额 screen 模板（含 `<ESC>[20;80m<SI>FG` 定位）
 > 与 decline next-state `048` 均为抓包种子。其它交易类型（转账/存款/改密）属后续子项目。
 
+## A 族取款放宽与通用兜底（子项目 2c）
+
+**A 族取款放宽**：取款规则从只匹配 `field[7] == "ADC     "` 放宽为 `field[7] startsWith "A"`，
+覆盖整个取现族（`ADC`/`AAC`/`ABC` 等变体，同族不同账户类型）。真实抓包里约 450 笔取款因旧规则
+写死 `ADC` 而漏匹配，放宽后消除。取款 handler 本身不变——A 族全部按**金额可兑现性 + `maxAmount`**
+批准/拒绝。
+
+> **已知模拟简化**：simulator 无真实余额，A 族一律按金额判定；真实主机对部分 A 族请求会因账户/
+> 余额原因拒绝，而我们只按金额批准出钞。这是被接受的偏差。
+
+**通用兜底**：任何未被取款(A)/余额(C)匹配的 class1-sub1 TxnRequest（改密 `D*`→698、`I*`、空 opcode
+等）由 `generic` handler 应答一个安全的 class-4"取消/无法完成"reply：下一状态 `048`（可配）、
+**不出钞**（fieldG 空）、退卡、不带 CAM。这保证**没有任何交易请求被晾着直到超时**。`config.json`
+的 `generic` 块：
+
+- **nextState**：兜底后 ATM 跳转状态（默认 `"048"`，复用取款拒绝的安全状态）。
+- **returnCard** / **printerFlag** / **includeCam** / **camArc**：同取款/余额。
+- **receipt.screen** / **receipt.printerData**：屏幕/凭条模板，支持 `<PAN> <DATE> <TIME> <RECNO> <LUNO>`
+  与控制字 `<LF> <FF> <ESC> <SO> <SI> <GS>`。
+
+**规则优先级**（engine 取首个匹配）：`withdrawal-request`(A) → `balance-inquiry`(C) →
+`generic-fallback`(class1-sub1 兜底，必须最后)。generic 是 sub1，与 `unsolicited-status-no-reply`(sub2)
+不冲突。
+
+> **需真 ATM 校准**：通用兜底的 next-state `048` 与凭条模板为抓包种子；各交易族（转账/存款/改密/
+> 对账单）的**专用**语义（专用 next-state、专用屏幕、改密确认等）属后续子项目，现统一落到兜底。
+
 ## 录包
 
 每条收/发报文都会打印 hex dump 并追加到 `captures/session-<时间戳>.log`，
