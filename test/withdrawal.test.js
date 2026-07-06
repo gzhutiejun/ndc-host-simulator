@@ -5,6 +5,7 @@ const { parse } = require('../src/ndc/parser');
 const { encodeText } = require('../src/framing');
 const { FS, SO } = require('../src/constants');
 const { createSession } = require('../src/session');
+const { matches } = require('../src/engine');
 
 function withdrawalReq(amount = '00000300') {
   return parse(encodeText(['11', '000', '', '', '15', ';XXXX=XXXX?', '', 'ADC     ', amount].join(FS)));
@@ -104,4 +105,29 @@ test('missing amount still returns null', () => {
   const handler = makeWithdrawal({});
   const p = parse(encodeText(['11', '000', '', '', '15', ';X=X?', '', 'ADC     ', ''].join(FS)));
   assert.strictEqual(handler(p, createSession(), helpers), null);
+});
+
+const AFAM_RULE = { messageClass: '1', subClass: '1', field: { index: 7, startsWith: 'A' } };
+
+function reqWithOpcode(opcode) {
+  return parse(encodeText(['11', '000', '', '', '15', ';XXXX=XXXX?', '', opcode, '00000300'].join(FS)));
+}
+
+test('relaxed A-family rule matches ADC / AAC / ABC variants', () => {
+  assert.strictEqual(matches(AFAM_RULE, reqWithOpcode('ADC     ')), true);
+  assert.strictEqual(matches(AFAM_RULE, reqWithOpcode('AAC     ')), true);
+  assert.strictEqual(matches(AFAM_RULE, reqWithOpcode('ABC     ')), true);
+});
+
+test('relaxed A-family rule does NOT match C-family (balance) opcodes', () => {
+  assert.strictEqual(matches(AFAM_RULE, reqWithOpcode('CC   C  ')), false);
+});
+
+test('AAC variant still approves a normal dispensable amount via withdrawal handler', () => {
+  const handler = makeWithdrawal({});
+  const out = handler(reqWithOpcode('AAC     '), createSession(), helpers);
+  const f = out.split(FS);
+  assert.strictEqual(f[0], '4');
+  assert.strictEqual(f[3], '123'); // approved
+  assert.strictEqual(f[4], '00030000'); // dispense for 300
 });

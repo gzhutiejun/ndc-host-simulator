@@ -10,6 +10,7 @@ const { createLogger } = require('./src/logging');
 const goInService = require('./src/handlers/goInService');
 const makeWithdrawal = require('./src/handlers/withdrawal');
 const makeBalance = require('./src/handlers/balance');
+const makeGeneric = require('./src/handlers/generic');
 
 function createApp(config) {
   const captureDir = config.captureDir || path.join(__dirname, 'captures');
@@ -18,6 +19,7 @@ function createApp(config) {
     goInService,
     withdrawal: makeWithdrawal(config.withdrawal || {}),
     balance: makeBalance(config.balance || {}),
+    generic: makeGeneric(config.generic || {}),
   };
   const engine = createEngine({ rules: config.rules || [], handlers });
   const logger = createLogger({ dir: captureDir });
