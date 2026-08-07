@@ -39,9 +39,13 @@ function createApp(config) {
     for (const spec of pushOnConnect) {
       setTimeout(() => {
         if (socket.destroyed) return;
-        const bytes = encodeText(buildTerminalCommand(spec));
-        logger.record('SEND', bytes, { type: 'TerminalCommand', rule: 'pushOnConnect' });
-        socket.write(encodeLength(bytes));
+        try {
+          const bytes = encodeText(buildTerminalCommand(spec));
+          logger.record('SEND', bytes, { type: 'TerminalCommand', rule: 'pushOnConnect' });
+          socket.write(encodeLength(bytes));
+        } catch (err) {
+          console.error(`pushOnConnect error (entry skipped): ${err.message}`);
+        }
       }, spec.delayMs || 0);
     }
 

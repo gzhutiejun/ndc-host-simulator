@@ -19,21 +19,32 @@ test('连接建立后按 pushOnConnect 主动下发终端命令', async () => {
   await new Promise((resolve) => app.server.listen(0, resolve));
   const port = app.server.address().port;
 
-  const pushed = await new Promise((resolve, reject) => {
-    const decoder = createDecoder();
-    const client = net.createConnection({ port });
-    client.on('data', (d) => {
-      const frames = decoder.push(d);
-      if (frames.length) {
-        resolve(frames[0].toString('latin1'));
-        client.end();
-      }
+  try {
+    const pushed = await new Promise((resolve, reject) => {
+      const decoder = createDecoder();
+      const client = net.createConnection({ port });
+      const timer = setTimeout(() => {
+        client.destroy();
+        reject(new Error('no frame pushed within 2000ms'));
+      }, 2000);
+      client.on('data', (d) => {
+        const frames = decoder.push(d);
+        if (frames.length) {
+          clearTimeout(timer);
+          resolve(frames[0].toString('latin1'));
+          client.end();
+        }
+      });
+      client.on('error', (err) => {
+        clearTimeout(timer);
+        reject(err);
+      });
     });
-    client.on('error', reject);
-  });
 
-  assert.strictEqual(pushed, '1' + FS + '000' + FS + FS + 'Z');
-  await new Promise((resolve) => app.server.close(resolve));
+    assert.strictEqual(pushed, '1' + FS + '000' + FS + FS + 'Z');
+  } finally {
+    await new Promise((resolve) => app.server.close(resolve));
+  }
 });
 
 test('未配置 pushOnConnect 时不主动发任何东西（默认行为不变）', async () => {
