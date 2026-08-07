@@ -2,6 +2,7 @@
   "port": 2000,
   "enableTLS": false,
   "responseDelayMs": 0,
+  "pushOnConnect": [],
   "tls": {
     "key": "path/to/key.pem",
     "cert": "path/to/cert.pem"

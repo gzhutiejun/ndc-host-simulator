@@ -7,6 +7,7 @@ const { parse } = require('./src/ndc/parser');
 const { createSession } = require('./src/session');
 const { createEngine } = require('./src/engine');
 const { createLogger } = require('./src/logging');
+const { buildTerminalCommand } = require('./src/push');
 const goInService = require('./src/handlers/goInService');
 const makeWithdrawal = require('./src/handlers/withdrawal');
 const makeBalance = require('./src/handlers/balance');
@@ -24,6 +25,7 @@ function createApp(config) {
     generic: makeGeneric(config.generic || {}),
   };
   const engine = createEngine({ rules: config.rules || [], handlers });
+  const pushOnConnect = Array.isArray(config.pushOnConnect) ? config.pushOnConnect : [];
   const logger = createLogger({ dir: captureDir });
 
   const server = createTransport(config, (socket) => {
@@ -31,6 +33,17 @@ function createApp(config) {
     console.log(`Client connected from ${peer}`);
     const session = createSession();
     const decoder = createDecoder();
+
+    // 主动下发：模拟主机索取状态的终端命令（手册 Table 10-1）。
+    // 默认 pushOnConnect 为空，行为与不配置时完全一致。
+    for (const spec of pushOnConnect) {
+      setTimeout(() => {
+        if (socket.destroyed) return;
+        const bytes = encodeText(buildTerminalCommand(spec));
+        logger.record('SEND', bytes, { type: 'TerminalCommand', rule: 'pushOnConnect' });
+        socket.write(encodeLength(bytes));
+      }, spec.delayMs || 0);
+    }
 
     socket.on('data', (chunk) => {
       let frames;
