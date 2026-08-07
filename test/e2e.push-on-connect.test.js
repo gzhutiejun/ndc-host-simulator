@@ -53,13 +53,16 @@ test('未配置 pushOnConnect 时不主动发任何东西（默认行为不变�
   await new Promise((resolve) => app.server.listen(0, resolve));
   const port = app.server.address().port;
 
-  const gotData = await new Promise((resolve, reject) => {
-    const client = net.createConnection({ port });
-    client.on('data', () => { resolve(true); client.end(); });
-    client.on('error', reject);
-    setTimeout(() => { resolve(false); client.end(); }, 200);
-  });
+  try {
+    const gotData = await new Promise((resolve, reject) => {
+      const client = net.createConnection({ port });
+      client.on('data', () => { resolve(true); client.end(); });
+      client.on('error', reject);
+      setTimeout(() => { resolve(false); client.end(); }, 200);
+    });
 
-  assert.strictEqual(gotData, false);
-  await new Promise((resolve) => app.server.close(resolve));
+    assert.strictEqual(gotData, false);
+  } finally {
+    await new Promise((resolve) => app.server.close(resolve));
+  }
 });
