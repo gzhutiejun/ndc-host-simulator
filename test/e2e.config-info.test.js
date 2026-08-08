@@ -46,9 +46,13 @@ test('主机按 pushOnConnect 下发命令码 7 + 修饰符 3', async () => {
   const { app, capDir } = startApp([{ code: '7', modifier: '3', luno: '000' }]);
   await new Promise((r) => app.server.listen(0, r));
   try {
+    // 现金处理器 fitness 字段固定 5 位，紧跟设备标识 'E'：
+    //   J A E 2    0    0    0    0
+    //       ^设备  ^处理器本身  ^钞箱1 ^钞箱2 ^钞箱3 ^钞箱4
+    //       标识E   (2=warning)  (0=无错误，四个钞箱各占一位，不可省略/合并)
     const pushed = await fakeAtm(
       app.server.address().port,
-      '22' + FS + '000' + FS + FS + 'F' + FS + 'JAE2',
+      '22' + FS + '000' + FS + FS + 'F' + FS + 'JAE20000',
     );
     assert.strictEqual(pushed, '1' + FS + '000' + FS + FS + '73');
   } finally {
@@ -68,9 +72,13 @@ test('修饰符 2 同样下发得出去', async () => {
   const { app } = startApp([{ code: '7', modifier: '2', luno: '000' }]);
   await new Promise((r) => app.server.listen(0, r));
   try {
+    // 现金处理器 supplies 字段固定 5 位，紧跟设备标识 'E'：
+    //   I A E 1    1    0    3    0
+    //       ^设备  ^拒钞盒 ^钞箱1 ^钞箱2 ^钞箱3 ^钞箱4
+    //       标识E   (1=无溢出)(1=充足)(0=无新状态)(3=缺钞)(0=无新状态)
     const pushed = await fakeAtm(
       app.server.address().port,
-      '22' + FS + '000' + FS + FS + 'F' + FS + 'IAE13',
+      '22' + FS + '000' + FS + FS + 'F' + FS + 'IAE11030',
     );
     assert.strictEqual(pushed, '1' + FS + '000' + FS + FS + '72');
   } finally {
@@ -97,7 +105,8 @@ test('ATM 的 solicited 应答被主机收下且不再回包（避免与 ATM 打
           count += 1;
           if (count === 1) {
             // 回一条 solicited 应答；主机不应因此再下发第二条
-            client.write(encodeLength(Buffer.from('22' + FS + '000' + FS + FS + 'F' + FS + 'JAE2', 'latin1')));
+            // fitness 字段固定 5 位（设备标识 E + 处理器 + 钞箱1~4），同上一条用例
+            client.write(encodeLength(Buffer.from('22' + FS + '000' + FS + FS + 'F' + FS + 'JAE20000', 'latin1')));
           }
         }
       });
