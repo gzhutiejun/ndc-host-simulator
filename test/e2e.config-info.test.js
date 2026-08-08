@@ -17,7 +17,8 @@ const RULES = [
 
 function startApp(pushOnConnect) {
   const capDir = fs.mkdtempSync(path.join(os.tmpdir(), 'ndc-cfginfo-'));
-  return createApp({ enableTLS: false, captureDir: capDir, rules: RULES, pushOnConnect });
+  const app = createApp({ enableTLS: false, captureDir: capDir, rules: RULES, pushOnConnect });
+  return { app, capDir };
 }
 
 /** 假 ATM：收到主机下发的帧后回一条固定应答，返回主机下发的那一帧。 */
@@ -42,7 +43,7 @@ function fakeAtm(port, reply, timeoutMs = 2000) {
 }
 
 test('主机按 pushOnConnect 下发命令码 7 + 修饰符 3', async () => {
-  const app = startApp([{ code: '7', modifier: '3', luno: '000' }]);
+  const { app, capDir } = startApp([{ code: '7', modifier: '3', luno: '000' }]);
   await new Promise((r) => app.server.listen(0, r));
   try {
     const pushed = await fakeAtm(
@@ -53,10 +54,18 @@ test('主机按 pushOnConnect 下发命令码 7 + 修饰符 3', async () => {
   } finally {
     await new Promise((r) => app.server.close(r));
   }
+
+  // capture 日志是真机排障时唯一的证据来源 —— 断言它确实落了盘，
+  // 而不是只建了个空目录(原计划写了这条却没实现)。
+  const files = fs.readdirSync(capDir).filter((f) => f.startsWith('session-'));
+  assert.ok(files.length > 0, 'capture 日志未落盘');
+  const log = fs.readFileSync(path.join(capDir, files[0]), 'utf8');
+  assert.match(log, /SEND .*TerminalCommand/, 'capture 里没有下发的终端命令');
+  assert.match(log, /RECV/, 'capture 里没有收到的 ATM 应答');
 });
 
 test('修饰符 2 同样下发得出去', async () => {
-  const app = startApp([{ code: '7', modifier: '2', luno: '000' }]);
+  const { app } = startApp([{ code: '7', modifier: '2', luno: '000' }]);
   await new Promise((r) => app.server.listen(0, r));
   try {
     const pushed = await fakeAtm(
@@ -101,7 +110,7 @@ test('ATM 的 solicited 应答被主机收下且不再回包（避免与 ATM 打
 });
 
 test('unsolicited 设备状态报文主机不应答', async () => {
-  const app = startApp([]);
+  const { app } = startApp([]);
   await new Promise((r) => app.server.listen(0, r));
   try {
     const port = app.server.address().port;
