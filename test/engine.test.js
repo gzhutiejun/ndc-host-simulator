@@ -134,6 +134,105 @@ test('respond stops at a noReply rule and does not fall through to later rules',
   assert.strictEqual(reached, false);
 });
 
+// ---- 一次性手动覆盖（Task 2） ----
+
+test('override: 未设置 nextResponse 时，respond 行为与改动前逐字节一致（默认路径不变）', () => {
+  // 跟上面"respond picks first matching template rule"用的是同一条规则/同一个入站报文，
+  // 只是这次引擎多了 setNextResponse 方法可用——但从没调用它。钉住：默认状态下多出来的
+  // 覆盖检查是一个纯粹的 no-op 分支，结果必须跟没有这个方法时完全一样。
+  const engine = createEngine({
+    rules: [{ name: 'gis', match: { messageClass: '2', field: { index: 3, startsWith: '9' } }, template: '1<FS><FS><FS>1' }],
+    handlers: {},
+  });
+  const p = parse(encodeText('22' + FS + '123' + FS + FS + '9'));
+  const out = engine.respond(p, createSession());
+  assert.strictEqual(out.payload, '1' + FS + FS + FS + '1');
+  assert.strictEqual(out.rule, 'gis');
+});
+
+test('override: { payload } 原样作答一次，赢过所有规则，用完自动回到规则引擎', () => {
+  const engine = createEngine({
+    rules: [{ name: 'gis', match: { messageClass: '2', field: { index: 3, startsWith: '9' } }, template: '1<FS><FS><FS>1' }],
+    handlers: {},
+  });
+  engine.setNextResponse({ payload: 'RAW-OVERRIDE' });
+  const p = parse(encodeText('22' + FS + '123' + FS + FS + '9'));
+
+  const first = engine.respond(p, createSession());
+  assert.strictEqual(first.payload, 'RAW-OVERRIDE');
+  assert.match(first.rule, /^override:/);
+
+  // 一次性：第二条同样匹配 gis 规则的报文，覆盖已经用掉了，落回规则引擎。
+  const second = engine.respond(p, createSession());
+  assert.strictEqual(second.payload, '1' + FS + FS + FS + '1');
+  assert.strictEqual(second.rule, 'gis');
+});
+
+test('override: { noReply: true } 让下一条入站报文不应答，且不算命中规则里的 noReply', () => {
+  const engine = createEngine({
+    rules: [{ name: 'gis', match: { messageClass: '2', field: { index: 3, startsWith: '9' } }, template: '1<FS><FS><FS>1' }],
+    handlers: {},
+  });
+  engine.setNextResponse({ noReply: true });
+  const p = parse(encodeText('22' + FS + '123' + FS + FS + '9'));
+  const out = engine.respond(p, createSession());
+  assert.strictEqual(out.payload, null);
+  assert.strictEqual(out.rule, 'override:noReply');
+});
+
+test('override: { key } 从传入的 library 里查 payload 作答', () => {
+  const engine = createEngine({
+    rules: [],
+    handlers: {},
+    library: [{ key: 'GIS', payload: '1' + FS + FS + FS + '1' }],
+  });
+  engine.setNextResponse({ key: 'GIS' });
+  const p = parse(encodeText('22' + FS + '123'));
+  const out = engine.respond(p, createSession());
+  assert.strictEqual(out.payload, '1' + FS + FS + FS + '1');
+  assert.match(out.rule, /GIS/);
+});
+
+test('override: 未知 key 在 setNextResponse 时就抛错（而不是拖到下一条报文进来才失败）', () => {
+  const engine = createEngine({ rules: [], handlers: {}, library: [{ key: 'GIS', payload: 'x' }] });
+  assert.throws(() => engine.setNextResponse({ key: 'NOPE' }), /unknown library key/);
+});
+
+test('override: 无效形状（既不是 key/payload/noReply）在设置时就抛错', () => {
+  const engine = createEngine({ rules: [], handlers: {} });
+  assert.throws(() => engine.setNextResponse({}), /must be/);
+});
+
+test('override: setNextResponse(null) 撤销一个已设置但还没用掉的覆盖，不消耗报文', () => {
+  const engine = createEngine({
+    rules: [{ name: 'gis', match: { messageClass: '2', field: { index: 3, startsWith: '9' } }, template: '1<FS><FS><FS>1' }],
+    handlers: {},
+  });
+  engine.setNextResponse({ payload: 'WOULD-HAVE-FIRED' });
+  engine.setNextResponse(null);
+  const p = parse(encodeText('22' + FS + '123' + FS + FS + '9'));
+  const out = engine.respond(p, createSession());
+  assert.strictEqual(out.payload, '1' + FS + FS + FS + '1');
+  assert.strictEqual(out.rule, 'gis');
+});
+
+test('override: 赢过 noReply 规则本身也会匹配的报文——覆盖优先，noReply 规则完全不参与', () => {
+  const engine = createEngine({
+    rules: [{ name: 'ready-b-idle', match: { messageClass: '2', field: { index: 3, startsWith: 'B' } }, noReply: true }],
+    handlers: {},
+  });
+  engine.setNextResponse({ payload: 'OVERRIDE-BEATS-NOREPLY' });
+  const p = parse(encodeText('22' + FS + '000' + FS + FS + 'B'));
+  const out = engine.respond(p, createSession());
+  assert.strictEqual(out.payload, 'OVERRIDE-BEATS-NOREPLY');
+  assert.match(out.rule, /^override:/);
+
+  // 用掉之后，同一条 noReply 报文再来一次，才轮到规则引擎正常处理成 noReply。
+  const second = engine.respond(p, createSession());
+  assert.strictEqual(second.payload, null);
+  assert.strictEqual(second.rule, 'ready-b-idle');
+});
+
 test('respond stops at the first handler that returns a payload (later rules untouched)', () => {
   let reached = false;
   const engine = createEngine({

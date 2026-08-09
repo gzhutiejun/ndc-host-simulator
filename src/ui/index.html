@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<title>NDC Host Simulator Console</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root {
+    --bg: #0d1117;
+    --panel: #161b22;
+    --border: #30363d;
+    --text: #c9d1d9;
+    --dim: #8b949e;
+    --accent: #58a6ff;
+    --recv: #3fb950;
+    --send: #d29922;
+    --danger: #f85149;
+    --mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    height: 100%; margin: 0; background: var(--bg); color: var(--text);
+    font-family: -apple-system, "Segoe UI", "PingFang SC", sans-serif;
+  }
+  body { display: flex; flex-direction: column; }
+  header {
+    padding: 10px 16px; border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 12px; flex-shrink: 0;
+  }
+  header h1 { font-size: 15px; margin: 0; font-weight: 600; }
+  header .sub { color: var(--dim); font-size: 12px; }
+  #conn-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--danger); flex-shrink: 0; }
+  #conn-dot.live { background: var(--recv); }
+
+  main { flex: 1; display: flex; flex-direction: column; min-height: 0; }
+
+  #stream-panel {
+    flex: 1 1 55%; min-height: 120px; display: flex; flex-direction: column;
+    border-bottom: 1px solid var(--border);
+  }
+  #stream-toolbar {
+    padding: 6px 12px; display: flex; align-items: center; gap: 10px;
+    border-bottom: 1px solid var(--border); flex-shrink: 0;
+  }
+  #stream-toolbar .count { color: var(--dim); font-size: 12px; }
+  #stream-log {
+    flex: 1; overflow-y: auto; font-family: var(--mono); font-size: 12px;
+    padding: 4px 0;
+  }
+  .frame-row {
+    display: grid;
+    grid-template-columns: 88px 52px 60px 150px 1fr;
+    gap: 8px; padding: 3px 12px; border-bottom: 1px solid #1c2229;
+    white-space: nowrap;
+  }
+  .frame-row:hover { background: #1c2229; }
+  .frame-row .dir { font-weight: 700; }
+  .frame-row .dir.RECV { color: var(--recv); }
+  .frame-row .dir.SEND { color: var(--send); }
+  .frame-row .rule { color: var(--accent); overflow: hidden; text-overflow: ellipsis; }
+  .frame-row .rule.unmatched { color: var(--danger); }
+  .frame-row .fields {
+    color: var(--text); overflow-x: auto; text-overflow: ellipsis;
+  }
+  .frame-row .ts { color: var(--dim); }
+
+  #lower { flex: 1 1 45%; display: flex; min-height: 160px; }
+  #library-panel {
+    flex: 1 1 55%; display: flex; flex-direction: column; border-right: 1px solid var(--border);
+    min-width: 260px;
+  }
+  #library-search {
+    margin: 8px 12px; padding: 6px 8px; background: var(--panel); border: 1px solid var(--border);
+    border-radius: 6px; color: var(--text); font-size: 13px;
+  }
+  #library-list { flex: 1; overflow-y: auto; padding-bottom: 8px; }
+  .lib-entry {
+    padding: 6px 12px; cursor: pointer; border-bottom: 1px solid #1c2229; font-size: 12.5px;
+  }
+  .lib-entry:hover { background: #1c2229; }
+  .lib-entry .key { font-family: var(--mono); color: var(--accent); margin-right: 8px; }
+  .lib-entry .label { color: var(--text); }
+  #library-empty { padding: 16px; color: var(--dim); font-size: 13px; }
+
+  #control-panel { flex: 1 1 45%; display: flex; flex-direction: column; padding: 12px 16px; gap: 14px; overflow-y: auto; }
+  #armed-banner {
+    font-size: 12.5px; padding: 8px 10px; border-radius: 6px; background: var(--panel);
+    border: 1px solid var(--border); color: var(--dim); font-family: var(--mono);
+  }
+  .control-group { display: flex; flex-direction: column; gap: 6px; }
+  .control-group h2 { font-size: 12px; text-transform: uppercase; letter-spacing: .04em; color: var(--dim); margin: 0; }
+  .btn-row { display: flex; gap: 8px; flex-wrap: wrap; }
+  button {
+    background: var(--panel); color: var(--text); border: 1px solid var(--border);
+    border-radius: 6px; padding: 7px 12px; font-size: 12.5px; cursor: pointer;
+  }
+  button:hover { border-color: var(--accent); color: var(--accent); }
+  button.danger:hover { border-color: var(--danger); color: var(--danger); }
+  button.primary { background: var(--accent); color: #0d1117; border-color: var(--accent); font-weight: 600; }
+  button.primary:hover { opacity: .85; color: #0d1117; }
+  textarea, input[type=text] {
+    background: var(--panel); color: var(--text); border: 1px solid var(--border);
+    border-radius: 6px; padding: 6px 8px; font-family: var(--mono); font-size: 12.5px;
+  }
+  textarea { min-height: 54px; resize: vertical; }
+  .hint { color: var(--dim); font-size: 11px; }
+  .legend { color: var(--dim); font-size: 11px; }
+  .legend code { color: var(--text); background: var(--panel); padding: 0 3px; border-radius: 3px; }
+</style>
+</head>
+<body>
+<header>
+  <span id="conn-dot"></span>
+  <h1>NDC Host Simulator</h1>
+  <span class="sub">实时收发 &amp; 下一条应答控制台</span>
+</header>
+
+<main>
+  <section id="stream-panel">
+    <div id="stream-toolbar">
+      <button id="pause-btn">暂停自动滚动</button>
+      <button id="clear-btn">清空</button>
+      <span class="count"><span id="frame-count">0</span> 帧 · <span class="legend">FS=<code>|</code> GS=<code>~</code> RS=<code>^</code> SO=<code>&lt;</code> SI=<code>&gt;</code></span></span>
+    </div>
+    <div id="stream-log"></div>
+  </section>
+
+  <section id="lower">
+    <div id="library-panel">
+      <input id="library-search" type="text" placeholder="搜索 key 或标签…（例如 A A  A A / Go In Service）">
+      <div id="library-list"></div>
+    </div>
+
+    <div id="control-panel">
+      <div id="armed-banner">未设置覆盖 — 走规则引擎</div>
+
+      <div class="control-group">
+        <h2>立即下发终端命令（不等 ATM 请求）</h2>
+        <div class="btn-row">
+          <button id="push-gis">进服务 (Go In Service)</button>
+          <button id="push-oos">停业 (Go Out Of Service)</button>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <h2>下一条应答</h2>
+        <div class="btn-row">
+          <button id="arm-noreply" class="danger">不回包（测超时）</button>
+          <button id="arm-clear">撤销覆盖</button>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <h2>自定义应答载荷</h2>
+        <textarea id="custom-payload" placeholder="用可见符号写控制字符：| = FS  ~ = GS  ^ = RS  &lt; = SO  &gt; = SI&#10;例如 1|||1"></textarea>
+        <div class="btn-row">
+          <button id="arm-custom" class="primary">设为下一条应答</button>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <h2>自定义终端命令</h2>
+        <div class="btn-row">
+          <input id="push-code" type="text" placeholder="命令码，如 1" style="width:70px">
+          <input id="push-modifier" type="text" placeholder="修饰符" style="width:70px">
+          <input id="push-luno" type="text" placeholder="LUNO" style="width:70px">
+          <button id="push-custom">下发</button>
+        </div>
+        <div class="hint">对应 Table 10-1 的命令码；1=Go In Service，2=Go Out Of Service。</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+(function () {
+  'use strict';
+
+  var VISIBLE_TO_CONTROL = { '|': '\x1c', '~': '\x1d', '^': '\x1e', '<': '\x0e', '>': '\x0f' };
+  function encodeVisible(str) {
+    return String(str).replace(/[|~^<>]/g, function (ch) { return VISIBLE_TO_CONTROL[ch]; });
+  }
+
+  // ---- 实时流 ----
+  var streamLog = document.getElementById('stream-log');
+  var frameCountEl = document.getElementById('frame-count');
+  var pauseBtn = document.getElementById('pause-btn');
+  var clearBtn = document.getElementById('clear-btn');
+  var connDot = document.getElementById('conn-dot');
+  var paused = false;
+  var frameCount = 0;
+  var MAX_ROWS = 500;
+
+  pauseBtn.addEventListener('click', function () {
+    paused = !paused;
+    pauseBtn.textContent = paused ? '继续自动滚动' : '暂停自动滚动';
+  });
+  clearBtn.addEventListener('click', function () {
+    streamLog.innerHTML = '';
+    frameCount = 0;
+    frameCountEl.textContent = '0';
+  });
+
+  function fmtTime(ts) {
+    var d = new Date(ts);
+    function p(n, w) { return String(n).padStart(w || 2, '0'); }
+    return p(d.getHours()) + ':' + p(d.getMinutes()) + ':' + p(d.getSeconds()) + '.' + p(d.getMilliseconds(), 3);
+  }
+
+  function appendFrame(frame) {
+    var row = document.createElement('div');
+    row.className = 'frame-row';
+
+    var ts = document.createElement('span');
+    ts.className = 'ts';
+    ts.textContent = fmtTime(frame.ts);
+
+    var dir = document.createElement('span');
+    dir.className = 'dir ' + frame.direction;
+    dir.textContent = frame.direction;
+
+    var bytes = document.createElement('span');
+    bytes.textContent = frame.bytes + 'B';
+
+    var rule = document.createElement('span');
+    rule.className = 'rule' + (frame.rule ? '' : ' unmatched');
+    rule.textContent = frame.rule || 'UNMATCHED';
+    rule.title = (frame.type || '') + ' / ' + (frame.rule || 'UNMATCHED');
+
+    var fields = document.createElement('span');
+    fields.className = 'fields';
+    fields.textContent = frame.fields.join('  ');
+    fields.title = frame.text;
+
+    row.appendChild(ts);
+    row.appendChild(dir);
+    row.appendChild(bytes);
+    row.appendChild(rule);
+    row.appendChild(fields);
+    streamLog.appendChild(row);
+
+    frameCount += 1;
+    frameCountEl.textContent = String(frameCount);
+    while (streamLog.children.length > MAX_ROWS) streamLog.removeChild(streamLog.firstChild);
+    if (!paused) streamLog.scrollTop = streamLog.scrollHeight;
+  }
+
+  function connectStream() {
+    var es = new EventSource('/api/stream');
+    es.onopen = function () { connDot.classList.add('live'); };
+    es.onerror = function () {
+      connDot.classList.remove('live');
+      // EventSource 自带重连，这里不用手动 setTimeout 再 new 一个
+    };
+    es.onmessage = function (ev) {
+      try { appendFrame(JSON.parse(ev.data)); } catch (err) { /* 忽略解析不了的行 */ }
+    };
+  }
+  connectStream();
+
+  // ---- 报文库 ----
+  var libraryList = document.getElementById('library-list');
+  var librarySearch = document.getElementById('library-search');
+  var allEntries = [];
+
+  function renderLibrary(filterText) {
+    var q = (filterText || '').trim().toLowerCase();
+    libraryList.innerHTML = '';
+    var shown = 0;
+    for (var i = 0; i < allEntries.length; i++) {
+      var e = allEntries[i];
+      if (q && e.key.toLowerCase().indexOf(q) === -1 && e.label.toLowerCase().indexOf(q) === -1) continue;
+      shown += 1;
+      (function (entry) {
+        var row = document.createElement('div');
+        row.className = 'lib-entry';
+        var keySpan = document.createElement('span');
+        keySpan.className = 'key';
+        keySpan.textContent = entry.key;
+        var labelSpan = document.createElement('span');
+        labelSpan.className = 'label';
+        labelSpan.textContent = entry.label;
+        row.appendChild(keySpan);
+        row.appendChild(labelSpan);
+        row.addEventListener('click', function () { armNext({ key: entry.key }, entry.label); });
+        libraryList.appendChild(row);
+      })(e);
+    }
+    if (shown === 0) {
+      var empty = document.createElement('div');
+      empty.id = 'library-empty';
+      empty.textContent = allEntries.length === 0
+        ? '报文库为空 —— 没配 messageLibrary，或该路径读不到文件（见服务端日志）。'
+        : '没有匹配的条目。';
+      libraryList.appendChild(empty);
+    }
+  }
+
+  librarySearch.addEventListener('input', function () { renderLibrary(librarySearch.value); });
+
+  fetch('/api/library').then(function (r) { return r.json(); }).then(function (data) {
+    allEntries = data.entries || [];
+    renderLibrary('');
+  }).catch(function () { renderLibrary(''); });
+
+  // ---- 下一条应答控制 ----
+  var armedBanner = document.getElementById('armed-banner');
+
+  function describeArmed(override, label) {
+    if (override == null) return '未设置覆盖 — 走规则引擎';
+    if (override.noReply) return '已设置：下一条入站报文不回包';
+    if (override.key) return '已设置：下一条应答 = 库条目 ' + override.key + (label ? '（' + label + '）' : '');
+    if (typeof override.payload === 'string') return '已设置：下一条应答 = 自定义载荷';
+    return '已设置覆盖';
+  }
+
+  function armNext(override, label) {
+    fetch('/api/next', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(override),
+    }).then(function (r) {
+      return r.json().then(function (data) { return { ok: r.ok, data: data }; });
+    }).then(function (result) {
+      armedBanner.textContent = result.ok
+        ? describeArmed(override, label)
+        : '设置失败：' + (result.data && result.data.error);
+      armedBanner.style.color = result.ok ? '' : 'var(--danger)';
+    }).catch(function (err) {
+      armedBanner.textContent = '设置失败：' + err.message;
+    });
+  }
+
+  document.getElementById('arm-noreply').addEventListener('click', function () {
+    armNext({ noReply: true });
+  });
+  document.getElementById('arm-clear').addEventListener('click', function () {
+    armNext(null);
+  });
+  document.getElementById('arm-custom').addEventListener('click', function () {
+    var raw = document.getElementById('custom-payload').value;
+    armNext({ payload: encodeVisible(raw) });
+  });
+
+  // ---- 立即下发终端命令 ----
+  function pushCommand(spec) {
+    fetch('/api/push', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(spec),
+    }).then(function (r) { return r.json(); }).then(function (data) {
+      armedBanner.textContent = data.error
+        ? '下发失败：' + data.error
+        : '已下发命令码 ' + spec.code + '，命中 ' + data.sent + ' 个活跃连接';
+      armedBanner.style.color = data.error ? 'var(--danger)' : '';
+    }).catch(function (err) {
+      armedBanner.textContent = '下发失败：' + err.message;
+    });
+  }
+
+  document.getElementById('push-gis').addEventListener('click', function () { pushCommand({ code: '1' }); });
+  document.getElementById('push-oos').addEventListener('click', function () { pushCommand({ code: '2' }); });
+  document.getElementById('push-custom').addEventListener('click', function () {
+    pushCommand({
+      code: document.getElementById('push-code').value,
+      modifier: document.getElementById('push-modifier').value,
+      luno: document.getElementById('push-luno').value,
+    });
+  });
+})();
+</script>
+</body>
+</html>
