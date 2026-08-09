@@ -41,7 +41,13 @@ npm test           # 跑单元/端到端测试（node --test）
 - **rules**：应答规则，按顺序匹配第一条命中的：
   - `match`：谓词，可含 `messageClass`、`subClass`、`type`、`field:{index,equals|startsWith}`；空对象总是匹配。
   - `template`：应答模板，支持占位符 `<FS> <GS> <SO> <SI> <LUNO> <TVN>`。
-  - `handler`：JS 处理器名（见 `src/handlers/`），用于需要计算/状态的应答，与 `template` 二选一。
+  - `handler`：JS 处理器名（见 `src/handlers/`），用于需要计算/状态的应答，与 `template`/`libraryKey` 三选一。
+  - `libraryKey`：从 `messageLibrary` 加载的报文库里按 key 取一条**原始报文**直接作答（不套 `applyTemplate`）。
+    这个 key 必须真的在已加载的库里——查不到，`createApp()`/`createEngine()` 在**装配阶段**（进程启动那一刻）
+    就抛错，不会拖到 ATM 真发一条报文才发现"这条规则其实答不上来"。没配 `messageLibrary`（或库文件加载失败降级
+    为空库）时，任何 `libraryKey` 规则都会命中这同一条校验、同样在启动期抛错——"没库"不是"这条规则可以将就过去"
+    的理由。出厂配置里 `withdrawal-request`/`balance-inquiry` 走的就是这条路径（分别对应库里的
+    `A A  A A`/`C A  A A`），下一状态是库里真实的 `001`，不是历史上手编、ATM 认不出的 `123`/`074`。
   - `noReply: true`：匹配到但**主机不应答**（如 ReadyB 心跳、设备状态）。与"未匹配"区分——不会告警。
 
 > 默认规则依据真实 ATM（AJMN1301）抓包：主机对 Ready9(`2x`+描述符`9`) 回 go-in-service，
@@ -50,8 +56,18 @@ npm test           # 跑单元/端到端测试（node --test）
 
 ## 取款交易流程（子项目 2a）
 
-收到取款 TransactionRequest（类 `1`/子 `1`，且请求 field[7]==`"ADC     "`）时，simulator
-默认批准并返回 TransactionReply（类 `4`）：下一状态 `123`、按金额贪心分解出的 `fieldG`
+> **2026-08 更新：出厂 `config.json` 的 `withdrawal-request` 规则已经改用 `libraryKey`
+> （`A A  A A`），不再走本节描述的 `withdrawal` handler。原因：本节以下描述的 next-state
+> `123`（以及余额节的 `074`、通用兜底/D/I 族的 `048`/`698`/`175`）是历史上从抓包片段手编的，
+> 实测**不在真实 ATM 的 next-state 表里**，会被 ATM 一律映射成"结束会话"，导致每笔交易都失败。
+> 报文库自带的 `A A  A A`/`C A  A A` 用的是库里真实、ATM 认得的 next-state `001`。
+> `withdrawal` handler 本身没删——仍可在 `config.json` 里把某条规则的 `handler` 改回
+> `"withdrawal"` 来用它（比如需要按运行时金额动态计算 fieldG 时），下面的字段说明仍然适用，
+> 只是它已经不是出厂默认路径。
+
+收到取款 TransactionRequest（类 `1`/子 `1`，且请求 field[7]==`"ADC     "`）时，若某条规则挂
+`"handler": "withdrawal"`，该 handler 批准后返回 TransactionReply（类 `4`）：下一状态
+`approvedNextState`（默认 `123`，**已知 ATM 不认**，见上）、按金额贪心分解出的 `fieldG`
 出钞指令、退卡、最小凭条。
 
 `config.json` 的 `withdrawal` 块：

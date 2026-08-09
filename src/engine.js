@@ -26,16 +26,32 @@ function matches(match, parsed) {
 }
 
 function createEngine({ rules = [], handlers = {}, now = () => new Date(), library = [] } = {}) {
-  // 库 key -> payload 的索引，懒建（大多数调用根本不传 library，不必白建一次）。
-  let libraryIndex = null;
+  // 库 key -> payload 的索引。曾经懒建（大多数调用根本不传 library），但规则里的
+  // libraryKey 需要在构造期就校验（见下），所以改成立即建——library 通常是空数组或
+  // 已经解析好的 ~1000 条记录，建一次 Map 的开销可以忽略。
+  const libraryIndex = new Map();
+  for (const entry of library) {
+    if (entry && typeof entry.key === 'string') libraryIndex.set(entry.key, entry.payload);
+  }
   function resolveKey(key) {
-    if (libraryIndex === null) {
-      libraryIndex = new Map();
-      for (const entry of library) {
-        if (entry && typeof entry.key === 'string') libraryIndex.set(entry.key, entry.payload);
-      }
-    }
     return libraryIndex.get(key);
+  }
+
+  // 规则里的 libraryKey 在这里、构造 engine 的时候就校验，而不是等到respond()第一次
+  // 用到那条规则才发现库里没有这个 key。理由：respond() 是在 ATM 真连上来发一条特定
+  // 报文时才会走到某条具体规则——如果校验放在那里，一条"字典打错了"的配置可以在收银台
+  // 静默运行几个月，直到测试脚本恰好发一笔取款才暴露成"这台主机模拟器没回应"，排查起来
+  // 比"启动时直接崩"贵得多。库为空（没配 messageLibrary，或库文件解析失败降级成空数组）
+  // 时同样会在这里失败：查不到就是查不到，跟"库非空但没这个 key"是同一种错误，没有理由
+  // 网开一面——"没配库"不是"这条规则不需要库"的许可证，规则既然点名要 libraryKey，就必须
+  // 有库能满足它。
+  for (const rule of rules) {
+    if (rule.libraryKey != null && !libraryIndex.has(rule.libraryKey)) {
+      const reason = library.length === 0
+        ? '未加载任何报文库（未配置 messageLibrary，或加载失败已降级为空库）'
+        : `已加载的报文库共 ${library.length} 条，其中没有这个 key`;
+      throw new Error(`Rule "${rule.name}" references unknown library key "${rule.libraryKey}" — ${reason}`);
+    }
   }
 
   // 一次性覆盖：respond() 用一次就清（见下）。不设置时这个变量恒为 null，
@@ -92,6 +108,12 @@ function createEngine({ rules = [], handlers = {}, now = () => new Date(), libra
         if (!matches(rule.match, parsed)) continue;
         lastRule = rule.name;
         if (rule.noReply === true) return { payload: null, rule: rule.name };
+        if (rule.libraryKey != null) {
+          // 存在性已经在构造期校验过（见上），这里直接取，取到的必是真实报文库
+          // 里的原始报文——不套 applyTemplate，跟 setNextResponse({ key }) 的
+          // 覆盖通道行为一致：库载荷已经是完整、真实的 NDC 报文文本。
+          return { payload: libraryIndex.get(rule.libraryKey), rule: rule.name };
+        }
         if (rule.handler != null) {
           const fn = handlers[rule.handler];
           if (typeof fn !== 'function') {
@@ -102,7 +124,7 @@ function createEngine({ rules = [], handlers = {}, now = () => new Date(), libra
           continue; // handler 返回 null：本规则不适用，试下一条匹配规则
         }
         if (rule.template != null) return { payload: applyTemplate(rule.template, ctx), rule: rule.name };
-        throw new Error(`Rule "${rule.name}" matched but defines no template, handler, or noReply`);
+        throw new Error(`Rule "${rule.name}" matched but defines no template, handler, libraryKey, or noReply`);
       }
       return { payload: null, rule: lastRule };
     },
