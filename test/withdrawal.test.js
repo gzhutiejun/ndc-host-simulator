@@ -70,7 +70,7 @@ test('shipped config.json receipt template renders without FS corruption and sub
   assert.strictEqual(out.split(FS)[0], '4');
   const printer = out.split(FS)[6];
   assert.ok(printer.includes('CASH WITHDRAWAL'));
-  assert.ok(printer.includes('AED 300.00'));
+  assert.ok(printer.includes('USD 300.00'));
 });
 
 test('declines when amount exceeds maxAmount → class-4 reply, empty fieldG, decline next-state', () => {

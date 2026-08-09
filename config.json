@@ -20,7 +20,7 @@
           "startsWith": "A"
         }
       },
-      "handler": "withdrawal"
+      "libraryKey": "A A  A A"
     },
     {
       "name": "balance-inquiry",
@@ -32,7 +32,7 @@
           "startsWith": "C"
         }
       },
-      "handler": "balance"
+      "libraryKey": "C A  A A"
     },
     {
       "name": "d-family-reply",
@@ -137,11 +137,11 @@
     "camArc": "00",
     "receipt": {
       "screen": "",
-      "printerData": "<GS>1  CASH WITHDRAWAL<LF>  AED <AMOUNT><LF>  <PAN><LF>  <DATE> <TIME><LF>  REF <RECNO><LF><FF>"
+      "printerData": "<GS>1  CASH WITHDRAWAL<LF>  USD <AMOUNT><LF>  <PAN><LF>  <DATE> <TIME><LF>  REF <RECNO><LF><FF>"
     },
     "declineReceipt": {
       "screen": "",
-      "printerData": "<GS>1  WITHDRAWAL DECLINED<LF>  AED <AMOUNT><LF>  <DATE> <TIME><LF><FF>"
+      "printerData": "<GS>1  WITHDRAWAL DECLINED<LF>  USD <AMOUNT><LF>  <DATE> <TIME><LF><FF>"
     }
   },
   "balance": {
@@ -153,7 +153,7 @@
     "camArc": "00",
     "receipt": {
       "screen": "074075<ESC>[20;80m<SI>FG      <BALANCE> ",
-      "printerData": "<GS>1  BALANCE INQUIRY<LF>  AVAIL BAL: AED <BALANCE><LF>  <DATE> <TIME><LF><FF>"
+      "printerData": "<GS>1  BALANCE INQUIRY<LF>  AVAIL BAL: USD <BALANCE><LF>  <DATE> <TIME><LF><FF>"
     }
   },
   "generic": {

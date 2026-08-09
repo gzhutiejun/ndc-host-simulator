@@ -233,6 +233,53 @@ test('override: 赢过 noReply 规则本身也会匹配的报文——覆盖优�
   assert.strictEqual(second.rule, 'ready-b-idle');
 });
 
+// ---- libraryKey 规则（config.json 里的规则用报文库应答，取代硬编码 handler） ----
+
+test('libraryKey: 匹配到的规则直接用库里的原始报文作答，不套 applyTemplate', () => {
+  const engine = createEngine({
+    rules: [{ name: 'withdrawal-request', match: { messageClass: '1', subClass: '1' }, libraryKey: 'A A  A A' }],
+    handlers: {},
+    library: [{ key: 'A A  A A', payload: '4' + FS + '000' + FS + FS + '001' + FS + '01000000' }],
+  });
+  const p = parse(encodeText('11' + FS + '000' + FS + FS + '15'));
+  const out = engine.respond(p, createSession());
+  assert.strictEqual(out.payload, '4' + FS + '000' + FS + FS + '001' + FS + '01000000');
+  assert.strictEqual(out.rule, 'withdrawal-request');
+});
+
+test('libraryKey: 规则点名的 key 不在已加载的库里——构造 engine 时就抛错，不等 respond()', () => {
+  assert.throws(
+    () => createEngine({
+      rules: [{ name: 'withdrawal-request', match: {}, libraryKey: 'NOT IN LIBRARY' }],
+      handlers: {},
+      library: [{ key: 'A A  A A', payload: 'x' }],
+    }),
+    /withdrawal-request.*unknown library key.*NOT IN LIBRARY/,
+  );
+});
+
+test('libraryKey: 压根没配库（library 为空数组）时同样在构造期抛错，而不是把没库当成"这条规则不用管"', () => {
+  assert.throws(
+    () => createEngine({
+      rules: [{ name: 'withdrawal-request', match: {}, libraryKey: 'A A  A A' }],
+      handlers: {},
+      // library 省略 —— 默认空数组，等价于没配 messageLibrary 或加载失败降级
+    }),
+    /withdrawal-request.*unknown library key/,
+  );
+});
+
+test('libraryKey: 校验只在构造期发生一次，respond() 不会因为反复调用而重复抛错/重新扫库', () => {
+  const engine = createEngine({
+    rules: [{ name: 'balance-inquiry', match: { messageClass: '1', subClass: '1' }, libraryKey: 'C A  A A' }],
+    handlers: {},
+    library: [{ key: 'C A  A A', payload: 'BALANCE-REPLY' }],
+  });
+  const p = parse(encodeText('11' + FS + '000' + FS + FS + '15'));
+  assert.doesNotThrow(() => engine.respond(p, createSession()));
+  assert.doesNotThrow(() => engine.respond(p, createSession()));
+});
+
 test('respond stops at the first handler that returns a payload (later rules untouched)', () => {
   let reached = false;
   const engine = createEngine({
