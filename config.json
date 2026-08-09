@@ -2,6 +2,7 @@
   "port": 2000,
   "enableTLS": false,
   "responseDelayMs": 0,
+  "pushOnConnect": [],
   "tls": {
     "key": "path/to/key.pem",
     "cert": "path/to/cert.pem"
@@ -33,9 +34,14 @@
       "handler": "generic"
     },
     {
-      "name": "ready9-go-in-service",
-      "match": { "messageClass": "2", "field": { "index": 3, "startsWith": "9" } },
+      "name": "powerup-go-in-service",
+      "match": { "messageClass": "1", "subClass": "2", "field": { "index": 3, "startsWith": "B" } },
       "handler": "goInService"
+    },
+    {
+      "name": "ready9-no-reply",
+      "match": { "messageClass": "2", "field": { "index": 3, "startsWith": "9" } },
+      "noReply": true
     },
     {
       "name": "ready-b-idle-no-reply",
