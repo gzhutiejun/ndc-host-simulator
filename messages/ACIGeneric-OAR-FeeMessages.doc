@@ -1,0 +1,552 @@
+M1187RESV
+0005GIS     11                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+0005OOS     12                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+0031COMMSKEY332020193062042095255162143                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+0357BFA-P2  40001200100000012832039075@@002DATE: 09/05/03          TIME: 02:37PM
+ATM : 0837              SEQ : 1283
+TEST LAB                 
+RICHMOND         VA 
+
+CARD NUMBER:  4***********8023
+
+2
+DEPOSIT WITH CASH BACK TO
+   PERSONAL CHKNG 
+   1********9339
+DEPOSITED ITEMS           $50.00
+CASH BACK AMOUNT          $20.00
+DEPOSIT AMOUNT            $30.00
+
+                                                                                                                                                                                                                                                   
+0077BFA  B A400024712831023075@@0041283 0905 4828600268938023 b0000005000b C 0837                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+0106OAR4    3000D819DCA521100111074186BE2 NDBJCHECKING   DDLNK CAP1       EA  FA  GA  HA  IA6> MORE J5                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+0158OAR3    3000D519DBA521100111074186BE2 NDBJCHECKING   DDLRG STATEMENT3 EDLNK CAP        FDLNK SAV        GDLNK SAV1       HDLNK SAV2       IA6> MORE J5                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+0158OAR2    3000D119DAA521100111074186BE2 NDBJCHECKING   DDVISA PLATINUM  EDPREFERRED BKLN FDLRG STATEMENT  GDLRG STATEMENT1 HDLRG STATEMENT2 IA6> MORE J5                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+0158OAR1    3000CC19D9A521100111074186BE2 NDBJCHECKING   DDPERSONAL CHKNG EDCAP ACCOUNT    FDINSTANT CASH   GDCUSTOMIZED SAV2HDCUSTOMIZED SAV IA6> MORE J5                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+0039SURCHARG400011812745118075E6     1.00000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+0389DAA  B A400012012855000075@@002DATE: 09/05/03          TIME: 02:40PM
+ATM : 0837              SEQ : 1285
+TEST LAB                 
+RICHMOND         VA 
+
+CARD NUMBER:  4***********8023
+
+2
+TRANSFER                      $20.00
+
+TRANSFER FROM PERSONAL CHKNG 
+   1********9339
+   AVAILABLE BALANCE        $1036.25
+
+TRANSFER TO CAP ACCOUNT    
+   4*****9177
+   AVAILABLE BALANCE      $227756.96
+                                                                                                                                                                                                                   
+0275GC   B A400012013081023075@@0041308 0905 4828600268938023 b0000002200b P 08372DATE: 09/05/03          TIME: 02:47PM
+ATM : 0837              SEQ : 1308
+TEST LAB                 
+RICHMOND         VA 
+
+CARD NUMBER:  4***********8023
+
+2
+PAYMENT ENCLOSED
+AMOUNT          $22.00
+                                                                                                                                                                                                                                                                                                                                     
+0394CA   B A400012013095000075@@002DATE: 09/05/03          TIME: 02:48PM
+ATM : 0837              SEQ : 1309
+TEST LAB                 
+RICHMOND         VA 
+
+CARD NUMBER:  4***********8023
+
+2
+INQUIRY TO PERSONAL CHKNG 
+   1********9339
+   AVAILABLE BALANCE          $1025.25
+
+OVERDRAFT ACCOUNT(S)
+   AVAILABLE BALANCE           $800.00
+
+   AVAILABLE INCLUDING
+   OVERDRAFT                  $1825.25
+                                                                                                                                                                                                              
+0561HHAI B A400012013315113075@@002DATE: 09/05/03          TIME: 03:09PM
+ATM : 0837              SEQ : 1331
+TEST LAB                 
+RICHMOND         VA 
+
+CARD NUMBER:  4***********8023
+
+AVAILABLE BALANCE        $1014.25
+ACCOUNT: PERSONAL CHKNG 
+MINI-STATEMENT AS OF:    08/08/03
+LAST 10 TRANSACTIONS      
+
+DATE  TRAN DESCR    AMOUNT
+----  ---------- ------------
+207/30 AUTO DEP        1050.00 
+07/11 AUTO DEP         934.73 
+07/03 DEPOSIT         5800.00 
+06/24 AUTO DEP        1000.00 
+06/23 AUTO DEP         901.00 
+
+
+  *** END OF STATEMENT ***                                                     
+0561HHAH B A400012013315113075@@002DATE: 09/05/03          TIME: 03:09PM
+ATM : 0837              SEQ : 1331
+TEST LAB                 
+RICHMOND         VA 
+
+CARD NUMBER:  4***********8023
+
+AVAILABLE BALANCE        $1014.25
+ACCOUNT: PERSONAL CHKNG 
+MINI-STATEMENT AS OF:    08/08/03
+LAST 10 CHECKS PAID       
+
+DATE  TRAN DESCR    AMOUNT
+----  ---------- ------------
+207/30 AUTO DEP        1050.00 
+07/11 AUTO DEP         934.73 
+07/03 DEPOSIT         5800.00 
+06/24 AUTO DEP        1000.00 
+06/23 AUTO DEP         901.00 
+
+
+  *** END OF STATEMENT ***                                                     
+0561HHAG B A400012013315113075@@002DATE: 09/05/03          TIME: 03:09PM
+ATM : 0837              SEQ : 1331
+TEST LAB                 
+RICHMOND         VA 
+
+CARD NUMBER:  4***********8023
+
+AVAILABLE BALANCE        $1014.25
+ACCOUNT: PERSONAL CHKNG 
+MINI-STATEMENT AS OF:    08/08/03
+LAST 10 WDLS/PURCHASES    
+
+DATE  TRAN DESCR    AMOUNT
+----  ---------- ------------
+207/30 AUTO DEP        1050.00 
+07/11 AUTO DEP         934.73 
+07/03 DEPOSIT         5800.00 
+06/24 AUTO DEP        1000.00 
+06/23 AUTO DEP         901.00 
+
+
+  *** END OF STATEMENT ***                                                     
+0561HHAF B A400012013315113075@@002DATE: 09/05/03          TIME: 03:09PM
+ATM : 0837              SEQ : 1331
+TEST LAB                 
+RICHMOND         VA 
+
+CARD NUMBER:  4***********8023
+
+AVAILABLE BALANCE        $1014.25
+ACCOUNT: PERSONAL CHKNG 
+MINI-STATEMENT AS OF:    08/08/03
+LAST 5 DEPOSITS           
+
+DATE  TRAN DESCR    AMOUNT
+----  ---------- ------------
+207/30 AUTO DEP        1050.00 
+07/11 AUTO DEP         934.73 
+07/03 DEPOSIT         5800.00 
+06/24 AUTO DEP        1000.00 
+06/23 AUTO DEP         901.00 
+
+
+  *** END OF STATEMENT ***                                                     
+0563HHAA-P1 40001235P112075@@008                      WACHOVIA
+
+DATE: 08/29/03  TIME: 05:06PM   ATM: 0837  SEQ: 1235
+LOCATION: TEST LAB                  RICHMOND      VA 
+
+CARD NUMBER: 4***********1067     PAGE NO:  01
+
+ACCOUNT: PERFORM PERS      1********9162
+STATEMENT PERIOD: 06/14/03 THRU 07/15/03
+OPENING BALANCE:                 $691.18
+CLOSING BALANCE:                 $134.62
+
+DATE   TRANSACTION DESCRIPTION        AMOUNT
+-----  -----------------------        ------
+
+06/16 AUTOMATED CREDIT VIRGINIA      1197.97+
+06/16 PURCHASE     MATTHEW'S HA         9.39-
+                                     
+0487HHAA-P2 40001235P112075@@00806/20 CHECK06834                       59.82-
+06/20 CHECK06839                       50.00-
+06/20 CHECK06831                       11.00-
+06/23 CHECK06837                      500.00-
+06/23 CHECK06835                       16.20-
+06/23 AUTOMATED DEBIT  STATE FA         9.20-
+06/23 AUTOMATED DEBIT  STATE FA         7.40-
+06/24 CHECK06838                       31.35-
+06/25 CHECK06832                       55.00-
+06/30 DEPOSIT      MARKET PLACE       534.92+
+                                                                                                                 
+0487HHAA-P3 40001235P112075@@00806/30 WITHDRAWAL   MARKET PLACE        20.00-
+06/30 PURCHASE     SUPER SHOE S        41.67-
+06/30 PURCHASE     SALLY BEAUTY        13.71-
+06/30 PURCHASE     OFFICE MAX          10.45-
+06/30 PURCHASE     MACADO'S             7.13-
+06/30 CHECK06833                       67.94-
+07/01 AUTOMATED CREDIT VIRGINIA      1197.98+
+07/01 PURCHASE     MOTOR MILE P        69.12-
+07/01 PURCHASE     USPS 5514560         3.45-
+07/01 CHECK06841                       20.00-
+                                                                                                                 
+0487HHAA-P4 40001235P112075@@00807/01 CHECK06840                       12.00-
+07/02 TRANSFER TO      07900523       350.00-
+07/02 TRANSFER TO      54909984        50.00-
+07/03 PURCHASE     HAIR FORCE          30.00-
+07/03 PURCHASE     OCHARLEYS           14.73-
+07/03 CHECK06846                       75.00-
+07/03 CHECK06844                       55.00-
+07/03 CHECK06843                       36.00-
+07/07 REFUND       KMART               31.32+
+07/07 WITHDRAWAL   MARKET PLACE        20.00-
+                                                                                                                 
+0487HHAA-P5 40001235P112075@@00807/07 TRANSFER TO      07900523       350.00-
+07/07 PURCHASE     JCPENNEY CO         39.69-
+07/07 PURCHASE     ANNIE KAYS          16.34-
+07/07 PURCHASE     KMART               10.45-
+07/07 TRANSFER  TO  CHECKING #1        50.00-
+07/07 CHECK06842                      696.18-
+07/08 CHECK06852                      100.00-
+07/08 CHECK06851                       60.00-
+07/09 CHECK06847                       50.00-
+07/09 CHECK06849                       50.00-
+                                                                                                                 
+0263HHAA-P6 40001201235Q113075@@00807/10 CHECK06848                       39.00-
+07/11 CHECK06845                       92.00-
+07/15 CHECK06854                       30.00-
+07/15 INTEREST FROM 06/14/2003          0.09+
+
+
+
+        THIS IS THE END OF YOUR STATEMENT   
+                                                                                                                                                                                                                                                                                                                                                 
+0571HHAB-P1 40001239P112075@@008                      WACHOVIA
+
+DATE: 08/29/03  TIME: 05:09PM   ATM: 0837  SEQ: 1239
+LOCATION: TEST LAB                  RICHMOND      VA 
+
+CARD NUMBER: 4***********1067     PAGE NO:  01
+
+ACCOUNT: PERFORM PERS        1********9162
+PREVIOUS STATEMENT DATE:          07/15/03
+PREVIOUS STATEMENT BALANCE:        $134.62
+INTERIM  STATEMENT AS OF:         08/08/03
+
+DATE   TRANSACTION DESCRIPTION        AMOUNT
+-----  -----------------------        ------
+
+08/07 PURCHASE     HAIR FORCE          30.00-
+08/06 CHECK06865                       51.04-
+                             
+0487HHAB-P2 40001239P112075@@00807/29 PURCHASE     WM SUPERCENT        26.97-
+07/29 REFUND       WM SUPERCENT        59.40+
+07/28 PURCHASE     GOODY'S #087        14.23-
+07/28 PURCHASE     TARGET              19.84-
+07/28 TRNSFR 1050000821885    M       200.00+
+07/24 PURCHASE     BOSTON BEANE        34.00-
+07/23 OVERDRAFT PROTECTION            200.00+
+07/23 CHECK06857                      500.00-
+07/23 CHECK06855                       30.00-
+07/23 CHECK06853                       55.00-
+                                                                                                                 
+0487HHAB-P3 40001239P112075@@00807/22 CHECK06858                      129.60-
+07/22 PURCHASE     WM SUPERCENT        37.05-
+07/22 REFUND       JCPENNEY CO         23.39+
+07/21 TRANSFER  TO  CHECKING #1        50.00-
+07/21 PURCHASE     WAL SAM'S CL        75.66-
+07/21 PURCHASE     ECKERD DRUG          5.29-
+07/21 PURCHASE     BED BATH & B        12.87-
+07/21 PURCHASE     NEW CREATION        43.90-
+07/21 PURCHASE     JCPENNEY CO         47.05-
+07/18 CHECK06856                       60.00-
+                                                                                                                 
+0430HHAB-P4 40001201239Q113075@@00807/16 CHECK06850                       16.20-
+07/16 TRANSFER TO      54909984        50.00-
+07/16 TRANSFER TO      07900523       350.00-
+07/16 AUTOMATED CREDIT VIRGINIA      1194.26+
+
+
+------------------------------------------------------------
+CURRENT AVAILABLE BALANCE:           $589.17
+------------------------------------------------------------
+            THIS IS THE END OF YOUR STATEMENT
+                                                                                                                                                                          
+0316FAA  B A4000123010000001267A040075@@002DATE: 09/05/03          TIME: 01:53PM
+ATM : 0837              SEQ : 1267
+TEST LAB                 
+RICHMOND         VA 
+
+CARD NUMBER:  4***********8023
+
+2
+WITHDRAWAL FROM PERSONAL CHKNG 
+   1********9339
+   AMOUNT                    $20.00
+   AVAILABLE BALANCE       $1216.25
+                                                                                                                                                                                                                                                                                            
+0316FAB  B A4000123020000001268A040075@@002DATE: 09/05/03          TIME: 01:55PM
+ATM : 0837              SEQ : 1268
+TEST LAB                 
+RICHMOND         VA 
+
+CARD NUMBER:  4***********8023
+
+2
+WITHDRAWAL FROM PERSONAL CHKNG 
+   1********9339
+   AMOUNT                    $40.00
+   AVAILABLE BALANCE       $1176.25
+                                                                                                                                                                                                                                                                                            
+0316FAC  B A4000123020000001268A040075@@002DATE: 09/05/03          TIME: 01:55PM
+ATM : 0837              SEQ : 1268
+TEST LAB                 
+RICHMOND         VA 
+
+CARD NUMBER:  4***********8023
+
+2
+WITHDRAWAL FROM PERSONAL CHKNG 
+   1********9339
+   AMOUNT                    $60.00
+   AVAILABLE BALANCE       $1176.25
+                                                                                                                                                                                                                                                                                            
+0317FAD  B A4000123020000001268A040075@@002DATE: 09/05/03          TIME: 01:55PM
+ATM : 0837              SEQ : 1268
+TEST LAB                 
+RICHMOND         VA 
+
+CARD NUMBER:  4***********8023
+
+2
+WITHDRAWAL FROM PERSONAL CHKNG 
+   1********9339
+   AMOUNT                    $100.00
+   AVAILABLE BALANCE       $1176.25
+                                                                                                                                                                                                                                                                                           
+0305BA   B A400012012781023075@@0041278 0905 4828600268938023 b0000003000b D 08372DATE: 09/05/03          TIME: 02:11PM
+ATM : 0837              SEQ : 1278
+TEST LAB                 
+RICHMOND         VA 
+
+CARD NUMBER:  4***********8023
+
+2
+DEPOSIT TO PERSONAL CHKNG 
+   1********9339
+   AMOUNT          $30.00
+                                                                                                                                                                                                                                                                                                       
+0397BEA  B A400012012801023075@@0041280 0905 4828600268938023 b0000005000b S 08372DATE: 09/05/03          TIME: 02:14PM
+ATM : 0837              SEQ : 1280
+TEST LAB                 
+RICHMOND         VA 
+
+CARD NUMBER:  4***********8023
+
+2
+DEPOSIT TO 2 ACCOUNTS
+
+DEPOSIT TO PERSONAL CHKNG 
+   1********9339
+   AMOUNT          $25.00
+
+DEPOSIT TO LNK CAP1       
+   4*****3908
+   AMOUNT          $25.00
+
+                                                                                                                                                                                                           
+0316AA   B A40001200100000012712039075@@002DATE: 09/05/03          TIME: 02:02PM
+ATM : 0837              SEQ : 1271
+TEST LAB                 
+RICHMOND         VA 
+
+CARD NUMBER:  4***********8023
+
+2
+WITHDRAWAL FROM PERSONAL CHKNG 
+   1********9339
+   AMOUNT                    $20.00
+   AVAILABLE BALANCE       $1076.25
+                                                                                                                                                                                                                                                                                            
+0320GADA B A40001200004000012482285075@@002DATE: 08/29/03          TIME: 05:13PM
+ATM : 0837              SEQ : 1248
+TEST LAB                 
+RICHMOND         VA 
+
+CARD NUMBER:  4***********1067
+
+2
+STAMP PURCHASE FROM CHRISTMAS ACCT 
+   1********1885
+   AMOUNT                    $29.60
+   AVAILABLE BALANCE       $6020.41
+                                                                                                                                                                                                                                                                                        
+0320GACA B A40001200003000012482285075@@002DATE: 08/29/03          TIME: 05:13PM
+ATM : 0837              SEQ : 1248
+TEST LAB                 
+RICHMOND         VA 
+
+CARD NUMBER:  4***********1067
+
+2
+STAMP PURCHASE FROM CHRISTMAS ACCT 
+   1********1885
+   AMOUNT                    $22.20
+   AVAILABLE BALANCE       $6020.41
+                                                                                                                                                                                                                                                                                        
+0320GABA B A40001200002000012482285075@@002DATE: 08/29/03          TIME: 05:13PM
+ATM : 0837              SEQ : 1248
+TEST LAB                 
+RICHMOND         VA 
+
+CARD NUMBER:  4***********1067
+
+2
+STAMP PURCHASE FROM CHRISTMAS ACCT 
+   1********1885
+   AMOUNT                    $14.80
+   AVAILABLE BALANCE       $6020.41
+                                                                                                                                                                                                                                                                                        
+0319GAAA B A40001200001000012482285075@@002DATE: 08/29/03          TIME: 05:13PM
+ATM : 0837              SEQ : 1248
+TEST LAB                 
+RICHMOND         VA 
+
+CARD NUMBER:  4***********1067
+
+2
+STAMP PURCHASE FROM CHRISTMAS ACCT 
+   1********1885
+   AMOUNT                    $7.40
+   AVAILABLE BALANCE       $6020.41
+                                                                                                                                                                                                                                                                                         
+0078DEP HOLD400022913755229075 @@0041375 1218 4828510004222048 b0075000000b D 09100                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+0481IGD     400017512085000075@@002DATE:  08/29/03
+
+TIME:  04:25PM
+
+ATM: 0837  SEQ: 
+
+ITEM C 00         20
+START    $10000
+INCR     $30000   DECR         $0
+OUT          $0   END      $40000
+ITEM N 03            7.40
+START   12014
+INCR      100   DECR        0
+OUT         0   END     12114
+2
+DEP0  00            0.00
+DEP1  00            0.00
+PAY   00            0.00
+TOT   00  CRD   00
+
+FUNCTION: DEPOSIT PULL       
+CARD NUM: 5705670010309018   
+LOCATION: TEST LAB                 
+                                                                                                                       
+0481IGC     400017512085000075@@002DATE:  08/29/03
+
+TIME:  04:26PM
+
+ATM: 0837  SEQ: 
+
+ITEM C 00         20
+START    $10000
+INCR     $30000   DECR         $0
+OUT          $0   END      $40000
+ITEM N 03            7.40
+START   12014
+INCR      100   DECR        0
+OUT         0   END     12114
+2
+DEP0  00            0.00
+DEP1  00            0.00
+PAY   00            0.00
+TOT   00  CRD   00
+
+FUNCTION: REPLENISH ONLY     
+CARD NUM: 5705670010309018   
+LOCATION: TEST LAB                 
+                                                                                                                       
+0481IHBB    400017512085000075@@002DATE:  08/29/03
+
+TIME:  04:27PM
+
+ATM: 0837  SEQ: 
+
+ITEM C 00         20
+START    $10000
+INCR       $300   DECR         $0
+OUT          $0   END      $10300
+ITEM N 03            7.40
+START   12114
+INCR        0   DECR        0
+OUT         0   END     12114
+2
+DEP0  00            0.00
+DEP1  00            0.00
+PAY   00            0.00
+TOT   00  CRD   00
+
+FUNCTION: CASH/COIN INCREASE 
+CARD NUM: 5705670010309018   
+LOCATION: TEST LAB                 
+                                                                                                                       
+0481IHBC    400017512085000075@@002DATE:  08/29/03
+
+TIME:  04:27PM
+
+ATM: 0837  SEQ: 
+
+ITEM C 00         20
+START    $10000
+INCR       $300   DECR         $0
+OUT          $0   END      $10300
+ITEM N 03            7.40
+START   12114
+INCR       50   DECR        0
+OUT         0   END     12164
+2
+DEP0  00            0.00
+DEP1  00            0.00
+PAY   00            0.00
+TOT   00  CRD   00
+
+FUNCTION: MEDIA     INCREASE 
+CARD NUM: 5705670010309018   
+LOCATION: TEST LAB                 
+                                                                                                                       
+0481II      400017512085000075@@002DATE:  08/29/03
+
+TIME:  04:28PM
+
+ATM: 0837  SEQ: 
+
+ITEM C 00         20
+START    $10000
+INCR       $300   DECR         $0
+OUT          $0   END      $10300
+ITEM N 03            7.40
+START   12114
+INCR       50   DECR        0
+OUT         0   END     12164
+2
+DEP0  00            0.00
+DEP1  00            0.00
+PAY   00            0.00
+TOT   00  CRD   00
+
+FUNCTION: SUBTOTALS          
+CARD NUM: 5705670010309018   
+LOCATION: TEST LAB                 
+                                                                                                                       

@@ -1,0 +1,757 @@
+M1187RESV
+0005GIS     11                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+0005OOS     12                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+0347024DS   400002431085000075@@001300456701106/05/03117:38
+DENY244322018111111112UNABLE TO DEPOSIT       2
+27   HUNTINGTON BANKS
+
+6  DATE   TIME  TERMINAL
+506/05/03  17:38 30045670
+
+5CARD NO. XXXXXXXXXXXX1111
+
+4HIP TX4001 DIAL-UP    
+4COLUMBUS      OH 
+4RECORD NO.:
+4DEPOSIT   
+
+4TRANSACTION DECLINED
+4
+4UNABLE TO DEPOSIT       
+                                                                                                                                                                                                                                                             
+0346024PAYOT400002431085000075@@001300456701106/05/03117:39
+DENY244322018111111112UNABLE TO DEPOSIT       2
+27   HUNTINGTON BANKS
+
+6  DATE   TIME  TERMINAL
+506/05/03  17:39 30045670
+
+5CARD NO. XXXXXXXXXXXX1111
+
+4HIP TX4001 DIAL-UP    
+4COLUMBUS      OH 
+4RECORD NO.:
+4PAYMT ENCL
+
+4TRANSACTION DECLINED
+4
+4UNABLE TO DEPOSIT       
+                                                                                                                                                                                                                                                              
+0346024DC   400002431085000075@@001300456701106/05/03117:36
+DENY244322018111111112UNABLE TO DEPOSIT       2
+27   HUNTINGTON BANKS
+
+6  DATE   TIME  TERMINAL
+506/05/03  17:36 30045670
+
+5CARD NO. XXXXXXXXXXXX1111
+
+4HIP TX4001 DIAL-UP    
+4COLUMBUS      OH 
+4RECORD NO.:
+4DEPOSIT   
+
+4TRANSACTION DECLINED
+4
+4UNABLE TO DEPOSIT       
+                                                                                                                                                                                                                                                              
+0356048A AA 40000480000000031085000075@@001300456701106/05/03117:31
+DENYCK244322018111111112UNABLE TO DISPENSE      2
+27   HUNTINGTON BANKS
+
+6  DATE   TIME  TERMINAL
+506/05/03  17:31 30045670
+
+5CARD NO. XXXXXXXXXXXX1111
+
+4HIP TX4001 DIAL-UP    
+4COLUMBUS      OH 
+4RECORD NO.:
+4PURCHASE  
+
+4TRANSACTION DECLINED
+4
+4UNABLE TO DISPENSE      
+                                                                                                                                                                                                                                                    
+0368152AD A 40001520000000031085000075@@0013004567013108106/05/03117:29
+DENY244322018111111112TRANSACTION NOT ALLOWED 2057
+27   HUNTINGTON BANKS
+
+6  DATE   TIME  TERMINAL
+506/05/03  17:29 30045670
+
+5CARD NO. XXXXXXXXXXXX1111
+
+4HIP TX4001 DIAL-UP    
+4COLUMBUS      OH 
+4RECORD NO.:3108
+4WITHDRAWAL
+
+4TRANSACTION DECLINED
+4057
+4TRANSACTION NOT ALLOWED 
+                                                                                                                                                                                                                                        
+0370151AA B 40001510000000031065000075@@0013004567013106106/05/03117:26
+DENYCK244322018111111112INVALID TRAN OR ACCOUNT 2056
+27   HUNTINGTON BANKS
+
+6  DATE   TIME  TERMINAL
+506/05/03  17:26 30045670
+
+5CARD NO. XXXXXXXXXXXX1111
+
+4HIP TX4001 DIAL-UP    
+4COLUMBUS      OH 
+4RECORD NO.:3106
+4WITHDRAWAL
+
+4TRANSACTION DECLINED
+4056
+4INVALID TRAN OR ACCOUNT 
+                                                                                                                                                                                                                                      
+0438AB A    40001200100000031072039075@@0013004567013107106/05/03117:27
+WITHDRAWAL1SV24432201811111111          20.00       54752.6700004894876051
+27   HUNTINGTON BANKS
+
+6  DATE   TIME  TERMINAL
+506/05/03  17:27 30045670
+
+5CARD NO. XXXXXXXXXXXX1111
+
+4HIP TX4001 DIAL-UP    
+4COLUMBUS      OH 
+4RECORD NO.?   3107
+4WITHDRAWAL7         $20.00
+4FR SV5XXXXXXX6051
+
+4ACCT BAL   6      $54752.67
+4AVAIL BAL  6      $54752.67
+                                                                                                                                                                  
+0046043BA   40000430000000031045185075BA      10000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+0438AB      40001200100000031032039075@@0013004567013103106/05/03116:29
+WITHDRAWAL1SV24432201811111111          20.00       54772.6700004894876051
+27   HUNTINGTON BANKS
+
+6  DATE   TIME  TERMINAL
+506/05/03  16:29 30045670
+
+5CARD NO. XXXXXXXXXXXX1111
+
+4HIP TX4001 DIAL-UP    
+4COLUMBUS      OH 
+4RECORD NO.?   3103
+4WITHDRAWAL7         $20.00
+4FR SV5XXXXXXX6051
+
+4ACCT BAL   6      $54772.67
+4AVAIL BAL  6      $54772.67
+                                                                                                                                                                  
+0438AA      40001200100000031022039075@@0013004567013102106/05/03116:28
+WITHDRAWAL1CK24432201811111111          20.00       20619.7600002891111111
+27   HUNTINGTON BANKS
+
+6  DATE   TIME  TERMINAL
+506/05/03  16:28 30045670
+
+5CARD NO. XXXXXXXXXXXX1111
+
+4HIP TX4001 DIAL-UP    
+4COLUMBUS      OH 
+4RECORD NO.?   3102
+4WITHDRAWAL7         $20.00
+4FR CK5XXXXXXX1111
+
+4ACCT BAL   6      $20619.76
+4AVAIL BAL  6      $20619.76
+                                                                                                                                                                  
+0377DAB A   400012030995000075@@0013004567013099106/05/03116:25
+TRF1CKSV4432201811111111          40.00?0010289111111104894876051
+27   HUNTINGTON BANKS
+
+6  DATE   TIME  TERMINAL
+506/05/03  16:25 30045670
+
+5CARD NO. XXXXXXXXXXXX1111
+
+4HIP TX4001 DIAL-UP    
+4COLUMBUS      OH 
+4RECORD NO.?   3099
+4TRANSFER9         $40.00
+4FR CK5XXXXXXX1111
+4TO SV5XXXXXXX6051
+                                                                                                                                                                                                                               
+0377DBA     400012030975000075@@0013004567013097106/05/03116:23
+TRF1SVCK4432201811111111          20.00?0010489487605102891111111
+27   HUNTINGTON BANKS
+
+6  DATE   TIME  TERMINAL
+506/05/03  16:23 30045670
+
+5CARD NO. XXXXXXXXXXXX1111
+
+4HIP TX4001 DIAL-UP    
+4COLUMBUS      OH 
+4RECORD NO.?   3097
+4TRANSFER9         $20.00
+4FR SV5XXXXXXX6051
+4TO CK5XXXXXXX1111
+                                                                                                                                                                                                                               
+0377DAB     400012030965000075@@0013004567013096106/05/03116:22
+TRF1CKSV4432201811111111          10.00?0010289111111104894876051
+27   HUNTINGTON BANKS
+
+6  DATE   TIME  TERMINAL
+506/05/03  16:22 30045670
+
+5CARD NO. XXXXXXXXXXXX1111
+
+4HIP TX4001 DIAL-UP    
+4COLUMBUS      OH 
+4RECORD NO.?   3096
+4TRANSFER9         $10.00
+4FR CK5XXXXXXX1111
+4TO SV5XXXXXXX6051
+                                                                                                                                                                                                                               
+0362150HHB C400015030955000075@@0013004567013095106/05/03116:21
+DENYSV244322018111111112UNABLE TO PROCESS       2072
+27   HUNTINGTON BANKS
+
+6  DATE   TIME  TERMINAL
+506/05/03  16:21 30045670
+
+5CARD NO. XXXXXXXXXXXX1111
+
+4HIP TX4001 DIAL-UP    
+4COLUMBUS      OH 
+4RECORD NO.:3095
+4STMT PRNT 
+
+4TRANSACTION DECLINED
+4072
+4UNABLE TO PROCESS       
+                                                                                                                                                                                                                                              
+0438FAD     4000123050000003085B040075@@0013004567013085106/05/03116:13
+WITHDRAWAL1CK24432201811111111         100.00       20669.7600002891111111
+27   HUNTINGTON BANKS
+
+6  DATE   TIME  TERMINAL
+506/05/03  16:13 30045670
+
+5CARD NO. XXXXXXXXXXXX1111
+
+4HIP TX4001 DIAL-UP    
+4COLUMBUS      OH 
+4RECORD NO.?   3085
+4WITHDRAWAL7        $100.00
+4FR CK5XXXXXXX1111
+
+4ACCT BAL   6      $20669.76
+4AVAIL BAL  6      $20669.76
+                                                                                                                                                                  
+0438FAA     4000123010000003084B040075@@0013004567013084106/05/03116:12
+WITHDRAWAL1CK24432201811111111          20.00       20769.7600002891111111
+27   HUNTINGTON BANKS
+
+6  DATE   TIME  TERMINAL
+506/05/03  16:12 30045670
+
+5CARD NO. XXXXXXXXXXXX1111
+
+4HIP TX4001 DIAL-UP    
+4COLUMBUS      OH 
+4RECORD NO.?   3084
+4WITHDRAWAL7         $20.00
+4FR CK5XXXXXXX1111
+
+4ACCT BAL   6      $20769.76
+4AVAIL BAL  6      $20769.76
+                                                                                                                                                                  
+0164CA   C  400007430835074075CI     20789.76 GI     20789.76 0013004567013083106/05/03116:11
+INQ1CK24432201811111111           0.00       20789.7600002891111111
+                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+0410CB A    400012030805000075@@0013004567013080106/05/03116:09
+INQ1SV24432201811111111           0.00       54762.6700004894876051
+27   HUNTINGTON BANKS
+
+6  DATE   TIME  TERMINAL
+506/05/03  16:09 30045670
+
+5CARD NO. XXXXXXXXXXXX1111
+
+4HIP TX4001 DIAL-UP    
+4COLUMBUS      OH 
+4RECORD NO.?   3080
+4BALANCE INQUIRY
+4FR SV5XXXXXXX6051
+4ACCT BAL   6      $54762.67
+4AVAIL BAL  6      $54762.67
+                                                                                                                                                                                              
+0410CA A    400012030775000075@@0013004567013077106/05/03116:07
+INQ1CK24432201811111111           0.00       20789.7600002891111111
+27   HUNTINGTON BANKS
+
+6  DATE   TIME  TERMINAL
+506/05/03  16:07 30045670
+
+5CARD NO. XXXXXXXXXXXX1111
+
+4HIP TX4001 DIAL-UP    
+4COLUMBUS      OH 
+4RECORD NO.?   3077
+4BALANCE INQUIRY
+4FR CK5XXXXXXX1111
+4ACCT BAL   6      $20789.76
+4AVAIL BAL  6      $20789.76
+                                                                                                                                                                                              
+0410CB      400012030755000075@@0013004567013075106/05/03116:05
+INQ1SV24432201811111111           0.00       54762.6700004894876051
+27   HUNTINGTON BANKS
+
+6  DATE   TIME  TERMINAL
+506/05/03  16:05 30045670
+
+5CARD NO. XXXXXXXXXXXX1111
+
+4HIP TX4001 DIAL-UP    
+4COLUMBUS      OH 
+4RECORD NO.?   3075
+4BALANCE INQUIRY
+4FR SV5XXXXXXX6051
+4ACCT BAL   6      $54762.67
+4AVAIL BAL  6      $54762.67
+                                                                                                                                                                                              
+0410CA      400012030745000075@@0013004567013074106/05/03116:05
+INQ1CK24432201811111111           0.00       20789.7600002891111111
+27   HUNTINGTON BANKS
+
+6  DATE   TIME  TERMINAL
+506/05/03  16:05 30045670
+
+5CARD NO. XXXXXXXXXXXX1111
+
+4HIP TX4001 DIAL-UP    
+4COLUMBUS      OH 
+4RECORD NO.?   3074
+4BALANCE INQUIRY
+4FR CK5XXXXXXX1111
+4ACCT BAL   6      $20789.76
+4AVAIL BAL  6      $20789.76
+                                                                                                                                                                                              
+0381UTP     40001520000000031085000075@@0013004567013108106/05/03117:29
+DENY244322018111111112TRANSACTION OPCODE NOT DEFINED 2057
+27   HUNTINGTON BANKS
+
+6  DATE   TIME  TERMINAL
+506/05/03  17:29 30045670
+
+5CARD NO. XXXXXXXXXXXX1111
+
+4HIP TX4001 DIAL-UP    
+4COLUMBUS      OH 
+4RECORD NO.:3108
+4WITHDRAWAL
+
+4TRANSACTION DECLINED
+4057
+4TRANSACTION OPCODE NOT DEFINED
+                                                                                                                                                                                                                           
+0331II      400015094000075@@00312/03/03 10:08 200X5670
+
+4C1 STR     $9740
+4C1 INC        $0  C1 DEC        $0
+4C1 OUT     $2300  C1 END     $7440
+4C2 STR      $930
+4C2 INC        $0  C2 DEC        $0
+4C2 OUT     $1680  C2 END        $0
+4C3 STR   $561.00
+4C3 INC     $0.00  C3 DEC     $0.00
+4C3 OUT    $39.60  C3 END   $521.40
+                                                                                                                                                                                                                                                                             
+0332IHBA    400015094000075@@00312/03/03 10:10 200X5670
+
+4C1 STR     $9740
+4C1 INC      $100  C1 DEC        $0
+4C1 OUT     $2300  C1 END     $7540
+4C2 STR      $930
+4C2 INC        $0  C2 DEC        $0
+4C2 OUT     $1680  C2 END        $0
+4C3 STR   $561.00
+4C3 INC     $0.00  C3 DEC     $0.00
+4C3 OUT    $39.60  C3 END   $521.40
+                                                                                                                                                                                                                                                                             
+0332IHBB    400015094000075@@00312/03/03 10:10 200X5670
+
+4C1 STR     $9740
+4C1 INC      $100  C1 DEC        $0
+4C1 OUT     $2300  C1 END     $7540
+4C2 STR      $930
+4C2 INC        $0  C2 DEC        $0
+4C2 OUT     $1680  C2 END        $0
+4C3 STR   $561.00
+4C3 INC     $0.00  C3 DEC     $0.00
+4C3 OUT    $39.60  C3 END   $521.40
+                                                                                                                                                                                                                                                                             
+0109II1     400017515095000075@@0034DEP0   2  DEP1   0  CHK   00
+4MSG    0  PAY    0
+4TOT    2  CRD    0  SUB
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+0186IHBA1   400017515095000075@@0034DEP0   2  DEP1   0  CHK   00
+4MSG    0  PAY    0
+4TOT    2  CRD    0  ADJ
+                                                                           
+                                                                                                                                                                                                                                                                                                                                                                                                                              
+0110IHBB1   400017515095000075@@0034DEP0   2  DEP1   0  CHK   00
+4MSG    0  PAY    0
+4TOT    2  CRD    0  ADJ
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+0332IHCA    400015114000075@@00312/03/03 10:18 200X5670
+
+4C1 STR     $9740
+4C1 INC      $100  C1 DEC      $100
+4C1 OUT     $2300  C1 END     $7440
+4C2 STR      $930
+4C2 INC      $200  C2 DEC        $0
+4C2 OUT     $1680  C2 END        $0
+4C3 STR   $561.00
+4C3 INC     $0.00  C3 DEC     $0.00
+4C3 OUT    $39.60  C3 END   $521.40
+                                                                                                                                                                                                                                                                             
+0110IHCA1   400017515115000075@@0034DEP0   2  DEP1   0  CHK   00
+4MSG    0  PAY    0
+4TOT    2  CRD    0  ADJ
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+0345IGA     400015114000075@@00312/03/03 10:20 200X5670
+
+4C1 STR     $9740
+4C1 INC      $100  C1 DEC      $100
+4C1 OUT     $2300  C1 END     $7440
+4C2 STR      $930
+4C2 INC      $200  C2 DEC        $0
+4C2 OUT     $1680  C2 END        $0
+4C3 STR   $561.00
+4C3 INC     $0.00  C3 DEC     $0.00
+4C3 OUT    $39.60  C3 END   $521.40
+            
+                                                                                                                                                                                                                                                               
+0110IGA1    400017515115000075@@0034DEP0   2  DEP1   0  CHK   00
+4MSG    0  PAY    0
+4TOT    2  CRD    0  BAL
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+0379HHA I   400015124112075@@00212/03/03 TEST LAB - 5670    11:02AM   
+ATM 200X5670 COLUMBUS, OH             
+                                      
+CARD XXXXXXXXXXXX0164 RECEIPT 1512    
+CHECKING ACCT 02893016694             
+ACCT  BAL     $1994.56                
+AVAIL BAL     $3294.56                
+                                      
+LAST 20 TRANSACTIONS    THRU  12/01   
+                                                                                                                                                                                                                              
+0380HHA I1  400015124112075@@002DATE--DESCRIPTION------AMOUNT         
+11/07 HNB ATM WTHDRL     45.00        
+11/07 CHK CARD PURCH     18.44        
+11/07 BILL PAYMENT       47.08        
+11/07 BILL PAYMENT       50.00        
+11/07 DEPOSIT           322.00        
+11/07 DEPOSIT          2266.34        
+11/07 DEPOSIT           300.00        
+                                      
+                                                                                                                                                                                                                             
+0496HHA I2  400015124112075@@00212/03/03 TEST LAB - 5670    11:02AM   
+ATM 200X5670 COLUMBUS, OH             
+                                      
+DATE--DESCRIPTION------AMOUNT         
+11/06 CHK CARD PURCH     21.34        
+11/05 CHK CARD PURCH     15.41        
+11/05 CHK CARD PURCH     31.49        
+11/05 CHK CARD PURCH    122.40        
+11/04 WITHDRAWAL        100.00        
+11/04 CHK CARD PURCH     38.00        
+11/04 CHK CARD PURCH     50.00        
+11/04 CHK CARD PURCH     57.80        
+                                                                                                         
+0329HHA I3  400012015123113075@@00211/03 HNB ATM WTHDRL     50.00        
+11/03 WITHDRAWAL       1150.03        
+11/03 CHK CARD PURCH     13.43        
+11/03 CHK CARD PURCH     18.09        
+11/03 BILL PAYMENT       50.00        
+                                      
+1200X567011512112/03/03111:02STMTCK24432201890000164PUR11
+                                                                                                                                                                                                                                                                                
+0379HHA H   400015134112075@@00212/03/03 TEST LAB - 5670    11:03AM   
+ATM 200X5670 COLUMBUS, OH             
+                                      
+CARD XXXXXXXXXXXX0164 RECEIPT 1513    
+CHECKING ACCT 02893016694             
+ACCT  BAL     $1994.56                
+AVAIL BAL     $3294.56                
+                                      
+LAST 5 TRANSACTIONS     THRU  12/01   
+                                                                                                                                                                                                                              
+0443HHA H1  400012015133113075@@002DATE--DESCRIPTION------AMOUNT         
+11/07 HNB ATM WTHDRL     45.00        
+11/07 CHK CARD PURCH     18.44        
+11/07 BILL PAYMENT       47.08        
+11/07 BILL PAYMENT       50.00        
+11/07 DEPOSIT           322.00        
+                                      
+                                      
+                                      
+1200X567011513112/03/03111:03STMTCK24432201890000164ENT
+                                                                                                                                                             
+0379HHA G   400015144112075@@00212/03/03 TEST LAB - 5670    11:03AM   
+ATM 200X5670 COLUMBUS, OH             
+                                      
+CARD XXXXXXXXXXXX0164 RECEIPT 1514    
+CHECKING ACCT 02893016694             
+ACCT  BAL     $1994.56                
+AVAIL BAL     $3294.56                
+                                      
+LAST 5 ATM WITHDRAWALS  THRU  12/01   
+                                                                                                                                                                                                                              
+0446HHA G1  400012015143113075@@002DATE--DESCRIPTION------AMOUNT         
+11/07 HUNTINGTON         45.00        
+11/03 HUNTINGTON         50.00        
+10/28 HUNTINGTON         15.00        
+10/27 HUNTINGTON         15.00        
+10/27 HUNTINGTON         40.00        
+                                      
+                                      
+                                      
+1200X567011514112/03/03111:03STMTCK24432201890000164N  
+                                                                                                                                                             
+0379HHA F   400015154112075@@00212/03/03 TEST LAB - 5670    11:04AM   
+ATM 200X5670 COLUMBUS, OH             
+                                      
+CARD XXXXXXXXXXXX0164 RECEIPT 1515    
+CHECKING ACCT 02893016694             
+ACCT  BAL     $1994.56                
+AVAIL BAL     $3294.56                
+                                      
+LAST 5 CHECK CARD       THRU  12/01   
+                                                                                                                                                                                                                              
+0443HHA F1  400012015153113075@@002DATE--DESCRIPTION------AMOUNT         
+11/07 CK CARD PURCHS     18.44        
+11/06 CK CARD PURCHS     21.34        
+11/05 CK CARD PURCHS     15.41        
+11/05 CK CARD PURCHS     31.49        
+11/05 CK CARD PURCHS    122.40        
+                                      
+                                      
+                                      
+1200X567011515112/03/03111:04STMTCK24432201890000164URC
+                                                                                                                                                             
+0379HHA B   400015164112075@@00212/03/03 TEST LAB - 5670    11:05AM   
+ATM 200X5670 COLUMBUS, OH             
+                                      
+CARD XXXXXXXXXXXX0164 RECEIPT 1516    
+CHECKING ACCT 02893016694             
+ACCT  BAL     $1994.56                
+AVAIL BAL     $3294.56                
+                                      
+LAST 5 DEPOSITS         THRU  12/01   
+                                                                                                                                                                                                                              
+0448HHA B1  400012015163113075@@002DATE-------------------AMOUNT         
+11/07                   322.00        
+11/07                  2266.34        
+11/07                   300.00        
+11/03                   253.52        
+10/24                   322.00        
+                                      
+                                      
+                                      
+1200X567011516112/03/03111:05STMTCK24432201890000164   
+                                                                                                                                                             
+0380HHA C   400015174112075@@00212/03/03 TEST LAB - 5670    11:06AM   
+ATM 200X5670 COLUMBUS, OH             
+                                      
+CARD XXXXXXXXXXXX0164 RECEIPT 1517    
+BILL PAY      02893016694             
+ACCT  BAL     $1994.56                
+AVAIL BAL     $3294.56                
+                                      
+LAST 5 BILL PAY         THRU  12/01   
+                                                                                                                                                                                                                              
+0443HHA C1  400012015173113075@@002DATE--DESCRIPTION------AMOUNT         
+11/07 BILL PAYMENT       47.08        
+11/07 BILL PAYMENT       50.00        
+11/03 BILL PAYMENT       50.00        
+11/03 BILL PAYMENT      500.00        
+10/30 BILL PAYMENT      120.90        
+                                      
+                                      
+                                      
+1200X567011517112/03/03111:06STMTCK24432201890000164ENT
+                                                                                                                                                             
+0380HHA D   400015184112075@@00212/03/03 TEST LAB - 5670    11:06AM   
+ATM 200X5670 COLUMBUS, OH             
+                                      
+CARD XXXXXXXXXXXX0164 RECEIPT 1518    
+CHECKING ACCT 02893016694             
+ACCT  BAL     $1994.56                
+AVAIL BAL     $3294.56                
+                                      
+LAST 5 CHECKS PAID      THRU  12/01   
+                                                                                                                                                                                                                              
+0448HHA D1  400012015183113075@@002DATE-CHECK NO.---------AMOUNT         
+11/03   5346             20.14        
+10/15   5337            120.06        
+10/08   0666             55.00        
+10/08   0665             97.00        
+10/01   5330             20.14        
+                                      
+                                      
+                                      
+1200X567011518112/03/03111:06STMTCK24432201890000164   
+                                                                                                                                                             
+0379HHB A   400015194112075@@00212/03/03 TEST LAB - 5670    11:07AM   
+ATM 200X5670 COLUMBUS, OH             
+                                      
+CARD XXXXXXXXXXXX0164 RECEIPT 1519    
+SAVINGS ACCT  04895421751             
+ACCT  BAL      $608.59                
+AVAIL BAL      $608.59                
+                                      
+LAST 5 TRANSACTIONS     THRU  12/01   
+                                                                                                                                                                                                                              
+0448HHB A1  400012015193113075@@002DATE--DESCRIPTION------AMOUNT         
+11/07 DEPOSIT            50.00        
+10/24 DEPOSIT            50.00        
+10/10 DEPOSIT            50.00        
+09/26 DEPOSIT            50.00        
+09/17 SERVICE CHARGE      3.00        
+                                      
+                                      
+                                      
+1200X567011519112/03/03111:07STMTSV24432201890000164   
+                                                                                                                                                             
+0379HHB B   400015204112075@@00212/03/03 TEST LAB - 5670    11:08AM   
+ATM 200X5670 COLUMBUS, OH             
+                                      
+CARD XXXXXXXXXXXX0164 RECEIPT 1520    
+SAVINGS ACCT  04895421751             
+ACCT  BAL      $608.59                
+AVAIL BAL      $608.59                
+                                      
+LAST 5 DEPOSITS         THRU  12/01   
+                                                                                                                                                                                                                              
+0448HHB B1  400012015203113075@@002DATE-------------------AMOUNT         
+09/17                     3.00        
+08/18                     3.00        
+07/21                    32.15        
+07/21                    30.00        
+07/18                    30.00        
+                                      
+                                      
+                                      
+1200X567011520112/03/03111:08STMTSV24432201890000164   
+                                                                                                                                                             
+0379HHB C   400015214112075@@00212/03/03 TEST LAB - 5670    11:08AM   
+ATM 200X5670 COLUMBUS, OH             
+                                      
+CARD XXXXXXXXXXXX0164 RECEIPT 1521    
+SAVINGS ACCT  04895421751             
+ACCT  BAL      $608.59                
+AVAIL BAL      $608.59                
+                                      
+LAST 5 ATM WITHDRAWALS  THRU  12/01   
+                                                                                                                                                                                                                              
+0446HHB C1  400012015213113075@@002DATE--DESCRIPTION------AMOUNT         
+07/17 HUNTINGTON         40.00        
+07/15 HUNTINGTON         15.00        
+                                      
+                                      
+                                      
+                                      
+                                      
+                                      
+1200X567011521112/03/03111:08STMTSV24432201890000164   
+                                                                                                                                                             
+0439A AA    40001200000010015222039075@@001200X567011522112/03/03111:09
+PURCHASE  1CK24432201890000164           6.60        3287.9600002893016694
+27   HUNTINGTON BANKS
+
+6  DATE   TIME  TERMINAL
+512/03/03  11:09 200X5670
+
+5CARD NO. XXXXXXXXXXXX0164
+
+4TEST LAB - 5670       
+4COLUMBUS      OH 
+4RECORD NO.?   1522
+4PURCHASE  7          $6.60
+4FR CK5XXXXXXX6694
+
+4ACCT BAL   6       $1987.96
+4AVAIL BAL  6       $3287.96
+                                                                                                                                                                  
+0364GC   B  400012015231023075@@00412031111PAYMENT 152300000000000000111111200X567011523112/03/03111:11
+PYMT24432201890000164         111.11?001xxxxxxxxxxx
+27   HUNTINGTON BANKS
+
+6  DATE   TIME  TERMINAL
+512/03/03  11:11 200X5670
+
+5CARD NO. XXXXXXXXXXXX0164
+
+4TEST LAB - 5670       
+4COLUMBUS      OH 
+4RECORD NO.?1523
+4PAYMT ENCLOSED        $111.11
+                                                                                                                                                                                                                                             
+0457BA   B  400012015241023075@@00412031329DEPOSIT 152402893016694000100001200X567011524112/03/03113:29
+DEP1CK24432201890000164         100.00?00002893016694
+27   HUNTINGTON BANKS
+
+6  DATE   TIME  TERMINAL
+512/03/03  13:29 200X5670
+
+5CARD NO. XXXXXXXXXXXX0164
+
+4TEST LAB - 5670       
+4COLUMBUS      OH 
+4RECORD NO.?   1524
+4DEPOSIT                  $100.00
+4TO CK5XXXXXXX6694
+
+4ACCT BAL   6       $2087.96
+4AVAIL BAL  6       $3387.96
+                                                                                                                                                
+0332II  I   400015274000075@@00312/03/03 13:35 200X5670
+
+4C1 STR    $10000
+4C1 INC        $0  C1 DEC        $0
+4C1 OUT        $0  C1 END    $10000
+4C2 STR     $1000
+4C2 INC        $0  C2 DEC        $0
+4C2 OUT       $10  C2 END      $990
+4C3 STR   $660.00
+4C3 INC     $0.00  C3 DEC     $0.00
+4C3 OUT     $6.60  C3 END   $653.40
+                                                                                                                                                                                                                                                                             
+0110II  I1  400049015275000075@@0034DEP0   1  DEP1   0  CHK   00
+4MSG    0  PAY    1
+4TOT    2  CRD    0  SUB
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+0332IHB I   400015294000075@@00312/03/03 13:36 200X5670
+
+4C1 STR    $10000
+4C1 INC     $2000  C1 DEC        $0
+4C1 OUT        $0  C1 END    $12000
+4C2 STR     $1000
+4C2 INC        $0  C2 DEC        $0
+4C2 OUT       $10  C2 END      $990
+4C3 STR   $660.00
+4C3 INC     $0.00  C3 DEC     $0.00
+4C3 OUT     $6.60  C3 END   $653.40
+                                                                                                                                                                                                                                                                             
+0111IHB I1  400049015295000075@@0034DEP0   1  DEP1   0  CHK   00
+4MSG    0  PAY    1
+4TOT    2  CRD    0  ADJ
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+0092IGA I   400049115315000075@@00112/03/03 13:38 200X5670
+
+4ADMIN TRANSACTION DECLINED
+4RA
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             

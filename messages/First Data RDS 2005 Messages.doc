@@ -1,0 +1,330 @@
+M1187RESV
+0005GIS     11                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+0005OOS     12                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+0298C      A40140100000037328048201102605.1312.NCR001.3732
+888886330000000138 
+WTD            $20.00 
+FROM CHECKING 101     
+.2102605  0112PM  NCR001
+XXXXXXXXXXXXXX0138 
+
+NCR APTRAEDGE 2.01 
+DAYTON        OH
+               SEQ#3732
+WITHDRAWAL     $20.00 
+FROM CHECKING 101     
+BALANCE   $122,590.68 
+                                                                                                                                                                                                                                                                                                               
+0297CA     A40140200000037338048001102605.1314.NCR001.3733
+888886330000000138 
+WTD            $40.00 
+FROM CHECKING 101     
+.2102605  0114PM  NCR001
+XXXXXXXXXXXXXX0138 
+
+NCR APTRAEDGE 2.01 
+DAYTON        OH
+               SEQ#3733
+WITHDRAWAL     $40.00 
+FROM CHECKING 101     
+BALANCE   $122,550.68 
+                                                                                                                                                                                                                                                                                                               
+0297CB     A40140300000037348048001102605.1315.NCR001.3734
+888886330000000138 
+WTD            $60.00 
+FROM CHECKING 101     
+.2102605  0115PM  NCR001
+XXXXXXXXXXXXXX0138 
+
+NCR APTRAEDGE 2.01 
+DAYTON        OH
+               SEQ#3734
+WITHDRAWAL     $60.00 
+FROM CHECKING 101     
+BALANCE   $122,490.68 
+                                                                                                                                                                                                                                                                                                               
+0297CC     A40140400000037358048001102605.1317.NCR001.3735
+888886330000000138 
+WTD            $80.00 
+FROM CHECKING 101     
+.2102605  0117PM  NCR001
+XXXXXXXXXXXXXX0138 
+
+NCR APTRAEDGE 2.01 
+DAYTON        OH
+               SEQ#3735
+WITHDRAWAL     $80.00 
+FROM CHECKING 101     
+BALANCE   $122,410.68 
+                                                                                                                                                                                                                                                                                                               
+0120C     DA40140100000037378048001102605.1320.NCR001.3737
+888886330000000138 
+WTD            $20.00 
+FROM CHECKING 101     
+.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+0120CB    DA40140300000037388048001102605.1320.NCR001.3738
+888886330000000138 
+WTD            $60.00 
+FROM CHECKING 101     
+.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+0333HAD    A40900000040037398103001102605.1343.NCR001.3739
+888887330000000137 
+PUR            $30.00 
+STAMPS             
+FROM CHECKING 101     
+1010000000000000137.2102605  0143PM  NCR001
+XXXXXXXXXXXXXX0137 
+
+NCR APTRAEDGE 2.01 
+DAYTON        OH
+               SEQ#3739
+PURCHASE       $30.00 
+STAMPS             
+FROM CHECKING 101     
+                                                                                                                                                                                                                                                                           
+0356B  A   A40900000000037407026001102605.1348.NCR001.3740
+888886330000000138 
+DEP            $10.00 
+TO CHECKING           
+1010000000000000138
+.2102605  0148PM  NCR001
+XXXXXXXXXXXXXX0138 
+
+NCR APTRAEDGE 2.01 
+DAYTON        OH
+               SEQ#3740
+DEPOSIT        $10.00 
+TO CHECKING           
+4NCR001 1026 1010000000000000138    $10.00UD 3740 1348 CK101                                                                                                                                                                                                                                                     
+0356B  B   A40900000000037417026001102605.1349.NCR001.3741
+888886330000000138 
+DEP            $12.34 
+TO SAVINGS            
+2010000000000000138
+.2102605  0149PM  NCR001
+XXXXXXXXXXXXXX0138 
+
+NCR APTRAEDGE 2.01 
+DAYTON        OH
+               SEQ#3741
+DEPOSIT        $12.34 
+TO SAVINGS            
+4NCR001 1026 2010000000000000138    $12.34UD 3741 1349 SV201                                                                                                                                                                                                                                                     
+0120CC    DA40140400000037428048001102605.1409.NCR001.3742
+888886330000000138 
+WTD            $80.00 
+FROM CHECKING 101     
+.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+0298A A    A40900100000037438048001102605.1410.NCR001.3743
+888886330000000138 
+WTD            $20.00 
+FROM CHECKING         
+.2102605  0210PM  NCR001
+XXXXXXXXXXXXXX0138 
+
+NCR APTRAEDGE 2.01 
+DAYTON        OH
+               SEQ#3743
+WITHDRAWAL     $20.00 
+FROM CHECKING         
+BALANCE   $122,200.68 
+                                                                                                                                                                                                                                                                                                               
+0120A A   DA40900100000037448048001102605.1412.NCR001.3744
+888886330000000138 
+WTD            $20.00 
+FROM CHECKING         
+.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+0297A B    A40900100000037458048001102605.1428.NCR001.3745
+888886330000000138 
+WTD            $20.00 
+FROM SAVINGS          
+.2102605  0228PM  NCR001
+XXXXXXXXXXXXXX0138 
+
+NCR APTRAEDGE 2.01 
+DAYTON        OH
+               SEQ#3745
+WITHDRAWAL     $20.00 
+FROM SAVINGS          
+BALANCE    $55,677.03 
+                                                                                                                                                                                                                                                                                                               
+0313DBB    A40900000000007465032001102605.1428.NCR001.3746
+888886330000000138 
+ABI        $55,677.03 
+FROM SAVINGS          
+.2102605  0228PM  NCR001
+XXXXXXXXXXXXXX0138 
+
+NCR APTRAEDGE 2.01 
+DAYTON        OH
+               SEQ#3746
+BALANCE INQUIRY
+FROM SAVINGS          
+AVAILABLE  $55,677.03 
+BALANCE   $105,590.09 
+                                                                                                                                                                                                                                                                                               
+0320DCBA   A40900000000037475032001102605.1429.NCR001.3747
+888886330000000138 
+XFR           $100.00 
+FROM SAVINGS          
+TO CHECKING           
+.2102605  0229PM  NCR001
+XXXXXXXXXXXXXX0138 
+
+NCR APTRAEDGE 2.01 
+DAYTON        OH
+               SEQ#3747
+TRANSFER      $100.00 
+FROM SAVINGS          
+TO CHECKING           
+                                                                                                                                                                                                                                                                                        
+0143DCAB  DA40900000000037535032001102605.1507.NCR001.3753
+888886330000000138 
+XFR           $100.00 
+FROM CHECKING         
+TO SAVINGS            
+.                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+0120A B   DA40900100000037518048001102605.1505.NCR001.3751
+888886330000000138 
+WTD           $100.00 
+FROM SAVINGS          
+.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+0200DBB   DA41770000000037525000157CE  SAVINGS ACCOUNT   DEXXXXXXXXXXXXXXX0138GE   $55,477.03KE  $105,390.09001102605.1506.NCR001.3752
+888886330000000138 
+ABI        $55,477.03 
+FROM SAVINGS          
+.                                                                                                                                                                                                                                                                                                                                                                                                                
+0158HAB   DA40900000020037598103001102605.1512.NCR001.3759
+888886330000000138 
+PUR            $15.00
+STAMPS             
+FROM CHECKING 101     
+1010000000000000138.                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+0333HAB    A40900000020037398103001102605.1343.NCR001.3739
+888887330000000137 
+PUR            $15.00 
+STAMPS             
+FROM CHECKING 101     
+1010000000000000137.2102605  0143PM  NCR001
+XXXXXXXXXXXXXX0137 
+
+NCR APTRAEDGE 2.01 
+DAYTON        OH
+               SEQ#3739
+PURCHASE       $15.00 
+STAMPS             
+FROM CHECKING 101     
+                                                                                                                                                                                                                                                                           
+0313DBA    A40900000000007715032001102605.1532.NCR001.3771
+888886330000000138 
+ABI       $122,870.76 
+FROM CHECKING         
+.2102605  0332PM  NCR001
+XXXXXXXXXXXXXX0138 
+
+NCR APTRAEDGE 2.01 
+DAYTON        OH
+               SEQ#3771
+BALANCE INQUIRY
+FROM CHECKING         
+AVAILABLE $122,870.76 
+BALANCE   $236,666.98 
+                                                                                                                                                                                                                                                                                               
+0200DBA   DA41770000000037035000157CE CHECKING ACCOUNT   DEXXXXXXXXXXXXXXX0138GE  $123,020.72KE  $236,816.94001102605.1521.NCR001.3763
+888886330000000138 
+ABI       $123,020.72 
+FROM CHECKING         
+.                                                                                                                                                                                                                                                                                                                                                                                                                
+0320DCAB   A40900000000063265032001102705.1305.NCR005.6326
+888886330000000138 
+XFR            $20.00 
+FROM CHECKING         
+TO SAVINGS            
+.2102705  0105PM  NCR005
+XXXXXXXXXXXXXX0138 
+
+NCR P77/P72 SIDE   
+DAYTON        OH
+               SEQ#6326
+TRANSFER       $20.00 
+FROM CHECKING         
+TO SAVINGS            
+                                                                                                                                                                                                                                                                                         
+0031NEWKEY  332020193062042095255162143                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+0120CA    DA40140200000037378048001102605.1320.NCR001.3737
+888886330000000138 
+WTD            $40.00 
+FROM CHECKING 101     
+.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+0143DCBA  DA40900000000063275032001102705.1306.NCR005.6327
+888886330000000138 
+XFR            $20.00 
+FROM SAVINGS          
+TO CHECKING           
+.                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+0157HAA   DA40900000010037598103001102605.1512.NCR001.3759
+888886330000000138 
+PUR            $7.50
+STAMPS             
+FROM CHECKING 101     
+1010000000000000138.                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+0158HAC   DA40900000030037598103001102605.1512.NCR001.3759
+888886330000000138 
+PUR            $22.50
+STAMPS             
+FROM CHECKING 101     
+1010000000000000138.                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+0158HAD   DA40900000040037598103001102605.1512.NCR001.3759
+888886330000000138 
+PUR            $22.50
+STAMPS             
+FROM CHECKING 101     
+1010000000000000138.                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+0333HAC    A40900000030037398103001102605.1343.NCR001.3739
+888887330000000137 
+PUR            $22.50 
+STAMPS             
+FROM CHECKING 101     
+1010000000000000137.2102605  0143PM  NCR001
+XXXXXXXXXXXXXX0137 
+
+NCR APTRAEDGE 2.01 
+DAYTON        OH
+               SEQ#3739
+PURCHASE       $22.50 
+STAMPS             
+FROM CHECKING 101     
+                                                                                                                                                                                                                                                                           
+0331HAA    A40900000010037398103001102605.1343.NCR001.3739
+888887330000000137 
+PUR            $7.50 
+STAMPS             
+FROM CHECKING 101     
+1010000000000000137.2102605  0143PM  NCR001
+XXXXXXXXXXXXXX0137 
+
+NCR APTRAEDGE 2.01 
+DAYTON        OH
+               SEQ#3739
+PURCHASE       $7.50 
+STAMPS             
+FROM CHECKING 101     
+                                                                                                                                                                                                                                                                             
+0381UTP     40001520100000031085000075@@0013004567013108106/05/03117:29
+DENY244322018111111112TRANSACTION OPCODE NOT DEFINED 2057
+27   HUNTINGTON BANKS
+
+6  DATE   TIME  TERMINAL
+506/05/03  17:29 30045670
+
+5CARD NO. XXXXXXXXXXXX1111
+
+4HIP TX4001 DIAL-UP    
+4COLUMBUS      OH 
+4RECORD NO.:3108
+4WITHDRAWAL
+
+4TRANSACTION DECLINED
+4057
+4TRANSACTION OPCODE NOT DEFINED
+                                                                                                                                                                                                                           

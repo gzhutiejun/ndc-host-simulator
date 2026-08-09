@@ -1,0 +1,1276 @@
+M1230RESV
+0005GIS     11                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+0005OOS     12                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+0221BAL LDGR40000075060790000000060055079075@@001501/30/02 13:16  ATM07506
+
+5************5727
+
+4ISB KAM SC       
+4HONOLULU      HI 
+
+4RECORD NO.?   6005
+4INQUIRY
+4FR5******9999
+4LEDGER BAL 6     $99000.54
+46
+                                                                                                                                                                                                                                                                                                                                                                                              
+0048SURCHARG4000 1180001000048175118075IA     1.50000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+0247CB      400012061675000075@@0027                          
+707/29/02 13:20  SNCN2223
+7XXXXXXXXXXXX5443
+7*CHARLOTTE-IC-ATM23      
+7NC CITY       NC 
+
+4SER. NO. 6167
+4SAVINGS         INQUIRY
+4FROM  PRIMARY   
+4BALANCE             $345.48
+
+                                                                                                                                                                                                                                                                                                                                                                 
+0324AA     A40001200001000042412039000@@003411/20/02  09:46 F056
+
+
+4(AA     A - WDL SAV $20)
+4NCR 5886                
+4RICHMOND       VA    G088
+4SUNTRUST OFFERS SMALL
+4BUSINESS LINES OF    
+4CREDIT. MEMBER FDIC.
+ 
+4SERIAL NUMBER64241
+4WITHDRAWAL FROM    
+4CHKxxx91972         $20.00
+4AVAIL BAL  1        $825.04                                                                                                                                                                                                                                                                                     
+0570BA     A400012038231023004F056 003823 05/16 08:05 115770       4011800883757793     $0.112405/16/03  08:43 F056
+
+
+4(BA     A)  7793-001
+4NCR 5886                
+4RICHMOND       VA    G088
+4CHECK OUT OUR MINI   
+4HOME EQUITY RATES.   
+4EQUAL HOUSING LENDER.
+ 
+4SERIAL NUMBER63823
+4DEPOSIT TO
+4CHK***57702          $0.11
+43
+43
+ 1405/16/03  08:43 F056
+44011800883757793-001
+4%NCR 5886                
+4RICHMOND        VA    G088
+4SERIAL NUMBER:3823
+4DEPOSIT TO
+4CHK***57703          $0.11
+4115770             
+46
+4CHK***57703          $0.11
+                              
+0287CA     A400012042445003411/20/02  09:50 F056
+
+
+4(CA     A)  0174-001
+4NCR 5886                
+4RICHMOND       VA    G088
+4SUNTRUST OFFERS SMALL
+4BUSINESS LINES OF    
+4CREDIT. MEMBER FDIC. 
+ 
+4SERIAL NUMBER64244
+4INQUIRY FROM
+4CHECKINGxxxxxxx9197
+4AVAIL BAL           $805.04                                                                                                                                                                                                                                                                                                                         
+0287DAB    A400012042585003411/20/02  10:10 F056
+
+4(DAB    A - XFR CHK->SAV)
+4NCR 5886                
+4RICHMOND       VA    G088
+4SUNTRUST OFFERS SMALL
+4BUSINESS LINES OF    
+4CREDIT. MEMBER FDIC. 
+ 
+4SERIAL NUMBER64258
+4TRANSFER FROM
+4CHK***91971         $22.22
+4TO1SAV***8270
+                                                                                                                                                                                                                                                                                                                         
+0273FAA    A4000123000100006158B040075@@0037                          
+707/29/02 13:10  SNCN2223
+7XXXXXXXX5443
+7*CHARLOTTE-IC-ATM23      
+7NC CITY       NC 
+
+4SER. NO. 6158          $20.00
+4CHECKING         WITHDRAWAL
+4FROM PRIMARY   
+4BALANCE                $53.29
+
+
+                                                                                                                                                                                                                                                                                                                                       
+0265GC     A400012061881023075@@0046188*FL07/29*14:09*2223*00000000000000*5 *0000010.0034                          
+407/29/02 14:09  SNCN2223
+4(GC     A) 5443
+4*CHARLOTTE-IC-ATM23      
+4NC CITY       NC 
+
+    SER. NO. 6188           $10.00
+    PAYMENT ENCLOSED
+
+                                                                                                                                                                                                                                                                                                                                               
+0006SOFT ID 175                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+0246CB     A400012061675000075@@0037                         
+707/29/02 13:20  SNCN2223
+7(CB     A)  5443
+7*CHARLOTTE-IC-ATM23      
+7NC CITY       NC 
+
+4SER. NO. 6167
+4SAVINGS         INQUIRY
+4FROM  PRIMARY   
+4BALANCE             $345.48
+
+                                                                                                                                                                                                                                                                                                                                                                  
+0307AA     B40001200001000042422039000@@003411/20/02  09:46 F056
+
+
+4(AA     B - WDL SAV $20)
+4NCR 5886                
+4RICHMOND       VA    G088
+4SUNTRUST OFFERS SMALL
+4BUSINESS LINES OF    
+4CREDIT. MEMBER FDIC.
+ 
+4SERIAL NUMBER64242
+4WITHDRAWAL FROM    
+4CHKxxx92882         $20.00
+
+9(SPANISH)
+                                                                                                                                                                                                                                                                                                      
+0255CA     B400012061665000075@@0037(CA     B - SPANISH)      
+722/11/02 07:57AM
+7ATM: WTXN7781 NUM. SER. 6648
+7TARJETA: ********0033
+7*CHARLOTTE-7781
+7TX CITY       TX
+
+4VERIFICACION DE4  CUENTA DE CHEQUES
+4PRIMARY   
+4SALDO             $21246.32
+
+                                                                                                                                                                                                                                                                                                                                                         
+0278AA   B A40001200001000061582039075@@0017                          
+707/29/02 13:10  SNCN2223
+7XXXXXXXXXXXX5443
+7*CHARLOTTE-IC-ATM23      
+7NC CITY       NC 
+
+4SER. NO. 6158          $20.00
+4CHECKING         WITHDRAWAL
+4FROM PRIMARY   
+4BALANCE                 $53.29
+
+
+                                                                                                                                                                                                                                                                                                                                  
+0278AA   D A40001200001000061582039075@@0027                          
+707/29/02 13:10  SNCN2223
+7XXXXXXXXXXXX5443
+7*CHARLOTTE-IC-ATM23      
+7NC CITY       NC 
+
+4SER. NO. 6158          $20.00
+4CHECKING         WITHDRAWAL
+4FROM PRIMARY   
+4BALANCE                 $53.29
+
+
+                                                                                                                                                                                                                                                                                                                                  
+0237OAR CHK53000210111110001074186BDWITHDRAW     $20.00CBFROM WHICHCMCHECKINGACCOUNT?E5   PRIMARYF1  XXXXXXXX2959H5    CHCKTVI1  XXXXXXXX0371K5     CHCK2L1  XXXXXXXX8274N5     CHCK3O1  XXXXXXXX9628EAODC       FAXXXXXXXX5840  J5                                                                                                                                                                                                                                                                                                                                                                           
+0317OAR MORE3000210111111111074186BDWITHDRAW     $20.00CBFROM WHICHCMCHECKINGC6ACCOUNT?E5   PRIMARYF1  XXXXXXXX0404H5     CHCK2I1  XXXXXXXX4466K5      ATM1L1  XXXXXXXX6252N5      OAR1O1  XXXXXXXX1111EAOAR2      FAXXXXXXXX2222  HAOAR3      IAXXXXXXXX3333  KAOAR4      LAXXXXXXXX4444  NAOTHEROAACCOUNTSJ5                                                                                                                                                                                                                                                                                           
+0173OAR PREV3000210110110000074186BDWITHDRAW     $20.00CBFROM WHICHCMCHECKINGC6ACCOUNT?E5      OAR5F1  XXXXXXXX5555H5      OAR6I1  XXXXXXXX6666N7PREVIOUSO5  ACCOUNTSJ5                                                                                                                                                                                                                                                                                                                                                                                                                                           
+0234OAR DEP 3000210111110001074186BDDEPOSIT     $20.00CBTO WHICHCMCHECKINGACCOUNT?E5   PRIMARYF1  XXXXXXXX2959H5    CHCKTVI1  XXXXXXXX0371K5     CHCK2L1  XXXXXXXX8274N5     CHCK3O1  XXXXXXXX9628EAODC       FAXXXXXXXX5840  J5                                                                                                                                                                                                                                                                                                                                                                              
+0402IHB I   400062094000075@@002707/30/02 10:31  SNCN2223
+
+7XXXXXXXX9991
+7*CHARLOTTE-IC-ATM23      
+7NC CITY       NC 
+
+707/30/02 10:31  SNCN2223
+7XXXXXXXX9991
+7*CHARLOTTE-IC-ATM23      
+7NC CITY       NC 
+
+   20 STR    $20980  20 INC    $40000
+   20 DEC        $0  20 OUT     $1620
+   20 END    $59360
+   10 STR    $11000  10 INC    $15000
+   10 DEC        $0  10 OUT      $400
+   10 END    $25600
+                                                                                                                                                                                                      
+0101IHB I  2400049062095000075@@002   DEP0  15  DEP1   0
+   MSG    6  PAY    9
+   TOT   30  CRD    1  ADJ
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+00410043    40000430000000059525185075M7$10000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+0151OARFLOC 3000210110010000074186BDTRANSFER     $10.00CBFROM WHICHCM   LINE C6ACCOUNT?E5      LOC2F1  XXXXXXXXXX4936H5      LOC1I1XXXXXXXXXX0585J5                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+0278OARTCHK 3000210111110001074186ADTRANSFER     $10.00BAFROM BF   LINE    B1 XXXXXXXXXX4936CATO WHICH CKCHECKING  C4ACCOUNT?E5   PRIMARYF1  XXXXXXXX2959H5    CHCKTVI1  XXXXXXXX0371K5     CHCK2   XXXXXXXX8274N5     CHCK3O1  XXXXXXXX9628EAODC       FAXXXXXXXX5840  J5                                                                                                                                                                                                                                                                                                                                  
+0286DDA    A400012061745000075@@0037                          
+707/29/02 13:31  SNCN2223
+7XXXXXXXX5443
+7*CHARLOTTE-IC-ATM23      
+7NC CITY       NC 
+
+4SER. NO.  6174            $10.00
+4TRANSFER LINE TO CHK
+4FROM  LOC2      
+4TO    PRIMARY   
+4
+4TO   BALANCE              $10.00
+
+                                                                                                                                                                                                                                                                                                                          
+0475CD     B400012066615000075@@0027                      
+7PARA SERVICIO LLAME AL
+7   1-800-688-6086
+
+722/11/02 08:12AM
+7ATM: WTXN7781 NUM.SER. 6661
+7TARJETA: ********0033
+7*CHARLOTTE-7781          
+7TX CITY       TX 
+
+4NUM. SER. 6661
+4VERIFICACION DE
+4  LINEA DE CREDITO         
+4DE   LOC       
+4CREDITO DISPONIBLE        $6969.53
+4SALDO**                   $1736.67
+4   
+4      
+4** EL SALDO NO INCLUYE
+4   ACTIVIDAD DESDE EL
+4   ULTIMO DIA LABORABLE **
+
+                                                                                                                             
+0457CD     A400012066345000075@@0027                         
+7FOR CUSTOMER SERVICE CALL
+7   1-888-789-7587
+
+711/22/02 06:57AM
+7ATM: WTXN7781 SER NO. 6634
+7CARD: ********0033
+7*CHARLOTTE-7781          
+7TX CITY       TX 
+
+4SER. NO. 6634
+4CREDIT LINE      INQUIRY
+4FROM LOC       
+4AVAIL CREDIT            $6969.53
+4BALANCE**               $1736.67
+4 
+4    
+4** THE BALANCE DOES NOT
+4   INCLUDE ACTIVITY SINCE
+4   THE PREVIOUS BUSINESS DAY **
+
+                                                                                                                                               
+0310OAR SPA 3000210111110001074186BDDEPOSITO    $100.00CB  A CUALCKCUENTA DEC5CHEQUES   E5   PRIMARYF1  XXXXXXXX8265H5      MMGRI1  XXXXXXXX1111K5      CHK1L1  XXXXXXXX2222N5      CHK2O1  XXXXXXXX3333EACHK3      FAXXXXXXXX4444  HACHK5      IAXXXXXXXX5555  KACHK6      LAXXXXXXXX6666  OACUENTASJ5                                                                                                                                                                                                                                                                                                  
+0295F A    A4000121000100004243B039003411/20/02  09:49 F056
+
+
+4(F A    A - FAST CASH $20)
+4NCR 5886                
+4RICHMOND       VA    G088
+4SUNTRUST OFFERS SMALL
+4BUSINESS LINES OF    
+4CREDIT. MEMBER FDIC. 
+ 
+4SERIAL NUMBER64243
+4WITHDRAWAL FROM    
+4CHK***91972         $20.00
+41                                                                                                                                                                                                                                                                                                                  
+0296F B    A4000121000200004243B039003411/20/02  09:49 F056
+
+
+4(F B    A - FAST CASH $40)
+4%NCR 5886                
+4RICHMOND       VA    G088
+4SUNTRUST OFFERS SMALL
+4BUSINESS LINES OF    
+4CREDIT. MEMBER FDIC. 
+ 
+4SERIAL NUMBER64243
+4WITHDRAWAL FROM    
+4CHK***91972         $40.00
+41                                                                                                                                                                                                                                                                                                                 
+0293F C    A4000121000300004243B039003411/20/02  09:49 F056
+
+
+4(F C    A - FAST CASH - $60)
+4NCR 5886                
+4RICHMOND       VA    G088
+4SUNTRUST OFFERS SMALL
+4BUSINESS LINES OF    
+4CREDIT. MEMBER FDIC. 
+ 
+4SERIAL NUMBER64243
+4WITHDRAWAL FROM    
+4CHK***91972         $60.00
+                                                                                                                                                                                                                                                                                                                    
+0293F D    A4000121000500004243B039003411/20/02  09:49 F056
+
+4(F D    A - FAST CASH - $100)
+4NCR 5886                
+4RICHMOND       VA    G088
+4SUNTRUST OFFERS SMALL
+4BUSINESS LINES OF    
+4CREDIT. MEMBER FDIC. 
+ 
+4SERIAL NUMBER64243
+4WITHDRAWAL FROM    
+4CHK***91972        $100.00
+                                                                                                                                                                                                                                                                                                                    
+0288DBA    A400012042585003411/20/02  10:10 F056
+
+
+4(DBA    A - XFR SAV->CHK)
+4NCR 5886                
+4RICHMOND       VA    G088
+4SUNTRUST OFFERS SMALL
+4BUSINESS LINES OF    
+4CREDIT. MEMBER FDIC. 
+ 
+4SERIAL NUMBER64258
+4TRANSFER FROM
+4SAV***82701         $22.22
+4TO1CHK***9197
+                                                                                                                                                                                                                                                                                                                        
+0330BB     A400012042771023004F056 004277 11/20 10:11 3200229197   4050480880000174     $1.113411/20/02  10:40 F056
+
+4(BB     A) DEP TO SAV
+4NCR 5886                
+4RICHMOND       VA    G088
+4SUNTRUST OFFERS SMALL
+4BUSINESS LINES OF    
+4CREDIT. MEMBER FDIC. 
+ 
+4SERIAL NUMBER64277
+4DEPOSIT TO
+4SAV***82702        $1.11
+                                                                                                                                                                                                                                                                              
+0311G      A400012042781023004F056 004278 11/20 10:11 4050480880000174     $500.003411/20/02  10:41 F056
+
+
+4************0174-001
+4%NCR 5886                
+4RICHMOND       VA    G088
+4SUNTRUST OFFERS SMALL
+4BUSINESS LINES OF    
+4CREDIT. MEMBER FDIC. 
+ 
+4SERIAL NUMBER64278
+4PAYMT ENCLOSED        $500.00
+                                                                                                                                                                                                                                                                                                 
+0457MINISTM1400036914112002402/12/03  15:07  F056
+4************0116-000
+4%NCR 5886                
+4MURFREESBORO  TN    F215
+4SERIAL NUMBER 3691
+
+4TRY INTERNET BANKING 
+4AND BILL PAY FREE FOR
+490 DAYS. MEMBER FDIC.
+ 7MINI STATEMENT3FOR
+4CENTRAL FLORIDA WATERPROOFING
+41255 BELLE AVE UNIT 167
+ACCT#:>*********3335
+
+DATE OF LAST STATEMENT:  10/31/02
+
+AVAIL BALANCE:9$26,019.37
+
+5LAST 5 ATM WITHDRAWALS
+8AMOUNT:DATE
+7$202.00911/18
+8200.00911/12
+                                                                                                                                               
+0365MINISTM24000369141120038200.00911/12
+8200.00911/12
+8300.00911/08
+
+4LAST 5 CHECKS/OTHER DEBITS
+  CHECK NO.8AMOUNT3DATE
+6100205$1,076.55  11/22
+61001961,076.55  11/22
+6100158674.33  11/22
+6100188606.45  11/22
+757768522.50  11/22
+
+:LAST 5 DEPOSITS
+8AMOUNT:DATE
+4$28,355.42911/22
+8949.76911/20
+970.00911/15
+521,700.27911/08
+8245.10911/06
+
+                                                                                                                                                                                                                                           
+0108MINISTM34000120369150033FOR ADDITIONAL INFORMATION
+5PLEASE CALL TELEBANK AT
+91-800-SUNTRUST
+;MEMBER FDIC
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+0445HHA A1  400048144112002404/10/03  14:36  B055
+4(HHA A1)     6744-000
+4%STC TEST LAB            
+4RICHMOND      VA    V443
+4SERIAL NUMBER 4814
+
+4NEW-ONLINE STATEMENTS
+4VISIT MY SOLUTIONS AT
+4WWW.SUNTRUST.COM.    
+7MINI STATEMENT3FOR
+4JAMES DALE BONE
+4CAROLE S BONE
+ACCT#:>*********7987
+
+DATE OF LAST STATEMENT:  01/14/03
+
+AVAIL BALANCE::$3,867.38
+
+5LAST 5 ATM WITHDRAWALS
+8AMOUNT:DATE
+8$20.00902/06
+:0.50902/06
+940.00901/15
+
+                                                                                                                                                           
+0371HHA A2  4000481441120024LAST 5 CHECKS/OTHER DEBITS
+  CHECK NO.8AMOUNT3DATE
+752577$500.00  02/07
+75253925.00  02/07
+75252922.75  02/07
+6OTHER938.75  02/07
+6OTHER943.75  02/06
+
+:LAST 5 DEPOSITS
+8AMOUNT:DATE
+7$645.00902/06
+8246.19902/06
+62,314.76901/31
+:3.86901/23
+:3.86901/23
+
+3FOR ADDITIONAL INFORMATION
+5PLEASE CALL TELEBANK AT
+91-800-SUNTRUST
+                                                                                                                                                                                                                                     
+0036HHA A3  400012048145002;MEMBER FDIC
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+0031NEWKEY  332020193062042095255162143                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+0031COMMSKEY332020193062042095255162143                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+0226CA   B A400012037105001405/05/03  17:45 F056
+44011800881000535-001
+4%NCR 5886                
+4MURFREESBORO    TN    G088
+4SERIAL NUMBER:3710
+4INQUIRY FROM
+4REG CKG   
+410579              
+4AVAIL BAL         $48439.87
+                                                                                                                                                                                                                                                                                                                                                                                      
+05110152    400015237315002405/07/03  16:52 F056
+
+
+4************7793-000
+4%NCR 5886                
+4RICHMOND       VA 
+4NEW-ONLINE STATEMENTS
+4VISIT MY SOLUTIONS AT
+4WWW.SUNTRUST.COM.    
+ 
+4SERIAL NUMBER6
+4
+40000000000
+
+4YOUR TRANSACTION IS    
+4NOT SUPPORTED AT       
+4THIS TERMINAL.         
+ 1405/07/03  16:52 F056
+44011800883757793-000
+4%NCR 5886                
+4RICHMOND        VA 
+4SER NBR2
+4
+40000000000
+4YOUR TRANSACTION IS    
+4NOT SUPPORTED AT       
+4THIS TERMINAL.         
+                                                                                         
+0323II  I   400049048275002404/10/03  15:04 B055
+
+
+4(II  I - HOST SUB-TOTALS)
+
+4NCR TEST LAB            
+4DAYTON   OHIO      F215
+
+ 3CC 00       20    STR      $0
+4C2 INC      $0 C2 DEC      $0
+4C2 OUT   $8280 C2 END      $0
+ 3CN 04     7.40    STR   $0.00
+4C3 INC   $0.00 C3 DEC   $0.00
+4C3 OUT $325.60 C3 END   $0.00                                                                                                                                                                                                                                                                                     
+0099II  I2  4000490482750024DEP0  00  DEP1  00  CHK   00
+4MSG   00  PAY  00
+4TOT   00  CRD   74  SUB
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+00380049    40000490000000022065000075@@000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+00380050    40000500000000022065000075@@000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+0190SCREEN9 311000(1P000;0\@@<CONFIGURATION_DATA reboot="y">AB<DD_UPDATE>BD<GROUP>CONSUMERFLOW</GROUP>CD<NAME>ENVELOPEDEPOSIT</NAME>DD<VALUE>NO</VALUE>EB</DD_UPDATE>F@</CONFIGURATION_DATA>                                                                                                                                                                                                                                                                                                                                                                                                                          
+0324AB     A40001200001000042412039000@@003411/20/02  09:46 F056
+
+
+4(AB     A - WDL SAV $20)
+4NCR 5886                
+4RICHMOND       VA    G088
+4SUNTRUST OFFERS SMALL
+4BUSINESS LINES OF    
+4CREDIT. MEMBER FDIC.
+ 
+4SERIAL NUMBER64241
+4WITHDRAWAL FROM    
+4SAVxxx91972         $20.00
+4AVAIL BAL  1        $825.04                                                                                                                                                                                                                                                                                     
+0336AB     B40001200001000042412039000@@003411/20/02  09:46 F056
+
+
+4(AB     B - WDL SAV $20)
+4NCR 5886                
+4RICHMOND       VA    G088
+4SUNTRUST OFFERS SMALL
+4BUSINESS LINES OF    
+4CREDIT. MEMBER FDIC.
+ 
+4SERIAL NUMBER64241
+4WITHDRAWAL FROM    
+4SAVxxx91972         $20.00
+4AVAIL BAL  1        $825.04
+
+9(SPANISH)                                                                                                                                                                                                                                                                        
+0300AC     A40001200001000042412039000@@003411/20/02  09:46 F056
+
+
+4(AC     A - WDL CCRD $20)
+4NCR 5886                
+4RICHMOND       VA    G088
+4SUNTRUST OFFERS SMALL
+4BUSINESS LINES OF    
+4CREDIT. MEMBER FDIC.
+ 
+4SERIAL NUMBER64241
+4WITHDRAWAL FROM    
+4CREDIT CARDxxx9192         $20.00                                                                                                                                                                                                                                                                                                             
+0309AC     B40001200001000042412039000@@002411/20/02  09:46 F056
+
+
+4xxxxxxxxxxxx0174-001
+4NCR 5886                
+4RICHMOND       VA    G088
+4SUNTRUST OFFERS SMALL
+4BUSINESS LINES OF    
+4CREDIT. MEMBER FDIC.
+ 
+4SERIAL NUMBER64241
+4WITHDRAWAL FROM    
+4CREDIT CARDxxx9192         $20.00
+
+9(SPANISH)
+                                                                                                                                                                                                                                                                                                    
+0475CC     B400012066615000075@@0027                      
+7PARA SERVICIO LLAME AL
+7   1-800-688-6086
+
+722/11/02 08:12AM
+7ATM: WTXN7781 NUM.SER. 6661
+7TARJETA: ********0033
+7*CHARLOTTE-7781          
+7TX CITY       TX 
+
+4NUM. SER. 6661
+4VERIFICACION DE
+4  LINEA DE CREDITO         
+4DE   LOC       
+4CREDITO DISPONIBLE        $6969.53
+4SALDO**                   $1736.67
+4   
+4      
+4** EL SALDO NO INCLUYE
+4   ACTIVIDAD DESDE EL
+4   ULTIMO DIA LABORABLE **
+
+                                                                                                                             
+0301DAB    B400012042585003411/20/02  10:10 F056
+
+4(DAB    B - XFR CHK->SAV)
+4NCR 5886                
+4RICHMOND       VA    G088
+4SUNTRUST OFFERS SMALL
+4BUSINESS LINES OF    
+4CREDIT. MEMBER FDIC. 
+ 
+4SERIAL NUMBER64258
+4TRANSFER FROM
+4CHK***91971         $22.22
+4TO1SAV***8270
+
+9(SPANISH)
+                                                                                                                                                                                                                                                                                                           
+0302DBA    B400012042585003411/20/02  10:10 F056
+
+
+4(DBA    B - XFR SAV->CHK)
+4NCR 5886                
+4RICHMOND       VA    G088
+4SUNTRUST OFFERS SMALL
+4BUSINESS LINES OF    
+4CREDIT. MEMBER FDIC. 
+ 
+4SERIAL NUMBER64258
+4TRANSFER FROM
+4SAV***82701         $22.22
+4TO1CHK***9197
+
+9(SPANISH)
+                                                                                                                                                                                                                                                                                                          
+0294DAC    A400012042585002411/20/02  10:10 F056
+
+
+4************0174-001
+4%NCR 5886                
+4RICHMOND       VA    G088
+4SUNTRUST OFFERS SMALL
+4BUSINESS LINES OF    
+4CREDIT. MEMBER FDIC. 
+ 
+4SERIAL NUMBER64258
+4TRANSFER FROM
+4CHK***91971         $22.22
+4TO1CREDIT CARD ***8270
+                                                                                                                                                                                                                                                                                                                  
+0307DAC    B400012042585002411/20/02  10:10 F056
+
+
+4************0174-001
+4%NCR 5886                
+4RICHMOND       VA    G088
+4SUNTRUST OFFERS SMALL
+4BUSINESS LINES OF    
+4CREDIT. MEMBER FDIC. 
+ 
+4SERIAL NUMBER64258
+4TRANSFER FROM
+4CHK***91971         $22.22
+4TO1CREDIT CARD ***8270
+
+9(SPANISH)
+                                                                                                                                                                                                                                                                                                     
+0457HHA A   400036914112003402/12/03  15:07  F056
+4(HHA A)     0116-000
+4%NCR 5886                
+4MURFREESBORO  TN    F215
+4SERIAL NUMBER 3691
+
+4TRY INTERNET BANKING 
+4AND BILL PAY FREE FOR
+490 DAYS. MEMBER FDIC.
+ 7MINI STATEMENT3FOR
+4CENTRAL FLORIDA WATERPROOFING
+41255 BELLE AVE UNIT 167
+ACCT#:>*********3335
+
+DATE OF LAST STATEMENT:  10/31/02
+
+AVAIL BALANCE:9$26,019.37
+
+5LAST 5 ATM WITHDRAWALS
+8AMOUNT:DATE
+7$202.00911/18
+8200.00911/12
+                                                                                                                                               
+0404UTP     400015037315002405/07/03  16:52 F056
+
+
+4(UTP - NO MATCH FOUND)
+
+4NCR 5886                
+4RICHMOND       VA 
+4YOUR TRANSACTION IS    
+4NOT SUPPORTED AT       
+4THIS TERMINAL.         
+ 1405/07/03  16:52 F056
+44011800883757793-000
+4%NCR 5886                
+4RICHMOND        VA 
+4SER NBR2
+4
+40000000000
+4YOUR TRANSACTION IS    
+4NOT SUPPORTED AT       
+4THIS TERMINAL.         
+                                                                                                                                                                                                    
+0570BA     B400012038231023004F056 003823 05/16 08:05 115770       4011800883757793     $0.112405/16/03  08:43 F056
+
+
+4(BA     B)  7793-001
+4NCR 5886                
+4RICHMOND       VA    G088
+4CHECK OUT OUR MINI   
+4HOME EQUITY RATES.   
+4EQUAL HOUSING LENDER.
+
+4SERIAL NUMBER63823
+4DEPOSIT TO
+4CHK***57702          $0.11
+
+9(SPANISH)1405/16/03  08:43 F056
+44011800883757793-001
+4%NCR 5886                
+4RICHMOND        VA    G088
+4SERIAL NUMBER:3823
+4DEPOSIT TO
+4CHK***57703          $0.11
+4115770             
+46
+4CHK***57703          $0.11
+                              
+0353BB     B400012042771023004F056 004277 11/20 10:11 3200229197   4050480880000174     $1.113411/20/02  10:40 F056
+
+
+4(BB     B) DEP TO SAV
+4NCR 5886                
+4RICHMOND       VA    G088
+4SUNTRUST OFFERS SMALL
+4BUSINESS LINES OF    
+4CREDIT. MEMBER FDIC. 
+ 
+4SERIAL NUMBER64277
+4DEPOSIT TO
+4SAV***82702        $1.11
+43
+43
+
+9(SPANISH)                                                                                                                                                                                                                                                       
+0460HHA A  A400012036914112003402/12/03  15:07  F056
+4(HHA A  A)  0116-000
+4%NCR 5886                
+4MURFREESBORO  TN    F215
+4SERIAL NUMBER 3691
+
+4TRY INTERNET BANKING 
+4AND BILL PAY FREE FOR
+490 DAYS. MEMBER FDIC.
+ 7MINI STATEMENT3FOR
+4CENTRAL FLORIDA WATERPROOFING
+41255 BELLE AVE UNIT 167
+ACCT#:>*********3335
+
+DATE OF LAST STATEMENT:  10/31/02
+
+AVAIL BALANCE:9$26,019.37
+
+5LAST 5 ATM WITHDRAWALS
+8AMOUNT:DATE
+7$202.00911/18
+8200.00911/12
+                                                                                                                                            
+0289DAA    A400012042585002405/27/03  10:10 F056
+
+
+4(DAA    A) XFR CHK TO CHK
+4%NCR 5886                
+4RICHMOND       VA    G088
+4SUNTRUST OFFERS SMALL
+4BUSINESS LINES OF    
+4CREDIT. MEMBER FDIC. 
+ 
+4SERIAL NUMBER64258
+4TRANSFER FROM
+4CHK***91971         $22.22
+4TO1CHK***8270
+                                                                                                                                                                                                                                                                                                                       
+0446HHB A  A400012036914112002402/12/03  15:07  F056
+4(HHB A  A)  0116-000
+4%NCR 5886                
+4MURFREESBORO  TN    F215
+4SERIAL NUMBER 3691
+
+4TRY INTERNET BANKING 
+4AND BILL PAY FREE FOR
+490 DAYS. MEMBER FDIC.
+ 7MINI STATEMENT3FOR
+4SAVINGS ACCOUNT
+41255 BELLE AVE UNIT 167
+ACCT#:>*********3335
+
+DATE OF LAST STATEMENT:  10/31/02
+
+AVAIL BALANCE:9$26,019.37
+
+5LAST 5 ATM WITHDRAWALS
+8AMOUNT:DATE
+7$202.00911/18
+8200.00911/12
+                                                                                                                                                          
+0460HHA A  B400012036914112002402/12/03  15:07  F056
+4(HHA A  B) (SPANISH)
+4%NCR 5886                
+4MURFREESBORO  TN    F215
+4SERIAL NUMBER 3691
+
+4TRY INTERNET BANKING 
+4AND BILL PAY FREE FOR
+490 DAYS. MEMBER FDIC.
+ 7MINI STATEMENT3FOR
+4CENTRAL FLORIDA WATERPROOFING
+41255 BELLE AVE UNIT 167
+ACCT#:>*********3335
+
+DATE OF LAST STATEMENT:  10/31/02
+
+AVAIL BALANCE:9$26,019.37
+
+5LAST 5 ATM WITHDRAWALS
+8AMOUNT:DATE
+7$202.00911/18
+8200.00911/12
+                                                                                                                                            
+0446HHB A  B400012036914112002402/12/03  15:07  F056
+4(HHB A  B) (SPANISH)
+4%NCR 5886                
+4MURFREESBORO  TN    F215
+4SERIAL NUMBER 3691
+
+4TRY INTERNET BANKING 
+4AND BILL PAY FREE FOR
+490 DAYS. MEMBER FDIC.
+ 7MINI STATEMENT3FOR
+4SAVINGS ACCOUNT
+41255 BELLE AVE UNIT 167
+ACCT#:>*********3335
+
+DATE OF LAST STATEMENT:  10/31/02
+
+AVAIL BALANCE:9$26,019.37
+
+5LAST 5 ATM WITHDRAWALS
+8AMOUNT:DATE
+7$202.00911/18
+8200.00911/12
+                                                                                                                                                          
+0293DAA    B400012042585002405/27/03  10:10 F056
+
+
+4(DAA    B   0174-001
+4NCR 5886                
+4RICHMOND       VA    G088
+4SUNTRUST OFFERS SMALL
+4BUSINESS LINES OF    
+4CREDIT. MEMBER FDIC. 
+ 
+4SERIAL NUMBER64258
+4TRANSFER FROM
+4CHK***91971         $22.22
+4TO1CHK***8270
+
+9SPANISH                                                                                                                                                                                                                                                                                                                   
+0256CB     B400012061675000075@@0037                         
+707/29/02 13:20  SNCN2223
+4(CB     B - SPANISH)  5443
+7*CHARLOTTE-IC-ATM23      
+7NC CITY       NC 
+
+4SER. NO. 6167
+4SAVINGS         INQUIRY
+4FROM  PRIMARY   
+4BALANCE             $345.48
+
+                                                                                                                                                                                                                                                                                                                                                        
+0275GC     B400012061881023075@@0046188*FL07/29*14:09*2223*00000000000000*5 *0000010.0037                          
+407/29/02 14:09  SNCN2223
+4(GC     B) 5443
+4*CHARLOTTE-IC-ATM23      
+4NC CITY       NC 
+
+    SER. NO. 6188           $10.00
+    PAYMENT ENCLOSED
+
+9SPANISH
+                                                                                                                                                                                                                                                                                                                                     
+0013SPECCR  31A12001                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+0292DCA    A400012042585003411/20/02  10:10 F056
+
+
+4(DCA    A) XFR CC TO CHK
+4NCR 5886                
+4RICHMOND       VA    G088
+4SUNTRUST OFFERS SMALL
+4BUSINESS LINES OF    
+4CREDIT. MEMBER FDIC. 
+ 
+4SERIAL NUMBER64258
+4TRANSFER FROM
+4CREDIT CARD*82701   $22.22
+4TO1CHECKING***9197
+                                                                                                                                                                                                                                                                                                                    
+0296DCB    A400012042585003411/20/02  10:10 F056
+
+
+4(DCB    A - XFR CC TO SAV)
+4%NCR 5886                
+4RICHMOND       VA    G088
+4SUNTRUST OFFERS SMALL
+4BUSINESS LINES OF    
+4CREDIT. MEMBER FDIC. 
+ 
+4SERIAL NUMBER64258
+4TRANSFER FROM
+4CREDIT CARD*82701     $22.22
+4TO1SAVINGS***9197
+                                                                                                                                                                                                                                                                                                                
+0293DBB    A400012042585003408/12/03  10:10 F056
+
+
+4(DBB    A) XFR SAV TO SAV
+4NCR 5886                
+4RICHMOND       VA    G088
+4SUNTRUST OFFERS SMALL
+4BUSINESS LINES OF    
+4CREDIT. MEMBER FDIC. 
+ 
+4SERIAL NUMBER64258
+4TRANSFER FROM
+4SAVINGS*****82701    $22.22
+4TO1SAVINGS***9197
+                                                                                                                                                                                                                                                                                                                   
+0309DCA    B400012042585003411/20/02  10:10 F056
+
+
+4(DCA    B) XFR CC TO CHK
+4SPANISH
+
+4NCR 5886                
+4RICHMOND       VA    G088
+4SUNTRUST OFFERS SMALL
+4BUSINESS LINES OF    
+4CREDIT. MEMBER FDIC. 
+ 
+4SERIAL NUMBER64258
+4TRANSFER FROM
+4CREDIT CARD*82701         $22.22
+4TO1CHECKING***9197
+                                                                                                                                                                                                                                                                                                   
+0307DCB    B400012042585002411/20/02  10:10 F056
+
+
+4(DCB    B) XFR CC TO SAV
+4SPANISH
+4NCR 5886                
+4RICHMOND       VA    G088
+4SUNTRUST OFFERS SMALL
+4BUSINESS LINES OF    
+4CREDIT. MEMBER FDIC. 
+ 
+4SERIAL NUMBER64258
+4TRANSFER FROM
+4CREDIT CARD*82701         $22.22
+4TO1SAVINGS***9197
+                                                                                                                                                                                                                                                                                                     
+0308DBB    B400012042585003411/20/02  10:10 F056
+
+
+4(DBB    B) XFR SAV TO SAV
+4NCR 5886                
+4RICHMOND       VA    G088
+4SUNTRUST OFFERS SMALL
+4BUSINESS LINES OF    
+4CREDIT. MEMBER FDIC. 
+ 
+4SERIAL NUMBER64258
+4TRANSFER FROM
+4SAVINGS*****82701         $22.22
+4TO1SAVINGS***9197
+
+9SPANISH                                                                                                                                                                                                                                                                                                    
+0349IGA I   400049048275002404/10/03  15:04 B055
+
+
+4(IGA I - HOST FINAL SETTLE
+4CASH ONLY - STD REPL)
+
+4NCR TEST LAB            
+4DAYTON  OHIO       F215
+
+ 3CC 00       20    STR      $0
+4C2 INC      $0 C2 DEC      $0
+4C2 OUT   $8280 C2 END      $0
+ 3CN 04     7.40    STR   $0.00
+4C3 INC   $0.00 C3 DEC   $0.00
+4C3 OUT $325.60 C3 END   $0.00
+                                                                                                                                                                                                                                                           
+0345IGASAVE 400048274002404/10/03  15:04 B055
+
+
+4(IGA I - HOST FINAL SETTLE4CASH ONLY - STD REPL
+
+4STC TEST LAB            
+4RICHMOND       VA    F215
+
+ 3CC 00       20    STR      $0
+4C2 INC      $0 C2 DEC      $0
+4C2 OUT   $8280 C2 END      $0
+ 3CN 04     7.40    STR   $0.00
+4C3 INC   $0.00 C3 DEC   $0.00
+4C3 OUT $325.60 C3 END   $0.00
+                                                                                                                                                                                                                                                               
+0111IGB I   400049048275002
+
+(IGB I - FINAL CASH - CURRENT)
+
+4ACI FINAL CASH - CURRENT
+
+4ACI FINAL CASH - CURRENT
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+0114IHBB    400049048275002
+
+(IHBB  - ADD CASH - CANISTER 2)
+
+4ACI ADD CASH - CANISTER 2
+
+4ACI ADD CASH - CANISTER 2
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+0114IHCB    400049048275002
+
+(IHCB  - SUB CASH - CANISTER 2)
+
+4ACI SUB CASH - CANISTER 2
+
+4ACI SUB CASH - CANISTER 2
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+0302F A    B4000121000100004243B039003411/20/02  09:49 F056
+
+
+4(F A    B - FAST CASH $20)
+4NCR 5886                
+4RICHMOND       VA    G088
+4SUNTRUST OFFERS SMALL
+4BUSINESS LINES OF    
+4CREDIT. MEMBER FDIC. 
+ 
+4SERIAL NUMBER64243
+4WITHDRAWAL FROM    
+4CHK***91972         $20.00
+9(SPANISH)
+                                                                                                                                                                                                                                                                                                          
+0297F C    B4000121000300004243B039003411/20/02  09:49 F056
+
+
+4(F C    B - FAST CASH
+4NCR 5886                
+4RICHMOND       VA    G088
+4SUNTRUST OFFERS SMALL
+4BUSINESS LINES OF    
+4CREDIT. MEMBER FDIC. 
+ 
+4SERIAL NUMBER64243
+4WITHDRAWAL FROM    
+4CHK***91972         $60.00
+9(SPANISH)                                                                                                                                                                                                                                                                                                                
+0302F B    B4000121000200004243B039003411/20/02  09:49 F056
+
+
+4(F B    B - FAST CASH $40)
+4NCR 5886                
+4RICHMOND       VA    G088
+4SUNTRUST OFFERS SMALL
+4BUSINESS LINES OF    
+4CREDIT. MEMBER FDIC. 
+ 
+4SERIAL NUMBER64243
+4WITHDRAWAL FROM    
+4CHK***91972         $40.00
+9(SPANISH)                                                                                                                                                                                                                                                                                                           
+0304F D    B4000121000500004243B039003411/20/02  09:49 F056
+
+4(F D    B - FAST CASH - $100)
+4NCR 5886                
+4RICHMOND       VA    G088
+4SUNTRUST OFFERS SMALL
+4BUSINESS LINES OF    
+4CREDIT. MEMBER FDIC. 
+ 
+4SERIAL NUMBER64243
+4WITHDRAWAL FROM    
+4CHK***91972        $100.00
+9(SPANISH)                                                                                                                                                                                                                                                                                                         
+0044OVRDRFT 40001970000000059525197075JN$30.00000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+0038DENY    40001370000000059525000075@@000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+046811110   400013737315002405/07/03  16:52 F056
+
+
+4(11110 - SENT AFTER A DISPENSER
+ 4ERROR STATUS MESSAGE
+4RECEIVED INSTEAD OF READY 9)
+
+4NCR 5886                
+4RICHMOND       VA 
+4YOUR TRANSACTION IS    
+4NOT SUPPORTED AT       
+4THIS TERMINAL.         
+ 1405/07/03  16:52 F056
+44011800883757793-000
+4%NCR 5886                
+4RICHMOND        VA 
+4SER NBR2
+4
+40000000000
+4YOUR TRANSACTION IS    
+4NOT SUPPORTED AT       
+4THIS TERMINAL.         
+                                                                                                                                    
+0326A AA   A40001200000010042412039000@@003411/20/02  09:46 F056
+
+
+4(A AA   A - BUY STAMPS - 1)
+4NCR 5886                
+4RICHMOND       VA    G088
+4SUNTRUST OFFERS SMALL
+4BUSINESS LINES OF    
+4CREDIT. MEMBER FDIC.
+ 
+4SERIAL NUMBER64241
+4STAMP PURCHASE FROM
+4CHKxxx91972         $6.66
+4AVAIL BAL  1        $825.04                                                                                                                                                                                                                                                                                   
+0304CHKRORDR400012038705002406/30/03  09:46 F058
+
+
+4(CHKRORDR - CHECK-REORDER)
+4NCR 5886                
+4CHECK OUT OUR MINI
+4HOME EQUITY RATES
+4EQUAL HOUSING LENDER.
+
+4SERIAL NUMBER 3870
+4CHECKING RE-ORDER AT ATM
+4        CHKXXXX6777
+1
+SERIAL NUMBER   3870
+     CHECK RE-ORDER AT ATM
+  CHKXXXX6777
+                                                                                                                                                                                                                                                                                                        
+0113OARRORDR300021100111074186BEFROMBJCHECKING  DDCHK***7987EDCHK***1111FDCHK***2222GDCHK***3333HDCHK***4444J5                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+0326A AB   A40001200000010042412039000@@003407/01/03  09:46 F056
+
+
+4(A AB   A - BUY STAMPS - 1)
+4NCR 5886                
+4RICHMOND       VA    G088
+4SUNTRUST OFFERS SMALL
+4BUSINESS LINES OF    
+4CREDIT. MEMBER FDIC.
+ 
+4SERIAL NUMBER64241
+4STAMP PURCHASE FROM
+4SAVxxx91972         $6.66
+4AVAIL BAL  1        $825.04                                                                                                                                                                                                                                                                                   
+0326A AC   A40001200000010042412039000@@003407/01/03  09:46 F056
+
+
+4(A AC   A - BUY STAMPS - 1)
+4NCR 5886                
+4RICHMOND       VA    G088
+4SUNTRUST OFFERS SMALL
+4BUSINESS LINES OF    
+4CREDIT. MEMBER FDIC.
+ 
+4SERIAL NUMBER64241
+4STAMP PURCHASE FROM
+4CCARDx91972         $6.66
+4AVAIL BAL  1        $825.04                                                                                                                                                                                                                                                                                   
+0337A AA   B40001200000010042412039000@@003411/20/02  09:46 F056
+
+
+4(A AA   B - BUY STAMPS - 1)
+4NCR 5886                
+4RICHMOND       VA    G088
+4SUNTRUST OFFERS SMALL
+4BUSINESS LINES OF    
+4CREDIT. MEMBER FDIC.
+ 
+4SERIAL NUMBER64241
+4STAMP PURCHASE FROM
+4CHKxxx91972         $6.66
+4AVAIL BAL  1        $825.04
+9(SPANISH)                                                                                                                                                                                                                                                                       
+0338A AB   B40001200000010042412039000@@003407/01/03  09:46 F056
+
+
+4(A AB   B - BUY STAMPS - 1)
+4NCR 5886                
+4RICHMOND       VA    G088
+4SUNTRUST OFFERS SMALL
+4BUSINESS LINES OF    
+4CREDIT. MEMBER FDIC.
+ 
+4SERIAL NUMBER64241
+4STAMP PURCHASE FROM
+4SAVxxx91972         $6.66
+4AVAIL BAL  1        $825.04
+9(SPANISH)                                                                                                                                                                                                                                                                       
+0338A AC   B40001200000010042412039000@@003407/01/03  09:46 F056
+
+
+4(A AC   B - BUY STAMPS - 1)
+4NCR 5886                
+4RICHMOND       VA    G088
+4SUNTRUST OFFERS SMALL
+4BUSINESS LINES OF    
+4CREDIT. MEMBER FDIC.
+ 
+4SERIAL NUMBER64241
+4STAMP PURCHASE FROM
+4CCARDx91972         $6.66
+4AVAIL BAL  1        $825.04
+9(SPANISH)                                                                                                                                                                                                                                                                       
+0336SCREEN9M311000(1P000;0\@@<CONFIGURATION_DATA reboot="y">AB<DD_UPDATE>BD<GROUP>SCR9MULTIPLE</GROUP>CD<NAME>TEST</NAME>DD<VALUE>YES</VALUE>EB</DD_UPDATE>F@</CONFIGURATION_DATA><CONFIGURATION_DATA reboot="y">AB<DD_UPDATE>BD<GROUP>SCR9MULTIPLE</GROUP>CD<NAME>TEST1</NAME>DD<VALUE>123</VALUE>EB</DD_UPDATE>F@</CONFIGURATION_DATA>                                                                                                                                                                                                                                                                        
+0195SCREEN91311000(1P000;0\@@<CONFIGURATION_DATA reboot="y">AB<DD_UPDATE>BD<GROUP>CONSUMERFLOW</GROUP>CD<NAME>ENVELOPEDEPOSIT</NAME>DD<VALUE>YES,1,1</VALUE>EB</DD_UPDATE>F@</CONFIGURATION_DATA>                                                                                                                                                                                                                                                                                                                                                                                                                     
+0349IGA     400049048275002404/10/03  15:04 B055
+
+
+4(IGA I - HOST FINAL SETTLE
+4CASH ONLY - STD REPL)
+
+4NCR TEST LAB            
+4DAYTON  OHIO       F215
+
+ 3CC 00       20    STR      $0
+4C2 INC      $0 C2 DEC      $0
+4C2 OUT   $8280 C2 END      $0
+ 3CN 04     7.40    STR   $0.00
+4C3 INC   $0.00 C3 DEC   $0.00
+4C3 OUT $325.60 C3 END   $0.00
+                                                                                                                                                                                                                                                           
+0323II      400049048275002404/10/03  15:04 B055
+
+
+4(II  I - HOST SUB-TOTALS)
+
+4NCR TEST LAB            
+4DAYTON   OHIO      F215
+
+ 3CC 00       20    STR      $0
+4C2 INC      $0 C2 DEC      $0
+4C2 OUT   $8280 C2 END      $0
+ 3CN 04     7.40    STR   $0.00
+4C3 INC   $0.00 C3 DEC   $0.00
+4C3 OUT $325.60 C3 END   $0.00                                                                                                                                                                                                                                                                                     

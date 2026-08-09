@@ -1,0 +1,372 @@
+M1187RESV
+0005GIS     11                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+0338FAEA    40000075061230300000060132040075@@002501/30/02 14:00  ATM07506
+
+5************5727
+
+4ISB KAM SC
+4HONOLULU      HI
+
+4RECORD NO.?   6013
+4WITHDRAWALS7$60.00
+4FR5******9999
+46
+46
+
+1501/30/02 14:00  ATM07506
+
+54811109622665727
+
+4ISB KAM SC               
+
+4RECORD NO.?   6013
+4WITHDRAWALS7$60.00
+4FR59999999999
+                                                                                                                                                                                                                                                                      
+0365EBBA    40001200002000036162052075@@002501/31/02 07:02  S1A00102
+
+5************5727
+
+4BOH TEST ATM             
+4HONOLULU      HI 
+
+4RECORD NO.?   3616
+4GIFT CERT.     2         $50.00
+4FR5******9999
+
+1501/31/02 07:02  S1A00102
+
+54811109622665727
+
+4BOH TEST ATM             
+
+4RECORD NO.?   3616
+4GIFT CERT.     2         $50.00
+4FR59999999999
+
+                                                                                                                                                                                                                                           
+0518ECAA    40000075061200000000160112053075@@002501/30/02 13:55  ATM07506
+
+5************5727
+
+4ISB KAM SC               
+4HONOLULU      HI 
+
+4RECORD NO.?   6011
+4HAWAIIAN AIR
+4COUPON         2         $65.25
+4FR5******9999
+
+4FOR RESERVATIONS OR QUESTIONS
+4REGARDING COUPONS PLEASE
+4CONTACT HAWAIIAN AIRLINES
+4RESERVATIONS ON YOUR ISLAND
+
+1501/30/02 13:55  ATM07506
+
+54811109622665727
+
+4ISB KAM SC               
+
+4RECORD NO.?   6011
+4HAWAIIAN AIR
+4COUPON         2         $65.25
+4FR59999999999
+                                                                                  
+0005OOS     12                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+0247BAL A+L 40000075060790000000060055079075@@001501/30/02 13:16  ATM07506
+
+5************5727
+
+4ISB KAM SC       
+4HONOLULU      HI 
+
+4RECORD NO.?   6005
+4INQUIRY
+4FR5******9999
+4LEDGER BAL 6     $99000.54
+4AVAIL BAL  6      $98908.96
+                                                                                                                                                                                                                                                                                                                                                                    
+0221BAL LDGR40000075060790000000060055079075@@001501/30/02 13:16  ATM07506
+
+5************5727
+
+4ISB KAM SC       
+4HONOLULU      HI 
+
+4RECORD NO.?   6005
+4INQUIRY
+4FR5******9999
+4LEDGER BAL 6     $99000.54
+46
+                                                                                                                                                                                                                                                                                                                                                                                              
+0036SURCHARG4000 16762065167075H4$1.40000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+0247CB      400012061675000075@@0027                          
+707/29/02 13:20  SNCN2223
+7XXXXXXXXXXXX5443
+7*CHARLOTTE-IC-ATM23      
+7NC CITY       NC 
+
+4SER. NO. 6167
+4SAVINGS         INQUIRY
+4FROM  PRIMARY   
+4BALANCE             $345.48
+
+                                                                                                                                                                                                                                                                                                                                                                 
+0278AA     A40001200001000061582039075@@0027                          
+707/29/02 13:10  SNCN2223
+7XXXXXXXXXXXX5443
+7*CHARLOTTE-IC-ATM23      
+7NC CITY       NC 
+
+4SER. NO. 6158          $20.00
+4CHECKING         WITHDRAWAL
+4FROM PRIMARY   
+4BALANCE                 $53.29
+
+
+                                                                                                                                                                                                                                                                                                                                  
+0413BA     A40001206010T023075@@0046010*TX10/23*08:39*7781*004771911734 *3 *0000005.0027                         
+7FOR CUSTOMER SERVICE CALL
+7   1-888-789-7587
+
+7  BUYING A HOME? WE CAN    
+7  HELP. CALL US TODAY AT   
+7  1.800.900.9000.          
+
+710/23/02 08:39  WTXN7781
+7XXXXXXXX4285
+7*CHARLOTTE-7781          
+7TX CITY       TX 
+
+    DEPOSIT             $5.00
+    TO CHECKING        
+    PRIMARY   
+
+                                                                                                                                                                                           
+0248CA     A400012061665000075@@0027                          
+707/29/02 13:18  SNCN2223
+7XXXXXXXXXXXX5443
+7*CHARLOTTE-IC-ATM23      
+7NC CITY       NC 
+
+4SER. NO. 6166
+4CHECKING         INQUIRY
+4FROM  PRIMARY   
+4BALANCE             $500.48
+
+                                                                                                                                                                                                                                                                                                                                                                
+0317DAB    A400012056495000075@@0037                          
+707/29/02 13:30  SNCN2223
+7XXXXXXXX5443
+7*CHARLOTTE-IC-ATM23      
+7NC CITY       NC 
+
+4SER. NO.  5649            $10.00
+4TRANSFER CHK TO SAV
+4FROM  PRIMARY   
+4TO    PRIMARY   
+4FROM BALANCE            $1261.29
+4TO   BALANCE             $402.93
+
+                                                                                                                                                                                                                                                                                           
+0273FAA    A4000123010000006158B040075@@0037                          
+707/29/02 13:10  SNCN2223
+7XXXXXXXX5443
+7*CHARLOTTE-IC-ATM23      
+7NC CITY       NC 
+
+4SER. NO. 6158          $20.00
+4CHECKING         WITHDRAWAL
+4FROM PRIMARY   
+4BALANCE                $53.29
+
+
+                                                                                                                                                                                                                                                                                                                                       
+0262GC     A400012061881023075@@0046188*FL07/29*14:09*2223*00000000000000*5 *0000010.0037                          
+707/29/02 14:09  SNCN2223
+7XXXXXXXX5443
+7*CHARLOTTE-IC-ATM23      
+7NC CITY       NC 
+
+    SER. NO. 6188           $10.00
+    PAYMENT ENCLOSED
+
+                                                                                                                                                                                                                                                                                                                                                  
+0006SOFT ID 175                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+0247CB     A400012061675000075@@0027                          
+707/29/02 13:20  SNCN2223
+7XXXXXXXXXXXX5443
+7*CHARLOTTE-IC-ATM23      
+7NC CITY       NC 
+
+4SER. NO. 6167
+4SAVINGS         INQUIRY
+4FROM  PRIMARY   
+4BALANCE             $345.48
+
+                                                                                                                                                                                                                                                                                                                                                                 
+0265AA     B40001200001000061582039075@@0027                          
+707/29/02 13:10  SNCN2223
+7XXXXXXXXXXXX5443
+7*CHARLOTTE-IC-ATM23      
+7NC CITY       NC 
+
+4NUM. SER. 6158          $20.00
+4RETIRO DE CHEQUES
+4DE PRIMARY   
+4SALDO                 $53.29
+
+
+                                                                                                                                                                                                                                                                                                                                               
+0255CA     B400012061665000075@@0027                          
+722/11/02 07:57AM
+7ATM: WTXN7781 NUM. SER. 6648
+7TARJETA: ********0033
+7*CHARLOTTE-7781
+7TX CITY       TX
+
+4VERIFICACION DE4  CUENTA DE CHEQUES
+4PRIMARY   
+4SALDO             $21246.32
+
+                                                                                                                                                                                                                                                                                                                                                         
+0278AA   B A40001200001000061582039075@@0017                          
+707/29/02 13:10  SNCN2223
+7XXXXXXXXXXXX5443
+7*CHARLOTTE-IC-ATM23      
+7NC CITY       NC 
+
+4SER. NO. 6158          $20.00
+4CHECKING         WITHDRAWAL
+4FROM PRIMARY   
+4BALANCE                 $53.29
+
+
+                                                                                                                                                                                                                                                                                                                                  
+0278AA   D A40001200001000061582039075@@0027                          
+707/29/02 13:10  SNCN2223
+7XXXXXXXXXXXX5443
+7*CHARLOTTE-IC-ATM23      
+7NC CITY       NC 
+
+4SER. NO. 6158          $20.00
+4CHECKING         WITHDRAWAL
+4FROM PRIMARY   
+4BALANCE                 $53.29
+
+
+                                                                                                                                                                                                                                                                                                                                  
+0237OAR CHK53000210111110001074186BDWITHDRAW     $20.00CBFROM WHICHCMCHECKINGACCOUNT?E5   PRIMARYF1  XXXXXXXX2959H5    CHCKTVI1  XXXXXXXX0371K5     CHCK2L1  XXXXXXXX8274N5     CHCK3O1  XXXXXXXX9628EAODC       FAXXXXXXXX5840  J5                                                                                                                                                                                                                                                                                                                                                                           
+0317OAR MORE3000210111111111074186BDWITHDRAW     $20.00CBFROM WHICHCMCHECKINGC6ACCOUNT?E5   PRIMARYF1  XXXXXXXX0404H5     CHCK2I1  XXXXXXXX4466K5      ATM1L1  XXXXXXXX6252N5      OAR1O1  XXXXXXXX1111EAOAR2      FAXXXXXXXX2222  HAOAR3      IAXXXXXXXX3333  KAOAR4      LAXXXXXXXX4444  NAOTHEROAACCOUNTSJ5                                                                                                                                                                                                                                                                                           
+0173OAR PREV3000210110110000074186BDWITHDRAW     $20.00CBFROM WHICHCMCHECKINGC6ACCOUNT?E5      OAR5F1  XXXXXXXX5555H5      OAR6I1  XXXXXXXX6666N7PREVIOUSO5  ACCOUNTSJ5                                                                                                                                                                                                                                                                                                                                                                                                                                           
+0234OAR DEP 3000210111110001074186BDDEPOSIT     $20.00CBTO WHICHCMCHECKINGACCOUNT?E5   PRIMARYF1  XXXXXXXX2959H5    CHCKTVI1  XXXXXXXX0371K5     CHCK2L1  XXXXXXXX8274N5     CHCK3O1  XXXXXXXX9628EAODC       FAXXXXXXXX5840  J5                                                                                                                                                                                                                                                                                                                                                                              
+0402IHB I   400062094000075@@002707/30/02 10:31  SNCN2223
+
+7XXXXXXXX9991
+7*CHARLOTTE-IC-ATM23      
+7NC CITY       NC 
+
+707/30/02 10:31  SNCN2223
+7XXXXXXXX9991
+7*CHARLOTTE-IC-ATM23      
+7NC CITY       NC 
+
+   20 STR    $20980  20 INC    $40000
+   20 DEC        $0  20 OUT     $1620
+   20 END    $59360
+   10 STR    $11000  10 INC    $15000
+   10 DEC        $0  10 OUT      $400
+   10 END    $25600
+                                                                                                                                                                                                      
+0101IHB I  2400049062095000075@@002   DEP0  15  DEP1   0
+   MSG    6  PAY    9
+   TOT   30  CRD    1  ADJ
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+00410043    40000430000000059525185075M7$10000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+0151OARFLOC 3000210110010000074186BDTRANSFER     $10.00CBFROM WHICHCM   LINE C6ACCOUNT?E5      LOC2F1  XXXXXXXXXX4936H5      LOC1I1XXXXXXXXXX0585J5                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+0278OARTCHK 3000210111110001074186ADTRANSFER     $10.00BAFROM BF   LINE    B1 XXXXXXXXXX4936CATO WHICH CKCHECKING  C4ACCOUNT?E5   PRIMARYF1  XXXXXXXX2959H5    CHCKTVI1  XXXXXXXX0371K5     CHCK2   XXXXXXXX8274N5     CHCK3O1  XXXXXXXX9628EAODC       FAXXXXXXXX5840  J5                                                                                                                                                                                                                                                                                                                                  
+0286DDA    A400012061745000075@@0037                          
+707/29/02 13:31  SNCN2223
+7XXXXXXXX5443
+7*CHARLOTTE-IC-ATM23      
+7NC CITY       NC 
+
+4SER. NO.  6174            $10.00
+4TRANSFER LINE TO CHK
+4FROM  LOC2      
+4TO    PRIMARY   
+4
+4TO   BALANCE              $10.00
+
+                                                                                                                                                                                                                                                                                                                          
+0475CD     B400012066615000075@@0027                      
+7PARA SERVICIO LLAME AL
+7   1-800-688-6086
+
+722/11/02 08:12AM
+7ATM: WTXN7781 NUM.SER. 6661
+7TARJETA: ********0033
+7*CHARLOTTE-7781          
+7TX CITY       TX 
+
+4NUM. SER. 6661
+4VERIFICACION DE
+4  LINEA DE CREDITO         
+4DE   LOC       
+4CREDITO DISPONIBLE        $6969.53
+4SALDO**                   $1736.67
+4   
+4      
+4** EL SALDO NO INCLUYE
+4   ACTIVIDAD DESDE EL
+4   ULTIMO DIA LABORABLE **
+
+                                                                                                                             
+0457CD     A400012066345000075@@0027                         
+7FOR CUSTOMER SERVICE CALL
+7   1-888-789-7587
+
+711/22/02 06:57AM
+7ATM: WTXN7781 SER NO. 6634
+7CARD: ********0033
+7*CHARLOTTE-7781          
+7TX CITY       TX 
+
+4SER. NO. 6634
+4CREDIT LINE      INQUIRY
+4FROM LOC       
+4AVAIL CREDIT            $6969.53
+4BALANCE**               $1736.67
+4 
+4    
+4** THE BALANCE DOES NOT
+4   INCLUDE ACTIVITY SINCE
+4   THE PREVIOUS BUSINESS DAY **
+
+                                                                                                                                               
+0310OAR SPA 3000210111110001074186BDDEPOSITO    $100.00CB  A CUALCKCUENTA DEC5CHEQUES   E5   PRIMARYF1  XXXXXXXX8265H5      MMGRI1  XXXXXXXX1111K5      CHK1L1  XXXXXXXX2222N5      CHK2O1  XXXXXXXX3333EACHK3      FAXXXXXXXX4444  HACHK5      IAXXXXXXXX5555  KACHK6      LAXXXXXXXX6666  OACUENTASJ5                                                                                                                                                                                                                                                                                                  
+0274HHA     40007255411200203/20/03205:35 AM  *CHARLOTTE-7781          2TX CITY1234562TX1
+ATM: WTXN7781        ??CARD: *****2980
+INTEREST CHECKING        6*** *** ** 5538
+03/18/03 TO 03/20/03??5PAGE 01
+---------------------------BANK OF AMERICA------------------------- 
+                                                                                                                                                                                                                                                                                                                                      
+0301HHA2    400072554112002
+LAST STATEMENT DATE              03/18/03
+BALANCE LAST STATEMENT          $2,119.61
+CREDITS SINCE LAST STATEMENT         $.00
+DEBITS SINCE LAST STATEMENT          $.00
+CURRENT BALANCE                 $2,119.61
+
+NO TRANSACTIONS HAVE OCCURRED SINCE YOUR LAST STATEMENT ON 03/18/03
+                                                                                                                                                                                                                                                                                                           
+0198HHA3    400072554112002
+FOR ADDITIONAL INFORMATION OR SERVICE, YOU MAY CALL: 
+                 1-888-789-7587   TELEPHONE BANKING 
+                 1-800-288-4408   SPEECH OR HEARING IMPAIRED -- TDD 
+                                                                                                                                                                                                                                                                                                                                                                                                                  
+0209HHA4    4000120725551130021F1-FOR ADDITIONAL INFORMATION OR SERVICE, YOU MAY CALL:
+F2-                 1-800-299-2265   TELEPHONE BANKING
+F3-                 1-800-288-4408   SPEECH OR HEARING IMPAIRED -- TDD
+                                                                                                                                                                                                                                                                                                                                                                                                       

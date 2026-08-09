@@ -1,0 +1,391 @@
+M1063RESV
+0083LOAD12  31300000000000000020000001001010020020302504010050100601007002080100901010000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+0245LOAD10  300015000000255255255255255001000132000000000000000255000001035069103137001035069000000000000000000000000000000000000000000001001017047248115255000000006000059000000000255255000000000000000000000000015169029184100195046087000000000000000000                                                                                                                                                                                                                                                                                                                                                                   
+0088LOAD11  3132000000000002002000000500105001002010400401005010060300700108000090109601098010                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+0558LOAD8   3012000A010001011002002002001001001M012035035002035013002009002D003000000000000000000000003K004005036036036036036036004E014035035007008255255000005E015035035007008009006000006E016035035010011012255001007E017035035013013255255002008E018035035020020255255002009E019035035014014255255002010E020035035017017255255002011E021035035020020255255002012E022035035015015255255002013F023035035016013255255024014C017000000000000000000000015H025035035017015255255001016G020013000000000000000000017F023035035020017255255024020I026038001003001001001000                                          
+0122DENY    403612345000002APTRA ADVANCE NDC DEMO
+
+DENY - TRANSACTION DENIED
+
+PRINT ON RECEIPT ONLY
+
+THIS MESSAGE CUTS RECEIPT
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+0297LOAD9   3012030N001032000000000000000000031E045035035032255255255000032E046035035002035255255002033E043035035017035255255000034U039000000000000000000000035L049036036036000000000000036J050000051052000000000000037E042035035001035255255000038E054035035002035255255000039E038035035032255255255000                                                                                                                                                                                                                                                                                                               
+0056LOAD13  30001A000010100002002030010404005001060000700112001                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+0214A A     40350112342036003$50 CASH WITHDAWAL
+FROM CHECKING
+BALANCE $12,345.00
+
+    THANK YOU FOR
+   BANKING WITH US
+
+NOTE: THIS DEMO IS NOT
+ABLE TO DISPENSE SPECIFIC
+AMOUNTS.
+
+APTRA ADVANCE NDC DEMO
+w0132,"$12345.00"                                                                                                                                                                                                                                                                                                                                                                                                  
+0213A B     40350112342036003$30 CASH WITHDAWAL
+FROM SAVINGS
+BALANCE $12,345.00
+
+    THANK YOU FOR
+   BANKING WITH US
+
+NOTE: THIS DEMO IS NOT
+ABLE TO DISPENSE SPECIFIC
+AMOUNTS.
+
+APTRA ADVANCE NDC DEMO
+w0132,"$12345.00"                                                                                                                                                                                                                                                                                                                                                                                                   
+0018CONFIG  30999006160001                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+0005OOS     12                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+0005GIS     11                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+0087DCA     403512345037003APTRA ADVANCE NDC DEMO
+
+PAYMENT FROM CHECKING
+AMOUNT     $1234.00
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+0086DCB     403512345037003APTRA ADVANCE NDC DEMO
+
+PAYMENT FROM SAVINGS
+AMOUNT     $1234.00
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+0082PRNT_IMD412344037001APTRA ADVANCE NDC DEMO
+
+PRINT IMMEDIATE
+ON JOURNAL AND RECEIPT
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+0053NXT_PRNT403512345037003NDC DEMO
+
+NEXT STATE
+AND PRINT
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+0059DPY_PRNT403512343037003APTRA ADVANCE DEMO
+
+DISPLAY AND PRINT
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+0141LOAD14  311C095?;123400000006=12933000996007??10202552552552552552552552552552550100000000IGB     00IGA     00IHB     ??IHC     ??II      0000000                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+0084UTP     403612345000003APTRA ADVANCE NDC DEMO
+
+UNABLE TO PROCESS
+
+TRANSACTION DENIED
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+0005LOAD16  11                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+0018LOAD15  30999006160001                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+0031KEY31S  331001002008004005006007008                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+0090IGB     403512345054003APTRA ADVANCE NDC DEMO
+
+MESSAGE NAME: IGB
+
+SUPERVISOR TRANSACTION 0
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+0005CON_ID  13                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+0578STM_WAITF10321234P037008(1[000p[080q
+ACCOUNT: 0123456789123456 NAME: MR. F. BROKE DATE: 9 APRIL 1986
+
+4DATE>DESCRIPTION? DEBITS5CREDITS4BALANCE
+
+ 9 MAR 1986    BALANCE BROUGHT FORWARD6;;527.18 C
+14 MAR 1986 AT 24HR BANK DUNDEE?440.00;4-12.82 D
+15 MAR 1986 SO ABBEYFAX B/S ?6150.00;3-162.82 D
+20 MAR 1986 SC 3 MONTHS TO 31 FEB=411.89;3-174.71 D
+21 MAR 1986 AR 24HR BANK LEEDS ?445.00;3-219.71 D
+21 MAR 1986 CH 00589 'ACCESS'?615.00;3-234.71 D
+22 MAR 1986 TR NCR LIMITED?5;3498.004263.29 C
+23 MAR 1986 CH 00590 'BRITISH GAS'<497.00;4165.32 C
+                      
+0005SEND_CON17                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+0481STM_CONT40351234Q03700825 MAR 1986 SO TRC (HIGH) RATES?436.10;4123.25 C
+28 MAR 1986 AT 24HR BANK INVERNESS<440.00;589.95 C
+29 MAR 1986 DD NEVER NEVER H/P LTD<428.00;561.25 C
+ 3 APR 1986 CH 00592 'HYDRO ELECTRIC'9456.00;65.25 C
+ 4 APR 1986 AT 24HR BANK POOLE>650.00;4-44.75 D
+
+
+
+(CCODES: DD DIRECT DEBIT  SO STANDING ORDER  TR TRANSFER  CH CHEQUE  DV DIVIDEND  SC SERVICE CHARGE  AT ATM TRANSACTION  FF FUDGE FACTOR.
+
+(>*PLEASE CONTACT THE MANAGER IMMEDIATELY*
+                                                                                                                       
+0055KEY31D  331001002008004005006007008001002003004005006007008                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+0031KEY32S  332001002008004005006007008                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+0055KEY32D  332001002008004005006007008001002003004005006007008                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+0031KEY33S  333001002008004005006007008                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+0055KEY33D  333001002008004005006007008001002003004005006007008                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+0058KEY41D  341030001002008004005006007008001002003004005006007008                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+0058KEY42D  342030001002008004005006007008001002003004005006007008                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+0560LOAD1   3011000BDDO YOU WANT MORE TIMEF1PRESS IF YES-->I1PRESS IF NO--->001CESORRY YOUR TRANSACTIONEGHAS BEEN CANCELLEDHBTHIS TERMINAL IS TEMPORARILYJIOUT OF SERVICE002DBTHIS TERMINAL IS TEMPORARILY(>GJCLOSED(1LFPLEASE SEE A TELLERC03002010EDPLEASE DIP YOUR CARDGDTO BEGIN A TRANSACTION011CGYOUR CARD WAS NOTEIREAD PROPERLYGDOR WAS WRONGLY INSERTEDIEPLEASE TRY AGAINMHOR SEE A TELLER012BDWELCOMEBM	DITO THE APTRA ADVANCE DEMOIFPLEASE KEY IN YOURLA033KL013DGYOU HAVE KEYED INFHA WRONG NUMBERHEPLEASE RE_ENTER YOURJB033                                        
+0468LOAD2   3011014FIWITHDRAW CASHIIACCOUNT INQUIRY030015031LIDEPOSIT CASHOIOTHER TRANSACTION016032FITRANSFER CASH--------->IICHECK VALIDATION------>LIPAY FROM ACCOUNT------>OIOTHER TRANSACTION----->017CBFROM WHICH YOU REQUIRE MONEY034018CEFROM WHICH YOU REQUIREDFBALANCE INFORMATION034019CBYOU WISH TO DEPOSIT MONEY TO034020CAYOU WISH TO TRANSFER MONEY TO034021CEFROM WHICH YOU REQUIREDHCHECK VALIDATION034022CFYOU WISH TO PAY FROM034                                                                                                                                    
+0177LOAD3   3011023CFPLEASE ENTER AMOUNT035024DF025BIPLEASE KEY INCGTHE ACCOUNT NUMBERDGYOU WHISH TO PAY INTO035EJ026DFYOUR TRANSACTION ISEHBEING PROCESSEDHJPLEASE WAIT                                                                                                                                                                                                                                                                                                                                                                                                                                       
+0556LOAD4   3011030F6----------I8--------032031014L5-----------O:------032CBPLEASE SELECT A TRANSACTION033JBPERSONAL IDENTIFICATION NUMBER034BCPLEASE SELECT THE ACCOUNTFI       CHECKING------->II        SAVINGS------->035FMPRESS IF CORRECTIMPRESS IF INCORRECT036EIPLEASE REMOVEHKYOUR MONEY037CEYOUR ACCOUNT IS BEINGEHCHECKED AND YOURGDBALANCE WILL BE PRINTEDIJPLEASE WAIT038AJREMOVE FORMCIAND PRESS KEYEKWHEN READYGJTO CONTINUE039EGPLEASE INSERT YOURIFCHEQUE INTO PRINTER040EBPLEASE PUT DEPOSIT ENVELOPEHGINTO DEPOSIT SLOT                                            
+0476LOAD5   300011041CFSORRY YOUR REQUESTFFCANNOT BE PROCESSEDIJPLEASE WAIT042AGYOU HAVE KEYED INBFA WRONG PIN NUMBER047043CKTHIS SCREENEHWILLGCBEIGUPDATEDKJOKAY!044CFSORRY YOUR REQUESTFFCANNOT BE PROCESSEDIJPLEASE WAIT045CFTHIS SCREEN WILL BEFFUPDATED AFTER TRANSIFREPLY FROM INQUIRY046053D@DO YOU WANT ANOTHER TRANSACTION 048047DHWOULD YOU LIKEEHANOTHER ATTEMPT048048F1PRESS IF YESI1PRESS IF NO049EJYOUR CARD ISGIBEING UPDATEDIJPLEASE WAIT                                                                                                                            
+0335LOAD6   300011050051FIAND STATEMENT051053DDPLEASE REMOVE YOUR CARD052CBYOUR CARD HAS BEEN RETAINEDFDPLEASE CONTACT A TELLER053BAYOUR TRANSACTION IS COMPLETED054BATHIS SELECTION IS UNAVAILABLED@DO YOU WANT ANOTHER TRANSACTION048055DDTHIS IS THE NEXT STATEFDFROM A BAD WRITE056DDTHIS IS THE NEXT STATEFDFROM NO WRITE                                                                                                                                                                                                                                                                         
+0332LOAD7   3011061CBPLEASE SELECT A TRANSACTIONFBWITHDRAWF7DEPOSITGDCASHG8CASHICACCOUNTI6TRANSFERJCENQUIRYJ8CASHLCCHEQUEL6PAY FROMMAVALIDATIONM7ACCOUNT064065066065(>E@PLEASE TAKE YOURGLCARD066(>E@PLEASE TAKE YOUR GLCASH067065IL ANDKLCASH 068[10m(3FIHIIIIIIIIIIIIJGI*G6EHI*H6EIIKLLLLLLLLLLLLM(1[00m                                                                                                                                                                                                                                                                            
+0058KEY43D  343030001002008004005006007008001002003004005006007008                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+0099DAA     403512345037003APTRA ADVANCE NDC DEMO
+
+TRANSFER
+FROM SAVINGS
+TO CHECKING
+AMOUNT     $1234.00
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+0100DAB     403512345037003APTRA ADVANCE NDC DEMO
+
+TRANSFER 
+FROM CHECKING
+TO SAVINGS
+AMOUNT     $1234.00
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+0158B A     403512345037003BALANCE INQUIRY
+CHECKING ACCOUNT
+
+BALANCE     $12,345.00
+
+    THANK YOU FOR
+   BANKING WITH US
+
+APTRA ADVANCE NDC DEMO
+w0132,"$12345.00"                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+0157B B     403512345037003BALANCE INQUIRY
+SAVINGS ACCOUNT
+
+BALANCE     $12,345.00
+
+    THANK YOU FOR
+   BANKING WITH US
+
+APTRA ADVANCE NDC DEMO
+w0132,"$12345.00"                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+0141C09     311C095?;123400000006=12933000996007??10202552552552552552552552552552550100000000IGB     00IGA     00IHB     ??IHC     ??II      0000000                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+0090IGA     403512345054003APTRA ADVANCE NDC DEMO
+
+MESSAGE NAME: IGA
+
+SUPERVISOR TRANSACTION 1
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+0090IHB     403512345054003APTRA ADVANCE NDC DEMO
+
+MESSAGE NAME: IHB
+
+SUPERVISOR TRANSACTION 2
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+0090IHC     403512345054003APTRA ADVANCE NDC DEMO
+
+MESSAGE NAME: IHC
+
+SUPERVISOR TRANSACTION 3
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+0089II      403512345054003APTRA ADVANCE NDC DEMO
+
+MESSAGE NAME: II
+
+SUPERVISOR TRANSACTION 4
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+0243SCREEN913011091CBPLEASE SELECT A TRANSACTIONFBWITHDRAWF7DEPOSITGDCASHG8CASHICACCOUNTI6TRANSFERJCINQUIRYJ8CASHLDCHECKL6PAY FROMMAVALIDATIONM7ACCOUNT094095096095(>E@[12pPLEASETAKE[10mCARD096(>E@[12pPLEASETAKE[10mCASH                                                                                                                                                                                                                                                                                                                                                                     
+0079CAPTURE 403612345052013APTRA ADVANCE NDC DEMO
+
+TRANSACTION DENIED
+CARD CAPTURED
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+0103FSCH_B  403601021234B067003APTRA ADVANCE DEMO
+
+FAST CASH
+PARALLEL EJECT/DISPENSE
+AND PRINT
+FUNCTION ID B
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+0109FSCH_F  403601021234F064003APTRA ADVANCE DEMO
+
+FAST CASH
+CARD BEFORE PARALLEL
+DISPENSE
+AND PRINT
+FUNCTION ID F
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+0103FSCH_C  403601021234C067003APTRA ADVANCE DEMO
+
+FAST CASH
+PARALLEL EJECT/DISPENSE
+AND PRINT
+FUNCTION ID C
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+0111FSCH_A  403601021234A064003APTRA ADVANCE DEMO
+
+CARD BEFORE CASH
+EJECT CARD THEN
+DISPENSE AND PRINT
+FUNCTION ID A
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+0067TIMERS  3130000001001010020100302504010050100601007010080100901010000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+0120OAR1    32111111111111030AAMESSAGE NAME: OAR1CATIMER:        24 SECONDSEAACTIVE KEYS:  NUMERICSGA              FDKSIO                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+0180OAR2    320110001030AAMESSAGE NAME: OAR2CATIMER:        24 SECONDSEADO NOT DISPLAY INPUTGAACTIVE KEYS:  NUMERICSIA              AKA              CANCELMA              ENTEROO                                                                                                                                                                                                                                                                                                                                                                                                                                    
+0189OAR3    3221100011030AAMESSAGE NAME: OAR3CATIMER:        24 SECONDSEADISPLAY * FOR NUMERICSGAACTIVE KEYS:  NUMERICSIA              A AND FKA              CANCELMA              ENTEROO                                                                                                                                                                                                                                                                                                                                                                                                                           
+0166DENY1   403612345000002APTRA ADVANCE NDC DEMO
+
+DENY1 - TRANSACTION DENIED
+
+PRINT ON RECEIPT ONLY
+
+THIS MESSAGE DOES NOT CUT RECEIPT
+
+RECEIPT WILL BE CUT IN CLOSE STATE
+                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+0239C A     403512345037003TRANSFER
+FROM CHECKING
+TO SAVINGS
+AMOUNT          $123.00
+
+PREV BALANCE  $12345.00
+CURR BALANCE  $12468.00
+
+    THANK YOU FOR
+   BANKING WITH US
+
+APTRA ADVANCE NDC DEMO
+w0133,"Checking","Savings","Savings","$12468.00"                                                                                                                                                                                                                                                                                                                                                                         
+0241C B     403512345037003TRANSFER 
+FROM SAVINGS
+TO CHECKING
+AMOUNT          $123.00
+
+PREV BALANCE  $12345.00
+CURR BALANCE  $12468.00
+
+    THANK YOU FOR
+   BANKING WITH US
+
+APTRA ADVANCE NDC DEMO
+w0133,"Savings","Checking","Checking","$12468.00"                                                                                                                                                                                                                                                                                                                                                                       
+0553D A     40331234Q026008(>STATEMENT FOR:
+
+
+(1CHECKING ACCOUNT #0123456789??;AUGUST 2005
+
+DATE>TRANSACTION DESCRIPTION<DEBIT4CREDIT5BALANCE
+
+05 AUG 2005  CHK  CHECK NUMBER 00529?1250.00?3450.75
+05 AUG 2005  DEP  DEPOSIT??61750.0055200.75
+09 AUG 2005  ATM  24HR BANK 1234 SOUTH ST<50.00?5150.75
+11 AUG 2005  POS  GROCERY STORE INC.?1135.00?5015.75
+19 AUG 2005  DEP  DEPOSIT??61575.0056590.75
+23 AUG 2005  TRN  FROM ACCOUNT #0987654321?41000.0057590.75
+
+
+
+(>?THANK YOU
+
+>FOR BANKING
+
+?1WITH US
+
+
+
+(1?=APTRA ADVANCE NDC DEMO                                               
+0544D B     40331234Q026008(>STATEMENT FOR:
+
+
+(1SAVINGS ACCOUNT #0123456789??<AUGUST 2005
+
+DATE>TRANSACTION DESCRIPTION<DEBIT4CREDIT5BALANCE
+
+05 AUG 2005  WTH  WITHDRAWAL?9250.00?3450.75
+05 AUG 2005  DEP  DEPOSIT??61750.0055200.75
+09 AUG 2005  ATM  24HR BANK 1234 SOUTH ST<50.00?5150.75
+11 AUG 2005  POS  GROCERY STORE INC.?1135.00?5015.75
+19 AUG 2005  DEP  DEPOSIT??61575.0056590.75
+23 AUG 2005  TRN  FROM ACCOUNT #0987654321?41000.0057590.75
+
+
+
+(>?THANK YOU
+
+>FOR BANKING
+
+?1WITH US
+
+
+
+(1?=APTRA ADVANCE NDC DEMO                                                        
+0239I A     403512345037003TRANSFER
+FROM CHECKING
+TO SAVINGS
+AMOUNT          $123.00
+
+PREV BALANCE  $12345.00
+CURR BALANCE  $12468.00
+
+    THANK YOU FOR
+   BANKING WITH US
+
+APTRA ADVANCE NDC DEMO
+w0133,"Checking","Savings","Savings","$12468.00"                                                                                                                                                                                                                                                                                                                                                                         
+0241I B     403512345037003TRANSFER 
+FROM SAVINGS
+TO CHECKING
+AMOUNT          $123.00
+
+PREV BALANCE  $12345.00
+CURR BALANCE  $12468.00
+
+    THANK YOU FOR
+   BANKING WITH US
+
+APTRA ADVANCE NDC DEMO
+w0133,"Savings","Checking","Checking","$12468.00"                                                                                                                                                                                                                                                                                                                                                                       
+0055H C     403512345037003APTRA ADVANCE NDC DEMO
+
+STATEMENT
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+0544H B     40331234Q026008(>STATEMENT FOR:
+
+
+(1SAVINGS ACCOUNT #0123456789??<AUGUST 2005
+
+DATE>TRANSACTION DESCRIPTION<DEBIT4CREDIT5BALANCE
+
+05 AUG 2005  WTH  WITHDRAWAL?9250.00?3450.75
+05 AUG 2005  DEP  DEPOSIT??61750.0055200.75
+09 AUG 2005  ATM  24HR BANK 1234 SOUTH ST<50.00?5150.75
+11 AUG 2005  POS  GROCERY STORE INC.?1135.00?5015.75
+19 AUG 2005  DEP  DEPOSIT??61575.0056590.75
+23 AUG 2005  TRN  FROM ACCOUNT #0987654321?41000.0057590.75
+
+
+
+(>?THANK YOU
+
+>FOR BANKING
+
+?1WITH US
+
+
+
+(1?=APTRA ADVANCE NDC DEMO                                                        
+0553H A     40331234Q026008(>STATEMENT FOR:
+
+
+(1CHECKING ACCOUNT #0123456789??;AUGUST 2005
+
+DATE>TRANSACTION DESCRIPTION<DEBIT4CREDIT5BALANCE
+
+05 AUG 2005  CHK  CHECK NUMBER 00529?1250.00?3450.75
+05 AUG 2005  DEP  DEPOSIT??61750.0055200.75
+09 AUG 2005  ATM  24HR BANK 1234 SOUTH ST<50.00?5150.75
+11 AUG 2005  POS  GROCERY STORE INC.?1135.00?5015.75
+19 AUG 2005  DEP  DEPOSIT??61575.0056590.75
+23 AUG 2005  TRN  FROM ACCOUNT #0987654321?41000.0057590.75
+
+
+
+(>?THANK YOU
+
+>FOR BANKING
+
+?1WITH US
+
+
+
+(1?=APTRA ADVANCE NDC DEMO                                               

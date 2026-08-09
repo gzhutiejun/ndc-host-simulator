@@ -1,0 +1,170 @@
+M1187RESV
+0005GIS     11                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+0005OOS     12                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+0368BA    A 4110010144738105110..B@      CHECKING WITHDRAWAL       .C@.166.G@.140001.5555350000003500005.311/13/02915:17;NCRIP1
+
+TCPIP DRIVE
+DAYTON?OH
+  RETAIN RECEIPT FOR YOUR RECORDS
+=THANK YOU
+
+XXXXXXXXXXXXXXX0005
+
+SEQ NBR:  44738AMT:7$40.00
+=ATM OWNER FEE8$1.00
+?5TOTAL:7$41.00.CHECKING WITHDRAWAL  XXXX0051
+2AVAILABLE BAL.>$41,456.28.BALANCE?5$41,456.28                                                                                                                                                                                                                                        
+0298CAA   A 411044745100110..BAYOUR BALANCE IS ON YOUR RECEIPT.G@.140001.5555350000003500005.311/13/02915:18;NCRIP1
+
+TCPIP DRIVE
+DAYTON?OH
+  RETAIN RECEIPT FOR YOUR RECORDS
+=THANK YOU
+
+XXXXXXXXXXXXXXX0005
+
+SEQ NBR:  4474
+CHECKING BALANCE5XXXX0051
+2AVAILABLE BAL>$41,456.28
+BALANCE?5$41,456.28
+                                                                                                                                                                                                                                                                                                              
+0238CAA     411044975100110..BAYOUR BALANCE IS ON YOUR RECEIPT.G@.140002
+9NCR
+511/18/02  16:024NCRIP1
+
+5XXXXXXXXXXXXXXXX0002
+
+4TCPIP DRIVE
+
+SEQ NBR:  4497
+CHECKING BALANCE5XXXX0021
+2AVAILABLE BALANCE;$998,479.56
+BALANCE?5$998,479.56
+                                                                                                                                                                                                                                                                                                                                                                          
+0235CAB     411044985100110..BAYOUR BALANCE IS ON YOUR RECEIPT.G@.140002
+9NCR
+511/18/02  16:024NCRIP1
+
+5XXXXXXXXXXXXXXXX0002
+
+4TCPIP DRIVE
+
+SEQ NBR:  4498
+SAVINGS BALANCE5XXXX0225
+2AVAILABLE BALANCE;$66,437.41
+BALANCE?2$66,437.41
+                                                                                                                                                                                                                                                                                                                                                                             
+0234CAC     411044995100110..BAYOUR BALANCE IS ON YOUR RECEIPT.G@.140002
+9NCR
+511/18/02  16:024NCRIP1
+
+5XXXXXXXXXXXXXXXX0002
+
+4TCPIP DRIVE
+
+SEQ NBR:  4499
+CREDIT BALANCE5XXXX0237
+2AVAILABLE BALANCE;$32,115.19
+BALANCE?7$32,115.19
+                                                                                                                                                                                                                                                                                                                                                                              
+0232CAD     411045005100110..BAYOUR BALANCE IS ON YOUR RECEIPT.G@.140002
+9NCR
+511/18/02  16:024NCRIP1
+
+5XXXXXXXXXXXXXXXX0002
+
+4TCPIP DRIVE
+
+SEQ NBR:  4500
+OTHER BALANCE8XXXX2411
+2AVAILABLE BALANCE<$35,676.73
+BALANCE 5$35,676.73
+                                                                                                                                                                                                                                                                                                                                                                                
+0042BA      412344925100124..A@.123.BH $1.00.000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+0302  BBC   415201004492C108150..A@      CHECKING WITHDRAWAL       .C@.134002
+9NCR
+511/18/02  15:594NCRIP1
+
+5XXXXXXXXXXXXXXXX0002
+
+4TCPIP DRIVE
+
+SEQ NBR:  44928AMT:7$40.00
+=SURCHARGE FEE8$1.00
+?5TOTAL:7$41.00
+CHECKING WITHDRAWAL  XXXX0021
+2AVAILABLE BALANCE;$998,500.56
+BALANCE?6$998,500.56
+                                                                                                                                                                                                                                                                                                          
+0042BB      412344925100124..A@.123.BH $1.00.000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+0042BC      412344925100124..A@.123.BH $1.00.000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+0042BD      412344925100124..A@.123.BH $1.00.000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+0042AA      412344925100124..A@.123.BH $1.00.000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+0332I AB    411045035100110..B@ CHECKING TO SAVINGS TRANSFER  .C@.166.G@.140003
+9NCR
+511/18/02  16:034NCRIP1
+
+5XXXXXXXXXXXXXXX0002
+
+4TCPIP DRIVE
+
+SEQ NBR:  45038AMT:7$20.00
+TRANSFER FR CHECKING XXXX0022
+AVAILABLE BALANCE;$998,459.56
+BALANCE?6$998,459.56
+9TO SAVINGS XXXX0224
+AVAILABLE BALANCE<$50,944.15
+BALANCE?7$50,944.15                                                                                                                                                                                                                                                                            
+0330I BA    411045035100110..B@ SAVINGS TO CHECKING TRANSFER  .C@.166.G@.140003
+9NCR
+511/18/02  16:054NCRIP1
+
+5XXXXXXXXXXXXXXX0002
+
+4TCPIP DRIVE
+
+SEQ NBR:  45058AMT:7$20.00
+TRANSFER FR SAVINGS XXXX0226
+AVAILABLE BALANCE<$94,992.78
+BALANCE?7$94,992.78
+9TO CHECKING XXXX0023
+AVAILABLE BALANCE<$68,222.80
+BALANCE?7$68,222.80                                                                                                                                                                                                                                                                              
+0199H A     411000677107110..B@        CHECKING DEPOSIT        .C@.166.G@.140002
+9NCR
+511/20/02 11:384DW830X
+
+5XXXXXXXXXXXXXXXX0102
+
+45855 FOREST AVE
+
+SEQ NBR:  00678AMT:6$102.00
+CHECKING DEPOSIT
+2                                                                                                                                                                                                                                                                                                                                                                                                                 
+0198H B     411000677107110..B@        SAVINGS DEPOSIT        .C@.166.G@.140002
+9NCR
+511/20/02911:38;DW830X
+
+5XXXXXXXXXXXXXXXX0102
+
+45855 FOREST AVE
+
+SEQ NBR:  00678AMT:6$102.00
+SAVINGS DEPOSIT
+2                                                                                                                                                                                                                                                                                                                                                                                                                  
+0042AB      412344925100124..A@.123.BH $1.50.000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+0042AC      412344925100124..A@.123.BH $1.00.000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+0328  BBD   411046165100110..A@      CHECKING WITHDRAWAL       .B@TRANSACTION CANNOT BE PROCESSED.D@.165.G@.140001.5555350000003500005
+312/02/02914:11;NCRIP1
+
+TCPIP DRIVE
+AMHERST?=NY
+
+  RETAIN RECEIPT FOR YOUR RECORDS
+=THANK YOU
+
+XXXXXXXXXXXXXXX0005
+
+SEQ NBR:  46168AMT:7$60.00
+CHECKING WITHDRAWAL
+TRAN CANNOT BE PROC?  113                                                                                                                                                                                                                                                                                 

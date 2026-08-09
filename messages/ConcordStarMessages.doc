@@ -1,0 +1,465 @@
+M1187RESV
+0005GIS     11                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+0005OOS     12                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+0312DBA     40900000000014705032001060502.1431.QJ0175.1470
+888886330000000101 
+ABI      997,891.83 
+FROM CHECKING         
+.2060502  0231PM  QJ0175
+XXXXXXXXXXXXXXX0010
+
+1100 CARR RD       
+SUN CITY WEST DE
+               SEQ#1470
+BALANCE INQUIRY
+FROM CHECKING         
+AVAILABLE $997,891.83 
+BALANCE   $997,891.83 
+.                                                                                                                                                                                                                                                                                                
+0297C       40140100000014748048001060502.1435.QJ0175.1474
+564366000000705445 
+WTD            $20.00 
+FROM CHECKING         
+.2060502  0235PM  QJ0175
+XXXXXXXXXXXXXXX0544
+
+1100 CARR RD       
+SUN CITY WEST DE
+               SEQ#1474
+WITHDRAWAL     $20.00 
+FROM CHECKING         
+BALANCE   8793,251.38 
+.                                                                                                                                                                                                                                                                                                               
+0314DBAD    40900000000014705032001060502.1431.QJ0175.1470
+888886330000000101 
+ABI       $997,891.83 
+FROM CHECKING         
+.2060502  0231PM  QJ0175
+XXXXXXXXXXXXXXX0010
+
+1100 CARR RD       
+SUN CITY WEST DE
+               SEQ#1470
+BALANCE INQUIRY
+FROM CHECKING         
+AVAILABLE $997,891.83 
+BALANCE   1997,891.83 
+.                                                                                                                                                                                                                                                                                              
+0294A A     40900100000014738048001060502.1435.QJ0175.1473
+564366000000705445 
+WTD            20.00 
+FROM CHECKING         
+.2060502  0235PM  QJ0175
+XXXXXXXXXXXXXXX0544
+
+1100 CARR RD       
+SUN CITY WEST DE
+               SEQ#1473
+WITHDRAWAL     $20.00 
+FROM CHECKING         
+BALANCE     $8793.28
+.                                                                                                                                                                                                                                                                                                                  
+0339B  B    40900000000025037026001090302.1342.QJ0175.2503
+2110001100000208   
+DEP           $100.00 
+TO SAVINGS            
+201000000208       
+.2090302  0142PM  QJ0175
+XXXXXXXXXXXX0208   
+
+1100 CARR RD       
+SUN CITY WEST DE
+               SEQ#2503
+DEPOSIT       $100.00 
+TO SAVINGS            
+.4 0175 25032110001100000208S0903  $100.00000                                                                                                                                                                                                                                                                     
+0009RDY9    220009                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+0343B  A    40900000000000977026001<DATE>.<TIME>.QJ0175.0097
+564366000035399891 
+DEP             $1.00 
+TO CHECKING           
+102000000P         
+.2<DATE>  <TIME>  QJ0175
+XXXXXXXXXXXXXX9891 
+
+1100 CARR RD       
+SUN CITY WEST DE
+               SEQ#<SEQ#>
+DEPOSIT         $1.00 
+TO CHECKING           
+.4 0175 <SEQ#>   102000000PC0815     $1.00366                                                                                                                                                                                                                                                                 
+0345B  C    40900000000031547026001<DATE>.<TIME>.QJ0175.<SEQ#>
+888886330000000101 
+DEP            $66.55 
+TO CHECKING           
+103000000P000000101
+.2<DATE>  <TIME>  QJ0175
+XXXXXXXXXXXXXX0101 
+
+1100 CARR RD       
+SUN CITY WEST DE
+               SEQ#<SEQ#>
+DEPOSIT        $66.55 
+TO CHECKING           
+.4 0175 <SEQ#>   103000000PC0819    $66.55886                                                                                                                                                                                                                                                               
+0376A    D  41020000000031565032003081902  0130PM  QH0175
+REM CASH   $55,040.00 
+STAMP   76    $465.12 
+                      
+XXXXXXXXXXXXXX5988 
+              SEQ#3156
+    INTERIM TOTALS
+
+CASH ITEMS    AMOUNT
+OUT    22     $360.00 
+IN     22   $2,300.31 
+
+ DEP   22   $2,300.31 
+ PAY
+  ENC   0        $.00 
+  CPN   0       ($.00)
+STAMP    6     $36.72 
+B DEP    0       $.00 
+1.                                                                                                                                                                                                                                
+0285AA      41020000000031655032003081902  0134PM  QH0175
+REM CASH   $50,000.00 
+XXXXXXXXXXXXXX5988 
+              SEQ#3165
+    FINAL SETTLEMENT
+     DEPOSITS ONLY    
+CASH ITEMS    AMOUNT
+IN     22   $2,300.31 
+
+ DEP   22   $2,300.31 
+ PAY
+  ENC   0        $.00 
+B DEP    0       $.00 
+1.                                                                                                                                                                                                                                                                                                                           
+0297CA      40140004000024948048001090302.1327.QJ0175.2494
+2110001100000208   
+WTD            $40.00 
+FROM CHECKING 101     
+.2090302  0127PM  QJ0175
+XXXXXXXXXXXX0208   
+
+1100 CARR RD       
+SUN CITY WEST DE
+               SEQ#2494
+WITHDRAWAL     $40.00 
+FROM CHECKING 101     
+BALANCE    $78,811.75 
+.                                                                                                                                                                                                                                                                                                               
+0297A B     40900002000024958048001090302.1329.QJ0175.2495
+2110001100000208   
+WTD            $20.00 
+FROM SAVINGS          
+.2090302  0129PM  QJ0175
+XXXXXXXXXXXX0208   
+
+1100 CARR RD       
+SUN CITY WEST DE
+               SEQ#2495
+WITHDRAWAL     $20.00 
+FROM SAVINGS          
+BALANCE    $72,298.79 
+.                                                                                                                                                                                                                                                                                                               
+0297A C     40900002000024968048001090302.1330.QJ0175.2496
+2110001100000208   
+WTD            $20.00 
+FROM CREDIT           
+.2090302  0130PM  QJ0175
+XXXXXXXXXXXX0208   
+
+1100 CARR RD       
+SUN CITY WEST DE
+               SEQ#2496
+WITHDRAWAL     $20.00 
+FROM CREDIT           
+BALANCE       $436.16 
+.                                                                                                                                                                                                                                                                                                               
+0339BBBA    42310000000024977026001090302.1334.QJ0175.2497
+2110001100000208   
+DEP           $100.00 
+TO CHECKING           
+101000000208       
+.2090302  0134PM  QJ0175
+XXXXXXXXXXXX0208   
+
+1100 CARR RD       
+SUN CITY WEST DE
+               SEQ#2497
+DEPOSIT       $100.00 
+TO CHECKING           
+.4 0175 24972110001100000208C0903  $100.00000                                                                                                                                                                                                                                                                     
+0259CBBA    40900002000024988048001090302.1335.QJ0175.2498
+2110001100000208   
+WTD            $20.00 
+FROM CHECKING         
+.2090302  0135PM  QJ0175
+XXXXXXXXXXXX0208   
+
+              SEQ#2498
+WITHDRAWAL     $20.00 
+FROM CHECKING         
+BALANCE    $78,891.75 
+.                                                                                                                                                                                                                                                                                                                                                     
+0339BBBB    42310000000024997026001090302.1338.QJ0175.2499
+2110001100000208   
+DEP           $100.00 
+TO SAVINGS            
+201000000208       
+.2090302  0138PM  QJ0175
+XXXXXXXXXXXX0208   
+
+1100 CARR RD       
+SUN CITY WEST DE
+               SEQ#2499
+DEPOSIT       $100.00 
+TO SAVINGS            
+.4 0175 24992110001100000208S0903  $100.00000                                                                                                                                                                                                                                                                     
+0259CBBB    40900002000025008048001090302.1339.QJ0175.2500
+2110001100000208   
+WTD            $20.00 
+FROM SAVINGS          
+.2090302  0139PM  QJ0175
+XXXXXXXXXXXX0208   
+
+              SEQ#2500
+WITHDRAWAL     $20.00 
+FROM SAVINGS          
+BALANCE    $72,378.79 
+.                                                                                                                                                                                                                                                                                                                                                     
+0452BBBC    42310000000025015051166BDLAST TRANSACTION CANNOTCIBE COMPLETEDFE  TRANSACTION SELECTED    HE     IS NOT ALLOWED.      JE    PLEASE TRY ANOTHER    LE      TRANSACTION.        001090302.1340.QJ0175.2501
+2110001100000208   
+DEP              $.00 
+ J
+.2090302  0140PM  QJ0175
+XXXXXXXXXXXX0208   
+
+1100 CARR RD       
+SUN CITY WEST DE
+        $.00   SEQ#2501
+TRANSACTION SELECTED
+   IS NOT ALLOWED.
+  PLEASE TRY ANOTHER
+    TRANSACTION.
+
+  J
+.                                                                                                                                                    
+0259CBBC    40900002000025028048001090302.1340.QJ0175.2502
+2110001100000208   
+WTD            $20.00 
+FROM CREDIT           
+.2090302  0140PM  QJ0175
+XXXXXXXXXXXX0208   
+
+              SEQ#2502
+WITHDRAWAL     $20.00 
+FROM CREDIT           
+BALANCE       $416.16 
+.                                                                                                                                                                                                                                                                                                                                                     
+0333HAA     40900000010025048103001090302.1343.QJ0175.2504
+2110001100000208   
+PUR             $7.00 
+STAMPS             
+FROM CHECKING 101     
+101000000208       .2090302  0143PM  QJ0175
+XXXXXXXXXXXX0208   
+
+1100 CARR RD       
+SUN CITY WEST DE
+               SEQ#2504
+PURCHASE        $7.00 
+STAMPS             
+FROM CHECKING 101     
+.                                                                                                                                                                                                                                                                           
+0333HAB     40900000020025058103001090302.1343.QJ0175.2505
+2110001100000208   
+PUR            $14.00 
+STAMPS             
+FROM CHECKING 101     
+101000000208       .2090302  0143PM  QJ0175
+XXXXXXXXXXXX0208   
+
+1100 CARR RD       
+SUN CITY WEST DE
+               SEQ#2505
+PURCHASE       $14.00 
+STAMPS             
+FROM CHECKING 101     
+.                                                                                                                                                                                                                                                                           
+0314DBB     40900000000025065032001090302.1344.QJ0175.2506
+2110001100000208   
+ABI        $72,478.79 
+FROM SAVINGS          
+.2090302  0144PM  QJ0175
+XXXXXXXXXXXX0208   
+
+1100 CARR RD       
+SUN CITY WEST DE
+               SEQ#2506
+BALANCE INQUIRY
+FROM SAVINGS          
+AVAILABLE  $72,478.79 
+BALANCE    $72,478.79 
+.                                                                                                                                                                                                                                                                                              
+0314DBC     40900000000025075032001090302.1345.QJ0175.2507
+2110001100000208   
+ABI           $416.16 
+FROM CREDIT           
+.2090302  0145PM  QJ0175
+XXXXXXXXXXXX0208   
+
+1100 CARR RD       
+SUN CITY WEST DE
+               SEQ#2507
+BALANCE INQUIRY
+FROM CREDIT           
+              $416.16 
+BALANCE       $416.16 
+.                                                                                                                                                                                                                                                                                              
+0320DCAB    40900000000025085032001090302.1346.QJ0175.2508
+2110001100000208   
+XFR            $50.00 
+FROM CHECKING         
+TO SAVINGS            
+.2090302  0146PM  QJ0175
+XXXXXXXXXXXX0208   
+
+1100 CARR RD       
+SUN CITY WEST DE
+               SEQ#2508
+TRANSFER       $50.00 
+FROM CHECKING         
+TO SAVINGS            
+.                                                                                                                                                                                                                                                                                        
+0320DCBA    40900000000025095032001090302.1347.QJ0175.2509
+2110001100000208   
+XFR            $50.00 
+FROM SAVINGS          
+TO CHECKING           
+.2090302  0147PM  QJ0175
+XXXXXXXXXXXX0208   
+
+1100 CARR RD       
+SUN CITY WEST DE
+               SEQ#2509
+TRANSFER       $50.00 
+FROM SAVINGS          
+TO CHECKING           
+.                                                                                                                                                                                                                                                                                        
+0319AA A    40900000000025117026001090302.1357.QJ0175.2511
+564366000000705445 
+PAY           $120.00 
+ENCLOSED              
+.2090302  0157PM  QJ0175
+XXXXXXXXXXXXXX5445 
+
+1100 CARR RD       
+SUN CITY WEST DE
+               SEQ#2511
+PAYMENT       $120.00 
+ENCLOSED              
+.4 0175 25114366000000705445P0903  $120.00366                                                                                                                                                                                                                                                                                         
+0320ABABC   40900000000025125032001090302.1359.QJ0175.2512
+564366000000705445 
+PXR            $75.00 
+FROM CHECKING         
+TO CREDIT             
+.2090302  0159PM  QJ0175
+XXXXXXXXXXXXXX5445 
+
+1100 CARR RD       
+SUN CITY WEST DE
+               SEQ#2512
+PAYMENT        $75.00 
+FROM CHECKING         
+TO CREDIT             
+.                                                                                                                                                                                                                                                                                        
+0320ABBBC   40900000000025135032001090302.1359.QJ0175.2513
+564366000000705445 
+PXR            $75.00 
+FROM SAVINGS          
+TO CREDIT             
+.2090302  0159PM  QJ0175
+XXXXXXXXXXXXXX5445 
+
+1100 CARR RD       
+SUN CITY WEST DE
+               SEQ#2513
+PAYMENT        $75.00 
+FROM SAVINGS          
+TO CREDIT             
+.                                                                                                                                                                                                                                                                                        
+0320ABCBC   40900000000025145032001090302.1400.QJ0175.2514
+564366000000705445 
+PXR            $75.00 
+FROM CREDIT           
+TO CREDIT             
+.2090302  0200PM  QJ0175
+XXXXXXXXXXXXXX5445 
+
+1100 CARR RD       
+SUN CITY WEST DE
+               SEQ#2514
+PAYMENT        $75.00 
+FROM CREDIT           
+TO CREDIT             
+.                                                                                                                                                                                                                                                                                        
+0297CB      40140300000024948048001090302.1327.QJ0175.2494
+2110001100000208   
+WTD            $60.00 
+FROM CHECKING 101     
+.2090302  0127PM  QJ0175
+XXXXXXXXXXXX0208   
+
+1100 CARR RD       
+SUN CITY WEST DE
+               SEQ#2494
+WITHDRAWAL     $60.00 
+FROM CHECKING 101     
+BALANCE    $78,811.75 
+.                                                                                                                                                                                                                                                                                                               
+0297CC      40140400000024948048001090302.1327.QJ0175.2494
+2110001100000208   
+WTD            $80.00 
+FROM CHECKING 101     
+.2090302  0127PM  QJ0175
+XXXXXXXXXXXX0208   
+
+1100 CARR RD       
+SUN CITY WEST DE
+               SEQ#2494
+WITHDRAWAL     $80.00 
+FROM CHECKING 101     
+BALANCE    $78,811.75 
+.                                                                                                                                                                                                                                                                                                               
+0438UTP     40910000000018985051166BDLAST TRANSACTION CANNOTCIBE COMPLETEDFE  ACTION SELECTED IS NOT  HE  AVAILABLE AT THIS TIME  JE      PLEASE RETRY.       LE                          001100102.1334.QI0175.1898
+4124081001002461   
+DEP              $.00 
+ N
+.2100102  0134PM  QI0175
+XXXXXXXXXXXX2461   
+
+1100 CARR RD       
+SUN CITY WEST DE
+        $.00   SEQ#1898
+ACTION SELECTED IS NOT
+AVAILABLE AT THIS TIME
+    PLEASE RETRY.
+
+  N
+.                                                                                                                                                                  
+0043CRRSP   4000120000000003102299910ENG020000000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+0043CRNEWEN 4000120000000003102299900ENG020000000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+0043CRNEWSP 4000120000000003102299900SPA020000000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+0043CRRENOEN4000120000000003102299910ENG020000000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+0043CRRENOSP4000120000000003102299910SPA020000000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+0043CRREYEN 4000120000000003102299911ENG020000000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+0043CRREYSP 4000120000000003102299911SPA020000000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+0043CRREAKEN4000120000000003102299912ENG020000000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+0043CRREAKSP4000120000000003102299912SPA020000000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+0043CRFC00EN4000120000000003102299911ENG000000000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+0043CRFC00SP4000120000000003102299911SPA000000000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+0043CRFC20EN4000120000000003102299911ENG020000000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+0043CRFC20SP4000120000000003102299911SPA020000000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             

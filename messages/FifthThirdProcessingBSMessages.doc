@@ -1,0 +1,3396 @@
+M1187RESV
+0005GIS     11                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+0005OOS     12                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+0273A     A 4 0190000620100000010268072002(>*************8720  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+052903  2:49PM  1026
+
+$10 CASH WITHDRAWAL
+FROM-
+CK1:******0289
+
+BALANCE $91,940.30
+
+RECEIPT PROMO LINE 1
+RECEIPT PROMO LINE 2
+RECEIPT PROMO LINE 3
+                                                                                                                                                                                                                                                                                                                                       
+0264A   C A 40190000620100000001848072002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:13PM  0184
+
+$20 CASH WITHDRAWAL
+FROM-
+CK1:****4055
+
+BALANCE $84,990
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                
+0266A   C B 40190000620100000001848072002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:13PM  0185
+
+$20 CASH WITHDRAWAL
+FROM-
+SV1:****6947
+
+BALANCE $3,829.99
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                              
+0264A   C C 40190000620100000001848072002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:13PM  0184
+
+$20 CASH WITHDRAWAL
+FROM-
+CR1:****4055
+
+BALANCE $84,990
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                
+0298B   C A 40190000580000000001605000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 11:48AM  0160
+
+BALANCE INQUIRY
+FROM-
+CK1:****4055
+
+$4,990.99 ACCT BAL
+$4,990.99 AVL  BAL
+$2,980 CASH BAL
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                              
+0298B   C B 40190000580000000001615000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 11:50AM  0161
+
+BALANCE INQUIRY
+FROM-
+SV1:****6947
+
+$3,809.99 ACCT BAL
+$3,809.99 AVL  BAL
+$1,980 CASH BAL
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                              
+0298B   C C 40190000580000000001625000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 11:52AM  0162
+
+BALANCE INQUIRY
+FROM-
+CR1:****5836
+
+$4,809.99 ACCT BAL
+$4,809.99 AVL  BAL
+$3,980 CASH BAL
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                              
+0258I   C AB40190000580000000001915000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:18PM  0191
+
+$20 TRANSFER
+FROM-
+CK1:****4055
+TO-
+SV1:****6947
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   C BA40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0320C   C A 401900005800000000017070710040019 000003 11/20 12:00 5/3  58954100103598779   $20.00 226840552*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:00PM  0170
+
+$20 DEPOSIT
+TO-
+CK1:****4055
+
+BALANCE $85,000
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                        
+0322C   C B 401900005800000000017270710040019 000003 11/20 12:02 5/3  58954100103598779   $30.00 226869472*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:02PM  0172
+
+$30 DEPOSIT
+TO-
+SV1:****6947
+
+BALANCE $3,839.99
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                      
+0322C   C C 401900005800000000017370710040019 000003 11/20 12:04 5/3  58954100103598779   $40.00 226858362*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:04PM  0173
+
+$40 DEPOSIT
+TO-
+CR1:****5836
+
+BALANCE $4,839.99
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                      
+0178B   D A 4 0190000590000000010515000133AB BALANCE INQUIRY BB FROM  CK1:CHECKING DB $9,695.84 ACCT BAL EB $9,695.84 AVL  BAL FB $2,980 CASH BAL 000>011,"9695",012,014,"84",015                                                                                                                                                                                                                                                                                                                                                                                                                                      
+0273DH  C  A4 0190000620000000111138074002(>*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+053003  9:03AM  1113
+
+$5.76 STAMP PURCHASE
+FROM-
+CK1:******8235
+
+BALANCE $9,716.06
+
+RECEIPT PROMO LINE 1
+RECEIPT PROMO LINE 2
+RECEIPT PROMO LINE 3
+                                                                                                                                                                                                                                                                                                                                       
+0305014     4 0190000690000000010965000118@@ DENIAL #014 A@ CC* ACCT IS NOT AVAILABLE 002(>*************8720  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+053003  8:41AM  1096
+
+#014 CC* ACCT IS NOT
+AVAILABLE-APPLY FOR
+ACCESS
+
+TRANSACTION DENIED  
+
+FOR ASSISTANCE
+CALL  1-513-579-5353
+                                                                                                                                                                                                                                                                                                       
+0364ADD   A 4 0190000580000000011245000078CASSETTE #1 ($20).002(>*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+053003  9:30AM  1124
+
+SP#080 LOGGED OFF
+CARDS: 00
+
+DEPOSITS:
+OWN: 005 $00240.70
+NON: 000 $00000.00
+
+CASSETTES:
+NO.  BEG  CURR  DISP
+1$ 20000 19740  0260
+2$ 10000  9950  0050
+3$  0000 -0005  0005
+4I  0000 -0011  0011
+
+                                                                                                                                                                                                                                            
+0234ADD   B 4 0190001310000000011255000078CASSETTE #2 ($10).002(>*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+053003  9:31AM  1125
+
+SP#041 SIGNON #1
+$300
+
+ITEM : $20 CURRENCY
+COUNT: 15
+VALUE: $300
+                                                                                                                                                                                                                                                                                                                                                                              
+0244ADD   CC4 0190001330000000011375000078CASSETTE #2 ($10).002(>*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+053003  9:38AM  1137
+
+SP#061 ADDED #1
+CASH ADDED: $40
+
+ITEM : $20 CURRENCY
+COUNT: 16
+VALUE: $320
+                                                                                                                                                                                                                                                                                                                                                                    
+0250ADD   CB4 0190001330000000011315000078CASSETTE #2 ($10).002(>*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+053003  9:35AM  1131
+
+SP#061 SUBTRACTED #1
+CASH ADDED: $-20
+
+ITEM : $20 CURRENCY
+COUNT: 14
+VALUE: $280
+                                                                                                                                                                                                                                                                                                                                                              
+0344ADD   DA4 0190000580000000011415000002(>*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+053003  9:40AM  1141
+
+SP#081 CURR STATUS
+CARDS: 00
+
+DEPOSITS:
+OWN: 000 $00000.00
+NON: 000 $00000.00
+
+CASSETTES:
+NO.  BEG  CURR  DISP
+1$  0320  0320  0000
+2$  0340  0340  0000
+3$  0070  0070  0000
+4I  0065  0065  0000
+
+                                                                                                                                                                                                                                                                
+0346ADD   DB4 0190000580000000011435000002(>*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+053003  9:41AM  1143
+
+SP#079 LOG-ON NO CHG
+CARDS: 00
+
+DEPOSITS:
+OWN: 000 $00000.00
+NON: 000 $00000.00
+
+CASSETTES:
+NO.  BEG  CURR  DISP
+1$  0320  0320  0000
+2$  0340  0340  0000
+3$  0070  0070  0000
+4I  0065  0065  0000
+
+                                                                                                                                                                                                                                                              
+0044SURCHRG 4 0190001250000000009845000240$1.00000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+0105015     4 3700000700000000004125000118@@ DENIAL #015 A@ INQUIRY NOT AUTHORIZED FOR: B@ CK1:CHECKING 000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+0099068     4 3700000700000000004655000118@@ DENIAL #068 A@ FROM ACCT CODE  * CK1 * IS B@ INVALID 000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+0109019     4 3700000700000000004165000118@@ DENIAL #019 A@ $0 EXCEEDS WITHDRAWAL LIMIT B@ FOR CK1:CHECKING 000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+0084033     4 3700000700000000004305000118@@ DENIAL #033 A@ STATUS PROBLEM FOR    : 000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+0089087     4 3700000700000000004845000118@@ DENIAL #087 A@ CK1 ACCOUNT IS NOT AVAILABLE 000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+0090003     4 3700000700000000004005000118@@ DENIAL #003 A@ DATE ON YOUR CARD HAS EXPIRED 010                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+0084010     4 3700000700000000004075000118@@ DENIAL #010 A@ SP#000 IS NOT AVAILABLE 000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+0085011     4 3700000700000000004085000118@@ DENIAL #011 A@ SP#000 IS NOT AUTHORIZED 000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+0092012     4 3700000700000000004095000118@@ DENIAL #012 A@ SP#000 INVALID - NOT LOGGED OFF 000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+0099013     4 3700000700000000004105000118@@ DENIAL #013 A@ CASSETTE #04 MUST BE SERVICED B@ NEXT 000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+0109034     4 3700000700000000004315000118@@ DENIAL #034 A@ ADD TO CASSETTE #04 MUST BE B@ NEXT TRANSACTION 000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+0109035     4 3700000700000000004325000118@@ DENIAL #035 A@ SIGNON CASSETTE #04 MUST BE B@ NEXT TRANSACTION 000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+0099048     4 3700000700000000004455000118@@ DENIAL #048 A@ CASSETTE #04 MUST BE SERVICED B@ NEXT 000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+0086063     4 3700000700000000004605000118@@ DENIAL #063 A@ $0 IS INSUFFICIENT SIGNON 000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+0136OAR CHK 4 0190000710100000010345000134D@   1. CK1: ALF CHECK           E@   2. CK2: ALF CHECK 2         000>016,018,019,031,001,032,002                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+0136OAR SAV 4 0190000710100000010365000134D@   1. SV1: ALF SAVE            E@   2. SV2: ALF SAVE 2          000>016,018,019,041,001,042,002                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+0379OAR CHK04 0190000710000000010075000134D@   1. CK1: RHUPERT             E@   2. CK2: DOBY                F@   3. CK3: ED SHENK            G@   4. CK4: NCR                 H@   5. CK5: LUNCH               I@   6. CK6: PERSONA             J@   7. CK7: WILLIAM             K@   8. CK8: LISA                L@   9. CK9: PS2                 M@  10. CK0: NUMBER 10           000                                                                                                                                                                                                                             
+0302DB  C A 4 0190000580000000010995070118@@ DENIAL #146 A@ TRANSACTION NOT COMPLETED 002(>*************8720  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+053003  8:43AM  1099
+
+#146 CHECK. TRANS.
+INQ. FROM
+CK2:******8866
+
+#146 CHECK NO. 123
+NOT COMPLETED FROM
+00/00/00 TO 00/00/00
+                                                                                                                                                                                                                                                                                                          
+0277DA  C A 4 0190000580000000010945000002(>*************8720  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+053003  8:40AM  1094
+
+LAST TRANSACTION
+FOR-
+CK1:******0289
+
+*ON 053003
+*$20 WITHDRAWAL
+
+RECEIPT PROMO LINE 1
+RECEIPT PROMO LINE 2
+RECEIPT PROMO LINE 3
+                                                                                                                                                                                                                                                                                                                                   
+0277DA  C B 4 0190000580000000010955000002(>*************8720  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+053003  8:40AM  1095
+
+LAST TRANSACTION
+FOR-
+SV2:******4031
+
+*ON 052903
+*$20 WITHDRAWAL
+
+RECEIPT PROMO LINE 1
+RECEIPT PROMO LINE 2
+RECEIPT PROMO LINE 3
+                                                                                                                                                                                                                                                                                                                                   
+0318DF    A 4 0190000690000000011185000118@@ DENIAL #145 A@ INFO IS NOT AVAILABLE FOR: B@ CK1:CHECKING 002(>*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+053003  9:10AM  1118
+
+#145 INFO NOT
+AVAILABLE FOR
+CK1:******8235
+
+TRANSACTION DENIED  
+
+FOR ASSISTANCE
+CALL  1-513-579-5353
+                                                                                                                                                                                                                                                                                          
+0288DC  C A 4 0190000580000000011015000002(>*************8720  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+053003  8:45AM  1101
+
+SNAPSHOT STATEMENT
+FROM-
+CK1:******0289
+
+FROM 00/00/00
+TO 00/00/00 APPROVED
+
+RECEIPT PROMO LINE 1
+RECEIPT PROMO LINE 2
+RECEIPT PROMO LINE 3
+                                                                                                                                                                                                                                                                                                                        
+0288DC  C B 4 0190000580000000011025000002(>*************8720  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+053003  8:46AM  1102
+
+SNAPSHOT STATEMENT
+FROM-
+SV2:******4031
+
+FROM 00/00/00
+TO 00/00/00 APPROVED
+
+RECEIPT PROMO LINE 1
+RECEIPT PROMO LINE 2
+RECEIPT PROMO LINE 3
+                                                                                                                                                                                                                                                                                                                        
+0163SCREEN 93000000011000<CONFIGURATION_DATA reboot="y"><DD_UPDATE><GROUP>CONSUMERFLOW</GROUP><NAME>FASTCASH1</NAME><VALUE>YES,1,4</VALUE></DD_UPDATE></CONFIGURATION_DATA>                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+0131DC  D A 4 0190000590000000000115000133@@ SNAPSHOT REQUEST A@ FROM- B@ CK1:CHECKING D@ FROM 10/23/03 E@ TO 10/24/03 APPROVED 000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+0142DB  D A 4 0190000590000000000135000133@@ CHECK.TRANS.INQUIRY A@ FROM- B@ CK1:CHECKING D@ 599 CHECK NO. E@ $15 AMOUNT F@ 10/21/03 DATE 000                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+0119DA  D A 4 0190000590000000000185000133@@ LAST TRANSACTION A@ FOR- B@ CK1:CHECKING C@ *$0 SNAPSHOT D@ *ON 110503 000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+0528MRKTMSG13000000011016AAFIFTH THIRD BANK    BAWILL CHARGE A 240 FEECAFOR THIS TRANSACTION.DATHIS FEE IS IN ADDITION TOEAANY FEES WHICH MAY BE CHARGEDFABY YOUR FINANCIAL INSTITUTION.JADO YOU WISH TO CONTINUE?LAYES (FEE WILL BE ASSESSED)---->NANO (CANCEL,OAFEE WILL NOT BE ASSESSED)----->101CF1 START-------------DF2-------------------EF3-------------------FF4-------------------GF5-------------------HF      CENTERED      IF7-------------------JF8-------------------KF9-------------------LF10---------------END                                                                        
+0366MRKTMSG23000000011200AL1 START-------------BL2-------------------CL3-------------------DL4-------------------EL5-------------------FL6-------------------GL7----------------END201AL1 START-------------BL2-------------------CL3----THANK YOU------DL4-------------------EL5-------------------FL6-------------------GL7-------------------HL8----------------END                                                                                                                                                                                                                                          
+0269MRKTMSG33000000011202GA1 START---------------------HA2-------PLEASE WAIT---------IA3---------------------------JA4---------------------------KA5---------------------------LA6---------------------------MA7---------------------------NA8------------------------END240                                                                                                                                                                                                                                                                                                                                           
+0304021     4 3700000690000000011825000118@@ DENIAL #021 A@ CC  ACCT IS NOT AVAILABLE 702(>*************8779  
+FIFTH THIRD BANK
+
+>0B370
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+120903  9:16AM  1182
+
+#021 CC ACCT IS NOT
+AVAILABLE-APPLY FOR
+ACCESS
+
+TRANSACTION DENIED  
+
+FOR ASSISTANCE
+CALL  1-513-579-5353
+                                                                                                                                                                                                                                                                                                        
+0021PINCHG1 402300175100000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+0021PINCHG2 402400175100000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+0264PINCHG3 409800185100150B@           PIN CHANGE           C@166M@176001 CARD NO: 3333043333330001
+
+
+3LOCATION: 400 W. DELUXE PARKWAY
+:GLENDALE?4WI
+
+ CARD NO: XXXXXXXXXXXX0001
+
+5DATE8TIME8TERMINAL
+308/28/03604:14PM4GS56XXSN
+
+
+SEQ NBR:  0018
+PIN CHANGE
+                                                                                                                                                                                                                                                                                                                                                
+0485FITABLE 3000000015000000064129104255255004000004000047000000000255255000000000000000000000000000000000000000000000000000000000000000000001000064129105255255004000004000047000000000255255000000000000000000000000000000000000000000000000000000000000000000002000065006004255255004000004000047000000000255255000000000000000000000000000000000000000000000000000000000000000000003000065088023255255004000004000047000000000255255000000000000000000000000000000000000000000000000000000000000000000                                                                                                                   
+0233ADD   B24 0190001310000000011265000078CASSETTE #3 ($5).002(>*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+053003  9:32AM  1126
+
+SP#042 SIGNON #2
+$320
+
+ITEM : $10 CURRENCY
+COUNT: 32
+VALUE: $320
+                                                                                                                                                                                                                                                                                                                                                                               
+0233ADD   B34 0190001320000000011275000078CASSETTE #4 (STAMPS).002(>*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+053003  9:32AM  1127
+
+SP#043 SIGNON #3
+$25
+
+ITEM : $5 CURRENCY
+COUNT: 5
+VALUE: $25
+                                                                                                                                                                                                                                                                                                                                                                               
+0242ADD   B44 0190000580000000011285000078CASSETTE #1.002(>*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+053003  9:33AM  1128
+
+SP#044 SIGNON #4
+NO. OF ITEMS: 10
+
+ITEM : $5.76 STAMPS
+COUNT: 10
+VALUE: $57.60
+                                                                                                                                                                                                                                                                                                                                                                      
+0085DI  C   400009564225095075@@00>
+7RECORD NO.       
+7
+
+7TRANSACTION DECLINED
+7
+7
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+0030DI2     400009664225096075@@000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+0140DI3     400009864235000075@@003705/08/03 11:39  T113010
+
+8XXXXXXXXXXXX3921
+
+711900 WEST LAKE PARK DRIV
+
+7RECORD NO.<6423
+7PIN CHANGE
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+0393DA  DAA 4 3700000590000000029825000133@@ LAST TRANSACTION A@ FOR- B@ CK1:CHECKING C@ *$0 SNAPSHOT D@ *ON 081904 501--------------------
+58954100103598779  
+FIFTH THIRD BANK
+>0B370
+081904  4:00PM  2982
+LAST TRANSACTION
+FOR-
+CK1:0060614055
+<EDC>5/3 ;00000000000B370;2982;021;000;000;58954100103598779  ;04232C160056;00;;000000000000;;CK1;0060614055          ;;;000000000;128;;;000000;</EDC>                                                                                                                                                                                                               
+0018RSA 4J  300920004J0013                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+0017RSA 4K  300920004K000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+0062RSA 3KEY3000000032124097070045027244105092001063108199183183225024                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+036000000   4 3700000700000000032145000118 @@ DENIAL #010 A@ SP#000 IS NOT AVAILABLE >01------------------------
+091304  2:03PM  3214
+ATM NUMBER:5 B370
+CARD 58954100103598779  
+#010 YOUR TRANSACTION
+CANNOT BE COMPLETED AT
+THIS TIME
+<EDC>OVB ;00000000000B370;3214;002;000;010;58954100103598779  ;04257C140334;00;;000000000000;;CK*;;;;000000000;002;;;000000;</EDC>                                                                                                                                                                                                                                                
+0360091     4 3700000700000000032145000118 @@ SORRY, A@ CARD NOT ACCEPTED BY MACHINE 001------------------------
+091304  3:14PM  3214
+ATM NUMBER:5 B370
+CARD 58954100103598779  
+#091 YOUR TRANSACTION
+CANNOT BE COMPLETED AT
+THIS TIME
+<EDC>OVB ;00000000000B370;3214;002;000;091;58954100103598779  ;04257C151456;00;;000000000000;;CK*;;;;000000000;002;;;000000;</EDC>                                                                                                                                                                                                                                                
+0400028     4 3700000690000000032145000118 @@ DENIAL #028 A@ $0 EXCEEDS WITHDRAWAL LIMIT B@ B@ CK*:CHECKING 0020913043 2:21PM   B370
+
+OHIO VALLEY BK
+38 FOUNTAIN SQ PLAZA    
+CINCINNATI       OH
+CARD 58954100103598779  
+
+
+                      
+                      
+                      
+
+#028 $0 EXCEEDS
+WITHDRAWAL LIMIT FOR
+CK*:CHECKING        
+DENIED=#3214
+FOR ASSISTANCE
+CALL  1-513-579-5353
+                                                                                                                                                                                                        
+0531134     4 3700000690000000032145000118 @@ DENIAL #134 INVALID CARD. A@ PLEASE COME INSIDE B@ FOR NEW JEANIE CARD. 0020913043 4:12PM   B370
+
+OHIO VALLEY BK
+38 FOUNTAIN SQ PLAZA    
+CINCINNATI       OH
+CARD 58954100103598779  
+
+
+                      
+                      
+                      
+
+#134 INVALID CARD
+PLEASE COME INSIDE FOR
+YOUR NEW JEANIE CARD
+DENIED=#3214
+1------------------------
+091304  4:12PM  3214
+ATM NUMBER:5 B370
+CARD 58954100103598779  
+#134 INVALID CARD
+PLEASE COME INSIDE FOR
+YOUR NEW JEANIE CARD
+                                                                     
+0520135     4 3700000690000000032145000118 @@ DENIAL #135 INVALID CARD. A@ SEE A JEANIE INSTI- B@ TUTION FOR NEW CARD. 0020913043 4:14PM   B370
+
+OHIO VALLEY BK
+38 FOUNTAIN SQ PLAZA    
+CINCINNATI       OH
+CARD 58954100103598779  
+
+
+                      
+                      
+                      
+
+#135 INVALID CARD
+SEE A JEANIE INSTITUTION
+FOR NEW CARD
+DENIED=#3214
+1------------------------
+091304  4:14PM  3214
+ATM NUMBER:5 B370
+CARD 58954100103598779  
+#135 INVALID CARD
+SEE A JEANIE INSTITUTION
+FOR NEW CARD
+                                                                                
+0500140     4 3700000690000000032145000118 @@ DENIAL #140 INVALID CARD. A@ PLEASE USE YOUR NEW B@ JEANIE CARD. 0020913043 4:18PM   B370
+
+OHIO VALLEY BK
+38 FOUNTAIN SQ PLAZA    
+CINCINNATI       OH
+CARD 58954100103598779  
+
+
+                      
+                      
+                      
+
+#140 INVALID CARD
+PLEASE USE YOUR NEW
+JEANIE CARD
+DENIED=#3214
+1------------------------
+091304  4:18PM  3214
+ATM NUMBER:5 B370
+CARD 58954100103598779  
+#140 INVALID CARD
+PLEASE USE YOUR NEW
+JEANIE CARD
+                                                                                                    
+0418205     4 3700002800000000032745000108$9999.00 002(>58954100103598779  
+FIFTH THIRD BANK
+
+>0B370
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+091404  3:54PM  3274
+
+#205 YOUR
+TRANSACTION CANNOT
+BE COMPLETED AT THIS
+TIME
+
+TRANSACTION ACCEPTED
+
+FOR ASSISTANCE
+CALL  1-513-579-5353
+1--------------------
+58954100103598779  
+FIFTH THIRD BANK
+>0B370
+091404  3:54PM  3274
+#205 YOUR
+TRANSACTION CANNOT
+BE COMPLETED AT THIS
+TIME
+                                                                                                                                                                                      
+0140DI      400006264235000075@@003705/08/03 11:39  T113010
+
+8XXXXXXXXXXXX3921
+
+711900 WEST LAKE PARK DRIV
+
+7RECORD NO.<6423
+7PIN CHANGE
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+0508047     4 3700000690000000000655000118 @@ DENIAL #047 A@ YOUR TRANSACTION B@ CANNOT BE COMPLETED AT THIS C@ TIME. PLEASE TRY LATER. 002(>************1405   
+FIFTH THIRD BANK
+
+>0B370
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+020205 10:10AM  0065
+
+#047 YOUR
+TRANSACTION CANNOT
+BE COMPLETED AT THIS
+TIME
+
+TRANSACTION DENIED  
+
+FOR ASSISTANCE
+CALL  1-513-579-5353
+1--------------------
+4445010011751405   
+FIFTH THIRD BANK
+>0B370
+020205 10:10AM  0065
+#047 YOUR
+TRANSACTION CANNOT
+BE COMPLETED AT THIS
+TIME
+                                                                                            
+0100183     4 3700000700000000000825000118 @@ DENIAL #183 A@ YOUR PASSWORD ENTRIES B@ DO NOT MATCH 000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+0036066     4 3700000660000000000845000000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+0418184     4 3700000690000000000905000118 @@ DENIAL #184 A@ YOUR NEW PASSWORD IS INVALID 002(>*************8795  
+FIFTH THIRD BANK
+
+>0B370
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+020205  3:41PM  0090
+
+#184 YOUR NEW
+PASSWORD IS INVALID
+
+TRANSACTION DENIED  
+
+FOR ASSISTANCE
+CALL  1-513-579-5353
+1--------------------
+58954100103598795  
+FIFTH THIRD BANK
+>0B370
+020205  3:41PM  0090
+#184 YOUR NEW
+PASSWORD IS INVALID
+                                                                                                                                                                                      
+0446023     4 3700000690000000000945000118 @@ DENIAL #023 A@ THE TRANSACTION REQUESTED IS B@ INVALID 002(>*************8795  
+FIFTH THIRD BANK
+
+>0B370
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+020205  3:49PM  0094
+
+#023 THE TRANSACTION
+REQUESTED IS INVALID
+
+TRANSACTION DENIED  
+
+FOR ASSISTANCE
+CALL  1-513-579-5353
+1--------------------
+58954100103598795  
+FIFTH THIRD BANK
+>0B370
+020205  3:49PM  0094
+#023 THE TRANSACTION
+REQUESTED IS INVALID
+                                                                                                                                                          
+0320G   CA  401900005800000000017070710040019 000003 11/20 12:00 5/3  58954100103598779   $20.00 226840552*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:00PM  0170
+
+$20 DEPOSIT
+TO-
+CK1:****4055
+
+BALANCE $85,000
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                        
+0320G   DA  401900005800000000017070710040019 000003 11/20 12:00 5/3  58954100103598779   $20.00 226840552*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:00PM  0170
+
+$20 DEPOSIT
+TO-
+CK1:****4055
+
+BALANCE $85,000
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                        
+0320C   CA A401900005800000000017070710040019 000003 11/20 12:00 5/3  58954100103598779   $20.00 226840552*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:00PM  0170
+
+$20 DEPOSIT
+TO-
+CK1:****4055
+
+BALANCE $85,000
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                        
+0320C   DA A401900005800000000017070710040019 000003 11/20 12:00 5/3  58954100103598779   $20.00 226840552*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:00PM  0170
+
+$20 DEPOSIT
+TO-
+CK1:****4055
+
+BALANCE $85,000
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                        
+0320C   CA B401900005800000000017070710040019 000003 11/20 12:00 5/3  58954100103598779   $20.00 226840552*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:00PM  0170
+
+$20 DEPOSIT
+TO-
+CK1:****4055
+
+BALANCE $85,000
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                        
+0320C   DA B401900005800000000017070710040019 000003 11/20 12:00 5/3  58954100103598779   $20.00 226840552*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:00PM  0170
+
+$20 DEPOSIT
+TO-
+CK1:****4055
+
+BALANCE $85,000
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                        
+0320C   CA C401900005800000000017070710040019 000003 11/20 12:00 5/3  58954100103598779   $20.00 226840552*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:00PM  0170
+
+$20 DEPOSIT
+TO-
+CK1:****4055
+
+BALANCE $85,000
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                        
+0320C   DA C401900005800000000017070710040019 000003 11/20 12:00 5/3  58954100103598779   $20.00 226840552*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:00PM  0170
+
+$20 DEPOSIT
+TO-
+CK1:****4055
+
+BALANCE $85,000
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                        
+0320C   CA D401900005800000000017070710040019 000003 11/20 12:00 5/3  58954100103598779   $20.00 226840552*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:00PM  0170
+
+$20 DEPOSIT
+TO-
+CK1:****4055
+
+BALANCE $85,000
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                        
+0320C   DA D401900005800000000017070710040019 000003 11/20 12:00 5/3  58954100103598779   $20.00 226840552*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:00PM  0170
+
+$20 DEPOSIT
+TO-
+CK1:****4055
+
+BALANCE $85,000
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                        
+0264DAD CA  40190000620100000001848072002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:13PM  0184
+
+$20 CASH WITHDRAWAL
+FROM-
+CR1:****4055
+
+BALANCE $84,990
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                
+0264DAD DA  40190000620100000001848072002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:13PM  0184
+
+$20 CASH WITHDRAWAL
+FROM-
+CR1:****4055
+
+BALANCE $84,990
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                
+0264DBD CA  40190000620100000001848072002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:13PM  0184
+
+$20 CASH WITHDRAWAL
+FROM-
+CR1:****4055
+
+BALANCE $84,990
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                
+0264DBD DA  40190000620100000001848072002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:13PM  0184
+
+$20 CASH WITHDRAWAL
+FROM-
+CR1:****4055
+
+BALANCE $84,990
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                
+0264DCD CA  40190000620100000001848072002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:13PM  0184
+
+$20 CASH WITHDRAWAL
+FROM-
+CR1:****4055
+
+BALANCE $84,990
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                
+0264DCD DA  40190000620100000001848072002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:13PM  0184
+
+$20 CASH WITHDRAWAL
+FROM-
+CR1:****4055
+
+BALANCE $84,990
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                
+0264DID CA  40190000620100000001848072002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:13PM  0184
+
+$20 CASH WITHDRAWAL
+FROM-
+CR1:****4055
+
+BALANCE $84,990
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                
+0264DID DA  40190000620100000001848072002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:13PM  0184
+
+$20 CASH WITHDRAWAL
+FROM-
+CR1:****4055
+
+BALANCE $84,990
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                
+0264DHD CA  40190000620000010001848072002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:13PM  0184
+
+$20 CASH WITHDRAWAL
+FROM-
+CR1:****4055
+
+BALANCE $84,990
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                
+0264DHD DA  40190000620000010001848072002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:13PM  0184
+
+$20 CASH WITHDRAWAL
+FROM-
+CR1:****4055
+
+BALANCE $84,990
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                
+0264A   CAA 40190000620100000001848072002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:13PM  0184
+
+$20 CASH WITHDRAWAL
+FROM-
+CK1:****4055
+
+BALANCE $84,990
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                
+0273A   DAA 4 0190000620100000010268072002(>*************8720  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+052903  2:49PM  1026
+
+$10 CASH WITHDRAWAL
+FROM-
+CK1:******0289
+
+BALANCE $91,940.30
+
+RECEIPT PROMO LINE 1
+RECEIPT PROMO LINE 2
+RECEIPT PROMO LINE 3
+                                                                                                                                                                                                                                                                                                                                       
+0266A   CBA 40190000620100000001848072002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:13PM  0185
+
+$20 CASH WITHDRAWAL
+FROM-
+SV1:****6947
+
+BALANCE $3,829.99
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                              
+0273A   DBA 4 0190000620100000010268072002(>*************8720  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+052903  2:49PM  1026
+
+$10 CASH WITHDRAWAL
+FROM-
+CK1:******0289
+
+BALANCE $91,940.30
+
+RECEIPT PROMO LINE 1
+RECEIPT PROMO LINE 2
+RECEIPT PROMO LINE 3
+                                                                                                                                                                                                                                                                                                                                       
+0264A   CAB 40190000620100000001848072002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:13PM  0184
+
+$20 CASH WITHDRAWAL
+FROM-
+CK1:****4055
+
+BALANCE $84,990
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                
+0273A   DAB 4 0190000620100000010268072002(>*************8720  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+052903  2:49PM  1026
+
+$10 CASH WITHDRAWAL
+FROM-
+CK1:******0289
+
+BALANCE $91,940.30
+
+RECEIPT PROMO LINE 1
+RECEIPT PROMO LINE 2
+RECEIPT PROMO LINE 3
+                                                                                                                                                                                                                                                                                                                                       
+0266A   CBB 40190000620100000001848072002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:13PM  0185
+
+$20 CASH WITHDRAWAL
+FROM-
+SV1:****6947
+
+BALANCE $3,829.99
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                              
+0273A   DBB 4 0190000620100000010268072002(>*************8720  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+052903  2:49PM  1026
+
+$10 CASH WITHDRAWAL
+FROM-
+CK1:******0289
+
+BALANCE $91,940.30
+
+RECEIPT PROMO LINE 1
+RECEIPT PROMO LINE 2
+RECEIPT PROMO LINE 3
+                                                                                                                                                                                                                                                                                                                                       
+0264A   CAC 40190000620100000001848072002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:13PM  0184
+
+$20 CASH WITHDRAWAL
+FROM-
+CK1:****4055
+
+BALANCE $84,990
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                
+0273A   DAC 4 0190000620100000010268072002(>*************8720  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+052903  2:49PM  1026
+
+$10 CASH WITHDRAWAL
+FROM-
+CK1:******0289
+
+BALANCE $91,940.30
+
+RECEIPT PROMO LINE 1
+RECEIPT PROMO LINE 2
+RECEIPT PROMO LINE 3
+                                                                                                                                                                                                                                                                                                                                       
+0266A   CBC 40190000620100000001848072002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:13PM  0185
+
+$20 CASH WITHDRAWAL
+FROM-
+SV1:****6947
+
+BALANCE $3,829.99
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                              
+0273A   DBC 4 0190000620100000010268072002(>*************8720  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+052903  2:49PM  1026
+
+$10 CASH WITHDRAWAL
+FROM-
+CK1:******0289
+
+BALANCE $91,940.30
+
+RECEIPT PROMO LINE 1
+RECEIPT PROMO LINE 2
+RECEIPT PROMO LINE 3
+                                                                                                                                                                                                                                                                                                                                       
+0264A   CAD 40190000620100000001848072002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:13PM  0184
+
+$20 CASH WITHDRAWAL
+FROM-
+CK1:****4055
+
+BALANCE $84,990
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                
+0273A   DAD 4 0190000620100000010268072002(>*************8720  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+052903  2:49PM  1026
+
+$10 CASH WITHDRAWAL
+FROM-
+CK1:******0289
+
+BALANCE $91,940.30
+
+RECEIPT PROMO LINE 1
+RECEIPT PROMO LINE 2
+RECEIPT PROMO LINE 3
+                                                                                                                                                                                                                                                                                                                                       
+0266A   CBD 40190000620100000001848072002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:13PM  0185
+
+$20 CASH WITHDRAWAL
+FROM-
+SV1:****6947
+
+BALANCE $3,829.99
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                              
+0273A   DBD 4 0190000620100000010268072002(>*************8720  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+052903  2:49PM  1026
+
+$10 CASH WITHDRAWAL
+FROM-
+CK1:******0289
+
+BALANCE $91,940.30
+
+RECEIPT PROMO LINE 1
+RECEIPT PROMO LINE 2
+RECEIPT PROMO LINE 3
+                                                                                                                                                                                                                                                                                                                                       
+0258I   CAAA40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   DAAA40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   CBAA40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   DBAA40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   CAAB40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   DAAB40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   CBAB40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   DBAB40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   CAAC40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   DAAC40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   CBAC40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   DBAC40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   CAAD40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   DAAD40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   CBAD40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   DBAD40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   CABA40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   DABA40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   CABB40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   CBBA40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   DBBA40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   DABB40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   CABC40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   DABC40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   CABD40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   DABD40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   CBBB40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   DBBB40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   CBBC40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   DBBC40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   CBBD40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   DBBD40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   CACA40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   DACA40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   CACB40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   DACB40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   CACC40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   DACC40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   CACD40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   DACD40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   CBCA40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   DBCA40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   CBCB40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   DBCB40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   CBCC40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   DBCC40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   CBCD40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   DBCD40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   CADA40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   DADA40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   CADB40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   DADB40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   CADC40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   DADC40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   CADD40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   DADD40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   CBDA40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   DBDA40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   CBDB40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   DBDB40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   CBDC40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   DBDC40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   CBDD40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0258I   DBDD40190000580000000001945000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:20PM  0194
+
+$10 TRANSFER
+FROM-
+SV1:****6947
+TO-
+CK1:****4055
+
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                      
+0298B   CAA 40190000580000000001605000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 11:48AM  0160
+
+BALANCE INQUIRY
+FROM-
+CK1:****4055
+
+$4,990.99 ACCT BAL
+$4,990.99 AVL  BAL
+$2,980 CASH BAL
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                              
+0178B   DAA 4 0190000590000000010515000133AB BALANCE INQUIRY BB FROM  CK1:CHECKING DB $9,695.84 ACCT BAL EB $9,695.84 AVL  BAL FB $2,980 CASH BAL 000>011,"9695",012,014,"84",015                                                                                                                                                                                                                                                                                                                                                                                                                                      
+0298B   CAB 40190000580000000001605000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 11:48AM  0160
+
+BALANCE INQUIRY
+FROM-
+CK1:****4055
+
+$4,990.99 ACCT BAL
+$4,990.99 AVL  BAL
+$2,980 CASH BAL
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                              
+0178B   DAB 4 0190000590000000010515000133AB BALANCE INQUIRY BB FROM  CK1:CHECKING DB $9,695.84 ACCT BAL EB $9,695.84 AVL  BAL FB $2,980 CASH BAL 000>011,"9695",012,014,"84",015                                                                                                                                                                                                                                                                                                                                                                                                                                      
+0298B   CAC 40190000580000000001605000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 11:48AM  0160
+
+BALANCE INQUIRY
+FROM-
+CK1:****4055
+
+$4,990.99 ACCT BAL
+$4,990.99 AVL  BAL
+$2,980 CASH BAL
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                              
+0178B   DAC 4 0190000590000000010515000133AB BALANCE INQUIRY BB FROM  CK1:CHECKING DB $9,695.84 ACCT BAL EB $9,695.84 AVL  BAL FB $2,980 CASH BAL 000>011,"9695",012,014,"84",015                                                                                                                                                                                                                                                                                                                                                                                                                                      
+0298B   CAD 40190000580000000001605000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 11:48AM  0160
+
+BALANCE INQUIRY
+FROM-
+CK1:****4055
+
+$4,990.99 ACCT BAL
+$4,990.99 AVL  BAL
+$2,980 CASH BAL
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                              
+0178B   DAD 4 0190000590000000010515000133AB BALANCE INQUIRY BB FROM  CK1:CHECKING DB $9,695.84 ACCT BAL EB $9,695.84 AVL  BAL FB $2,980 CASH BAL 000>011,"9695",012,014,"84",015                                                                                                                                                                                                                                                                                                                                                                                                                                      
+0298B   CBA 40190000580000000001615000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 11:50AM  0161
+
+BALANCE INQUIRY
+FROM-
+SV1:****6947
+
+$3,809.99 ACCT BAL
+$3,809.99 AVL  BAL
+$1,980 CASH BAL
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                              
+0178B   DBA 4 0190000590000000010515000133AB BALANCE INQUIRY BB FROM  CK1:CHECKING DB $9,695.84 ACCT BAL EB $9,695.84 AVL  BAL FB $2,980 CASH BAL 000>011,"9695",012,014,"84",015                                                                                                                                                                                                                                                                                                                                                                                                                                      
+0298B   CBB 40190000580000000001615000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 11:50AM  0161
+
+BALANCE INQUIRY
+FROM-
+SV1:****6947
+
+$3,809.99 ACCT BAL
+$3,809.99 AVL  BAL
+$1,980 CASH BAL
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                              
+0178B   DBB 4 0190000590000000010515000133AB BALANCE INQUIRY BB FROM  CK1:CHECKING DB $9,695.84 ACCT BAL EB $9,695.84 AVL  BAL FB $2,980 CASH BAL 000>011,"9695",012,014,"84",015                                                                                                                                                                                                                                                                                                                                                                                                                                      
+0298B   CBC 40190000580000000001615000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 11:50AM  0161
+
+BALANCE INQUIRY
+FROM-
+SV1:****6947
+
+$3,809.99 ACCT BAL
+$3,809.99 AVL  BAL
+$1,980 CASH BAL
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                              
+0178B   DBC 4 0190000590000000010515000133AB BALANCE INQUIRY BB FROM  CK1:CHECKING DB $9,695.84 ACCT BAL EB $9,695.84 AVL  BAL FB $2,980 CASH BAL 000>011,"9695",012,014,"84",015                                                                                                                                                                                                                                                                                                                                                                                                                                      
+0298B   CBD 40190000580000000001615000002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 11:50AM  0161
+
+BALANCE INQUIRY
+FROM-
+SV1:****6947
+
+$3,809.99 ACCT BAL
+$3,809.99 AVL  BAL
+$1,980 CASH BAL
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                              
+0178B   DBD 4 0190000590000000010515000133AB BALANCE INQUIRY BB FROM  CK1:CHECKING DB $9,695.84 ACCT BAL EB $9,695.84 AVL  BAL FB $2,980 CASH BAL 000>011,"9695",012,014,"84",015                                                                                                                                                                                                                                                                                                                                                                                                                                      
+0322C   CB A401900005800000000017270710040019 000003 11/20 12:02 5/3  58954100103598779   $30.00 226869472*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:02PM  0172
+
+$30 DEPOSIT
+TO-
+SV1:****6947
+
+BALANCE $3,839.99
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                      
+0320C   DB A401900005800000000017070710040019 000003 11/20 12:00 5/3  58954100103598779   $20.00 226840552*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:00PM  0170
+
+$20 DEPOSIT
+TO-
+CK1:****4055
+
+BALANCE $85,000
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                        
+0322C   CB B401900005800000000017270710040019 000003 11/20 12:02 5/3  58954100103598779   $30.00 226869472*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:02PM  0172
+
+$30 DEPOSIT
+TO-
+SV1:****6947
+
+BALANCE $3,839.99
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                      
+0320C   DB B401900005800000000017070710040019 000003 11/20 12:00 5/3  58954100103598779   $20.00 226840552*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:00PM  0170
+
+$20 DEPOSIT
+TO-
+CK1:****4055
+
+BALANCE $85,000
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                        
+0322C   CB C401900005800000000017270710040019 000003 11/20 12:02 5/3  58954100103598779   $30.00 226869472*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:02PM  0172
+
+$30 DEPOSIT
+TO-
+SV1:****6947
+
+BALANCE $3,839.99
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                      
+0320C   DB C401900005800000000017070710040019 000003 11/20 12:00 5/3  58954100103598779   $20.00 226840552*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:00PM  0170
+
+$20 DEPOSIT
+TO-
+CK1:****4055
+
+BALANCE $85,000
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                        
+0322C   CB D401900005800000000017270710040019 000003 11/20 12:02 5/3  58954100103598779   $30.00 226869472*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:02PM  0172
+
+$30 DEPOSIT
+TO-
+SV1:****6947
+
+BALANCE $3,839.99
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                      
+0320C   DB D401900005800000000017070710040019 000003 11/20 12:00 5/3  58954100103598779   $20.00 226840552*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:00PM  0170
+
+$20 DEPOSIT
+TO-
+CK1:****4055
+
+BALANCE $85,000
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                        
+0320G   CB  401900005800000000017070710040019 000003 11/20 12:00 5/3  58954100103598779   $20.00 226840552*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:00PM  0170
+
+$20 DEPOSIT
+TO-
+CK1:****4055
+
+BALANCE $85,000
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                        
+0320G   DB  401900005800000000017070710040019 000003 11/20 12:00 5/3  58954100103598779   $20.00 226840552*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:00PM  0170
+
+$20 DEPOSIT
+TO-
+CK1:****4055
+
+BALANCE $85,000
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                        
+0264DAD CB  40190000620100000001848072002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:13PM  0184
+
+$20 CASH WITHDRAWAL
+FROM-
+CR1:****4055
+
+BALANCE $84,990
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                
+0264DAD DB  40190000620100000001848072002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:13PM  0184
+
+$20 CASH WITHDRAWAL
+FROM-
+CR1:****4055
+
+BALANCE $84,990
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                
+0264DBD CB  40190000620100000001848072002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:13PM  0184
+
+$20 CASH WITHDRAWAL
+FROM-
+CR1:****4055
+
+BALANCE $84,990
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                
+0264DBD DB  40190000620100000001848072002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:13PM  0184
+
+$20 CASH WITHDRAWAL
+FROM-
+CR1:****4055
+
+BALANCE $84,990
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                
+0264DCD CB  40190000620100000001848072002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:13PM  0184
+
+$20 CASH WITHDRAWAL
+FROM-
+CR1:****4055
+
+BALANCE $84,990
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                
+0264DCD DB  40190000620100000001848072002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:13PM  0184
+
+$20 CASH WITHDRAWAL
+FROM-
+CR1:****4055
+
+BALANCE $84,990
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                
+0264DID CB  40190000620100000001848072002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:13PM  0184
+
+$20 CASH WITHDRAWAL
+FROM-
+CR1:****4055
+
+BALANCE $84,990
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                
+0264DID DB  40190000620100000001848072002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:13PM  0184
+
+$20 CASH WITHDRAWAL
+FROM-
+CR1:****4055
+
+BALANCE $84,990
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                
+0264DHD CB  40190000620100000001848072002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:13PM  0184
+
+$20 CASH WITHDRAWAL
+FROM-
+CR1:****4055
+
+BALANCE $84,990
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                
+0264DHD DB  40190000620100000001848072002*************8779  
+FIFTH THIRD BANK
+
+>00019
+38 FOUNTAIN SQ PLAZA
+CINCINNATI     OH
+
+112002 12:13PM  0184
+
+$20 CASH WITHDRAWAL
+FROM-
+CR1:****4055
+
+BALANCE $84,990
+
+HEY                 
+                    
+                    
+                                                                                                                                                                                                                                                                                                                                                

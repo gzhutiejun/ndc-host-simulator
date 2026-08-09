@@ -1,0 +1,629 @@
+M1187RESV
+0005GIS     11                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+0006OOS     121                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+0524AAD  B  4000123000100002138B040075@@0022DATE5TIME3MACH CODE3CARD ENDS
+208/26/02 14:29  BB005   40086
+
+2FLEET BANK NA         
+2ALLENDALE NCR 5675       
+2DAYTON       3OH 
+
+2TRAN NO.121385POSTS ON108/26/02
+
+2WITHDRAWAL=      $20.00
+2FROM HOUSEHOLD      
+2ACCOUNT ENDS 2731
+
+2CHECKING CURRENT BAL3   $20028.26
+
+2CHECKING AVAILABLE BAL1   $14632.01
+  +CASH RESERVE AVAILABLE       $0.00
+  +AVAILABLE O/D SAVINGS      $595.80
+  =TOTAL AVAILABLE          $15227.81
+
+  CASH RESERVE OWED           $500.00
+
+                                                                            
+0451C    C  4000238213750009991P BP100000000000020NYB00  110000022731         73011Y100 0000022798         71011N181 0000044476         73111N321 0000044496         71111N316 0000140426         73322N354 0000140483         71322N311 4124500589004508   73311N301 5487010300074242   71311N000 000000000200472744 73413N067 000070119992004572 73442N508 9437258048         51011N000 Z000310@@320000     08/26/02 14:284;4135800000000086=07041010000000001000?                                                                                                                                                     
+0366ABD  B  4000123000100002138B040075@@0022DATE5TIME3MACH CODE3CARD ENDS
+208/26/02 14:29  BB005   40086
+
+2FLEET BANK NA         
+2ALLENDALE NCR 5675       
+2DAYTON       3OH 
+
+2TRAN NO.121385POSTS ON108/26/02
+
+2WITHDRAWAL=      $20.00
+2FROM SAVINGS    9
+                
+
+2SAVINGS CURRENT BAL 3    $1508.95
+
+2SAVINGS AVAILABLE BAL 1    $1508.95
+                                                                                                                                                                                                                                          
+0290F    B  4000123000100002138B040075@@0022DATE5TIME3MACH CODE3CARD ENDS
+208/26/02 14:29  BB005   40086
+
+2FLEET BANK NA         
+2ALLENDALE NCR 5675       
+2DAYTON       3OH 
+
+2TRAN NO.121385POSTS ON108/26/02
+
+2FLEET CASH=      $20.00
+2FROM1CHECKING   9
+                
+
+                                                                                                                                                                                                                                                                                                                      
+0321CB   B  40001202138B040075@@0022DATE5TIME3MACH CODE3CARD ENDS
+208/26/02 14:29  BB005   40086
+
+2FLEET BANK NA         
+2ALLENDALE NCR 5675       
+2DAYTON       3OH 
+
+2TRAN NO.12138
+
+2INQUIRY
+2ON1SAVINGS   ;             
+
+2SAVINGS CURRENT BAL3   $11494.85
+       
+
+2SAVINGS AVAILABLE BAL1   $11471.16
+                                                                                                                                                                                                                                                                                       
+0324CA   B  40001202138B040075@@0022DATE5TIME3MACH CODE3CARD ENDS
+208/26/02 14:29  BB005   40086
+
+2FLEET BANK NA         
+2ALLENDALE NCR 5675       
+2DAYTON       3OH 
+
+2TRAN NO.12138
+
+2INQUIRY
+2ON1CHECKING   ;             
+
+2CHECKING CURRENT BAL3   $11494.85
+       
+
+2CHECKING AVAILABLE BAL1   $11471.16
+                                                                                                                                                                                                                                                                                    
+0311CD   B  40001202138B040075@@0022DATE5TIME3MACH CODE3CARD ENDS
+208/26/02 14:29  BB005   40086
+
+2FLEET BANK NA         
+2ALLENDALE NCR 5675       
+2DAYTON       3OH 
+
+2TRAN NO.12138
+
+2INQUIRY
+2ON1CASH RESERVES   ;             
+
+2CURRENT BAL3   $11494.85
+       
+
+2AVAILABLE BAL1   $11471.16
+                                                                                                                                                                                                                                                                                                 
+0323CI   B  40001202138B040075@@0022DATE5TIME3MACH CODE3CARD ENDS
+208/26/02 14:29  BB005   40086
+
+2FLEET BANK NA         
+2ALLENDALE NCR 5675       
+2DAYTON       3OH 
+
+2TRAN NO.12138
+
+2INQUIRY
+2ON1CASH RES / LINE OF CREDIT   ;             
+
+2CURRENT BAL3   $11494.85
+       
+
+2AVAILABLE BAL1   $11471.16
+                                                                                                                                                                                                                                                                                     
+0312CF   B  40001202138B040075@@0022DATE5TIME3MACH CODE3CARD ENDS
+208/26/02 14:29  BB005   40086
+
+2FLEET BANK NA         
+2ALLENDALE NCR 5675       
+2DAYTON       3OH 
+
+2TRAN NO.12138
+
+2INQUIRY
+2ON1LINE OF CREDIT   ;             
+
+2CURRENT BAL3   $11494.85
+       
+
+2AVAILABLE BAL1   $11471.16
+                                                                                                                                                                                                                                                                                                
+0239CA   C  400007421515074075EBCHECKINGFCCURRENT BAL F2   $19988.26GCAVAILABLE BALG2   $14592.01HC+CASH RESERVE         $0.00LCRESERVE OWED        $500.00IC+AVAIL O/D SAV      $595.80JC=TOTAL AVAIL      $15187.81000     08/27/02 14:31                                                                                                                                                                                                                                                                                                                                                                         
+0117CB   C  400007421545074075EBSAVINGSGCCURRENT BALG2    $2995.80ICAVAILABLE BALI2     $595.80000     08/27/02 14:32                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+0125CI   C  400007421565074075EBCASH RESERVEICRESERVE OWED   I2     $500.00GCAVAIL CREDITG2       $0.00000     08/27/02 14:33                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+0505HDAA    400012021683097075@@002208/27/02 15:14   ATM BB005   
+
+2TRAN NO.12168  CARD ENDS 0086
+
+2LAST 10 TRANSACTIONS    
+2ON CHECKING      
+2ACCOUNT ENDS 2731
+
+508/27 ATM DEBIT   $20.00-
+508/27 ATM DEBIT   $20.00-
+508/27 ATM DEBIT   $20.00-
+508/26 ATM DEBIT   $20.00-
+508/22 ATM DEBIT   $20.00-
+508/22 ATM DEBIT   $20.00-
+508/22 ATM DEBIT   $20.00-
+508/21 ATM CREDIT $500.00+
+508/21 ATM CREDIT $245.00+
+508/21 ATM DEBIT   $60.00-
+5
+5CHK CURR BAL   $19968.26 
+5CHK AVAIL BAL  $14572.01 
+                                                                                               
+0500HDBA    400012021743097075@@002208/27/02 15:17   ATM BB005   
+
+2TRAN NO.12174  CARD ENDS 0086
+
+2LAST 10 TRANSACTIONS    
+2ON SAVINGS  
+2ACCOUNT ENDS 4496
+
+508/20 ATM DEBIT   $20.00-
+508/19 ATM DEBIT   $22.58-
+508/19 ATM DEBIT   $20.00-
+508/19 ATM CREDIT   $0.05+
+507/16 ATM DEBIT  $150.00-
+507/16 ATM DEBIT  $100.00-
+507/16 ATM CREDIT  $50.00+
+507/16 ATM DEBIT   $50.00-
+507/16 ATM DEBIT   $40.00-
+507/16 ATM DEBIT   $20.00-
+5
+5SAV CURR BAL  $900325.60 
+5SAV AVAIL BAL     $60.00 
+                                                                                                    
+00540107    400017047245160310@@320000     08/28/02 08:21                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+0243IHAA    400047244000075@@0022DATE5TIME3MACH CODE3CARD ENDS
+208/28/02 08:21  BB006   40107
+
+2FLEET BANK NA         
+2ALLENDALE NCR 5675       
+2DAYTON       3OH 
+
+5CASH ADJ. ON T1
+
+5RPL      $1000.00
+
+8DEC     $4970
+8END     $1000
+                                                                                                                                                                                                                                                                                                                                                                     
+0031IHAA-2  400017547245000075@@002                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+0243IHAB    400047244000075@@0022DATE5TIME3MACH CODE3CARD ENDS
+208/28/02 08:22  BB006   40107
+
+2FLEET BANK NA         
+2ALLENDALE NCR 5675       
+2DAYTON       3OH 
+
+5CASH ADJ. ON T2
+
+5RPL      $2000.00
+
+8DEC    $18680
+8END     $2000
+                                                                                                                                                                                                                                                                                                                                                                     
+0031IHAB-2  400017547245000075@@002                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+0050IHAC    400017847245000075@@000     08/28/02 08:24                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+0247IHAD    400047244000075@@0022DATE5TIME3MACH CODE3CARD ENDS
+208/28/02 08:23  BB006   40107
+
+2FLEET BANK NA         
+2ALLENDALE NCR 5675       
+2DAYTON       3OH 
+
+5CASH ADJ. ON T4
+
+5RPL       $666.00
+
+8DEC    $6546.78
+8END     $666.00
+                                                                                                                                                                                                                                                                                                                                                                 
+0031IHAD-2  400017547245000075@@002                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+0200IF   B  400047254000075@@0022DATE5TIME3MACH CODE3CARD ENDS
+208/28/02 08:25  BB006   40107
+
+2FLEET BANK NA         
+2ALLENDALE NCR 5675       
+2DAYTON       3OH 
+
+5TYPE COUNT          AMOUNT
+                                                                                                                                                                                                                                                                                                                                                                                                                
+0149IF   B-2400017547255000075@@002
+5DEP    137    $56910.51
+5DEP1    00        $0.00
+5PAYE    51    $14411.14
+5MSG     00
+5TOT    188
+5CRD     01
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+0277IGE  B  400047254000075@@0022DATE5TIME3MACH CODE3CARD ENDS
+208/28/02 08:25  BB006   40107
+
+2FLEET BANK NA         
+2ALLENDALE NCR 5675       
+2DAYTON       3OH 
+
+2T1 OUT       $301END     $1000
+2T2 OUT     $22201END     $2000
+2T4 OUT     $173.161END     $666.00
+                                                                                                                                                                                                                                                                                                                                   
+0036IGE  B-2400017547255000075@@002  CSH                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+0277II   B  400047254000075@@0022DATE5TIME3MACH CODE3CARD ENDS
+208/28/02 08:26  BB006   40107
+
+2FLEET BANK NA         
+2ALLENDALE NCR 5675       
+2DAYTON       3OH 
+
+2T1 OUT        $01END     $1000
+2T2 OUT        $01END     $2000
+2T4 OUT       $0.001END     $666.00
+                                                                                                                                                                                                                                                                                                                                   
+0164II   B-2400017547255000075@@002
+5DEP          $0.00
+5DEP1         $0.00
+5PAYE         $0.00
+
+5DEP0  00  DEP1  00
+5MSG   00  PAY   00
+5TOT   00  CRD   00  SUB
+                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+0277IE   B  400047254000075@@0022DATE5TIME3MACH CODE3CARD ENDS
+208/28/02 08:26  BB006   40107
+
+2FLEET BANK NA         
+2ALLENDALE NCR 5675       
+2DAYTON       3OH 
+
+2T1 OUT        $01END     $1000
+2T2 OUT        $01END     $2000
+2T4 OUT       $0.001END     $666.00
+                                                                                                                                                                                                                                                                                                                                   
+0164IE   B-2400017547255000075@@002
+5DEP          $0.00
+5DEP1         $0.00
+5PAYE         $0.00
+
+5DEP0  00  DEP1  00
+5MSG   00  PAY   00
+5TOT   00  CRD   00  CHD
+                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+0400DAB  B  400012021905000075@@0022DATE5TIME3MACH CODE3CARD ENDS
+208/27/02 15:31  BB005   40086
+
+2FLEET BANK NA         
+2ALLENDALE NCR 5675       
+2DAYTON       3OH 
+
+2TRAN NO.121904POSTS ON208/27/02
+
+2TRANSFER  =      $50.00
+2FROM REGULAR CK     
+2ACCOUNT ENDS 2798
+2TO BASIC SAVINGS  
+2ACCOUNT ENDS 4496
+
+2SAVINGS CURRENT BAL4  $900375.60
+2SAVINGS AVAILABLE BAL2     $110.00
+                                                                                                                                                                                                        
+0386DBA  B  400012021925000075@@0022DATE5TIME3MACH CODE3CARD ENDS
+208/27/02 15:32  BB005   40086
+
+2FLEET BANK NA         
+2ALLENDALE NCR 5675       
+2DAYTON       3OH 
+
+2TRAN NO.121924POSTS ON208/27/02
+
+2TRANSFER  =      $50.00
+2FROM BASIC SAVINGS  
+2ACCOUNT ENDS 4496
+2TO REGULAR CK     
+2ACCOUNT ENDS 2798
+
+2CHK CUR BAL<  $636985.99
+2CHK AVAIL BAL:    $2258.57
+
+
+                                                                                                                                                                                                                      
+0402DAG  B  400012021945000075@@0022DATE5TIME3MACH CODE3CARD ENDS
+208/27/02 15:33  BB005   40086
+
+2FLEET BANK NA         
+2ALLENDALE NCR 5675       
+2DAYTON       3OH 
+
+2TRAN NO.121944POSTS ON208/27/02
+
+2PAYMENT   =      $50.00
+2FROM REGULAR CK     
+2ACCOUNT ENDS 2798
+2TO LINE OF CREDIT 
+2ACCOUNT ENDS 0483
+
+2CASH RESERVE AVAILABLE       $93.79
+2CASH RESERVE OWED           $406.21
+                                                                                                                                                                                                      
+0404DCA  B  400012022045000075@@0022DATE5TIME3MACH CODE3CARD ENDS
+208/27/02 15:38  BB005   40817
+
+2FLEET BANK NA         
+2ALLENDALE NCR 5675       
+2DAYTON       3OH 
+
+2TRAN NO.122044POSTS ON208/27/02
+
+2TRANSFER  =      $50.00
+2FROM CREDIT CARD    
+2ACCOUNT ENDS              
+2TO CHECKING ACCT  
+2ACCOUNT ENDS              
+
+2CHK CUR BAL<    $6493.05
+2CHK AVAIL BAL:      $62.59
+
+
+                                                                                                                                                                                                    
+0404DAC  B  400012022045000075@@0022DATE5TIME3MACH CODE3CARD ENDS
+208/27/02 15:38  BB005   40817
+
+2FLEET BANK NA         
+2ALLENDALE NCR 5675       
+2DAYTON       3OH 
+
+2TRAN NO.122044POSTS ON208/27/02
+
+2TRANSFER  =      $50.00
+2FROM CHECKING ACCT  
+2ACCOUNT ENDS              
+2TO CREDIT CARD    
+2ACCOUNT ENDS              
+
+2CHK CUR BAL<    $6493.05
+2CHK AVAIL BAL:      $62.59
+
+
+                                                                                                                                                                                                    
+0402DGA  B  400012021945000075@@0022DATE5TIME3MACH CODE3CARD ENDS
+208/27/02 15:33  BB005   40086
+
+2FLEET BANK NA         
+2ALLENDALE NCR 5675       
+2DAYTON       3OH 
+
+2TRAN NO.121944POSTS ON208/27/02
+
+2PAYMENT   =      $50.00
+2FROM LINE OF CREDIT 
+2ACCOUNT ENDS 2798
+2TO REGULAR CK     
+2ACCOUNT ENDS 0483
+
+2CASH RESERVE AVAILABLE       $93.79
+2CASH RESERVE OWED           $406.21
+                                                                                                                                                                                                      
+0344DBC  B  400012022065000075@@0022DATE5TIME3MACH CODE3CARD ENDS
+208/27/02 15:40  BB005   40817
+
+2FLEET BANK NA         
+2ALLENDALE NCR 5675       
+2DAYTON       3OH 
+
+2TRAN NO.122064POSTS ON208/27/02
+
+2PAYMENT   =      $50.00
+2FROM SAVINGS ACCOUNT
+2ACCOUNT ENDS              
+2TO CREDIT CARD    
+2ACCOUNT ENDS              
+
+                                                                                                                                                                                                                                                                
+0418DCB  B  400012022085000075@@0022DATE5TIME3MACH CODE3CARD ENDS
+208/27/02 15:41  BB005   40817
+
+2FLEET BANK NA         
+2ALLENDALE NCR 5675       
+2DAYTON       3OH 
+
+2TRAN NO.122084POSTS ON208/27/02
+
+2TRANSFER  =      $50.00
+2FROM CREDIT CARD    
+2ACCOUNT ENDS              
+2TO SAVINGS ACCOUNT
+2ACCOUNT ENDS              
+
+2SAVINGS CURRENT BAL4    $1618.98
+2SAVINGS AVAILABLE BAL2     $359.61
+                                                                                                                                                                                      
+0401DDA  B  400012021945000075@@0022DATE5TIME3MACH CODE3CARD ENDS
+208/27/02 15:33  BB005   40086
+
+2FLEET BANK NA         
+2ALLENDALE NCR 5675       
+2DAYTON       3OH 
+
+2TRAN NO.121944POSTS ON208/27/02
+
+2PAYMENT   =      $50.00
+2FROM LINE OF CREDIT 
+2ACCOUNT ENDS 2798
+2TO REGULAR CK     
+2ACCOUNT ENDS 0483
+
+2CASH RESERVE AVAILABLE       $93.79
+2CASH RESERVE OWED           $406.21
+                                                                                                                                                                                                       
+00402DAD  B  400012021945000075@@0022DATE5T                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+0399DBG  B  400012021945000075@@0022DATE5TIME3MACH CODE3CARD ENDS
+208/27/02 15:33  BB005   40086
+
+2FLEET BANK NA         
+2ALLENDALE NCR 5675       
+2DAYTON       3OH 
+
+2TRAN NO.121944POSTS ON208/27/02
+
+2PAYMENT   =      $50.00
+2FROM SAVINGS     
+2ACCOUNT ENDS 2798
+2TO LINE OF CREDIT 
+2ACCOUNT ENDS 0483
+
+2CASH RESERVE AVAILABLE       $93.79
+2CASH RESERVE OWED           $406.21
+                                                                                                                                                                                                         
+0421DGB  B  400012022085000075@@0022DATE5TIME3MACH CODE3CARD ENDS
+208/27/02 15:41  BB005   40817
+
+2FLEET BANK NA         
+2ALLENDALE NCR 5675       
+2DAYTON       3OH 
+
+2TRAN NO.122084POSTS ON208/27/02
+
+2TRANSFER  =      $50.00
+2FROM LINE OF CREDIT    
+2ACCOUNT ENDS              
+2TO SAVINGS ACCOUNT
+2ACCOUNT ENDS              
+
+2SAVINGS CURRENT BAL4    $1618.98
+2SAVINGS AVAILABLE BAL2     $359.61
+                                                                                                                                                                                   
+0421DDB  B  400012022085000075@@0022DATE5TIME3MACH CODE3CARD ENDS
+208/27/02 15:41  BB005   40817
+
+2FLEET BANK NA         
+2ALLENDALE NCR 5675       
+2DAYTON       3OH 
+
+2TRAN NO.122084POSTS ON208/27/02
+
+2TRANSFER  =      $50.00
+2FROM LINE OF CREDIT    
+2ACCOUNT ENDS              
+2TO SAVINGS ACCOUNT
+2ACCOUNT ENDS              
+
+2SAVINGS CURRENT BAL4    $1618.98
+2SAVINGS AVAILABLE BAL2     $359.61
+                                                                                                                                                                                   
+0257HAAA    400012021785000075@@002208/27/02 15:20   ATM BB005   
+
+2TRAN NO.12178  CARD ENDS 0086
+
+2LATEST CHECKS PRESENTED 
+2ON REGULAR CK     
+2ACCOUNT ENDS 2798
+
+5 NO ACTIVITY TO REPORT   
+5
+5
+5CHK CURR BAL  $636862.54 
+5CHK AVAIL BAL   $2158.57 
+                                                                                                                                                                                                                                                                                                                                                       
+0506HCAA    400012021813097075@@002208/27/02 15:21   ATM BB005   
+
+2TRAN NO.12181  CARD ENDS 0086
+
+2LATEST ACCOUNT DEBITS   
+2ON REGULAR CK     
+2ACCOUNT ENDS 2798
+
+5ATM DEBIT                
+508/19/02          $20.00 
+5ATM DEBIT                
+508/13/02           $5.00 
+5ATM DEBIT                
+508/05/02          $20.00 
+5ATM DEBIT                
+508/03/02        $1000.00 
+5ATM DEBIT                
+508/03/02        $1000.00 
+5
+5CHK CURR BAL  $636862.54 
+5CHK AVAIL BAL   $2158.57 
+                                                                                              
+0506HCBA    400012021833097075@@002208/27/02 15:22   ATM BB005   
+
+2TRAN NO.12183  CARD ENDS 0086
+
+2LATEST ACCOUNT DEBITS   
+2ON MONEY MKT SAV  
+2ACCOUNT ENDS 4476
+
+5ATM DEBIT                
+508/23/02          $26.64 
+5ATM DEBIT                
+508/23/02           $6.66 
+5ATM DEBIT                
+508/21/02          $33.00 
+5ATM DEBIT                
+508/20/02          $20.00 
+5ATM DEBIT                
+508/20/02          $20.00 
+5
+5SAV CURR BAL    $2995.80 
+5SAV AVAIL BAL    $595.80 
+                                                                                              
+0506HBAA    400012021853097075@@002208/27/02 15:22   ATM BB005   
+
+2TRAN NO.12185  CARD ENDS 0086
+
+2LATEST ACCOUNT CREDITS  
+2ON REGULAR CK     
+2ACCOUNT ENDS 2798
+
+5ATM CREDIT               
+508/19/02         $300.00 
+5ATM CREDIT               
+507/26/02        $4000.00 
+5ATM CREDIT               
+507/25/02       $40000.00 
+5ATM CREDIT               
+507/25/02         $100.00 
+5ATM CREDIT               
+507/25/02          $79.00 
+5
+5CHK CURR BAL  $636862.54 
+5CHK AVAIL BAL   $2158.57 
+                                                                                              
+0506HBBA    400012021873097075@@002208/27/02 15:23   ATM BB005   
+
+2TRAN NO.12187  CARD ENDS 0086
+
+2LATEST ACCOUNT CREDITS  
+2ON BASIC SAVINGS  
+2ACCOUNT ENDS 4496
+
+5ATM CREDIT               
+508/19/02           $0.05 
+5ATM CREDIT               
+507/16/02          $50.00 
+5ATM CREDIT               
+507/16/02           $5.00 
+5ATM CREDIT               
+507/16/02           $5.00 
+5ATM CREDIT               
+507/16/02           $5.00 
+5
+5SAV CURR BAL  $900325.60 
+5SAV AVAIL BAL     $60.00 
+                                                                                              

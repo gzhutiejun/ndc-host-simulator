@@ -1,0 +1,1002 @@
+M1187RESV
+0005GIS     11                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+0005OOS     12                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+0031COMMTKEY332020193062042095255162143                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+0392AABA    40500000000002105068069MF$   25538.64 00108/24/04 14:04  333
+5887030000041859
+INQUIRY CHECKING
+0210  
+2  DATE    TIME
+08/24/04 14:04 
+017TCP3333         
+CARD NUMBER
+************1859
+ACCOUNT NUMBER
+42
+
+
+TRANSACTION
+
+BUSINESS DATE 06/25/04
+INQUIRY CHECKING
+0210         
+AVAILABLE   $   25538.64
+CURRENT     $   26838.64
+
+
+JACK HENRY          
+HWY 60               
+MONETT        MO
+                                                                                                                                                                                                                
+0395AABB    40500000000002125068069MF$    1994.24 00108/24/04 14:05  333
+5887030000041859
+INQUIRY SAVINGS
+0212  
+2  DATE    TIME
+08/24/04 14:05 
+017TCP3333         
+CARD NUMBER
+************1859
+ACCOUNT NUMBER
+1045621
+
+
+TRANSACTION
+
+BUSINESS DATE 06/25/04
+INQUIRY SAVINGS
+0212         
+AVAILABLE   $    1994.24
+CURRENT     $    1204.24
+
+
+JACK HENRY          
+HWY 60               
+MONETT        MO
+                                                                                                                                                                                                             
+0393AABC    40500000000002125068069MF$    1994.24 00108/24/04 14:05  333
+5887030000041859
+INQUIRY CREDIT
+0212  
+2  DATE    TIME
+08/24/04 14:05 
+017TCP3333         
+CARD NUMBER
+************1859
+ACCOUNT NUMBER
+1045999
+
+
+TRANSACTION
+
+BUSINESS DATE 06/25/04
+INQUIRY CREDIT
+0212         
+AVAILABLE   $    1994.24
+CURRENT     $    1204.24
+
+
+JACK HENRY          
+HWY 60               
+MONETT        MO
+                                                                                                                                                                                                               
+0110ABBA    40520000000002155068069MF$   25538.64 00108/24/04 14:07  333
+5887030000041859
+INQUIRY CHECKING
+0215  
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+0109ABBB    40520000000002165068069MF$    1994.24 00108/24/04 14:08  333
+5887030000041859
+INQUIRY SAVINGS
+0216  
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+0108ABBC    40520000000002165068069MF$    1994.24 00108/24/04 14:08  333
+5887030000041859
+INQUIRY CREDIT
+0217  
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+0392BABA    41500000000002105068069MF$   25538.64 00108/24/04 14:04  333
+5887030000041859
+INQUIRY CHECKING
+0210  
+2  DATE    TIME
+08/24/04 14:04 
+017TCP3333         
+CARD NUMBER
+************1859
+ACCOUNT NUMBER
+42
+
+
+TRANSACTION
+
+BUSINESS DATE 06/25/04
+INQUIRY CHECKING
+0210         
+AVAILABLE   $   25538.64
+CURRENT     $   26838.64
+
+
+JACK HENRY          
+HWY 60               
+MONETT        MO
+                                                                                                                                                                                                                
+0395BABB    41500000000002125068069MF$    1994.24 00108/24/04 14:05  333
+5887030000041859
+INQUIRY SAVINGS
+0212  
+2  DATE    TIME
+08/24/04 14:05 
+017TCP3333         
+CARD NUMBER
+************1859
+ACCOUNT NUMBER
+1045621
+
+
+TRANSACTION
+
+BUSINESS DATE 06/25/04
+INQUIRY SAVINGS
+0212         
+AVAILABLE   $    1994.24
+CURRENT     $    1204.24
+
+
+JACK HENRY          
+HWY 60               
+MONETT        MO
+                                                                                                                                                                                                             
+0393BABC    41500000000002125068069MF$    1994.24 00108/24/04 14:05  333
+5887030000041859
+INQUIRY CREDIT
+0212  
+2  DATE    TIME
+08/24/04 14:05 
+017TCP3333         
+CARD NUMBER
+************1859
+ACCOUNT NUMBER
+1045999
+
+
+TRANSACTION
+
+BUSINESS DATE 06/25/04
+INQUIRY CREDIT
+0212         
+AVAILABLE   $    1994.24
+CURRENT     $    1204.24
+
+
+JACK HENRY          
+HWY 60               
+MONETT        MO
+                                                                                                                                                                                                               
+0393AAAAI   40510001000001918052030C9 10.0000108/24/04 13:31  333
+5887030000041859
+FAST CASH
+0191  $     20.00
+2  DATE    TIME
+08/24/04 13:31 
+017TCP3333         
+CARD NUMBER
+************1859
+ACCOUNT NUMBER
+42
+
+
+TRANSACTION
+
+BUSINESS DATE 06/25/04
+FAST CASH
+0191         $     20.00
+AVAILABLE   $   26818.64
+CURRENT     $   26818.64
+
+
+JACK HENRY          
+HWY 60               
+MONETT        MO
+                                                                                                                                                                                                               
+0393AAAAH   40510002000001928052030C9 10.0000108/24/04 13:32  333
+5887030000041859
+FAST CASH
+0192  $     40.00
+2  DATE    TIME
+08/24/04 13:32 
+017TCP3333         
+CARD NUMBER
+************1859
+ACCOUNT NUMBER
+42
+
+
+TRANSACTION
+
+BUSINESS DATE 06/25/04
+FAST CASH
+0192         $     40.00
+AVAILABLE   $   26778.64
+CURRENT     $   26798.64
+
+
+JACK HENRY          
+HWY 60               
+MONETT        MO
+                                                                                                                                                                                                               
+0393AAAAG   40510003000001938052030C9 10.0000108/24/04 13:33  333
+5887030000041859
+FAST CASH
+0193  $     60.00
+2  DATE    TIME
+08/24/04 13:33 
+017TCP3333         
+CARD NUMBER
+************1859
+ACCOUNT NUMBER
+42
+
+
+TRANSACTION
+
+BUSINESS DATE 06/25/04
+FAST CASH
+0193         $     60.00
+AVAILABLE   $   26718.64
+CURRENT     $   26778.64
+
+
+JACK HENRY          
+HWY 60               
+MONETT        MO
+                                                                                                                                                                                                               
+0393AAAAF   40510004000001948052030C9 10.0000108/24/04 13:34  333
+5887030000041859
+FAST CASH
+0194  $     80.00
+2  DATE    TIME
+08/24/04 13:34 
+017TCP3333         
+CARD NUMBER
+************1859
+ACCOUNT NUMBER
+42
+
+
+TRANSACTION
+
+BUSINESS DATE 06/25/04
+FAST CASH
+0194         $     80.00
+AVAILABLE   $   26638.64
+CURRENT     $   26758.64
+
+
+JACK HENRY          
+HWY 60               
+MONETT        MO
+                                                                                                                                                                                                               
+0393AAAAA   40510005000001958052030C9 10.0000108/24/04 13:34  333
+5887030000041859
+FAST CASH
+0195  $    100.00
+2  DATE    TIME
+08/24/04 13:34 
+017TCP3333         
+CARD NUMBER
+************1859
+ACCOUNT NUMBER
+42
+
+
+TRANSACTION
+
+BUSINESS DATE 06/25/04
+FAST CASH
+0195         $    100.00
+AVAILABLE   $   26538.64
+CURRENT     $   26738.64
+
+
+JACK HENRY          
+HWY 60               
+MONETT        MO
+                                                                                                                                                                                                               
+0393AAAAB   40510006000001968052030C9 10.0000108/24/04 13:35  333
+5887030000041859
+FAST CASH
+0196  $    120.00
+2  DATE    TIME
+08/24/04 13:35 
+017TCP3333         
+CARD NUMBER
+************1859
+ACCOUNT NUMBER
+42
+
+
+TRANSACTION
+
+BUSINESS DATE 06/25/04
+FAST CASH
+0196         $    120.00
+AVAILABLE   $   26418.64
+CURRENT     $   26718.64
+
+
+JACK HENRY          
+HWY 60               
+MONETT        MO
+                                                                                                                                                                                                               
+0393AAAAC   40510007000001978052030C9 10.0000108/24/04 13:35  333
+5887030000041859
+FAST CASH
+0197  $    140.00
+2  DATE    TIME
+08/24/04 13:35 
+017TCP3333         
+CARD NUMBER
+************1859
+ACCOUNT NUMBER
+42
+
+
+TRANSACTION
+
+BUSINESS DATE 06/25/04
+FAST CASH
+0197         $    140.00
+AVAILABLE   $   26278.64
+CURRENT     $   26698.64
+
+
+JACK HENRY          
+HWY 60               
+MONETT        MO
+                                                                                                                                                                                                               
+0107ABAAI   40530001000001988052030C9 10.0000108/24/04 13:36  333
+5887030000041859
+FAST CASH
+0198  $     20.00
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+0107ABAAH   40530002000001928052030C9 10.0000108/24/04 13:32  333
+5887030000041859
+FAST CASH
+0192  $     40.00
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+0107ABAAG   40530003000001938052030C9 10.0000108/24/04 13:33  333
+5887030000041859
+FAST CASH
+0193  $     60.00
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+0107ABAAF   40530004000001948052030C9 10.0000108/24/04 13:34  333
+5887030000041859
+FAST CASH
+0194  $     80.00
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+0107ABAAC   40530007000001978052030C9 10.0000108/24/04 13:35  333
+5887030000041859
+FAST CASH
+0197  $    140.00
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+0107ABAAB   40530006000001968052030C9 10.0000108/24/04 13:35  333
+5887030000041859
+FAST CASH
+0196  $    120.00
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+0107ABAAA   40530005000001958052030C9 10.0000108/24/04 13:34  333
+5887030000041859
+FAST CASH
+0195  $    100.00
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+0413AAAA    40510100000003018052030C9 10.0000108/25/04 09:48  333
+5887030000041859
+WITHDRAWAL CHECKING
+0301  $     10.00
+2  DATE    TIME
+08/25/04 09:48 
+017TCP3333         
+CARD NUMBER
+************1859
+ACCOUNT NUMBER
+42
+
+
+TRANSACTION
+
+BUSINESS DATE 06/25/04
+WITHDRAWAL CHECKING
+0301         $     10.00
+AVAILABLE   $   24976.92
+CURRENT     $   26828.64
+
+
+JACK HENRY          
+HWY 60               
+MONETT        MO
+                                                                                                                                                                                           
+0411AAAB    40510100000003018052030C9 10.0000108/25/04 09:48  333
+5887030000041859
+WITHDRAWAL SAVINGS
+0301  $     10.00
+2  DATE    TIME
+08/25/04 09:48 
+017TCP3333         
+CARD NUMBER
+************1859
+ACCOUNT NUMBER
+42
+
+
+TRANSACTION
+
+BUSINESS DATE 06/25/04
+WITHDRAWAL SAVINGS
+0301         $     10.00
+AVAILABLE   $   24976.92
+CURRENT     $   26828.64
+
+
+JACK HENRY          
+HWY 60               
+MONETT        MO
+                                                                                                                                                                                             
+0409AAAC    40510100000003018052030C9 10.0000108/25/04 09:48  333
+5887030000041859
+WITHDRAWAL CREDIT
+0301  $     10.00
+2  DATE    TIME
+08/25/04 09:48 
+017TCP3333         
+CARD NUMBER
+************1859
+ACCOUNT NUMBER
+42
+
+
+TRANSACTION
+
+BUSINESS DATE 06/25/04
+WITHDRAWAL CREDIT
+0301         $     10.00
+AVAILABLE   $   24976.92
+CURRENT     $   26828.64
+
+
+JACK HENRY          
+HWY 60               
+MONETT        MO
+                                                                                                                                                                                               
+0176AABDA   40940000000002765000069MF$   25087.17 00108/24/04 17:39 
+017TCP3333         
+5887030000041859
+MINI STMT CHECKING
+0276         
+*************** 24
+APPROVED             
+                                                                                                                                                                                                                                                                                                                                                                                                                                        
+0207AABBBBBB40180000000002765000069MF$   25087.17 002NNDATE    CK#/DESC   AMOUNT
+ 9/17 - ******      15.00
+ 3/18 - ******      15.00
+ 3/17 - ******      15.00
+ 3/14 - ******      15.00
+ 3/13 - ******      15.00
+                                                                                                                                                                                                                                                                                                                                                                                                         
+0176AABBBCBB40940000000002775000069MF$   25087.17 00108/24/04 17:39 
+017TCP3333         
+5887030000041859
+MINI STMT CHECKING
+0277         
+*************** 24
+APPROVED             
+                                                                                                                                                                                                                                                                                                                                                                                                                                        
+0175AABDB   40940000000002765000069MF$   25087.17 00108/24/04 17:39 
+017TCP3333         
+5887030000041859
+MINI STMT SAVINGS
+0276         
+*************** 24
+APPROVED             
+                                                                                                                                                                                                                                                                                                                                                                                                                                         
+0425AACAA   40510000000002265050030C9 10.0000108/24/04 14:36  333
+5887030000041859
+TRFR CHECKING TO CHECKING
+0226  $     15.00
+2  DATE    TIME
+08/24/04 14:36 
+017TCP3333         
+CARD NUMBER
+************1859
+ACCOUNT NUMBER
+42
+
+
+TRANSACTION
+
+BUSINESS DATE 06/25/04
+TRFR CHECKING TO CHECKING
+0226         $     15.00
+AVL FROM    $   25523.64
+AVL TO      $   80683.91
+
+
+JACK HENRY          
+HWY 60               
+MONETT        MO
+                                                                                                                                                                               
+0423AACAB   40510000000002265050030C9 10.0000108/24/04 14:36  333
+5887030000041859
+TRFR CHECKING TO SAVINGS
+0226  $     15.00
+2  DATE    TIME
+08/24/04 14:36 
+017TCP3333         
+CARD NUMBER
+************1859
+ACCOUNT NUMBER
+42
+
+
+TRANSACTION
+
+BUSINESS DATE 06/25/04
+TRFR CHECKING TO SAVINGS
+0226         $     15.00
+AVL FROM    $   25523.64
+AVL TO      $   80683.91
+
+
+JACK HENRY          
+HWY 60               
+MONETT        MO
+                                                                                                                                                                                 
+0423AACBA   40510000000002265050030C9 10.0000108/24/04 14:36  333
+5887030000041859
+TRFR SAVINGS TO CHECKING
+0226  $     15.00
+2  DATE    TIME
+08/24/04 14:36 
+017TCP3333         
+CARD NUMBER
+************1859
+ACCOUNT NUMBER
+42
+
+
+TRANSACTION
+
+BUSINESS DATE 06/25/04
+TRFR SAVINGS TO CHECKING
+0226         $     15.00
+AVL FROM    $   25523.64
+AVL TO      $   80683.91
+
+
+JACK HENRY          
+HWY 60               
+MONETT        MO
+                                                                                                                                                                                 
+0421AACBB   40510000000002265050030C9 10.0000108/24/04 14:36  333
+5887030000041859
+TRFR SAVINGS TO SAVINGS
+0226  $     15.00
+2  DATE    TIME
+08/24/04 14:36 
+017TCP3333         
+CARD NUMBER
+************1859
+ACCOUNT NUMBER
+42
+
+
+TRANSACTION
+
+BUSINESS DATE 06/25/04
+TRFR SAVINGS TO SAVINGS
+0226         $     15.00
+AVL FROM    $   25523.64
+AVL TO      $   80683.91
+
+
+JACK HENRY          
+HWY 60               
+MONETT        MO
+                                                                                                                                                                                   
+0419AADCB   40510000000002935050030C9 10.0000108/25/04 08:54  333
+5887030000041859
+PAY LOAN FROM CHECKING
+0293  $     25.00
+2  DATE    TIME
+08/25/04 08:54 
+017TCP3333         
+CARD NUMBER
+************1859
+ACCOUNT NUMBER
+42
+
+
+TRANSACTION
+
+BUSINESS DATE 06/25/04
+PAY LOAN FROM CHECKING
+0293         $     25.00
+AVAILABLE   $   25062.17
+CURRENT     $   26813.64
+
+
+JACK HENRY          
+HWY 60               
+MONETT        MO
+                                                                                                                                                                                     
+0417AADCC   40510000000002935050030C9 10.0000108/25/04 08:54  333
+5887030000041859
+PAY LOAN FROM SAVINGS
+0293  $     25.00
+2  DATE    TIME
+08/25/04 08:54 
+017TCP3333         
+CARD NUMBER
+************1859
+ACCOUNT NUMBER
+42
+
+
+TRANSACTION
+
+BUSINESS DATE 06/25/04
+PAY LOAN FROM SAVINGS
+0293         $     25.00
+AVAILABLE   $   25062.17
+CURRENT     $   26813.64
+
+
+JACK HENRY          
+HWY 60               
+MONETT        MO
+                                                                                                                                                                                       
+0120ABDCB   40530000000002935050030C9 10.0000108/25/04 08:54  333
+5887030000041859
+PAY LOAN FROM CHECKING
+0293  $     25.00
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+0119ABDCC   40530000000002935050030C9 10.0000108/25/04 08:54  333
+5887030000041859
+PAY LOAN FROM SAVINGS
+0293  $     25.00
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+0419BADCB   41510000000002935050030C9 10.0000108/25/04 08:54  333
+5887030000041859
+PAY LOAN FROM CHECKING
+0293  $     25.00
+2  DATE    TIME
+08/25/04 08:54 
+017TCP3333         
+CARD NUMBER
+************1859
+ACCOUNT NUMBER
+42
+
+
+TRANSACTION
+
+BUSINESS DATE 06/25/04
+PAY LOAN FROM CHECKING
+0293         $     25.00
+AVAILABLE   $   25062.17
+CURRENT     $   26813.64
+
+
+JACK HENRY          
+HWY 60               
+MONETT        MO
+                                                                                                                                                                                     
+0417BADCC   41510000000002935050030C9 10.0000108/25/04 08:54  333
+5887030000041859
+PAY LOAN FROM SAVINGS
+0293  $     25.00
+2  DATE    TIME
+08/25/04 08:54 
+017TCP3333         
+CARD NUMBER
+************1859
+ACCOUNT NUMBER
+42
+
+
+TRANSACTION
+
+BUSINESS DATE 06/25/04
+PAY LOAN FROM SAVINGS
+0293         $     25.00
+AVAILABLE   $   25062.17
+CURRENT     $   26813.64
+
+
+JACK HENRY          
+HWY 60               
+MONETT        MO
+                                                                                                                                                                                       
+0120BBDCB   41530000000002935050030C9 10.0000108/25/04 08:54  333
+5887030000041859
+PAY LOAN FROM CHECKING
+0293  $     25.00
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+0119BBDCC   41530000000002935050030C9 10.0000108/25/04 08:54  333
+5887030000041859
+PAY LOAN FROM SAVINGS
+0293  $     25.00
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+0179AADA    40510000000002487053030C9 10.0000108/24/04 15:23  333
+5887030000041859
+DEPOSIT CHECKING
+0248  $    120.00
+45887030000041859 0000000000000042 08/24/04 15:23 $    120.00                                                                                                                                                                                                                                                                                                                                                                                                                                       
+0178AADB    40510000000002497053030C9 10.0000108/24/04 15:24  333
+5887030000041859
+DEPOSIT SAVINGS
+0249  $     35.00
+45887030000041859 0000000001045621 08/24/04 15:24 $     35.00                                                                                                                                                                                                                                                                                                                                                                                                                                        
+0181ABDA    40510000000002487053030C9 10.0000108/24/04 15:23  333
+5887030000041859
+DEPOSIT CHECKING
+0248  $    120.00
+45887030000041859 0000000000000042 08/24/04 15:23 $    120.00  
+                                                                                                                                                                                                                                                                                                                                                                                                                                   
+0178ABDB    40510000000002487053030C9 10.0000108/24/04 15:23  333
+5887030000041859
+DEPOSIT SAVINGS
+0248  $    120.00
+45887030000041859 0000000000000042 08/24/04 15:23 $    120.00                                                                                                                                                                                                                                                                                                                                                                                                                                        
+0419AADDA   40510100000003338052030C9 20.0000108/25/04 11:35  333
+5887030000041859
+PURCHASE STAMPS 1 BOOK
+0333  $     10.00
+2  DATE    TIME
+08/25/04 11:35 
+017TCP3333         
+CARD NUMBER
+************1859
+ACCOUNT NUMBER
+42
+
+
+TRANSACTION
+
+BUSINESS DATE 06/25/04
+PURCHASE STAMPS 1 BOOK
+0333         $     10.00
+AVAILABLE   $   24846.92
+CURRENT     $   26828.64
+
+
+JACK HENRY          
+HWY 60               
+MONETT        MO
+                                                                                                                                                                                     
+0421AADDB   40510200000003338052030C9 20.0000108/25/04 11:35  333
+5887030000041859
+PURCHASE STAMPS 2 BOOKS
+0333  $     20.00
+2  DATE    TIME
+08/25/04 11:35 
+017TCP3333         
+CARD NUMBER
+************1859
+ACCOUNT NUMBER
+42
+
+
+TRANSACTION
+
+BUSINESS DATE 06/25/04
+PURCHASE STAMPS 2 BOOKS
+0333         $     20.00
+AVAILABLE   $   24846.92
+CURRENT     $   26828.64
+
+
+JACK HENRY          
+HWY 60               
+MONETT        MO
+                                                                                                                                                                                   
+0421AADDC   40510300000003338052030C9 20.0000108/25/04 11:35  333
+5887030000041859
+PURCHASE STAMPS 3 BOOKS
+0333  $     30.00
+2  DATE    TIME
+08/25/04 11:35 
+017TCP3333         
+CARD NUMBER
+************1859
+ACCOUNT NUMBER
+42
+
+
+TRANSACTION
+
+BUSINESS DATE 06/25/04
+PURCHASE STAMPS 3 BOOKS
+0333         $     30.00
+AVAILABLE   $   24846.92
+CURRENT     $   26828.64
+
+
+JACK HENRY          
+HWY 60               
+MONETT        MO
+                                                                                                                                                                                   
+0421AADDD   40510400000003338052030C9 20.0000108/25/04 11:35  333
+5887030000041859
+PURCHASE STAMPS 4 BOOKS
+0333  $     40.00
+2  DATE    TIME
+08/25/04 11:35 
+017TCP3333         
+CARD NUMBER
+************1859
+ACCOUNT NUMBER
+42
+
+
+TRANSACTION
+
+BUSINESS DATE 06/25/04
+PURCHASE STAMPS 4 BOOKS
+0333         $     40.00
+AVAILABLE   $   24846.92
+CURRENT     $   26828.64
+
+
+JACK HENRY          
+HWY 60               
+MONETT        MO
+                                                                                                                                                                                   
+01445887033240320000000004405000030C9 20.0000108/26/04 08:56  333
+572156022000000095
+WITHDRAWAL CHECKING
+0440  $     20.00
+91
+ISSUER DECLINE       
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+01485887034240420000000004425000030C9 20.0000108/26/04 09:02  333
+5887030000041859
+TRNFR CHECKING TO SAVINGS
+0442  $ 999999.99
+50
+INSUFFICIENT FUNDS   
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+00425887034440440000000004425000030C9 20.00000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+01355887033340330000000004435000069MFNOT AVAILABLE00108/26/04 09:05  333
+5887030000041859
+INQUIRY CHECKING
+0443  
+55
+INVALID PIN          
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+00965887034340430000000004425000030C9 20.0000108/26/04 09:02  333
+5887030000041859
+EXCEEDS LIMIT   
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+01065887033440430000000004425000030C9 20.0000108/26/04 09:02  333
+5887030000041859
+ACCOUNT NUMBER DISABLED   
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+00955887033140430000000004425000030C9 20.0000108/26/04 09:02  333
+5887030000041859
+CARD EXPIRED   
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+00975887034040430000000004425000030C9 20.0000108/26/04 09:02  333
+5887030000041859
+AMOUNT INVALID   
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+00985887034140410000000004425000030C9 20.0000108/26/04 09:02  333
+5887030000041859
+INVALID ACCOUNT   
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+01005887038040800000000004425000030C9 20.0000108/26/04 09:02  333
+5887030000041859
+PIN DID NOT MATCH   
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+03225887039940160000000004165050030C9 20.00003  DATE    TIME
+08/25/04 14:41 
+017TCP3333         
+CARD NUMBER
+5887030000041859
+
+
+TRANSACTION
+
+
+
+CASH ON US    $      0.00
+CASH SWITCH   $      0.00
+DEPOSITS      $      0.00
+STAMPS ON US  $      0.00
+STAMPS SWITCH $      0.00
+
+CAPTURED CARDS      00000
+ENVELOPES           00000
+                                                                                                                                                                                                                                                                                      
+0007COMMSRES334                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+0031COMMS33 333020193062042095255162143                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+0027FEE     40720000000003485000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+0485FITTABLE3000000015000000064129104255255004000004000047000000000255255000000000000000000000000000000000000000000000000000000000000000000001000064129105255255004000004000047000000000255255000000000000000000000000000000000000000000000000000000000000000000002000153153153255255001000004000047000000000255255000000000000000000000000000000000000000000000000000000000000000000003000255255255255255000000004000047000000000255255000000000000000000000000000000000000000000000000000000000000000000                                                                                                                   
+0027FEE2    41230000000003485000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+0041FEE3    407200115100124@@123A3 $1.50000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+0041  A   DD407200115100124@@123A3 $1.50000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+0058OARFROM 321100011019CG1. 8888            DG2. 8856075073                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+0058OARTO   321100011019CG1. 8888            DG2. 8856076073                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+0042INVAMT  40400000000004425000030C9 20.00000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+0006SOFTID75175                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+0006SOFTID74174                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+0006SOFTID73173                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+0006SOFTID72172                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+0006SOFTID71171                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+0135INVPIN  40330000000004435000069MFNOT AVAILABLE00108/26/04 09:05  333
+5887030000041859
+INQUIRY CHECKING
+0443  
+55
+INVALID PIN          
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+0122PIN1    40820000000003205000030C9 20.0000008/25/04 11:08  333
+5887030000041859
+PIN CHANGE
+0320  
+88
+USE BOUNCE/ODP       
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+0101PIN2    40810000000003215000030C9 20.0000008/25/04 11:08  333
+5887030000041859
+PIN CHANGE
+0321  
+87
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+0101PIN3    40900000000003225068030C9 20.0000108/25/04 11:08  333
+5887030000041859
+PIN CHANGE
+0322  
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+0122AADCD   40820000000003205000030C9 20.0000008/25/04 11:08  333
+5887030000041859
+PIN CHANGE
+0320  
+88
+USE BOUNCE/ODP       
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+0101AADCDA  40810000000003215000030C9 20.0000008/25/04 11:08  333
+5887030000041859
+PIN CHANGE
+0321  
+87
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+0101AADCDB  40510000000003225068030C9 20.0000108/25/04 11:08  333
+5887030000041859
+PIN CHANGE
+0322  
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+0168AADCA   40900000000002547053030C9 10.0000108/24/04 15:37  333
+5887030000041859
+PAYMENT ENCLOSED
+0254  
+45887030000041859 0000000000000000 08/24/04 15:37 $      0.00                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+0176MINI1   40180000000002765000069MF$   25087.17 00108/24/04 17:39 
+017TCP3333         
+5887030000041859
+MINI STMT CHECKING
+0276         
+*************** 24
+APPROVED             
+                                                                                                                                                                                                                                                                                                                                                                                                                                        
+0043MINI2   40000180001000049375197075JN30.00000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+0027OVERDRFT40970000000003485000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+0041OVERDRF2409700115100124@@123A3 $1.50000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+01485887030540050000000004425000030C9 20.0000108/26/04 09:02  333
+5887030000041859
+TRNFR CHECKING TO SAVINGS
+0442  $ 999999.99
+50
+INSUFFICIENT FUNDS   
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+0042INVAMT2 40440000000004425000030C9 20.00000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              

@@ -1,0 +1,348 @@
+M1187RESV
+0005GIS     11                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+0005OOS     12                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+0170AA   C A40001200100000064682039075@@003704/04/03 09:06  H113001
+
+8XXXXXXXXXXXX0022
+
+73320 RIVER WALK COURT
+
+7RECORD NO.<6468
+7WITHDRAWAL:$20.00
+7FR CHECKING
+7
+7
+                                                                                                                                                                                                                                                                                                                                                                                                                                              
+0188CA   C A400012064715000075@@003704/04/03 09:32  H113001
+
+8XXXXXXXXXXXX0022
+
+73320 RIVER WALK COURT
+
+7RECORD NO.<6471
+7INQUIRY
+7FR CHECKING410000007227 CK
+7AVAIL BAL9$7081.01
+7
+
+                                                                                                                                                                                                                                                                                                                                                                                                                            
+0171FAA  C A4000123010000006467A040075@@003704/04/03 09:00  H113001
+
+8XXXXXXXXXXXX0022
+
+73320 RIVER WALK COURT
+
+7RECORD NO.<6467
+7WITHDRAWAL:$50.00
+7FR CHECKING
+7
+7
+                                                                                                                                                                                                                                                                                                                                                                                                                                             
+0221DAB  C A400012064735000075@@003704/04/03 09:35  H113001
+
+8XXXXXXXXXXXX0022
+
+73320 RIVER WALK COURT
+
+7RECORD NO.<6473
+7TRANSFER;$200.00
+7FR CHECKING410000007227 CK
+7TO SAVINGS500000000007 SV
+7AVAIL BAL:$305.43
+                                                                                                                                                                                                                                                                                                                                                                                           
+0032SURCHG  300020001101074182A71.00                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+0038SURDEN  40001350000000065405000075@@000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+0162AA     A400017064685039075@@003704/04/03 09:06  H113001
+
+8XXXXXXXXXXXX0022
+
+73320 RIVER WALK COURT
+
+7RECORD NO.<6468
+7WITHDRAWAL:$20.00
+7FR CHECKING
+7
+7
+                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+0188CA     A400012064715000075@@003704/04/03 09:32  H113001
+
+8XXXXXXXXXXXX0022
+
+73320 RIVER WALK COURT
+
+7RECORD NO.<6471
+7INQUIRY
+7FR CHECKING410000007227 CK
+7AVAIL BAL9$7081.01
+7
+
+                                                                                                                                                                                                                                                                                                                                                                                                                            
+0221DAB    A400012064735000075@@003704/04/03 09:35  H113001
+
+8XXXXXXXXXXXX0022
+
+73320 RIVER WALK COURT
+
+7RECORD NO.<6473
+7TRANSFER;$200.00
+7FR CHECKING410000007227 CK
+7TO SAVINGS500000000007 SV
+7AVAIL BAL:$305.43
+                                                                                                                                                                                                                                                                                                                                                                                           
+0171F A    A4000123010000006467A040075@@003704/04/03 09:00  H113001
+
+8XXXXXXXXXXXX0022
+
+73320 RIVER WALK COURT
+
+7RECORD NO.<6467
+7WITHDRAWAL:$50.00
+7FR CHECKING
+7
+7
+                                                                                                                                                                                                                                                                                                                                                                                                                                             
+0090OAR     300021100111074186BEFROMBJSAVINGS    DD0000001111EDAUTO      FA  GA  HA  J5                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+0358A AA   A40001200000010064122039075@@003705/07/03 17:04  T113010
+
+8XXXXXXXXXXXX0014
+
+711900 WEST LAKE PARK DRIV
+
+7RECORD NO.<6412
+7PURCHASE=$6.66
+7FR CHECKING<CK
+7ACCT BAL:$9399.38
+7AVAIL BAL8$51808.05
+7
+>
+7RECORD NO.<6412
+7PURCHASE             $6.66
+7FR CHECKING            CK 
+7ACCT BAL          $9399.38
+7AVAIL BAL        $51808.05
+7
+                                                                                                                                                                                                                                                  
+0290II      400065914000075@@003704/30/03 10:39  H113001
+
+8XXXXXXXXXXXX0015
+
+73320 RIVER WALK COURT
+6C1 STR90  C1 INC815
+6C1 DEC90  C1 OUT90
+6C1 END815
+6C2 STR90  C2 INC90
+6C2 DEC90  C2 OUT860
+6C2 END90
+6C3 STR60.00  C3 INC60.00
+6C3 DEC60.00  C3 OUT60.00
+6C3 END60.00
+                                                                                                                                                                                                                                                                                                                      
+0179II2     400017565915000075@@0036DEP0   0  DEP1   0        TOTL-DEP
+6MSG    0  PAY    0            0.00
+6TOT    0  CRD    0        TOTL-PAY
+6SUB                           0.00
+                                                                                                                                                                                                                                                                                                                                                                                                                                     
+0171F       4000123010000006467A040075@@003704/04/03 09:00  H113001
+
+8XXXXXXXXXXXX0022
+
+73320 RIVER WALK COURT
+
+7RECORD NO.<6467
+7WITHDRAWAL:$50.00
+7FR CHECKING
+7
+7
+                                                                                                                                                                                                                                                                                                                                                                                                                                             
+0170AA      40001200100000064682039075@@003704/04/03 09:06  H113001
+
+8XXXXXXXXXXXX0022
+
+73320 RIVER WALK COURT
+
+7RECORD NO.<6468
+7WITHDRAWAL:$20.00
+7FR CHECKING
+7
+7
+                                                                                                                                                                                                                                                                                                                                                                                                                                              
+0176CA      400012064715000075@@003704/04/03 09:32  H1130018XXXXXXXXXXXX002273320 RIVER WALK COURT7RECORD NO.<64717INQUIRY7FR CHECKING410000007227 CK7AVAIL BAL9$7081.017                                                                                                                                                                                                                                                                                                                                                                                                                                        
+0038SETTLEOK40001750000000065405000075@@000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+0038STLOK2  40001750000000065405000075@@000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+0030STLOK   400017064685039075@@000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+0153STLPRT  400017064715000075@@003704/04/03 09:32  H113001
+
+8XXXXXXXXXXXX0022
+
+73320 RIVER WALK COURT
+
+7RECORD NO.<6471
+7SETTLEMENT
+7TEST TRANSACTION                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+0030DEN177  400017764685039075@@000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+0030DEN178  400017864685039075@@000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+0030DEN176  400017664685039075@@000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+0030DEN179  400017964685039075@@000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+0030DEN129  400012964685039075@@000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+0030DEN132  400013264685039075@@000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+0030DEN133  400013364685039075@@000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+0030DEN144  400014464685039075@@000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+0030DEN145  400014564685039075@@000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+0030DEN148  400014864685039075@@000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+0030DEN150  400015064685039075@@000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+0030DEN152  400015264685039075@@000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+0030DEN155  400015564685039075@@000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+0030DEN159  400015964685039075@@000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+0358A AA    40001200000010064122039075@@003705/07/03 17:04  T113010
+
+8XXXXXXXXXXXX0014
+
+711900 WEST LAKE PARK DRIV
+
+7RECORD NO.<6412
+7PURCHASE=$6.66
+7FR CHECKING<CK
+7ACCT BAL:$9399.38
+7AVAIL BAL8$51808.05
+7
+>
+7RECORD NO.<6412
+7PURCHASE             $6.66
+7FR CHECKING            CK 
+7ACCT BAL          $9399.38
+7AVAIL BAL        $51808.05
+7
+                                                                                                                                                                                                                                                  
+0030STLAMT  400016664685039075@@000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+0176TEST    400012064715000075@@003704/04/03 09:32  H1130018XXXXXXXXXXXX002273320 RIVER WALK COURT7RECORD NO.<64717INQUIRY7FR CHECKING410000007227 CK7AVAIL BAL9$7081.017                                                                                                                                                                                                                                                                                                                                                                                                                                        
+0177TEST2   400012064715000075@@003704/04/03 09:32  H1130018XXXXXXXXXXXX002273320 RIVER WALK COURT7RECORD NO.<64717INQUIRY7FR CHECKING410000007227 CK7AVAIL BAL9$7081.017
+                                                                                                                                                                                                                                                                                                                                                                                                                                       
+0256TEST3   400012064715000075@@003710/10/03 14:01  H113001  8XXXXXXXXXXXX3921  73320 RIVER WALK COURT  7RECORD NO.<7745 7WITHDRAWAL:$60.00 7TERMINAL FEE9$1.00 7TOTAL?$61.00 7FR CHECKING400000004444 CK 7ACCT BAL:$5000.00 7AVAIL BAL9$3751.98 7                                                                                                                                                                                                                                                                                                                                                        
+0372STEST1  400078584000075@@003710/13/03 09:45  H113001  
+8XXXXXXXXXXXX0015  
+73320 RIVER WALK COURT 
+6C1 STR90  C1 INC90 
+6C1 DEC90  C1 OUT90 
+6C1 END90 
+6C2 STR90  C2 INC7200 
+6C2 DEC90  C2 OUT
+62220 6C2 END90 
+E>6C3 STR60.00  C3 INC60.00 
+6C3 DEC60.00  
+C3 OUT4199.80 6C3 END60.00 
+6C4 STR42500  C4 INC70 
+6C4 DEC70  C4 OUT70 6C4 END42500
+                                                                                                                                                                                                                                    
+0183STEST2  400017578585000075@@0036DEP0  14  DEP1   0        TOTL-DEP 
+6MSG    0  PAY    8         1195.65 
+6TOT   22  CRD    1        TOTL-PAY 
+6ADJ                         795.54 
+                                                                                                                                                                                                                                                                                                                                                                                                                                 
+0176DEPNOREC400012064711000075@@001704/04/03 09:32  H1130018XXXXXXXXXXXX002273320 RIVER WALK COURT7RECORD NO.<64717INQUIRY7FR CHECKING410000007227 CK7AVAIL BAL9$7081.017                                                                                                                                                                                                                                                                                                                                                                                                                                        
+0176DEPREC  400012064711000075@@003704/04/03 09:32  H1130018XXXXXXXXXXXX002273320 RIVER WALK COURT7RECORD NO.<64717INQUIRY7FR CHECKING410000007227 CK7AVAIL BAL9$7081.017                                                                                                                                                                                                                                                                                                                                                                                                                                        
+0035STESTX  400012078585000075@@003XXXX
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+0330STEST1X 400078584000075@@003TEST LINE 1
+TEST LINE 2
+TEST LINE 3
+TEST LINE 4
+TEST LINE 5
+TEST LINE 6
+TEST LINE 7
+TEST LINE 8
+TEST LINE 9
+TEST LINE 10
+TEST LINE 11
+TEST LINE 12
+TEST LINE 13
+TEST LINE 14
+TEST LINE 15
+TEST LINE 16
+TEST LINE 17
+TEST LINE 18
+TEST LINE 19
+TEST LINE 20
+TEST LINE 21
+TEST LINE 22
+TEST LINE 23
+TEST LINE 24
+                                                                                                                                                                                                                                                                              
+0343STEST2X 400017578585000075@@003TEST LINE 1X
+TEST LINE 2X
+TEST LINE 3X
+TEST LINE 4X
+TEST LINE 5X
+TEST LINE 6X
+TEST LINE 7X
+TEST LINE 8X
+TEST LINE 9X
+TEST LINE 10X
+TEST LINE 11X
+TEST LINE 12X
+TEST LINE 13X
+TEST LINE 14X
+TEST LINE 15X
+TEST LINE 16X
+TEST LINE 17X
+TEST LINE 18X
+TEST LINE 19X
+TEST LINE 20X
+TEST LINE 21X
+TEST LINE 22X
+TEST LINE 23X
+                                                                                                                                                                                                                                                                 
+0307STEST1XX400078584000075@@003013456789012345678901234567890123456789X023456789012345678901234567890123456789X033456789012345678901234567890123456789X043456789012345678901234567890123456789X053456789012345678901234567890123456789X063456789012345678901234567890123456789X013456789012345678901234567890123456789X                                                                                                                                                                                                                                                                                                     
+0310STEST2XX400017578585000075@@003013456789012345678901234567890123456789X023456789012345678901234567890123456789X033456789012345678901234567890123456789X043456789012345678901234567890123456789X053456789012345678901234567890123456789X063456789012345678901234567890123456789X013456789012345678901234567890123456789X                                                                                                                                                                                                                                                                                                  
+0280STEST2X2400017578585000075@@0030134567890123456789X023456789012345678901234567890123456789X03345678901234567890123456789X043456789012345678901234567890123456789X053456789012345678901234567890123456789X063456789012345678901234567890123456789X013456789012345678901234567890123456789X                                                                                                                                                                                                                                                                                                                                
+0263WDRX    40001200100000064682039075@@003710/22/03 07:53  H113001  8XXXXXXXXXXXX3921  73320 RIVER WALK COURT  7RECORD NO.<8133 7WITHDRAWAL:$20.00 7TERMINAL FEE9$1.00 7TOTAL?$21.00 7FR CHECKING400000002222 000 7ACCT BAL;$697.11 7AVAIL BAL9$5524.51 7                                                                                                                                                                                                                                                                                                                                                 
+0184TESTW2  40001200100000064712000075@@003704/04/03 09:32  H1130018XXXXXXXXXXXX002273320 RIVER WALK COURT7RECORD NO.<64717INQUIRY7FR CHECKING410000007227 CK7AVAIL BAL9$7081.017                                                                                                                                                                                                                                                                                                                                                                                                                                
+0265WDRX2   40001200100000064682039075@@003710/22/03 07:53  H113001  8XXXXXXXXXXXX3921  73320 RIVER WALK COURT  7RECORD NO.<8133 7WITHDRAWAL:$20.00 7TERMINAL FEE9$1.00 7TOTAL?$21.00 7FR CHECKING400000002222 000 7ACCT BAL;$697.11 7AVAIL BAL9$5524.51 7                                                                                                                                                                                                                                                                                                                                               
+0030ACK074  400007464685039075@@000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+0030ACK076  400007664685039075@@000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+0030ACK077  400007764685039075@@000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+0030ACK078  400007864685039075@@000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+0030ACK079  400007964685039075@@000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+0297TESTABI 400012068735000075@@001710/29/03 13:00  T113011
+
+8XXXXXXXXXXXX0014
+
+7WLP LAB
+
+7RECORD NO.<6873
+7INQUIRY
+7FR 00000000005
+7
+7AVAIL BAL;$49.19
+7
+
+2710/29/03 13:00  T113011
+
+8XXXXXXXXXXXX0014
+
+7WLP LAB
+
+7RECORD NO.<6873
+7INQUIRY
+7FR CHECKING<CK
+7
+7AVAIL BAL;$49.19
+7
+
+                                                                                                                                                                                                                                                                                                               
+0298TESTNULL400012068735000075@@001710/29/03 13:00  T113011  8XXXXXXXXXXXX0014  7WLP LAB  7RECORD NO.<6873 7INQUIRY0>7FR 00000000005 7 7AVAIL BAL;$49.19 7  2710/29/03 13:00  T113011  8XXXXXXXXXXXX0014  7WLP LAB  7RECORD NO.<6873 7INQUIRY 7FR CHECKING<CK
+7
+7AVAIL BAL;$49.19
+7
+
+                                                                                                                                                                                                                                                                                                              
+0032TESTOAR 300020001101074182A71.00                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+0098TESTRSP 300021100111074186BEFROMBJCHECKING   DD0000002222EDCOLLEGE   FDVACATION  GA  HA  J5                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+0291DDUP1   311000(1@@<CONFIGURATION_DATA reboot="y">A@<DD_UPDATE>B@<GROUP>CONSUMERFLOW</GROUP>C@<NAME>FASTCASH1</NAME>D@<VALUE>YES,1,5</VALUE>E@</DD_UPDATE>F@<DD_UPDATE>G@<GROUP>CONSUMERFLOW</GROUP>H@<NAME>FASTCASH1AMOUNT</NAME>I@<VALUE>20</VALUE>J@</DD_UPDATE>K@</CONFIGURATION_DATA>                                                                                                                                                                                                                                                                                                                     
+0296DDUP2   311001(1@@<CONFIGURATION_DATA reboot="y">A@<DD_UPDATE>B@<GROUP>CONSUMERFLOW</GROUP>C@<NAME>WITHDRAWAL</NAME>D@<VALUE>YES,1,6</VALUE>E@</DD_UPDATE>F@<DD_UPDATE>G@<GROUP>CONSUMERFLOW</GROUP>H@<NAME>ACCOUNTBALANCE</NAME>I@<VALUE>YES,1,7</VALUE>J@</DD_UPDATE>K@</CONFIGURATION_DATA>                                                                                                                                                                                                                                                                                                                
+0295DDUP3   311002(1@@<CONFIGURATION_DATA reboot="y">A@<DD_UPDATE>B@<GROUP>CONSUMERFLOW</GROUP>C@<NAME>TRANSFER</NAME>D@<VALUE>YES,1,8</VALUE>E@</DD_UPDATE>F@<DD_UPDATE>G@<GROUP>CONSUMERFLOW</GROUP>H@<NAME>ENVELOPEDEPOSIT</NAME>I@<VALUE>YES,1,1</VALUE>J@</DD_UPDATE>K@</CONFIGURATION_DATA>                                                                                                                                                                                                                                                                                                                 
+0475DDUP4   311003(1@@<CONFIGURATION_DATA reboot="y">A@<DD_UPDATE>B@<GROUP>CONSUMERFLOW</GROUP>C@<NAME>ENVELOPEPAYMENT</NAME>D@<VALUE>YES,1,2</VALUE>E@</DD_UPDATE>F@<DD_UPDATE>G@<GROUP>CONSUMERFLOW</GROUP>H@<NAME>MINISTATEMENT</NAME>I@<VALUE>YES,1,3</VALUE>J@</DD_UPDATE>K@</CONFIGURATION_DATA>004(1@@<CONFIGURATION_DATA reboot="y">A@<DD_UPDATE>B@<GROUP>CONSUMERFLOW</GROUP>C@<NAME>CHANGEPIN</NAME>D@<VALUE>YES,1,4</VALUE>E@</DD_UPDATE>F@</CONFIGURATION_DATA>                                                                                                                             
+0581DDUPX   311000(1@@<CONFIGURATION_DATA reboot="y">A@<DD_UPDATE>B@<GROUP>CONSUMERFLOW</GROUP>C@<NAME>FASTCASH1</NAME>D@<VALUE>YES,1,6</VALUE>E@</DD_UPDATE>F@<DD_UPDATE>G@<GROUP>CONSUMERFLOW</GROUP>H@<NAME>FASTCASH1AMOUNT</NAME>I@<VALUE>20</VALUE>J@</DD_UPDATE>K@</CONFIGURATION_DATA>001(1@@<CONFIGURATION_DATA reboot="y">A@<DD_UPDATE>B@<GROUP>CONSUMERFLOW</GROUP>C@<NAME>WITHDRAWAL</NAME>D@<VALUE>YES,1,7</VALUE>E@</DD_UPDATE>F@<DD_UPDATE>G@<GROUP>CONSUMERFLOW</GROUP>H@<NAME>ACCOUNTBALANCE</NAME>I@<VALUE>YES,1,7</VALUE>J@</DD_UPDATE>K@</CONFIGURATION_DATA>                   
+0030DEN166  400015964685039075@@000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+0030DEN129CA400012964685039075@@010   
+0031NEWKEY  332020193062042095255162143                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+0058ENCLOAD1342030141045159188199220094131165117182059001158231211                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              

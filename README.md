@@ -172,3 +172,37 @@ src/handlers/      JS 处理器（如 goInService）
 ## License
 
 ISC
+
+## 报文库（messages/）
+
+`messages/` 下是 NCR AP00_NDCHost 的报文文件（34 个 `.doc`，来自
+`C:\Program Files (x86)\NCR APTRA\AP00_NDCHost\MessageFiles`）。扩展名虽是 `.doc`，
+除一个例外外**内容都是纯文本**：11 字节文件头 + 定长 614 字节记录
+（4 位长度 + 8 字符键 + 完整 NDC 报文，含真实控制字符）。
+
+实测 33 个可解析，合计 **11920 条**真实报文：
+
+| 文件 | 条数 |
+|---|---|
+| StandardBaseACI.doc / StandardEditionMessages.doc | 2145 |
+| StandardBaseACIEnglish.doc | 1161 |
+| StandardInterface_0300_English_Messages.doc | 1071 |
+| StandardInterface_0300_Spanish_Messages.doc | 1019 |
+| StandardBaseACIEspanol.doc | 986 |
+| …其余 28 个 | 21–359 不等 |
+
+`First Data RDS 2005 Message Descriptions.doc` 是**真正的 Word 文档**（不是报文库），
+加载器会解析出 0 条 —— 这是正确行为，不要拿它当库文件配。
+`Metavante2Messages.doc` 有 2 条坏记录会被跳过，其余 71 条正常。
+
+在 `config.json` 里指向其中一个：
+
+```json
+{
+  "messageLibrary": "messages/StandardInterface_0300_English_Messages.doc",
+  "uiPort": 8080
+}
+```
+
+键（如 `A A  A A`）是 NCR 自己的场景命名，**不是操作码**，不要试图和 ATM 发来的
+操作码配对。控制台里显示的是从载荷推出的可读标签。
