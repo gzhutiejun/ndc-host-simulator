@@ -222,3 +222,27 @@ ISC
 
 键（如 `A A  A A`）是 NCR 自己的场景命名，**不是操作码**，不要试图和 ATM 发来的
 操作码配对。控制台里显示的是从载荷推出的可读标签。
+
+### 用报文库作答（推荐）
+
+规则里写 `libraryKey`，直接用库里的真实报文作答，不再用手写 handler 拼：
+
+```json
+{ "name": "balance-inquiry",
+  "match": { "messageClass": "1", "subClass": "1", "field": { "index": 7, "startsWith": "C" } },
+  "libraryKey": "C A  A A" }
+```
+
+**为什么默认改成库驱动**：原先五个 handler 发的 next state（`123`/`074`/`048`/`698`/`175`）
+是凭空写的，**不在 ATM 的 `ndc-next-states.json` 里**，ATM 一律兜底成 endSession，
+于是每笔交易都失败。库里 1024 条交易应答有 986 条用的是 ATM 认识的状态码
+（967 条是 `001` = Success）。
+
+键名规律与操作码一致：`A …` 取款、`C …` 余额。
+
+`libraryKey` 指向不存在的键（或没配 `messageLibrary`）会在**启动时**报错退出，
+不会等到有人站在机器前才发现。
+
+⚠️ **LUNO**：库里的报文把 LUNO 写死为 `000`，没有模板替换。ATM 侧
+`application.json` 的 `ndcLuno` 也是 `000`，当前一致；若哪天改了 ATM 的 LUNO，
+库驱动的应答会对不上，需要在这里补模板替换。
