@@ -6,12 +6,31 @@ const { createDecoder, encodeLength, encodeText } = require('./src/framing');
 const { parse } = require('./src/ndc/parser');
 const { createSession } = require('./src/session');
 const { createEngine } = require('./src/engine');
+const { parseLibrary } = require('./src/message-library');
 const { createLogger } = require('./src/logging');
 const { buildTerminalCommand } = require('./src/push');
 const goInService = require('./src/handlers/goInService');
 const makeWithdrawal = require('./src/handlers/withdrawal');
 const makeBalance = require('./src/handlers/balance');
 const makeGeneric = require('./src/handlers/generic');
+
+// 报文库文件是 NCR 给的第三方文件（640KB，不入库，每台机器路径可能不同）。不配路径时
+// 直接返回空数组——引擎的行为跟压根没有 library 参数时完全一样。配了路径但读不到/解析
+// 出问题时也不抛错、不让模拟器起不来，只记一条日志降级到空库：手动覆盖里的 { key } 用法会
+// 不可用，但规则引擎（默认路径）不受影响。
+function loadMessageLibrary(libraryPath) {
+  if (!libraryPath) return [];
+  try {
+    const buf = fs.readFileSync(libraryPath);
+    const records = parseLibrary(buf);
+    const skippedNote = records.skipped ? `，跳过 ${records.skipped} 条坏记录` : '';
+    console.log(`Message library loaded: ${records.length} entries from ${libraryPath}${skippedNote}`);
+    return records;
+  } catch (err) {
+    console.error(`Message library unavailable (${libraryPath}): ${err.message} — falling back to rule engine only`);
+    return [];
+  }
+}
 
 function createApp(config) {
   const captureDir = config.captureDir || path.join(__dirname, 'captures');
@@ -24,7 +43,8 @@ function createApp(config) {
     familyI: makeGeneric(config.familyI || { nextState: '175' }),
     generic: makeGeneric(config.generic || {}),
   };
-  const engine = createEngine({ rules: config.rules || [], handlers });
+  const library = loadMessageLibrary(config.messageLibrary);
+  const engine = createEngine({ rules: config.rules || [], handlers, library });
   const pushOnConnect = Array.isArray(config.pushOnConnect) ? config.pushOnConnect : [];
   const logger = createLogger({ dir: captureDir });
 
@@ -100,6 +120,10 @@ function createApp(config) {
 
   return {
     server,
+    // Task 3 的 HTTP 控制台（POST /api/next）就是靠这个 engine 引用调用
+    // engine.setNextResponse(...)；这里不启动任何 HTTP，只是把已经存在的引擎实例
+    // 露出去，本身不改变 NDC 端口上的任何行为。
+    engine,
     start(port) {
       server.listen(port, () => console.log(`NDC host simulator listening on port ${port}`));
       return server;

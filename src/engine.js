@@ -25,9 +25,64 @@ function matches(match, parsed) {
   return true;
 }
 
-function createEngine({ rules = [], handlers = {}, now = () => new Date() } = {}) {
+function createEngine({ rules = [], handlers = {}, now = () => new Date(), library = [] } = {}) {
+  // 库 key -> payload 的索引，懒建（大多数调用根本不传 library，不必白建一次）。
+  let libraryIndex = null;
+  function resolveKey(key) {
+    if (libraryIndex === null) {
+      libraryIndex = new Map();
+      for (const entry of library) {
+        if (entry && typeof entry.key === 'string') libraryIndex.set(entry.key, entry.payload);
+      }
+    }
+    return libraryIndex.get(key);
+  }
+
+  // 一次性覆盖：respond() 用一次就清（见下）。不设置时这个变量恒为 null，
+  // respond() 直接落进原有规则循环，逐字节不变。
+  let nextResponse = null;
+
   return {
+    // override 三选一：
+    //   { key: '<库里的键>' }  —— 从 Task 1 的 parseLibrary 结果里查 payload；查不到直接抛，
+    //                            让调用方（控制台）在"设置"这一刻就发现坏 key，而不是拖到
+    //                            下一条报文进来时才失败。
+    //   { payload: '<原始报文文本>' } —— 原样使用，不套 applyTemplate。
+    //   { noReply: true } —— 下一条入站报文不应答，用来测 ATM 自己的主机应答超时。
+    //   null/undefined —— 撤销已设置但还没用掉的覆盖（不消耗一次使用）。
+    setNextResponse(override) {
+      if (override == null) {
+        nextResponse = null;
+        return;
+      }
+      if (override.noReply === true) {
+        nextResponse = { kind: 'noReply' };
+        return;
+      }
+      if (typeof override.payload === 'string') {
+        nextResponse = { kind: 'payload', payload: override.payload, label: 'override:payload' };
+        return;
+      }
+      if (typeof override.key === 'string') {
+        const payload = resolveKey(override.key);
+        if (payload === undefined) {
+          throw new Error(`setNextResponse: unknown library key "${override.key}"`);
+        }
+        nextResponse = { kind: 'payload', payload, label: `override:key:${override.key}` };
+        return;
+      }
+      throw new Error('setNextResponse: override must be { key }, { payload }, { noReply: true }, or null/undefined to clear');
+    },
     respond(parsed, session) {
+      // 覆盖检查放在规则循环之前、任何匹配逻辑之前：一旦设置了覆盖，它必须赢过规则
+      // （包括 noReply 规则）。没设置时（nextResponse === null，默认状态）这个 if 直接
+      // 跳过，下面的规则循环是改动前的原样代码，行为逐字节不变。
+      if (nextResponse !== null) {
+        const override = nextResponse;
+        nextResponse = null; // 用掉即清：不管这次匹配与否，覆盖只吃一条入站报文
+        if (override.kind === 'noReply') return { payload: null, rule: 'override:noReply' };
+        return { payload: override.payload, rule: override.label };
+      }
       const ctx = {
         luno: (session && session.luno) || parsed.luno || '',
         tvn: session ? String(session.tvn) : '0',
