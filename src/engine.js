@@ -52,6 +52,14 @@ function createEngine({ rules = [], handlers = {}, now = () => new Date(), libra
         : `已加载的报文库共 ${library.length} 条，其中没有这个 key`;
       throw new Error(`Rule "${rule.name}" references unknown library key "${rule.libraryKey}" — ${reason}`);
     }
+    // libraryKeyFromField 的键要等报文进来才知道，没法逐个校验存在性；但「库是空的」
+    // 这一种必错的情形可以在构造期就抓住——理由与上面 libraryKey 的校验相同。
+    if (rule.libraryKeyFromField != null && libraryIndex.size === 0) {
+      throw new Error(
+        `Rule "${rule.name}" uses libraryKeyFromField but no message library is loaded ` +
+          '(messageLibrary not configured, or the library failed to load and degraded to empty)',
+      );
+    }
   }
 
   // 一次性覆盖：respond() 用一次就清（见下）。不设置时这个变量恒为 null，
@@ -108,6 +116,16 @@ function createEngine({ rules = [], handlers = {}, now = () => new Date(), libra
         if (!matches(rule.match, parsed)) continue;
         lastRule = rule.name;
         if (rule.noReply === true) return { payload: null, rule: rule.name };
+        if (rule.libraryKeyFromField != null) {
+          // 用入站报文里的操作码直接查库。库键是定长 8 字节，报文段末尾的空格
+          // 容易丢，所以补齐后再查。
+          const raw = (parsed.fields || [])[rule.libraryKeyFromField.index] || '';
+          const key = raw.padEnd(8, ' ');
+          if (libraryIndex.has(key)) {
+            return { payload: libraryIndex.get(key), rule: `${rule.name}:${key}` };
+          }
+          continue; // 库里没有这个操作码：交给后面的规则（家族 handler / generic 兜底）
+        }
         if (rule.libraryKey != null) {
           // 存在性已经在构造期校验过（见上），这里直接取，取到的必是真实报文库
           // 里的原始报文——不套 applyTemplate，跟 setNextResponse({ key }) 的

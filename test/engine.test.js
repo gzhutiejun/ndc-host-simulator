@@ -295,3 +295,43 @@ test('respond stops at the first handler that returns a payload (later rules unt
   assert.strictEqual(out.rule, 'first');
   assert.strictEqual(reached, false);
 });
+
+test('libraryKeyFromField：用请求里的操作码直接查库', () => {
+  const engine = createEngine({
+    library: [{ key: 'D AB A A', payload: 'TRANSFER-REPLY' }],
+    rules: [{ name: 'opcode-library', match: {}, libraryKeyFromField: { index: 7 } }],
+  });
+  const parsed = { fields: ['11', '000', '', '', '1=', 'track2', '', 'D AB A A', '00030000'] };
+  const out = engine.respond(parsed, null);
+  assert.strictEqual(out.payload, 'TRANSFER-REPLY');
+});
+
+test('libraryKeyFromField：库里没有这个操作码时落到下一条规则', () => {
+  const engine = createEngine({
+    library: [{ key: 'D AB A A', payload: 'TRANSFER-REPLY' }],
+    handlers: { fallback: () => 'FALLBACK' },
+    rules: [
+      { name: 'opcode-library', match: {}, libraryKeyFromField: { index: 7 } },
+      { name: 'generic', match: {}, handler: 'fallback' },
+    ],
+  });
+  const parsed = { fields: ['11', '000', '', '', '1=', 'track2', '', 'Z       ', ''] };
+  assert.strictEqual(engine.respond(parsed, null).payload, 'FALLBACK');
+});
+
+test('libraryKeyFromField：键按 8 位补齐后再查', () => {
+  // 报文段末尾的空格容易在传输/解析里丢掉；库键是定长 8。
+  const engine = createEngine({
+    library: [{ key: 'C A  A A', payload: 'BAL-REPLY' }],
+    rules: [{ name: 'opcode-library', match: {}, libraryKeyFromField: { index: 7 } }],
+  });
+  const parsed = { fields: ['11', '000', '', '', '1=', 't', '', 'C A  A A'] };
+  assert.strictEqual(engine.respond(parsed, null).payload, 'BAL-REPLY');
+});
+
+test('libraryKeyFromField 规则在库为空时构造期就抛', () => {
+  assert.throws(
+    () => createEngine({ rules: [{ name: 'opcode-library', match: {}, libraryKeyFromField: { index: 7 } }] }),
+    /opcode-library/,
+  );
+});

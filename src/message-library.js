@@ -6,8 +6,13 @@
 //
 // 每条记录：
 //   [0-3]   4 字节，十进制、前导零 —— 载荷长度
-//   [4-11]  8 字节 —— 键（NCR 自己的场景名，比如 "GIS     "、"A A  A A"；不是操作码，
-//           不要拿它去跟 ATM 发来的报文配对，实测对不上）
+//   [4-11]  8 字节 —— 键。其中 912 条**就是操作码**（如 "A A  A A"），另有 GIS/OOS/PIN1
+//           这类场景名。位语义可从应答正文反推：D AB A A 的凭条写 FROM CHECKING/TO
+//           SAVINGS（位 3 源账户、位 4 目标账户）、A A  B A 写 NO RECEIPT（位 6 凭条）、
+//           CBA  A B 写 SPANISH（位 8 语言）。
+//           曾经这里写着"不是操作码、实测对不上"——那是被 ATM 侧残缺的操作码误导了：
+//           当时 ATM 只发位 1（"A       "），自然 0 命中。ATM 侧已修，见 acc-ndc-app 的
+//           docs/superpowers/specs/2026-08-09-ndc-transaction-request-design.md §2.1。
 //   [12..]  上面那个长度 —— 载荷，完整的 NDC 报文，含真实控制字符 FS/SO/SI
 //   [之后]  补齐到 614 —— 空格（文件里偶尔混着 CRLF），丢弃
 //

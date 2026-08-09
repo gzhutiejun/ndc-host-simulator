@@ -11,6 +11,11 @@
   },
   "rules": [
     {
+      "name": "opcode-library",
+      "match": { "messageClass": "1", "subClass": "1" },
+      "libraryKeyFromField": { "index": 7 }
+    },
+    {
       "name": "withdrawal-request",
       "match": {
         "messageClass": "1",
