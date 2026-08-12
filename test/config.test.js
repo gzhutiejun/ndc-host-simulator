@@ -7,9 +7,15 @@ const { parseLibrary } = require('../src/message-library');
 const { parse } = require('../src/ndc/parser');
 const { encodeText } = require('../src/framing');
 const { createSession } = require('../src/session');
+const makeHostConfirmation = require('../src/handlers/hostConfirmation');
 const { FS } = require('../src/constants');
 
 const cfg = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'config.json'), 'utf8'));
+
+// 出厂规则里第一条 host-confirmation 匹配所有 class 1/1，所以任何用 config.json 的
+// 规则集建 engine 的测试都必须提供这个 handler。按出厂配置（enabled:false）建出来的
+// 那个恒返回 null，于是引擎照常落到后面的 libraryKey 规则——下面几个断言测的正是那条路径。
+const handlers = { hostConfirmation: makeHostConfirmation(cfg.hostConfirmation || {}) };
 
 test('config.json: familyD/familyI blocks carry the observed next-states (698/175)', () => {
   assert.strictEqual(cfg.familyD.nextState, '698');
@@ -75,13 +81,13 @@ test('config.json: 三个凭条模板不再说 AED（这个部署点的币种是
 test('config.json + 随仓库分发的报文库：启动期能装配出一个可用的 engine（libraryKey 全部能查到），不会像改动前那样直接崩', () => {
   const libraryPath = path.join(__dirname, '..', cfg.messageLibrary);
   const library = parseLibrary(fs.readFileSync(libraryPath));
-  assert.doesNotThrow(() => createEngine({ rules: cfg.rules, handlers: {}, library }));
+  assert.doesNotThrow(() => createEngine({ rules: cfg.rules, handlers, library }));
 });
 
 test('config.json + 报文库：取款规则应出一个 ATM 认得的下一状态（001），并带上真实出钞字段——不再是发明的 123', () => {
   const libraryPath = path.join(__dirname, '..', cfg.messageLibrary);
   const library = parseLibrary(fs.readFileSync(libraryPath));
-  const engine = createEngine({ rules: cfg.rules, handlers: {}, library });
+  const engine = createEngine({ rules: cfg.rules, handlers, library });
   const req = ['11', '000', '', '', '15', ';XXXX=XXXX?', '', 'ADC     ', '00000300'].join(FS);
   const out = engine.respond(parse(encodeText(req)), createSession());
   const f = out.payload.split(FS);
@@ -93,7 +99,7 @@ test('config.json + 报文库：取款规则应出一个 ATM 认得的下一状�
 test('config.json + 报文库：余额查询规则应出下一状态 001、不出钞，屏幕字段带三个余额', () => {
   const libraryPath = path.join(__dirname, '..', cfg.messageLibrary);
   const library = parseLibrary(fs.readFileSync(libraryPath));
-  const engine = createEngine({ rules: cfg.rules, handlers: {}, library });
+  const engine = createEngine({ rules: cfg.rules, handlers, library });
   const req = ['11', '000', '', '', '15', ';XXXX=XXXX?', '', 'CC   C  ', ''].join(FS);
   const out = engine.respond(parse(encodeText(req)), createSession());
   const f = out.payload.split(FS);

@@ -14,6 +14,7 @@ const goInService = require('./src/handlers/goInService');
 const makeWithdrawal = require('./src/handlers/withdrawal');
 const makeBalance = require('./src/handlers/balance');
 const makeGeneric = require('./src/handlers/generic');
+const makeHostConfirmation = require('./src/handlers/hostConfirmation');
 
 // 报文库文件是 NCR 给的第三方文件（640KB，不入库，每台机器路径可能不同）。不配路径时
 // 直接返回空数组——引擎的行为跟压根没有 library 参数时完全一样。配了路径但读不到/解析
@@ -43,6 +44,9 @@ function createApp(config) {
     familyD: makeGeneric(config.familyD || { nextState: '698' }),
     familyI: makeGeneric(config.familyI || { nextState: '175' }),
     generic: makeGeneric(config.generic || {}),
+    // 「先确认手续费/汇率再记账」。默认关闭（config.hostConfirmation.enabled 不为 true
+    // 时恒返回 null），所以它的规则可以常驻 config.json 而不改变出厂行为。
+    hostConfirmation: makeHostConfirmation(config.hostConfirmation || {}),
   };
   const library = loadMessageLibrary(config.messageLibrary);
   const engine = createEngine({ rules: config.rules || [], handlers, library });

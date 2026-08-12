@@ -11,6 +11,11 @@
   },
   "rules": [
     {
+      "name": "host-confirmation",
+      "match": { "messageClass": "1", "subClass": "1" },
+      "handler": "hostConfirmation"
+    },
+    {
       "name": "opcode-library",
       "match": { "messageClass": "1", "subClass": "1" },
       "libraryKeyFromField": { "index": 7 }
@@ -125,6 +130,11 @@
       "noReply": true
     }
   ],
+  "hostConfirmation": {
+    "enabled": false,
+    "scenario": "surcharge",
+    "declineNextState": "048"
+  },
   "withdrawal": {
     "cassettes": [
       50,

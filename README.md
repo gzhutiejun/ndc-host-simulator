@@ -157,6 +157,54 @@ withdrawal-request (A) → balance-inquiry (C) → d-family-reply (D,698) → i-
 > 账户状态无法确定性复现，未纳入；A 族各拒绝态同理。`familyD`/`familyI` 的 next-state 为抓包实测，
 > screen/printer 模板为 seed，**需真 ATM 校准**。
 
+## 记账前先让持卡人确认手续费/汇率
+
+主机可以在**记账之前**先要持卡人确认一件事：一笔手续费，或一个汇率/DCC 币种选择。
+报文是 **Interactive Transaction Response（消息类 `3`、子类 `2`）**，ATM 显示屏幕文本、
+收一个功能键，然后**重发同一笔 Transaction Request**，把按键放进 **Buffer B**（段 10）；
+主机收到那一条才做账务处理，再回 Transaction Reply。
+
+出厂**关闭**。打开：
+
+```json
+"hostConfirmation": {
+  "enabled": true,
+  "scenario": "surcharge",
+  "declineNextState": "048"
+}
+```
+
+内置场景（`src/handlers/hostConfirmation.js` 的 `SCENARIOS`）：
+
+| scenario | active keys | 屏幕文本要点 | 接受 | 拒绝 |
+|---|---|---|---|---|
+| `surcharge` | `AB` | `SURCHARGE;Fee=$2.00;` | `A` | `B` |
+| `overdraft` | `CD` | `OVERDRAFT FEE;Fee=$35.00;` | `C` | `D` |
+| `fee0` | `AB` | `FEE0;Fee=$1.50;` | `A` | `B` |
+| `fx` | `CD` | `CONDITIONAL=1805;EXCHANGETYPE=FX;…` | `C` | `D` |
+| `dcc` | `DEF` | `CONDITIONAL=1800;EXCHANGETYPE=DCC;…` | `D`(外币)/`F`(本币) | `E` |
+
+也可以不用内置场景，直接给 `screenData`/`activeKeys`/`accept`/`decline`。
+
+主机侧三态，靠入站请求的 Buffer B 区分：
+
+1. 第一条请求（Buffer B **不是**本场景的应答字母）→ 回交互式应答。判据是"字母在不在选项里"
+   而不是"Buffer B 是不是空的" —— 转账的 Buffer B 本来就放着目标账号。
+2. 接受字母 → handler 返回 `null`，引擎交给后面的规则（报文库/家族 handler）出真正的交易应答。
+   这正是真主机的行为：确认之后这一笔才走正常授权。
+3. 拒绝字母 → 回一条 `declineNextState` 的交易应答，不出钞。
+
+每笔只问一次：ATM 若回了一个不在场景里的字母，主机不再追问（否则会和 ATM 侧的轮数上限
+对撞成一个来回刷屏的死循环）。
+
+规则 `host-confirmation` 已经在出厂 `config.json` 的**第一条** —— 必须排在 `opcode-library`
+之前，否则报文库会先把交易答掉。关闭状态下这个 handler 恒返回 `null`，引擎逐字节地
+落到原有路径，所以它常驻规则表不改变任何出厂行为。
+
+> 字母表、状态号、标签都取自 Atleos Activate 的
+> `ChnApp/Cnsmr/CnsmrAppAE/Source/Config/Customiser/`（`RequestConfigurationTool.xml` 的
+> `BufferBConfiguration`、`ReplyState.xml`、`GenericToolConfiguration.xml`）。
+
 ## 录包
 
 每条收/发报文都会打印 hex dump 并追加到 `captures/session-<时间戳>.log`，
@@ -179,6 +227,7 @@ server.js          入口 + 装配层（createApp）
 src/transport.js   TCP/TLS 服务器
 src/framing.js     长度分帧 + 流式拆帧 + latin1 文本编解码
 src/ndc/parser.js  NDC 报文解析 + 分类
+src/ndc/interactiveResponse.js  交互式应答（class 3 子类 2）构造
 src/engine.js      混合应答引擎（规则 + 模板 + handler）
 src/session.js     每连接会话状态
 src/logging.js     hex dump + 录包
