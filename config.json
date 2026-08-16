@@ -6,6 +6,16 @@
   "responseDelayMs": 0,
   "uiPort": 8080,
   "pushOnConnect": [],
+  "fitDownload": {
+    "luno": "218",
+    "msn": "000",
+    "responseFlag": "0",
+    "beforeGoInService": false,
+    "delayMs": 500,
+    "entries": [
+      "023000255255255255255002000132000015000031138255007001035069103137001035069000000000000000000000000064064064000000000"
+    ]
+  },
   "tls": {
     "key": "path/to/key.pem",
     "cert": "path/to/cert.pem"

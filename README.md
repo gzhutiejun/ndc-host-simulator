@@ -8,7 +8,7 @@
 - 帧格式：`[2 字节大端长度 N][N 字节 payload]`（N 不含长度头本身）。
 - payload 为字符流，控制字符分隔：FS=0x1C、GS=0x1D、RS=0x1E、ETX=0x03。
 - 报文首字符=消息类，次字符=子类。ATM→host：`1`=非请求状态、`2`=请求状态；
-  host→ATM：`1`=终端命令、`4`=交易应答。
+  host→ATM：`1`=终端命令、`3`=数据命令（如 FIT 下发）、`4`=交易应答。
 
 ## 运行
 
@@ -238,6 +238,60 @@ withdrawal-request (A) → balance-inquiry (C) → d-family-reply (D,698) → i-
   `BS`（ASCII `08`）手册是 `08` 而 CP500 是 `16`；`|`（ASCII `7C`）手册是 `6A` 而
   CP500 是 `BB`。对接的主机若坚持标准 CP500，先查这两位。
 
+## FIT 下发（FIT download）
+
+主动往 ATM 推一条 **FIT 装载命令**——数据命令，报文类 `3`、报文标识 `15`：
+
+```
+"3"[响应标志] FS [LUNO] FS [消息序号] FS "15" FS <FIT 条目> FS [<FIT 条目> FS ...]
+```
+
+每条 FIT 条目是一串 3 位十进制的字节值（`000`-`255`），所以整条必须**全是数字**且**长度是 3 的倍数**；
+不满足时在发出任何一个字节之前就抛错。
+
+> 报文标识 `15` 与整条报文的形状，依据是随仓库分发的报文库里 key 字面就叫 `FIT` 的那条真实样本
+> （`messages/StandardInterface_0300_English_Messages.doc`）。`test/push.test.js` 里有一条"金标准"用例，
+> 断言 `buildFitDownload()` 拼出的字节与该样本**逐字节相等**。
+>
+> 至于那 35 个字节各自是什么字段（INDX / PAN 偏移 / PIN 长度……），手头**没有**权威依据，
+> 所以本仓库不提供字段级的构造器，也不在任何地方解释这些字节的含义——内容原样来自配置。
+
+### 配置
+
+```json
+"fitDownload": {
+  "luno": "218",
+  "msn": "000",
+  "responseFlag": "0",
+  "beforeGoInService": false,
+  "delayMs": 500,
+  "entries": ["023000255255255255255002000132000015000031138255007001035069103137001035069000000000000000000000000064064064000000000"]
+}
+```
+
+- **entries**：要下发的 FIT 条目，出厂值就是上面那条真实样本。
+- **beforeGoInService**：`true` 时，上电报文触发进服务的那一刻**先发 FIT、再发 Go In Service**
+  （真实主机的次序：先把 FIT 装载下去，ATM 才进服务）。**默认 `false`，出厂行为逐字节不变。**
+  认"哪条规则是进服务"看的是规则的 `handler` 是不是 `goInService`，不是写死的规则名——
+  在 `config.json` 里给规则改个名字不会让这个功能悄悄失效。
+- **delayMs**：`beforeGoInService` 打开时，FIT 与随后的 Go In Service 之间的间隔（默认 0）。
+
+FIT 拼不出来（没配 `entries`、或条目是坏的）时只在控制台打一条错误，Go In Service 照常发下去——
+一个可选的装载步骤没理由把上电流程整个卡死。
+
+### 三种触发方式
+
+| 方式 | 怎么做 |
+| --- | --- |
+| 浏览器控制台 | 打开 `http://localhost:<uiPort>`，点「下发 FIT」 |
+| HTTP 接口 | `curl -X POST localhost:<uiPort>/api/push -H 'Content-Type: application/json' -d '{"type":"fit"}'` |
+| 命令行 | `npm run push-fit`（端口取 `config.json` 的 `uiPort`，或 `-- --port 8080` 就地指定） |
+
+`POST /api/push` 的 body 可以逐字段就地覆盖配置：`{"type":"fit","luno":"001","entries":["000255"]}`。
+不带 `type`（或 `"type":"command"`）时仍是原来的类 1 终端命令，老用法一个字节都没变。
+
+FIT 只会发给**当前已连上**的 ATM；一台没连时返回 `{"sent":0}`，这不是错误。
+
 ## 录包
 
 每条收/发报文都会打印 hex dump 并追加到 `captures/session-<时间戳>.log`，
@@ -265,7 +319,10 @@ src/ndc/interactiveResponse.js  交互式应答（class 3 子类 2）构造
 src/engine.js      混合应答引擎（规则 + 模板 + handler）
 src/session.js     每连接会话状态
 src/logging.js     hex dump + 录包
+src/push.js        主动下发的报文构造（类 1 终端命令 / 类 3 数据命令 / FIT 下发）
+src/ui-server.js   浏览器控制台的 HTTP 接口
 src/handlers/      JS 处理器（如 goInService）
+scripts/push-fit.js  命令行下发 FIT（npm run push-fit）
 ```
 
 ## License

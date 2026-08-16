@@ -5,6 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
+    "push-fit": "node scripts/push-fit.js",
     "test": "node --test"
   },
   "keywords": [

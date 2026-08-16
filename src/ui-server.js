@@ -11,7 +11,9 @@
 //                        选中后靠 key 让 engine 去查，不用把 602 字节的载荷都传一遍）
 //   GET  /api/stream     SSE，收发的每一帧推一条 `data: {...}\n\n`
 //   POST /api/next       设置/撤销一次性覆盖，body 就是 engine.setNextResponse() 的参数
-//   POST /api/push       立刻给所有活跃连接下发一条终端命令，不等 ATM 先发请求
+//   POST /api/push       立刻给所有活跃连接下发一条报文，不等 ATM 先发请求。
+//                        {code, modifier, luno, msn} → 类 1 终端命令（默认）
+//                        {type:"fit", ...}           → 类 3 FIT 下发，缺省字段取 config.fitDownload
 
 const http = require('node:http');
 const fs = require('node:fs');
@@ -177,7 +179,16 @@ function createUiServer({ engine, library = [], push } = {}) {
       sendJson(res, 400, { error: err.message });
       return;
     }
-    if (!body || typeof body.code !== 'string' || body.code === '') {
+    // 这里只做"能不能发"的门卫，不管报文长什么样：怎么拼字节是注入的 push 回调
+    // （server.js 的 pushToActiveSockets）的事。
+    //   不带 type / type='command' —— 类 1 终端命令，必须有 code（老契约，逐字节不变）
+    //   type='fit'                 —— FIT 下发，报文类 3，没有 code 这个概念
+    const type = body && body.type != null ? body.type : 'command';
+    if (type !== 'command' && type !== 'fit') {
+      sendJson(res, 400, { error: `push: unknown type "${type}" (expected "command" or "fit")` });
+      return;
+    }
+    if (type === 'command' && (!body || typeof body.code !== 'string' || body.code === '')) {
       sendJson(res, 400, { error: 'push requires a non-empty "code"' });
       return;
     }

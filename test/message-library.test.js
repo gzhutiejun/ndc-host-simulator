@@ -146,6 +146,12 @@ test('describe: 类 3 已知子码（COMMSKEY，子码 32）标注"密钥变更"
   assert.strictEqual(d.label, '密钥变更');
 });
 
+test('describe: 类 3 子码 15 标注"FIT 下发"（库里 key 就叫 FIT 的那条样本）', () => {
+  const d = describeMessage('3' + '0' + FS + '218' + FS + '000' + FS + '15' + FS + '023000' + FS);
+  assert.strictEqual(d.subClass, '15');
+  assert.strictEqual(d.label, 'FIT 下发');
+});
+
 test('describe: 类 3 未知子码不编含义，只报子码', () => {
   const d = describeMessage('3' + FS + '000' + FS + FS + '21100111' + FS + '074' + FS + 'SURCHARGE FEE=$1.75');
   assert.strictEqual(d.subClass, '21100111');

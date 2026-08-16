@@ -222,6 +222,38 @@ test('POST /api/push: 调用注入的 push handler 并透传其返回值', async
   }
 });
 
+test('POST /api/push: type=fit 不需要 code，原样透传给 push handler', async () => {
+  const engine = createEngine({ rules: [], handlers: {} });
+  const calls = [];
+  const ui = createUiServer({ engine, push: (spec) => { calls.push(spec); return { sent: 1 }; } });
+  await new Promise((resolve) => ui.listen(0, resolve));
+  const port = ui.server.address().port;
+  try {
+    const res = await request(port, 'POST', '/api/push', { type: 'fit', luno: '218' });
+    assert.strictEqual(res.status, 200);
+    assert.deepStrictEqual(res.body, { sent: 1 });
+    assert.strictEqual(calls.length, 1);
+    assert.strictEqual(calls[0].type, 'fit');
+    assert.strictEqual(calls[0].luno, '218');
+  } finally {
+    await new Promise((resolve) => ui.close(resolve));
+  }
+});
+
+test('POST /api/push: 不认识的 type 返回 400，而不是当成终端命令发出去', async () => {
+  const engine = createEngine({ rules: [], handlers: {} });
+  const ui = createUiServer({ engine, push: () => ({ sent: 1 }) });
+  await new Promise((resolve) => ui.listen(0, resolve));
+  const port = ui.server.address().port;
+  try {
+    // 带上 code：今天这条 body 会被当成合法终端命令发出去（200）。认得 type 之后必须 400。
+    const res = await request(port, 'POST', '/api/push', { type: 'screens', code: '1' });
+    assert.strictEqual(res.status, 400);
+  } finally {
+    await new Promise((resolve) => ui.close(resolve));
+  }
+});
+
 test('GET /api/stream: publish() 广播的帧经过控制字符渲染后送达客户端（流不是哑的）', async () => {
   const engine = createEngine({ rules: [], handlers: {} });
   const ui = createUiServer({ engine });
