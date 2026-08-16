@@ -2,7 +2,8 @@ const path = require('node:path');
 const fs = require('node:fs');
 
 const { createTransport } = require('./src/transport');
-const { createDecoder, encodeLength, encodeText } = require('./src/framing');
+const { createDecoder, encodeLength, encodeWire } = require('./src/framing');
+const { parseTransmissionCode, setTransmissionCode } = require('./src/ebcdic');
 const { parse } = require('./src/ndc/parser');
 const { createSession } = require('./src/session');
 const { createEngine } = require('./src/engine');
@@ -35,6 +36,11 @@ function loadMessageLibrary(libraryPath) {
 }
 
 function createApp(config) {
+  // 传输码要在任何一帧收发之前定下来。缺省 ASCII —— 不配就与出厂行为逐字节一致。
+  const transmissionCode = parseTransmissionCode(config.transmissionCode);
+  setTransmissionCode(transmissionCode);
+  if (transmissionCode !== 'ASCII') console.log(`Transmission code: ${transmissionCode}`);
+
   const captureDir = config.captureDir || path.join(__dirname, 'captures');
   const responseDelayMs = config.responseDelayMs || 0;
   const handlers = {
@@ -60,7 +66,7 @@ function createApp(config) {
   // 它得知道现在有哪些连接可以写。
   const activeSockets = new Set();
   function pushToActiveSockets(spec) {
-    const bytes = encodeText(buildTerminalCommand(spec));
+    const bytes = encodeWire(buildTerminalCommand(spec));
     let sent = 0;
     for (const socket of activeSockets) {
       if (socket.destroyed) continue;
@@ -87,7 +93,7 @@ function createApp(config) {
       setTimeout(() => {
         if (socket.destroyed) return;
         try {
-          const bytes = encodeText(buildTerminalCommand(spec));
+          const bytes = encodeWire(buildTerminalCommand(spec));
           logger.record('SEND', bytes, { type: 'TerminalCommand', rule: 'pushOnConnect' });
           if (ui) ui.publish('SEND', bytes, { type: 'TerminalCommand', rule: 'pushOnConnect' });
           socket.write(encodeLength(bytes));
@@ -129,7 +135,7 @@ function createApp(config) {
             // 匹配到 noReply 规则（如 ReadyB 心跳/设备状态）：正常无应答，不告警
             continue;
           }
-          const bytes = encodeText(result.payload);
+          const bytes = encodeWire(result.payload);
           logger.record('SEND', bytes, { type: parsed.type, rule: result.rule });
           if (ui) ui.publish('SEND', bytes, { type: parsed.type, rule: result.rule });
           const out = encodeLength(bytes);

@@ -2,6 +2,7 @@
   "port": 2000,
   "messageLibrary": "messages/StandardInterface_0300_English_Messages.doc",
   "enableTLS": false,
+  "transmissionCode": "ASCII",
   "responseDelayMs": 0,
   "uiPort": 8080,
   "pushOnConnect": [],

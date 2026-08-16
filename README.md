@@ -25,6 +25,7 @@ npm test           # 跑单元/端到端测试（node --test）
 {
   "port": 2000,
   "enableTLS": false,
+  "transmissionCode": "ASCII",
   "responseDelayMs": 0,
   "tls": { "key": "path/to/key.pem", "cert": "path/to/cert.pem" },
   "rules": [
@@ -37,6 +38,7 @@ npm test           # 跑单元/端到端测试（node --test）
 
 - **port**：监听端口（默认 2000）。
 - **enableTLS**：是否启用 TLS 1.2（默认 false）。启用时需配置 `tls.key`/`tls.cert`。
+- **transmissionCode**：线缆上的传输码，`"ASCII"`（默认）或 `"EBCDIC"`。见下方「EBCDIC 传输码」。
 - **responseDelayMs**：应答延迟毫秒（默认 0）。
 - **rules**：应答规则，按顺序匹配第一条命中的：
   - `match`：谓词，可含 `messageClass`、`subClass`、`type`、`field:{index,equals|startsWith}`；空对象总是匹配。
@@ -205,6 +207,37 @@ withdrawal-request (A) → balance-inquiry (C) → d-family-reply (D,698) → i-
 > `ChnApp/Cnsmr/CnsmrAppAE/Source/Config/Customiser/`（`RequestConfigurationTool.xml` 的
 > `BufferBConfiguration`、`ReplyState.xml`、`GenericToolConfiguration.xml`）。
 
+## EBCDIC 传输码
+
+一部分 NDC 主机在线缆上用 **EBCDIC** 而不是 ASCII。把 `config.json` 的
+`transmissionCode` 设成 `"EBCDIC"` 即可让模拟器扮演这种主机：
+
+```json
+{ "transmissionCode": "EBCDIC" }
+```
+
+码表照抄 **B66180《APTRA Advance NDC, Reference Manual》附录 F 表 F-1**，实现在
+`src/ebcdic.js`，与 ATM 侧（`acc-ndc-app` 的 `core/ndc-charset.ts`）是同一张表。
+逐条核对见 `test/ebcdic.test.js` —— 那里按手册行序把 128 行又誊抄了一遍。
+
+几条要点：
+
+- **缺省是 ASCII**，不配这一项时行为与本功能实施前逐字节一致。
+- **换码只发生在 socket 边界**（`framing.js` 的 `encodeWire`/`decodeWire`）。规则引擎、
+  handler、模板、报文库全都照旧在 ASCII 串上工作，写规则时不用管传输码。
+- **`encodeText`/`decodeText` 保持纯 latin1，对传输码免疫** —— `message-library.js`
+  用它们读磁盘上的 NCR 报文库，那是文件编码不是线缆编码，跟着换会把整个库读成乱码。
+- **`FS`/`GS`/`RS`/`ETX` 在两种编码下同码**（`1C`/`1D`/`1E`/`03`）。所以成帧、切段逻辑
+  完全不受影响；抓包时也**别拿这几个字节判断对端用的是哪种码**，看数字：ASCII 下是
+  `30-39`，EBCDIC 下是 `F0-F9`。
+- **hexdump 与 UI 控制台会按传输码还原**：hex 栏仍是线缆上的真实字节，右边的字符栏和
+  控制台页面显示换码后的 ASCII，所以 EBCDIC 下照样看得懂。
+- 这是**整帧、收发对称**的设置（手册的 transmission code 就是这个口径）。真要模拟
+  「收 EBCDIC 发 ASCII」的不对称主机，得把它拆成两项，别用这一个开关硬凑。
+- 表 F-1 的可打印区基本等同 EBCDIC **CP500**，逐位比对只有两处不同，一律以手册为准：
+  `BS`（ASCII `08`）手册是 `08` 而 CP500 是 `16`；`|`（ASCII `7C`）手册是 `6A` 而
+  CP500 是 `BB`。对接的主机若坚持标准 CP500，先查这两位。
+
 ## 录包
 
 每条收/发报文都会打印 hex dump 并追加到 `captures/session-<时间戳>.log`，
@@ -225,7 +258,8 @@ openssl req -x509 -newkey rsa:2048 -keyout key.pem -out cert.pem -days 365 -node
 ```
 server.js          入口 + 装配层（createApp）
 src/transport.js   TCP/TLS 服务器
-src/framing.js     长度分帧 + 流式拆帧 + latin1 文本编解码
+src/framing.js     长度分帧 + 流式拆帧 + 文本编解码（latin1 与线缆两套）
+src/ebcdic.js      ASCII/EBCDIC 换码表（B66180 表 F-1）+ 传输码开关
 src/ndc/parser.js  NDC 报文解析 + 分类
 src/ndc/interactiveResponse.js  交互式应答（class 3 子类 2）构造
 src/engine.js      混合应答引擎（规则 + 模板 + handler）

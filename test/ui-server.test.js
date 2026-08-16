@@ -373,3 +373,20 @@ test('server.js: 真实 TCP 收发的帧经 SSE 推给控制台（端到端，�
     await new Promise((resolve) => app.ui.close(resolve));
   }
 });
+
+// UI 控制台展示的是**线缆上**的帧，所以也得按传输码换码；否则 EBCDIC 配置下
+// 页面上每一条报文都是乱码，控制台就废了。
+test('decodeFrame 在 EBCDIC 传输码下按表 F-1 还原', () => {
+  const { decodeFrame } = require('../src/ui-server');
+  const { setTransmissionCode } = require('../src/ebcdic');
+  setTransmissionCode('EBCDIC');
+  try {
+    // EBCDIC 的 "12" FS "000"
+    const buf = Buffer.from([0xf1, 0xf2, 0x1c, 0xf0, 0xf0, 0xf0]);
+    const { text, fields } = decodeFrame(buf);
+    assert.strictEqual(text, '12|000'); // FS 在 UI 里渲染成 '|'
+    assert.deepStrictEqual(fields, ['12', '000']);
+  } finally {
+    setTransmissionCode('ASCII');
+  }
+});

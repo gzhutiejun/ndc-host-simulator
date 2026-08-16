@@ -18,6 +18,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { URL } = require('node:url');
 const { describe } = require('./message-library');
+const { decodeWire } = require('./framing');
 const { FS, GS, RS, SO, SI } = require('./constants');
 
 const INDEX_HTML_PATH = path.join(__dirname, 'ui', 'index.html');
@@ -40,7 +41,8 @@ function toVisible(text) {
 }
 
 function decodeFrame(buf) {
-  const text = buf.toString('latin1');
+  // 控制台展示的是线缆上的帧，按传输码换码；不换的话 EBCDIC 配置下页面全是乱码。
+  const text = decodeWire(buf);
   const fields = text.split(FS).map(toVisible);
   return { text: toVisible(text), fields };
 }

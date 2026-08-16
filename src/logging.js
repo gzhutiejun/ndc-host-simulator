@@ -1,5 +1,6 @@
 const fs = require('node:fs');
 const path = require('node:path');
+const { decodeByte } = require('./ebcdic');
 
 function hexDump(buf) {
   const lines = [];
@@ -7,7 +8,12 @@ function hexDump(buf) {
     const slice = buf.subarray(i, i + 16);
     const offset = i.toString(16).padStart(8, '0');
     const hex = [...slice].map((b) => b.toString(16).padStart(2, '0')).join(' ');
-    const ascii = [...slice].map((b) => (b >= 0x20 && b < 0x7f ? String.fromCharCode(b) : '.')).join('');
+    // hex 栏是线缆上的**真实字节**（抓包要对得上），字符栏按传输码换码后再渲染
+    // （那一栏问的是"这帧在说什么"）。EBCDIC 下不换码的话字符栏会全是点。
+    const ascii = [...slice]
+      .map((b) => decodeByte(b))
+      .map((c) => (c >= 0x20 && c < 0x7f ? String.fromCharCode(c) : '.'))
+      .join('');
     lines.push(`${offset}  ${hex.padEnd(16 * 3 - 1)}  |${ascii}|`);
   }
   return lines.join('\n');
