@@ -386,6 +386,35 @@ ISC
 `libraryKey` 指向不存在的键（或没配 `messageLibrary`）会在**启动时**报错退出，
 不会等到有人站在机器前才发现。
 
+### 迷你对账单（H 族）与 Everlink 的 `DG`
+
+操作码取自 APTRA Activate 的请求构造配置（`spl-ActivateEnterpriseProduct` 的
+`ChnApp/Cnsmr/CnsmrAppAE/Source/Config/Customiser/RequestConfigurationTool.xml`，
+`<OpcodeConfiguration><OpcodeRecords>`）：
+
+| TRANSLET_ID | 变体 | 操作码位 1-2 |
+| --- | --- | --- |
+| MINISTATEMENT | 1…10 | `HA`…`HJ` |
+| FULLSTATEMENT | 1…8 | `LA`…`LH` |
+
+库里 `H*` 键有 23 条（`HA`…`HJ` × 位 3 账户 `A`=CHECKING/`B`=SAVINGS，另加三条位 4=`C`），
+应答凭条正文字面就写着 `MINISTATEMENT1`…`MINISTATEMENT10`，能独立佐证。全帐单 `L*` 18 条。
+
+但这 23 条键的**位 5-8 全是 `  A A` 这一种**——真机只要在别的位上发了不同字符（历史上还出现过
+只发位 1 的截断操作码），精确查库就落空、掉进 `generic-fallback` 拿一个 `048`「交易取消」，
+测的人看着就像"主机不支持迷你对账单"。所以出厂配置里补了两条规则：
+
+- **`h-family-ministatement`**：任何 `H` 开头的操作码 → `libraryKey: "HAA  A A"`。
+  排在 `opcode-library` **之后**，所以能精确命中的（`HJA  A A` → MINISTATEMENT10、
+  `HAB  A A` → SAVINGS）仍然走精确那条，变体/账户的区分不会被兜底吃掉。
+- **`everlink-ministatement`**：Everlink（加拿大）区域把 MINISTATEMENT 覆盖成了
+  `DG      `（见 `Regions/Canada/Everlink/Customiser/RequestConfigurationToolEV.xml`），
+  而库里 `DG*` 命中 0 条。不特殊处理的话它会被 `d-family-reply` 按"`D` 开头"吃掉、
+  回一个 `698`（D 族/改密）。这条规则排在 `d-family-reply` **之前**，只吃 `DG`，
+  其余 D 族照旧走 `familyD`。
+
+`test/config.test.js` 里有这两条的规则顺序与路由断言。
+
 ⚠️ **LUNO**：库里的报文把 LUNO 写死为 `000`，没有模板替换。ATM 侧
 `application.json` 的 `ndcLuno` 也是 `000`，当前一致；若哪天改了 ATM 的 LUNO，
 库驱动的应答会对不上，需要在这里补模板替换。
