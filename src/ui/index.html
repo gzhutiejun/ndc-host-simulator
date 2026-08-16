@@ -143,6 +143,14 @@
       </div>
 
       <div class="control-group">
+        <h2>下发 FIT</h2>
+        <div class="btn-row">
+          <button id="push-fit">下发 FIT (FIT download)</button>
+        </div>
+        <div class="hint">数据命令（报文类 3，报文标识 15）。内容取自 config.json 的 fitDownload。</div>
+      </div>
+
+      <div class="control-group">
         <h2>下一条应答</h2>
         <div class="btn-row">
           <button id="arm-noreply" class="danger">不回包（测超时）</button>
@@ -342,8 +350,9 @@
     armNext({ payload: encodeVisible(raw) });
   });
 
-  // ---- 立即下发终端命令 ----
+  // ---- 立即下发（终端命令 / FIT）----
   function pushCommand(spec) {
+    var what = spec.type === 'fit' ? 'FIT' : '命令码 ' + spec.code;
     fetch('/api/push', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -351,7 +360,7 @@
     }).then(function (r) { return r.json(); }).then(function (data) {
       armedBanner.textContent = data.error
         ? '下发失败：' + data.error
-        : '已下发命令码 ' + spec.code + '，命中 ' + data.sent + ' 个活跃连接';
+        : '已下发 ' + what + '，命中 ' + data.sent + ' 个活跃连接';
       armedBanner.style.color = data.error ? 'var(--danger)' : '';
     }).catch(function (err) {
       armedBanner.textContent = '下发失败：' + err.message;
@@ -360,6 +369,7 @@
 
   document.getElementById('push-gis').addEventListener('click', function () { pushCommand({ code: '1' }); });
   document.getElementById('push-oos').addEventListener('click', function () { pushCommand({ code: '2' }); });
+  document.getElementById('push-fit').addEventListener('click', function () { pushCommand({ type: 'fit' }); });
   document.getElementById('push-custom').addEventListener('click', function () {
     pushCommand({
       code: document.getElementById('push-code').value,

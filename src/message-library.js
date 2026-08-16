@@ -99,9 +99,12 @@ const TERMINAL_COMMAND_LABELS = {
   2: 'Go Out Of Service',
 };
 
-// 类 3（数据命令）里，只有 COMMSKEY 样例（子码 32）在 plan 里被明确点名是"密钥变更"。
+// 类 3（数据命令）里，只收录能拿样本对上号的子码：
+//   32 —— COMMSKEY 样例，plan 里明确点名是"密钥变更"
+//   15 —— 库里 key 字面就叫 "FIT" 的那条样本，子码字段为 "15"
 // 其余子码（比如 21100111，样本里出现在 OAR* 一类屏幕文案更新报文里）含义不确定，不编。
 const DATA_COMMAND_LABELS = {
+  15: 'FIT 下发',
   32: '密钥变更',
 };
 
