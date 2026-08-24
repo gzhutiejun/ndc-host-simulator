@@ -159,6 +159,163 @@ withdrawal-request (A) → balance-inquiry (C) → d-family-reply (D,698) → i-
 > 账户状态无法确定性复现，未纳入；A 族各拒绝态同理。`familyD`/`familyI` 的 next-state 为抓包实测，
 > screen/printer 模板为 seed，**需真 ATM 校准**。
 
+## CUBC / DDC 方言：主机 PIN 验证（HHH）
+
+CUBC 说的是 NDC 结构的报文，只是若干字段用了自己的约定（"DDC"）——不是另一个协议。
+第一片落地的是本行卡会话的**第一条**主机报文：插卡、选语言、输 PIN 之后、主菜单之前，
+ATM 先发一条 `HHH` 请求验证卡号+PIN，不动钱、不出钞，next-state `803` 表示"这一段过了，
+继续"。字段形状与标准 NDC 的 Transaction Reply 相同（`[4, luno, stn, nextState, fieldG,
+screen, printer]`），跟出厂的取款/余额规则用的是同一套 `respond()` 引擎，只是换了个 handler。
+
+出厂 `config.json` **不引用**这条规则——要用就在自己的规则表里加：
+
+```json
+{ "name": "ddc-pin-validation",
+  "match": { "messageClass": "1", "subClass": "1", "field": { "index": 7, "equals": "HHH A   " } },
+  "handler": "ddcPinValidation" }
+```
+
+`config.json` 的 `ddcPinValidation` 块：
+
+- **nextState**：批准后的 next-state（默认 `"803"`）。改成 `"833"`/`"804"` 可以模拟
+  强制改密/重输 PIN 这两条 CUBC 专用分支。
+- **screen** / **printer**：屏幕/打印模板（默认空——真实这一步只停在 PLEASE_WAIT，
+  211/213 次抓包 `ReceiptRequested=false`）。
+- **includeCam** / **camArc**：要不要在应答里追加 DDC 的 EMV 边界段（默认关）。真实
+  样本（终端 008823，2024-01-15 07:44:56）的 HHH 应答就是这个 10 段形状——见下面
+  「DDC 的 EMV 段」一节。
+
+本模拟器没有真实卡库，所以**恒批准**（`nextState` 之外没有拒绝路径）——测的是 ATM 侧
+对这几个 next-state 的处理，不是主机侧的风控逻辑。
+
+> **需真 ATM 校准**：`HHH` 的操作码位 5（语言）示例值取自单条现网样本（`HHH A   `），
+> 完整语言表未独立核实。DDC 的 EMV 段内层字段含义未核实（见下节）。
+
+### DDC 的 EMV 段（应答里的 `'9''M'...`）
+
+真实 DDC 应答的打印数据可以跨多个 FS 段，直到遇上一段含 `'9'` 标记（EMV 边界）为止——
+acc-cubc 的 `ddc-reply-sectors.ts` 就是靠这个字符判定"打印数据到这里为止"。真实样本：
+
+```
+'9''M'0016B64CEDA6008000000000123230373730
+```
+
+`buildDdcEmvSegment(arc, include)`（`src/ndc/ddcTransactionReply.js`）只保证**外层
+形状**——两个引号标记 `'9''M'` + 由 `arc` 编出的十六进制——跟标准 NDC 的 `buildCam`
+（`'5CAM8A02'+hex(arc)`）是同一条纪律：让分段逻辑测得到、**不是字节级还原真实密文**。
+内层十六进制数据的字段级含义没有核实，而且 acc-cubc 自己解出这一段之后也只当不透明串
+存着，全仓找不到第二处读它的代码——所以这不是一个亟待补全的精度缺口，是这段数据
+本来就没有已知的消费者。
+
+已接进两个 handler：`ddcPinValidation`（`includeCam`/`camArc`，见上）与
+`ddcWithdrawalStage2`（同名配置，**只加在批准的应答上**——被拒绝的这一笔本来就没有
+走完 EMV 密文交换，跟标准 NDC `withdrawal` 块的 `includeCam` 是同一条纪律）。
+
+> **需真 ATM 校准**：只有一条真实样本，出现在 HHH 应答；取款/余额第 2 段的应答是否
+> 也带这一段、内层数据的字段级含义，都还没有独立验证。
+
+## CUBC / DDC 方言：两段式取款（AA B → 547 → AA C → 128）
+
+CUBC 的取款不是一条请求一条应答，是**两段主机往返**，操作码基码不同：
+
+```
+主菜单 → [AA B] → (547，不出钞) → 客户选币种/输金额 → [AA C] → (128，出钞)
+```
+
+第 1 段（`AA B`）**不带真实金额**（12 个零）——ATM 那时还没问客户要多少钱，主机这一步
+只做准入判断。`ddcWithdrawalStage1` 恒批准，next-state 可配（默认 `547`），不出钞。
+第 2 段（`AA C`）带真实金额，`ddcWithdrawalStage2` 才真的算钞、出钞。两段用**不同的
+handler、不同的规则**分辨——不需要按连接记"现在是第几段"，ATM 自己知道该发哪个操作码。
+
+出厂 `config.json` **不引用**这两条规则：
+
+```json
+{ "name": "ddc-withdrawal-stage1",
+  "match": { "messageClass": "1", "subClass": "1", "field": { "index": 7, "startsWith": "AA B" } },
+  "handler": "ddcWithdrawalStage1" },
+{ "name": "ddc-withdrawal-stage2",
+  "match": { "messageClass": "1", "subClass": "1", "field": { "index": 7, "startsWith": "AA C" } },
+  "handler": "ddcWithdrawalStage2" }
+```
+
+`config.json` 的 `ddcWithdrawalStage2` 块（`ddcWithdrawalStage1` 只有 `nextState`/`screen`/
+`printer`，语义同 `ddcPinValidation`）：
+
+- **cassettes**：磁箱面额（同标准 NDC 的 `withdrawal` 块），默认 `[50,100,500,1000]`。
+- **approvedNextState** / **declineNextState**：默认 `"128"` / `"048"`。
+- **maxAmount**：超过就拒绝，默认不限。
+- **amountFieldIndex**：请求里金额字段索引，默认 `8`（与标准 NDC 相同，CUBC 没有挪位）。
+- **receipt** / **declineReceipt**：屏幕/凭条模板，占位符与标准 `withdrawal` 块相同
+  （`<AMOUNT> <PAN> <DATE> <TIME> <RECNO> <LUNO>`）。
+- **includeCam** / **camArc**：要不要在**批准**的应答里追加 DDC 的 EMV 边界段（默认
+  关；拒绝的应答永远不带）。见「DDC 的 EMV 段」一节。
+
+⚠️ **金额单位**：CUBC 的金额字段是 **12 位、单位是分**（末两位是小数），与标准 NDC
+`withdrawal` 块的 8 位字段**不是同一种解释**——那边把整段数字直接当整数配 cassette 面额
+（既有简化，未跟着改）。`ddcWithdrawalStage2` 按分换算成主币种单位再配 cassette，
+跟真实 acc-cubc ATM 发出来的金额字段口径一致（出处：acc-cubc 的
+`core/request/ddc-amount.ts`）。
+
+> **需真 ATM 校准**：`declineNextState` 缺省值 `"048"` 是借用标准 NDC 取款拒绝的安全
+> state，不是 CUBC 现网实测值；`fieldG` 用的是既有的贪心分解算法（同标准 `withdrawal`
+> 块），不是 CUBC 真实的混钞策略。凭条/屏幕模板内容同样是占位，不是真实文案抓取。
+
+### 快捷取款（AA A → 503 → AA C，与普通取款共用第 2 段）
+
+快捷取款只是**第 1 段**换了个操作码基码（`AA A` 不是 `AA B`）和阶段确认 next-state
+（`503` 不是 `547`）——**第 2 段完全共用**普通取款的 `AA C` → `128`，同一条
+`ddc-withdrawal-stage2` 规则，不需要为快捷取款另建。
+
+`ddcFastCashStage1` 复用的就是 `makeDdcWithdrawalStage1` 这个工厂函数，只是换了默认
+配置（`nextState: "503"`）——跟出厂已有的 `familyD`/`familyI` 复用同一个
+`makeGeneric` 工厂、只换 `nextState` 是同一个模式，不是新写的 handler。
+
+```json
+{ "name": "ddc-fastcash-stage1",
+  "match": { "messageClass": "1", "subClass": "1", "field": { "index": 7, "startsWith": "AA A" } },
+  "handler": "ddcFastCashStage1" }
+```
+
+（第 2 段直接沿用上面「两段式取款」小节的 `ddc-withdrawal-stage2` 规则与
+`ddcWithdrawalStage2` 配置块，不用重复配。）
+
+## CUBC / DDC 方言：两段式余额查询（BA A → 055 → BA B → 063）
+
+跟两段式取款同一个道理，操作码基码不同：
+
+```
+主菜单 → [BA A] → (055，无业务数据) → （无需客户操作）→ [BA B] → (063，带余额)
+```
+
+第 1 段（`BA A`）同样只做准入判断，`ddcBalanceStage1` 恒批准、不出钞。第 2 段
+（`BA B`）才带真实余额，`ddcBalanceStage2` 返回配置里的固定余额（同标准 NDC 的
+`balance` 块，没有真实账务系统）。两段之间**不需要客户输入**——现网抓包两段之间
+只出现 `PLEASE_WAIT_SCREEN`，与取款两段之间要选币种/输金额不同，但这只影响 ATM
+侧的流程图，不影响这两个 handler。
+
+出厂 `config.json` **不引用**这两条规则：
+
+```json
+{ "name": "ddc-balance-stage1",
+  "match": { "messageClass": "1", "subClass": "1", "field": { "index": 7, "startsWith": "BA A" } },
+  "handler": "ddcBalanceStage1" },
+{ "name": "ddc-balance-stage2",
+  "match": { "messageClass": "1", "subClass": "1", "field": { "index": 7, "startsWith": "BA B" } },
+  "handler": "ddcBalanceStage2" }
+```
+
+`config.json` 的 `ddcBalanceStage2` 块（`ddcBalanceStage1` 只有 `nextState`/`screen`/
+`printer`）：
+
+- **nextState**：默认 `"063"`。
+- **amount**：返回的固定余额，默认 `"5000.00"`，填入 `receipt.screen`/`receipt.printerData`
+  模板的 `<BALANCE>`。
+- **receipt**：屏幕/凭条模板，占位符同标准 `balance` 块
+  （`<BALANCE> <PAN> <DATE> <TIME> <RECNO> <LUNO>`）。
+
+> **需真 ATM 校准**：next-state `055`/`063` 与两段之间无需客户操作这两条取自
+> acc-cubc 的现网抓包分析，未在本模拟器这一侧独立验证；屏幕/凭条模板内容是占位。
+
 ## 记账前先让持卡人确认手续费/汇率
 
 主机可以在**记账之前**先要持卡人确认一件事：一笔手续费，或一个汇率/DCC 币种选择。

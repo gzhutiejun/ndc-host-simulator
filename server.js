@@ -16,6 +16,11 @@ const makeWithdrawal = require('./src/handlers/withdrawal');
 const makeBalance = require('./src/handlers/balance');
 const makeGeneric = require('./src/handlers/generic');
 const makeHostConfirmation = require('./src/handlers/hostConfirmation');
+const makeDdcPinValidation = require('./src/handlers/ddcPinValidation');
+const makeDdcWithdrawalStage1 = require('./src/handlers/ddcWithdrawalStage1');
+const makeDdcWithdrawalStage2 = require('./src/handlers/ddcWithdrawalStage2');
+const makeDdcBalanceStage1 = require('./src/handlers/ddcBalanceStage1');
+const makeDdcBalanceStage2 = require('./src/handlers/ddcBalanceStage2');
 
 // 报文库文件是 NCR 给的第三方文件（640KB，不入库，每台机器路径可能不同）。不配路径时
 // 直接返回空数组——引擎的行为跟压根没有 library 参数时完全一样。配了路径但读不到/解析
@@ -53,6 +58,19 @@ function createApp(config) {
     // 「先确认手续费/汇率再记账」。默认关闭（config.hostConfirmation.enabled 不为 true
     // 时恒返回 null），所以它的规则可以常驻 config.json 而不改变出厂行为。
     hostConfirmation: makeHostConfirmation(config.hostConfirmation || {}),
+    // CUBC/DDC 方言：主机 PIN 验证（HHH）。跟其它 handler 一样，注册只是让它**可以**被
+    // 规则引用——出厂 config.json 不引用它，这一行本身不改变任何现有行为。
+    ddcPinValidation: makeDdcPinValidation(config.ddcPinValidation || {}),
+    ddcWithdrawalStage1: makeDdcWithdrawalStage1(config.ddcWithdrawalStage1 || {}),
+    ddcWithdrawalStage2: makeDdcWithdrawalStage2(config.ddcWithdrawalStage2 || {}),
+    // 快捷取款第 1 段：操作码基码 "AA A"（不是 "AA B"），阶段确认 next-state 503
+    // （不是 547）。复用 ddcWithdrawalStage1 的工厂函数、只换缺省 nextState——同一个
+    // handler 逻辑对哪个操作码把它匹配上来的并不关心，跟下面 familyD/familyI 复用
+    // makeGeneric 是同一个模式。第 2 段（"AA C"）与普通取款完全共用
+    // ddc-withdrawal-stage2 那条规则，不需要新 handler。
+    ddcFastCashStage1: makeDdcWithdrawalStage1(config.ddcFastCashStage1 || { nextState: '503' }),
+    ddcBalanceStage1: makeDdcBalanceStage1(config.ddcBalanceStage1 || {}),
+    ddcBalanceStage2: makeDdcBalanceStage2(config.ddcBalanceStage2 || {}),
   };
   const library = loadMessageLibrary(config.messageLibrary);
   const engine = createEngine({ rules: config.rules || [], handlers, library });
