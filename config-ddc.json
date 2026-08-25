@@ -30,6 +30,78 @@
       "handler": "hostConfirmation"
     },
     {
+      "name": "ddc-pin-validation",
+      "match": {
+        "messageClass": "1",
+        "subClass": "1",
+        "field": {
+          "index": 7,
+          "startsWith": "HHH"
+        }
+      },
+      "handler": "ddcPinValidation"
+    },
+    {
+      "name": "ddc-fastcash-stage1",
+      "match": {
+        "messageClass": "1",
+        "subClass": "1",
+        "field": {
+          "index": 7,
+          "startsWith": "AA A"
+        }
+      },
+      "handler": "ddcFastCashStage1"
+    },
+    {
+      "name": "ddc-withdrawal-stage1",
+      "match": {
+        "messageClass": "1",
+        "subClass": "1",
+        "field": {
+          "index": 7,
+          "startsWith": "AA B"
+        }
+      },
+      "handler": "ddcWithdrawalStage1"
+    },
+    {
+      "name": "ddc-withdrawal-stage2",
+      "match": {
+        "messageClass": "1",
+        "subClass": "1",
+        "field": {
+          "index": 7,
+          "startsWith": "AA C"
+        }
+      },
+      "handler": "ddcWithdrawalStage2"
+    },
+    {
+      "name": "ddc-balance-stage1",
+      "match": {
+        "messageClass": "1",
+        "subClass": "1",
+        "field": {
+          "index": 7,
+          "startsWith": "BA A"
+        }
+      },
+      "handler": "ddcBalanceStage1"
+    },
+    {
+      "name": "ddc-balance-stage2",
+      "match": {
+        "messageClass": "1",
+        "subClass": "1",
+        "field": {
+          "index": 7,
+          "startsWith": "BA B"
+        }
+      },
+      "handler": "ddcBalanceStage2"
+    },
+    {
       "name": "opcode-library",
       "match": {
         "messageClass": "1",
@@ -246,5 +318,36 @@
       "screen": "",
       "printerData": "<GS>1  TRANSACTION<LF>  <DATE> <TIME><LF><FF>"
     }
+  },
+  "ddcPinValidation": {
+    "nextState": "803",
+    "includeCam": false,
+    "camArc": "00"
+  },
+  "ddcFastCashStage1": {
+    "nextState": "503"
+  },
+  "ddcWithdrawalStage1": {
+    "nextState": "547"
+  },
+  "ddcWithdrawalStage2": {
+    "cassettes": [
+      50,
+      100,
+      500,
+      1000
+    ],
+    "approvedNextState": "128",
+    "declineNextState": "048",
+    "amountFieldIndex": 8,
+    "includeCam": false,
+    "camArc": "00"
+  },
+  "ddcBalanceStage1": {
+    "nextState": "055"
+  },
+  "ddcBalanceStage2": {
+    "nextState": "063",
+    "amount": "5000.00"
   }
 }

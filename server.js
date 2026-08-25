@@ -244,10 +244,14 @@ function createApp(config) {
 }
 
 if (require.main === module) {
-  const config = JSON.parse(fs.readFileSync(path.join(__dirname, 'config.json'), 'utf8'));
+  // 配置文件名可选传参：`node server.js config-ddc.json` 切协议方言，不传时保持
+  // 出厂行为（config.json，标准 NDC）逐字节不变。相对路径相对仓库根目录解析，
+  // 跟 config.json 里 messageLibrary 等字段的既有约定一致。
+  const configFile = process.argv[2] || 'config.json';
+  const config = JSON.parse(fs.readFileSync(path.join(__dirname, configFile), 'utf8'));
   const port = config.port || 2000;
   const mode = config.enableTLS ? 'TLS 1.2' : 'TCP';
-  console.log(`Starting ${mode} server on port ${port}...`);
+  console.log(`Starting ${mode} server on port ${port} (config: ${configFile})...`);
   createApp(config).start(port);
 }
 

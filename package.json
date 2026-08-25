@@ -5,6 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
+    "start-ddc": "node server.js config-ddc.json",
     "push-fit": "node scripts/push-fit.js",
     "test": "node --test"
   },

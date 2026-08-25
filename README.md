@@ -13,11 +13,22 @@
 ## 运行
 
 ```bash
-npm start          # 读 config.json 启动
+npm start          # 读 config.json 启动（标准 NDC，对 acc-ndc-app）
+npm run start-ddc  # 读 config-ddc.json 启动（CUBC/DDC 方言，对 acc-cubc）
 npm test           # 跑单元/端到端测试（node --test）
 ```
 
 真实 ATM 默认连 `127.0.0.1:2000`，与本模拟器默认端口一致。
+
+`server.js` 接受一个可选的位置参数覆盖配置文件名（`node server.js <file>`，相对仓库根目录
+解析）；不传时是 `config.json`，跟本功能实施前逐字节一致。两份配置文件是**两条独立的规则表**，
+不是同一份文件的两种读法：
+
+- **`config.json`**——标准 NDC。不引用任何 `ddc-*` 规则/handler。
+- **`config-ddc.json`**——`config.json` 的规则表之上，额外挂了「CUBC / DDC 方言」各节
+  描述的六条 `ddc-*` 规则（PIN 验证、两段式取款/快捷取款/余额），跟 acc-cubc 的
+  `ndcDialect=ddc` 配套。下面各节里"出厂 config.json 不引用这条规则，要用就自己加"的说明，
+  指的是 `config.json`；`config-ddc.json` 已经替你加好了。
 
 ## 配置（config.json）
 
