@@ -102,6 +102,30 @@
       "handler": "ddcBalanceStage2"
     },
     {
+      "name": "ddc-transfer-own-stage1",
+      "match": {
+        "messageClass": "1",
+        "subClass": "1",
+        "field": {
+          "index": 7,
+          "startsWith": "GD B"
+        }
+      },
+      "handler": "ddcTransferOwnStage1"
+    },
+    {
+      "name": "ddc-transfer-own-stage2",
+      "match": {
+        "messageClass": "1",
+        "subClass": "1",
+        "field": {
+          "index": 7,
+          "startsWith": "GD C"
+        }
+      },
+      "handler": "ddcTransferOwnStage2"
+    },
+    {
       "name": "opcode-library",
       "match": {
         "messageClass": "1",
@@ -349,5 +373,14 @@
   "ddcBalanceStage2": {
     "nextState": "063",
     "amount": "5000.00"
+  },
+  "ddcTransferOwnStage1": {
+    "nextState": "882"
+  },
+  "ddcTransferOwnStage2": {
+    "receipt": {
+      "screen": "",
+      "printerData": "<GS>1  FUNDS TRANSFER<LF>  <DATE> <TIME><LF>  REF <RECNO><LF><FF>"
+    }
   }
 }

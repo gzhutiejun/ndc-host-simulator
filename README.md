@@ -327,6 +327,37 @@ handler、不同的规则**分辨——不需要按连接记"现在是第几段"
 > **需真 ATM 校准**：next-state `055`/`063` 与两段之间无需客户操作这两条取自
 > acc-cubc 的现网抓包分析，未在本模拟器这一侧独立验证；屏幕/凭条模板内容是占位。
 
+## CUBC / DDC 方言：两段式转账（本人账户，GD B → 882 → GD C → 130）
+
+```
+主菜单 → [GD B] → (882，不出钞) → 客户选目标账户/输金额 → [GD C] → (130，不出钞)
+```
+
+跟两段式余额同一个道理，操作码基码不同。出处：NCR《CUBC Activate DDC EJ Reference
+Guide v.01.00》19 页。
+
+`config-ddc.json` **默认已引用**这两条规则（不同于其余 `ddc-*` 规则需要自己加进
+`config.json` 才生效——转账没有对应的标准 NDC 兜底路径，`config.json` 跑标准方言时
+遇到 `GD B`/`GD C` 这类操作码会落进 `generic-fallback`）。
+
+⚠️ **已知模拟简化**：真实主机在这两段各自先弹一条 Interactive Transaction Response
+（源账户选择 / 金额确认），screen data 是 VT100 光标定位格式（`<ESC>O648<ESC>P6480
+<ESC>H000<SI>...`），跟手续费/汇率确认用的 `;` 分隔 `TAG=value` 格式不是一回事。
+本模拟器两段都**直接批准**，不模拟那两次交互——需要更多真实样本才能精确复现该格式。
+详见 `docs/superpowers/plans/2026-08-25-cubc-ddc-transfer.md`（acc-cubc 仓库）。
+
+`config-ddc.json` 的 `ddcTransferOwnStage2` 块：
+
+- **receipt**：屏幕/凭条模板，占位符同标准 NDC 的 `withdrawal`/`balance` 块
+  （`<PAN> <DATE> <TIME> <RECNO> <LUNO>`）。**没有 `<AMOUNT>`/`<BALANCE>`**——
+  本模拟器没有真实账务系统，且转账双方账号/金额都是持卡人在 ATM 上收集的，
+  不是主机告诉 ATM 的。
+
+> **需真 ATM 校准**：next-state `882`/`130` 与两段之间无需客户操作这一条，均取自
+> `CUBC_Host_Simulator` 目录下随附的真实 reply 样本（`FTOWN002`/`FTOWN003` 记录），
+> 未在本模拟器这一侧独立验证；两段各自的 ITR 菜单未实现（见上）；凭条/屏幕模板内容
+> 是占位。仅覆盖**本人账户**转账——转他人账户（`GD F`/`GD G`/`GD H`）未实现。
+
 ## 记账前先让持卡人确认手续费/汇率
 
 主机可以在**记账之前**先要持卡人确认一件事：一笔手续费，或一个汇率/DCC 币种选择。
