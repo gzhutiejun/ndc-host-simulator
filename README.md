@@ -358,6 +358,32 @@ Guide v.01.00》19 页。
 > 未在本模拟器这一侧独立验证；两段各自的 ITR 菜单未实现（见上）；凭条/屏幕模板内容
 > 是占位。仅覆盖**本人账户**转账——转他人账户（`GD F`/`GD G`/`GD H`）未实现。
 
+## CUBC / DDC 方言：两段式对账单（Mini Statement，CA A → 085 → CA B → 093）
+
+```
+主菜单 → [CA A] → (085，不出钞) → 客户选账户 → [CA B] → (093，不出钞，带回执)
+```
+
+跟两段式转账同一个道理，操作码基码不同。出处：NCR《CUBC Activate DDC EJ Reference
+Guide v.01.00》操作码表 "Mini statement source account/s validation" / "...
+transaction authorization"。
+
+`config-ddc.json` **默认已引用**这两条规则（同转账，没有对应的标准 NDC 兜底路径）。
+
+⚠️ **已知模拟简化**：真实主机在第 1 段先弹一条 Interactive Transaction Response
+（账户选择），screen data 是 VT100 光标定位格式。本模拟器**直接批准**，不模拟那次
+交互——需要更多真实样本才能精确复现该格式。详见
+`docs/superpowers/plans/2026-08-25-cubc-ddc-mini-statement-and-menu.md`（acc-cubc 仓库）。
+
+`config-ddc.json` 的 `ddcMiniStatementStage2` 块：
+
+- **receipt**：屏幕/凭条模板，占位符同 `withdrawal`/`balance`/`transfer` 块。
+  **没有具体对账单明细行**——本模拟器没有真实账务系统，给不出真实的近几笔交易记录。
+
+> **需真 ATM 校准**：next-state `085`/`093` 均取自 `CUBC_Host_Simulator` 目录下
+> 随附的真实 reply 样本（`MINIITR1` 记录及紧随 `CA BA C` 的应答），未在本模拟器这
+> 一侧独立验证；第 1 段的 ITR 菜单未实现（见上）；凭条/屏幕模板内容是占位。
+
 ## 记账前先让持卡人确认手续费/汇率
 
 主机可以在**记账之前**先要持卡人确认一件事：一笔手续费，或一个汇率/DCC 币种选择。

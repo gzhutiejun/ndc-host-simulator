@@ -126,6 +126,30 @@
       "handler": "ddcTransferOwnStage2"
     },
     {
+      "name": "ddc-mini-statement-stage1",
+      "match": {
+        "messageClass": "1",
+        "subClass": "1",
+        "field": {
+          "index": 7,
+          "startsWith": "CA A"
+        }
+      },
+      "handler": "ddcMiniStatementStage1"
+    },
+    {
+      "name": "ddc-mini-statement-stage2",
+      "match": {
+        "messageClass": "1",
+        "subClass": "1",
+        "field": {
+          "index": 7,
+          "startsWith": "CA B"
+        }
+      },
+      "handler": "ddcMiniStatementStage2"
+    },
+    {
       "name": "opcode-library",
       "match": {
         "messageClass": "1",
@@ -381,6 +405,15 @@
     "receipt": {
       "screen": "",
       "printerData": "<GS>1  FUNDS TRANSFER<LF>  <DATE> <TIME><LF>  REF <RECNO><LF><FF>"
+    }
+  },
+  "ddcMiniStatementStage1": {
+    "nextState": "085"
+  },
+  "ddcMiniStatementStage2": {
+    "receipt": {
+      "screen": "",
+      "printerData": "<GS>1  MINI STATEMENT<LF>  <DATE> <TIME><LF>  REF <RECNO><LF><FF>"
     }
   }
 }
