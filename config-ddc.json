@@ -404,7 +404,7 @@
   "ddcTransferOwnStage2": {
     "receipt": {
       "screen": "",
-      "printerData": "<GS>1  FUNDS TRANSFER<LF>  <DATE> <TIME><LF>  REF <RECNO><LF><FF>"
+      "printerData": "2  FUNDS TRANSFER<LF>  <DATE> <TIME><LF>  REF <RECNO><LF><FF>"
     }
   },
   "ddcMiniStatementStage1": {
@@ -413,7 +413,7 @@
   "ddcMiniStatementStage2": {
     "receipt": {
       "screen": "",
-      "printerData": "<GS>1  MINI STATEMENT<LF>  <DATE> <TIME><LF>  REF <RECNO><LF><FF>"
+      "printerData": "2  MINI STATEMENT<LF>  <DATE> <TIME><LF>  REF <RECNO><LF><FF>"
     }
   }
 }

@@ -1,7 +1,7 @@
 const { breakdown } = require('../dispense');
 const { buildDdcTransactionReply, buildDdcEmvSegment } = require('../ndc/ddcTransactionReply');
 const { extractRequest } = require('../ndc/transactionRequest');
-const { applyReceipt, fmtDate, fmtTime } = require('../ndc/receipt');
+const { applyReceipt, fmtDate, fmtTime, DDC_PRINT_HEADER_PAD } = require('../ndc/receipt');
 
 /**
  * CUBC/DDC 取款的**第二段**（操作码基码 `AA C`）。主机上一条应答的 `547`（见
@@ -48,7 +48,7 @@ module.exports = function makeDdcWithdrawalStage2(cfg = {}) {
         nextState: declineNextState,
         fieldG: '',
         screen: applyReceipt(declineReceipt.screen || '', values),
-        printer: applyReceipt(declineReceipt.printerData || '', values),
+        printer: DDC_PRINT_HEADER_PAD + applyReceipt(declineReceipt.printerData || '', values),
       });
     }
 
@@ -57,7 +57,7 @@ module.exports = function makeDdcWithdrawalStage2(cfg = {}) {
       nextState: approvedNextState,
       fieldG: disp.fieldG,
       screen: applyReceipt(receipt.screen || '', values),
-      printer: applyReceipt(receipt.printerData || '', values),
+      printer: DDC_PRINT_HEADER_PAD + applyReceipt(receipt.printerData || '', values),
       cam: buildDdcEmvSegment(camArc, includeCam),
     });
   };

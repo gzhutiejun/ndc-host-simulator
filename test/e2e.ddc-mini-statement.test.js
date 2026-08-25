@@ -53,7 +53,7 @@ test('ddc mini statement stage 2: CA BA C -> nextState 093, no dispense, receipt
         match: { messageClass: '1', subClass: '1', field: { index: 7, startsWith: 'CA BA C' } },
         handler: 'ddcMiniStatementStage2' },
     ],
-    ddcMiniStatementStage2: { receipt: { printerData: '<GS>1 MINI STATEMENT<LF>  <DATE> <TIME><LF><FF>' } },
+    ddcMiniStatementStage2: { receipt: { printerData: '2 MINI STATEMENT<LF>  <DATE> <TIME><LF><FF>' } },
   });
   await new Promise((resolve) => app.server.listen(0, resolve));
   const port = app.server.address().port;

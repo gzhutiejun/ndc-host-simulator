@@ -36,5 +36,7 @@ test('next-state and balance amount are configurable', () => {
 test('printer template substitutes recno/date/time/pan', () => {
   const handler = makeDdcBalanceStage2({ receipt: { printerData: 'REC <RECNO> <PAN>' } });
   const out = handler(stage2Req(), createSession(), helpers);
-  assert.match(out.split(FS)[6], /^REC 1 /);
+  // 打印字段头 2 字节（o+p，值本身不读，只占位，见 receipt.js 的 DDC_PRINT_HEADER_PAD）
+  // + 模板内容——不是模板内容从位 0 开始。
+  assert.match(out.split(FS)[6], /^00REC 1 /);
 });

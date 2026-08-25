@@ -53,7 +53,7 @@ test('DDC own-account transfer stage 2: GD C... -> 130, no dispense, receipt ren
         match: { messageClass: '1', subClass: '1', field: { index: 7, startsWith: 'GD C' } },
         handler: 'ddcTransferOwnStage2' },
     ],
-    ddcTransferOwnStage2: { receipt: { printerData: '<GS>1  FUNDS TRANSFER<LF>  <DATE> <TIME><LF><FF>' } },
+    ddcTransferOwnStage2: { receipt: { printerData: '2  FUNDS TRANSFER<LF>  <DATE> <TIME><LF><FF>' } },
   });
   await new Promise((resolve) => app.server.listen(0, resolve));
   const port = app.server.address().port;

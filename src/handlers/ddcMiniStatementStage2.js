@@ -1,6 +1,6 @@
 const { buildDdcTransactionReply } = require('../ndc/ddcTransactionReply');
 const { extractRequest } = require('../ndc/transactionRequest');
-const { applyReceipt, fmtDate, fmtTime } = require('../ndc/receipt');
+const { applyReceipt, fmtDate, fmtTime, DDC_PRINT_HEADER_PAD } = require('../ndc/receipt');
 
 /**
  * CUBC/DDC 对账单（Mini Statement）的**第二段**（操作码基码 `CA B`）。主机上一条
@@ -36,7 +36,7 @@ module.exports = function makeDdcMiniStatementStage2(cfg = {}) {
       nextState,
       fieldG: '',
       screen: applyReceipt(receipt.screen || '', values),
-      printer: applyReceipt(receipt.printerData || '', values),
+      printer: DDC_PRINT_HEADER_PAD + applyReceipt(receipt.printerData || '', values),
     });
   };
 };
