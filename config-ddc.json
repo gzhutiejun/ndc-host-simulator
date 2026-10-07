@@ -423,16 +423,16 @@
       "printerData": "2  MINI STATEMENT<LF>  <DATE> <TIME><LF>  REF <RECNO><LF><FF>"
     }
   },
-  "_ddcTransferOther_comment": "开关：singleAccount=true 时 GD F 直接回 430；invalidAccount 填一个目标账号，GD G 收到它回 149；limitCents 填分，GD H 回送 C 时金额超过它回 162。",
+  "_ddcTransferOther_comment": "开关：singleAccount=true 时 GD F 直接回 430；invalidAccount 填一个目标账号（例 01110110999999，缺省空=关），GD G 收到它回 149；limitCents 填分，GD H 回送 C 时金额超过它回 162。149/162/131 均无真实主机样本，按官方 next state 表假设。",
   "ddcTransferOther": {
     "singleAccount": false,
-    "invalidAccount": "01110110999999",
+    "invalidAccount": "",
     "limitCents": null
   },
-  "_ddcCardPayment_comment": "开关：singleAccount=true 时 FG A 直接回 382；invalidCard 填一个卡号，FG B 收到它回 149；limitCents 填分，FG C 金额超过它回 162。",
+  "_ddcCardPayment_comment": "开关：singleAccount=true 时 FG A 直接回 382；invalidCard 填一个卡号（例 4000000000000002，缺省空=关），FG B 收到它回 149；limitCents 填分，FG C 金额超过它回 162。149/162 无真实主机样本，按官方 next state 表假设。",
   "ddcCardPayment": {
     "singleAccount": false,
-    "invalidCard": "4000000000000002",
+    "invalidCard": "",
     "limitCents": null
   }
 }

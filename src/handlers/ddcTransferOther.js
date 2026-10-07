@@ -73,14 +73,17 @@ module.exports = function makeDdcTransferOther(cfg = {}) {
       return itr(ACCOUNT_LIST_KEYS, accountListScreen(accounts));
     }
     if (stage === 'G') {
+      // 无真实主机样本：按官方 next state 表假设
       if (invalidAccount !== '' && bufferB === invalidAccount) return reply('149');
       return reply('434', zFields(session, [
         ['964', `${amountText(req.amount)} USD`], ['962', bufferB], ['963', accountName],
       ]));
     }
     // stage === 'H'
+    // 无真实主机样本：按官方 next state 表假设（131）
     if (bufferB === 'D') return reply(declineNextState);
     if (bufferB === 'C') {
+      // 无真实主机样本：按官方 next state 表假设
       if (limitCents != null && req.amount != null && req.amount > limitCents) return reply('162');
       const now = helpers && helpers.now ? helpers.now() : new Date();
       const values = {

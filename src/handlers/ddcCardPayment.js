@@ -52,10 +52,12 @@ module.exports = function makeDdcCardPayment(cfg = {}) {
       });
     }
     if (stage === 'B') {
+      // 无真实主机样本：按官方 next state 表假设
       if (invalidCard !== '' && card === invalidCard) return reply('149');
       return reply('385', zFields(session, [['965', card], ['963', cardholderName]]));
     }
     if (stage === 'C') {
+      // 无真实主机样本：按官方 next state 表假设
       if (limitCents != null && req.amount != null && req.amount > limitCents) return reply('162');
       return reply('390', zFields(session, [
         ['964', `${amountText(req.amount)} USD`], ['965', card], ['933', `${fee} USD`],
