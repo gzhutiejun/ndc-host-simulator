@@ -25,6 +25,8 @@ const makeDdcTransferOwnStage1 = require('./src/handlers/ddcTransferOwnStage1');
 const makeDdcTransferOwnStage2 = require('./src/handlers/ddcTransferOwnStage2');
 const makeDdcMiniStatementStage1 = require('./src/handlers/ddcMiniStatementStage1');
 const makeDdcMiniStatementStage2 = require('./src/handlers/ddcMiniStatementStage2');
+const makeDdcTransferOther = require('./src/handlers/ddcTransferOther');
+const makeDdcCardPayment = require('./src/handlers/ddcCardPayment');
 
 // 报文库文件是 NCR 给的第三方文件（640KB，不入库，每台机器路径可能不同）。不配路径时
 // 直接返回空数组——引擎的行为跟压根没有 library 参数时完全一样。配了路径但读不到/解析
@@ -79,6 +81,9 @@ function createApp(config) {
     ddcTransferOwnStage2: makeDdcTransferOwnStage2(config.ddcTransferOwnStage2 || {}),
     ddcMiniStatementStage1: makeDdcMiniStatementStage1(config.ddcMiniStatementStage1 || {}),
     ddcMiniStatementStage2: makeDdcMiniStatementStage2(config.ddcMiniStatementStage2 || {}),
+    // CUBC 第三期：转他人户（GD F/G/H）与信用卡缴款（FG A-D），各一个 handler 按操作码第 4 位分段。
+    ddcTransferOther: makeDdcTransferOther(config.ddcTransferOther || {}),
+    ddcCardPayment: makeDdcCardPayment(config.ddcCardPayment || {}),
   };
   const library = loadMessageLibrary(config.messageLibrary);
   const engine = createEngine({ rules: config.rules || [], handlers, library });
