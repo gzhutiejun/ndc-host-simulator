@@ -93,8 +93,11 @@ test('完整 config-ddc.json 规则表：旧规则不被抢，新帧命中新 ha
     return replies[n].split(FS);
   };
   try {
-    assert.strictEqual((await send('GD BA C ', '', '', ''))[3], '882');
-    assert.strictEqual((await send('GD BA CC', '', '', ''))[3], '882');
+    // config-ddc.json 打开了 accountList：GD B 先回账户列表 ITR（SIM:138），回送行号字母后才 882。
+    assert.strictEqual((await send('GD BA C ', '', '', ''))[0], '3');
+    // ATM 的回送只有新 MCN + Buffer B（opcode 空），模拟器并回上一条 GD B 再分派。
+    assert.strictEqual((await send('', '', 'I', ''))[3], '882');
+    assert.strictEqual((await send('GD BA CC', '', 'I', ''))[3], '882');
     assert.strictEqual((await send('GD CA C ', '000000000258', '', ''))[3], '130');
     assert.strictEqual((await send('GD FA C ', '000000000000', '', ''))[0], '3');
     assert.strictEqual((await send('GD GA C ', '000000000258', '01110110281087', ''))[3], '434');

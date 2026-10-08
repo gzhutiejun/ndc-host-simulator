@@ -358,6 +358,10 @@ Guide v.01.00》19 页。
 > 未在本模拟器这一侧独立验证；两段各自的 ITR 菜单未实现（见上）；凭条/屏幕模板内容
 > 是占位。仅覆盖**本人账户**转账——转他人账户（`GD F`/`GD G`/`GD H`）未实现。
 
+> **账户列表（2026-10-08）**：`ddcTransferOwnStage1` / `ddcMiniStatementStage1` 的 `accountList: true`
+> （`config-ddc.json` 已打开）让第 1 段先回账户列表 ITR（SIM:138 的形状：屏 647、行 `I1       0112***80 USD-->`，
+> 见 `src/ndc/accountListItr.js`），ATM 回送行号字母后才回 882 / 085。对账单没有自己的样本，按同一形状假设。
+
 ## CUBC / DDC 方言：两段式对账单（Mini Statement，CA A → 085 → CA B → 093）
 
 ```

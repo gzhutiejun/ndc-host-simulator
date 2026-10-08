@@ -662,7 +662,8 @@
     }
   },
   "ddcTransferOwnStage1": {
-    "nextState": "882"
+    "nextState": "882",
+    "accountList": true
   },
   "ddcTransferOwnStage2": {
     "receipt": {
@@ -671,7 +672,8 @@
     }
   },
   "ddcMiniStatementStage1": {
-    "nextState": "085"
+    "nextState": "085",
+    "accountList": true
   },
   "ddcMiniStatementStage2": {
     "receipt": {
