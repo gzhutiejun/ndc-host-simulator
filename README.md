@@ -358,9 +358,14 @@ Guide v.01.00》19 页。
 > 未在本模拟器这一侧独立验证；两段各自的 ITR 菜单未实现（见上）；凭条/屏幕模板内容
 > 是占位。仅覆盖**本人账户**转账——转他人账户（`GD F`/`GD G`/`GD H`）未实现。
 
-> **账户列表（2026-10-08）**：`ddcTransferOwnStage1` / `ddcMiniStatementStage1` 的 `accountList: true`
-> （`config-ddc.json` 已打开）让第 1 段先回账户列表 ITR（SIM:138 的形状：屏 647、行 `I1       0112***80 USD-->`，
-> 见 `src/ndc/accountListItr.js`），ATM 回送行号字母后才回 882 / 085。对账单没有自己的样本，按同一形状假设。
+> **账户列表与确认屏（2026-10-08）**：形状取自 OneDrive `CUBC_Host_Simulator/Reply` 的四份本行卡样本
+> （OnusDebitCredit / OnusNBC 的 `_ITR` 与 `-NOITR`），见 `src/ndc/accountListItr.js`：
+> - 本人转账（四份都有）：`ddcTransferOwnStage1.accountList` → GD B 先回源账户列表（屏 647）、再回目标账户列表
+>   （屏 648，FTOWN001），之后 882；`ddcTransferOwnStage2.confirm` → GD C 先回确认屏 209，回送 C 才 130、D 回 131。
+>   `config-ddc.json` 两个都打开。
+> - 多账户客户（只在 `_ITR`）：`ddcBalanceStage1` / `ddcWithdrawalStage1`（快捷取款共用）/ `ddcMiniStatementStage1`
+>   的 `accountList` → 第 1 段先回账户列表（屏 647 / 047，带 `@TOAR`）。前两个缺省关（单账户，同现网），对账单在
+>   `config-ddc.json` 里打开。
 
 ## CUBC / DDC 方言：两段式对账单（Mini Statement，CA A → 085 → CA B → 093）
 

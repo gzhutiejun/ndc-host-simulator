@@ -1,24 +1,36 @@
 const { buildInteractiveResponse } = require('./interactiveResponse');
 
 /**
- * 本人转账 GD B / 对账单 CA A 第 1 段的账户列表 ITR（SIM:138，本人转账 GD BA CC 的应答）：
- * 屏 647，没有 3a 账户列表（SIM:182）那一行 `@TOAR`，行格式相同（`<行号字母>1       <掩码账号> <币种>-->`）。
- * ATM 回送行号字母（Buffer B）。对账单没有自己的样本，按同一形状假设。
+ * CUBC 本行卡第 1 段的账户列表 ITR。形状全部取自 CUBC_Host_Simulator/Reply 的四份样本
+ * （OnusDebitCredit / OnusNBC 的 _ITR 与 -NOITR）：
+ * - 余额 BA A / 取款 AA B / 快捷取款 AA A：屏 647，FF FF + `@TOAR` 行（只在 _ITR，即多账户客户）；
+ * - 对账单 CA A：屏 047，FF FF + `@TOAR`（只在 _ITR）；
+ * - 本人转账 GD B：屏 647，单个 FF、没有 `@TOAR`（四份都有）；接着 FTOWN001：屏 648、只有一个账户、
+ *   active keys `0100010000`。
+ * 行格式 `<行号字母>1       <掩码账号> <币种>-->`，ATM 回送行号字母（Buffer B）。
  */
 const DEFAULT_ACCOUNTS = [
   { key: 'I', text: '0112***80 USD' },
   { key: 'L', text: '0111***61 USD' },
 ];
+const DEST_ACCOUNTS = [{ key: 'I', text: '0111***61 USD' }];
 
-/** SIM:138 sector 4 = `210110010000`：子类 2 + 显示 1 + 这 10 位 active keys；screen timer 037。 */
-function buildAccountListItr(luno, accounts = DEFAULT_ACCOUNTS) {
+function buildAccountListItr(luno, { screen = '647', toar = true, accounts = DEFAULT_ACCOUNTS, activeKeys = '0110010000' } = {}) {
   return buildInteractiveResponse({
     luno,
     displayFlag: '1',
-    activeKeys: '0110010000',
+    activeKeys,
     screenTimer: 37,
-    screenData: '\x0c\x1bO647\x1bP6470\x1bH000' + accounts.map((a) => `\x0f${a.key}1       ${a.text}-->`).join(''),
+    screenData: (toar ? '\x0c\x0c' : '\x0c') + `\x1bO${screen}\x1bP${screen}0\x1bH000`
+      + (toar ? '\x0f@TOAR' : '') + accounts.map((a) => `\x0f${a.key}1       ${a.text}-->`).join(''),
   });
 }
 
-module.exports = { buildAccountListItr, DEFAULT_ACCOUNTS };
+/** 有 accountList 开关的第 1 段共用：Buffer B 不是列表里的键就回账户列表，是就放行（返回 null）。 */
+function accountListGate(parsed, luno, accounts, opts) {
+  const bufferB = (parsed.fields || [])[10] || '';
+  if (accounts.some((a) => a.key === bufferB)) return null;
+  return buildAccountListItr(luno, { ...opts, accounts });
+}
+
+module.exports = { buildAccountListItr, accountListGate, DEFAULT_ACCOUNTS, DEST_ACCOUNTS };

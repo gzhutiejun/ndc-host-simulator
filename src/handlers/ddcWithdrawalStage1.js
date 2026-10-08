@@ -1,5 +1,6 @@
 const { buildDdcTransactionReply } = require('../ndc/ddcTransactionReply');
 const { extractRequest } = require('../ndc/transactionRequest');
+const { accountListGate, DEFAULT_ACCOUNTS } = require('../ndc/accountListItr');
 
 /**
  * CUBC/DDC 取款的**第一段**（操作码基码 `AA B`）。
@@ -17,8 +18,16 @@ module.exports = function makeDdcWithdrawalStage1(cfg = {}) {
   const screen = cfg.screen != null ? cfg.screen : '';
   const printer = cfg.printer != null ? cfg.printer : '';
 
+  // accountList：多账户客户先回账户列表 ITR（屏 647 + @TOAR，样本 *_ITR.txt），缺省关（单账户，同现网）。
+  const accountList = cfg.accountList === true;
+  const accounts = cfg.accounts || DEFAULT_ACCOUNTS;
+
   return function ddcWithdrawalStage1(parsed) {
     const req = extractRequest(parsed);
+    if (accountList) {
+      const itr = accountListGate(parsed, req.luno, accounts, { screen: '647', toar: true });
+      if (itr) return itr;
+    }
     return buildDdcTransactionReply({
       luno: req.luno,
       nextState,

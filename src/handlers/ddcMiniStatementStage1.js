@@ -1,8 +1,6 @@
 const { buildDdcTransactionReply } = require('../ndc/ddcTransactionReply');
 const { extractRequest } = require('../ndc/transactionRequest');
-const { buildAccountListItr, DEFAULT_ACCOUNTS } = require('../ndc/accountListItr');
-
-const BUFFER_B_INDEX = 10;
+const { accountListGate, DEFAULT_ACCOUNTS } = require('../ndc/accountListItr');
 
 /**
  * CUBC/DDC 对账单（Mini Statement）的**第一段**（操作码基码 `CA A`）。
@@ -23,15 +21,16 @@ module.exports = function makeDdcMiniStatementStage1(cfg = {}) {
   const nextState = cfg.nextState != null ? cfg.nextState : '085';
   const screen = cfg.screen != null ? cfg.screen : '';
   const printer = cfg.printer != null ? cfg.printer : '';
-  // accountList：先回账户列表 ITR（SIM:138），收到回送的行号字母才回 next state。缺省关（老口径）。
+  // accountList：多账户客户先回账户列表 ITR，收到回送的行号字母才回 next state。缺省关（单账户，同现网）。
   const accountList = cfg.accountList === true;
   const accounts = cfg.accounts || DEFAULT_ACCOUNTS;
 
   return function ddcMiniStatementStage1(parsed) {
     const req = extractRequest(parsed);
     if (accountList) {
-      const bufferB = (parsed.fields || [])[BUFFER_B_INDEX] || '';
-      if (!accounts.some((acc) => acc.key === bufferB)) return buildAccountListItr(req.luno, accounts);
+      // 屏 047 + @TOAR（样本 *_ITR.txt 的 CA AA C → MINIITR1），同转他人户 GD F 的列表。
+      const itr = accountListGate(parsed, req.luno, accounts, { screen: '047', toar: true });
+      if (itr) return itr;
     }
     return buildDdcTransactionReply({
       luno: req.luno,

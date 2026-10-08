@@ -666,6 +666,7 @@
     "accountList": true
   },
   "ddcTransferOwnStage2": {
+    "confirm": true,
     "receipt": {
       "screen": "",
       "printerData": "2  FUNDS TRANSFER<LF>  <DATE> <TIME><LF>  REF <RECNO><LF><FF>"

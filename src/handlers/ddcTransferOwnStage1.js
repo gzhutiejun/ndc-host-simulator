@@ -1,6 +1,6 @@
 const { buildDdcTransactionReply } = require('../ndc/ddcTransactionReply');
 const { extractRequest } = require('../ndc/transactionRequest');
-const { buildAccountListItr, DEFAULT_ACCOUNTS } = require('../ndc/accountListItr');
+const { buildAccountListItr, DEFAULT_ACCOUNTS, DEST_ACCOUNTS } = require('../ndc/accountListItr');
 
 const BUFFER_B_INDEX = 10;
 
@@ -23,15 +23,27 @@ module.exports = function makeDdcTransferOwnStage1(cfg = {}) {
   const nextState = cfg.nextState != null ? cfg.nextState : '882';
   const screen = cfg.screen != null ? cfg.screen : '';
   const printer = cfg.printer != null ? cfg.printer : '';
-  // accountList：先回账户列表 ITR（SIM:138），收到回送的行号字母才回 next state。缺省关（老口径）。
+  // accountList：先后回源 / 目标两张账户列表 ITR（FTOWN001），都回送之后才回 882。缺省关（老口径）。
   const accountList = cfg.accountList === true;
   const accounts = cfg.accounts || DEFAULT_ACCOUNTS;
+  const destAccounts = cfg.destAccounts || DEST_ACCOUNTS;
 
-  return function ddcTransferOwnStage1(parsed) {
+  return function ddcTransferOwnStage1(parsed, session) {
     const req = extractRequest(parsed);
     if (accountList) {
+      // 样本四份都是：GD BA CC → 源账户列表（屏 647，单 FF、无 @TOAR）→ 回送 → FTOWN001 目标账户列表
+      // （屏 648，一个账户）→ 回送 → FTOWN002 882。两次回送只差 Buffer B，按会话记走到哪一张。
       const bufferB = (parsed.fields || [])[BUFFER_B_INDEX] || '';
-      if (!accounts.some((acc) => acc.key === bufferB)) return buildAccountListItr(req.luno, accounts);
+      const step = session && session.ownTransferList;
+      if (!step || !accounts.concat(destAccounts).some((acc) => acc.key === bufferB)) {
+        if (session) session.ownTransferList = 'source';
+        return buildAccountListItr(req.luno, { screen: '647', toar: false, accounts });
+      }
+      if (step === 'source') {
+        session.ownTransferList = 'destination';
+        return buildAccountListItr(req.luno, { screen: '648', toar: false, accounts: destAccounts, activeKeys: '0100010000' });
+      }
+      session.ownTransferList = undefined;
     }
     return buildDdcTransactionReply({
       luno: req.luno,
