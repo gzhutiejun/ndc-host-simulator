@@ -21,6 +21,7 @@ function matches(match, parsed) {
     if (value == null) return false;
     if (match.field.equals != null && value !== match.field.equals) return false;
     if (match.field.startsWith != null && !value.startsWith(match.field.startsWith)) return false;
+    if (match.field.pattern != null && !new RegExp(match.field.pattern).test(value)) return false;
   }
   return true;
 }

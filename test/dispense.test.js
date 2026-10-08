@@ -36,3 +36,21 @@ test('custom cassettes respected', () => {
   assert.deepStrictEqual(r.counts, [1, 1]); // greedy: 1x200 + 1x100
   assert.strictEqual(r.fieldG, '0101');
 });
+
+test('钞箱可按 { value, currency } 声明：只用请求币种的钞箱（CUBC A=USD50 B=USD10 C=KHR50000 D=USD100）', () => {
+  const cubc = [
+    { value: 50, currency: 'USD' }, { value: 10, currency: 'USD' },
+    { value: 50000, currency: 'KHR' }, { value: 100, currency: 'USD' },
+  ];
+  assert.deepStrictEqual(breakdown(190, cubc, { currency: 'USD' }).counts, [1, 4, 0, 1]);
+  assert.deepStrictEqual(breakdown(100000, cubc, { currency: 'KHR' }).counts, [0, 0, 2, 0]);
+  assert.strictEqual(breakdown(100000, cubc, { currency: 'USD' }).counts[2], 0);
+});
+
+test('slots 把出钞字段补到固定钞箱数（DDC 现网 8 组两位：0104000100000000）', () => {
+  const cubc = [
+    { value: 50, currency: 'USD' }, { value: 10, currency: 'USD' },
+    { value: 50000, currency: 'KHR' }, { value: 100, currency: 'USD' },
+  ];
+  assert.strictEqual(breakdown(190, cubc, { currency: 'USD', slots: 8 }).fieldG, '0104000100000000');
+});

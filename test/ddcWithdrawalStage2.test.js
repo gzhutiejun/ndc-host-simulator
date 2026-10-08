@@ -64,3 +64,27 @@ test('includeCam appends the EMV boundary segment on approval only', () => {
   const declined = on(stage2Req('000000000700'), createSession(), helpers); // 凑不出来
   assert.strictEqual(declined.split(FS).length, 7); // 拒绝这条不带 EMV 段
 });
+
+const CUBC_CASSETTES = [
+  { value: 50, currency: 'USD' }, { value: 10, currency: 'USD' },
+  { value: 50000, currency: 'KHR' }, { value: 100, currency: 'USD' },
+];
+
+test('CUBC 钞箱：币种取操作码位 6（A=USD、B=KHR），出钞字段 8 组', () => {
+  const handler = makeDdcWithdrawalStage2({ cassettes: CUBC_CASSETTES, fieldGCassettes: 8 });
+  const usd = handler(stage2Req('000000019000', 'AA CAAC '), createSession(), helpers).split(FS);
+  assert.strictEqual(usd[3], '128');
+  assert.strictEqual(usd[4], '0104000100000000');
+  const khr = handler(stage2Req('000010000000', 'AA CABC '), createSession(), helpers).split(FS);
+  assert.strictEqual(khr[4], '0000020000000000');
+});
+
+test('没配屏幕模板时按现网形状回 Z000930 / Z000929 / Z000931（余额、本笔金额），凭条可用 <BALANCE>', () => {
+  const handler = makeDdcWithdrawalStage2({
+    cassettes: CUBC_CASSETTES, fieldGCassettes: 8, balance: '485.56',
+    receipt: { printerData: '2 TRANS AMOUNT  : <AMOUNT> USD<LF> BALANCE       : <BALANCE>USD' },
+  });
+  const f = handler(stage2Req('000000019000', 'AA CAAC '), createSession(), helpers).split(FS);
+  assert.match(f[5], /;\x1dZ000930485\.56 USD\x1dZ000929190\.00 USD\x1dZ000931485\.56 USD$/);
+  assert.match(f[6], /TRANS AMOUNT {2}: 190\.00 USD\n BALANCE {7}: 485\.56USD/);
+});

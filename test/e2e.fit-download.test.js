@@ -193,3 +193,18 @@ test('FIT 帧落进抓包日志，rule 标注得出是哪条路径发的', async
     await new Promise((r) => app.server.close(r));
   }
 });
+
+test('entriesPerMessage 把 FIT 拆成多帧，全部在 Go In Service 之前（CUBC 现网每帧 5 条）', async () => {
+  const entries = Array.from({ length: 12 }, (_, i) => String(i).padStart(3, '0') + FIT_ENTRY.slice(3));
+  const app = startApp({ fitDownload: { ...FIT_CONFIG, entries, entriesPerMessage: 5, beforeGoInService: true, delayMs: 50 } });
+  await new Promise((r) => app.server.listen(0, r));
+  try {
+    const frames = await collectFrames(app.server.address().port, POWERUP_FRAME);
+    const fits = frames.filter((f) => f.startsWith('30' + FS));
+    assert.deepStrictEqual(fits.map((f) => f.split(FS).slice(4).filter((e) => e !== '').length), [5, 5, 2]);
+    assert.deepStrictEqual(fits.map((f) => f.split(FS)[4].slice(0, 3)), ['000', '005', '010']);
+    assert.strictEqual(frames[frames.length - 1], EXPECTED_GIS_FRAME);
+  } finally {
+    await new Promise((r) => app.server.close(r));
+  }
+});

@@ -13,6 +13,17 @@ function fmtTime(d) {
   return `${pad2(d.getUTCHours())}:${pad2(d.getUTCMinutes())}`;
 }
 
+/**
+ * Track 2（`;4617601234567710=2512…?`）里的卡号，按现网凭条掩码：前 6 后 4，中间 X
+ * （`461760XXXXXX7710`）。取不出卡号时回空串。
+ */
+function maskCard(track2) {
+  const m = /^;?(\d{10,19})/.exec(String(track2 || ''));
+  if (!m) return '';
+  const pan = m[1];
+  return pan.slice(0, 6) + 'X'.repeat(pan.length - 10) + pan.slice(-4);
+}
+
 function applyReceipt(tpl, values = {}) {
   const v = (x) => (x != null ? x : '');
   return String(tpl)
@@ -24,6 +35,9 @@ function applyReceipt(tpl, values = {}) {
     .replace(/<GS>/g, C.GS)
     .replace(/<AMOUNT>/g, v(values.amount))
     .replace(/<BALANCE>/g, v(values.balance))
+    .replace(/<LEDGER>/g, v(values.ledger))
+    .replace(/<CCY>/g, v(values.currency))
+    .replace(/<CARD>/g, v(values.card))
     .replace(/<PAN>/g, v(values.pan))
     .replace(/<DATE>/g, v(values.date))
     .replace(/<TIME>/g, v(values.time))
@@ -66,6 +80,7 @@ function buildCam(arc, include) {
 }
 
 module.exports = {
+  maskCard,
   applyReceipt,
   fmtAmount,
   fmtDate,

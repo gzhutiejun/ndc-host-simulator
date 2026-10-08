@@ -335,3 +335,9 @@ test('libraryKeyFromField 规则在库为空时构造期就抛', () => {
     /opcode-library/,
   );
 });
+
+test('matches: field.pattern 按正则匹配整段（国际卡 AA?D / BA?F）', () => {
+  const p = { messageClass: '1', subClass: '1', fields: ['11', '', '', '', '', '', '', 'AABDABC '] };
+  assert.strictEqual(matches({ field: { index: 7, pattern: '^AA[ABC]D' } }, p), true);
+  assert.strictEqual(matches({ field: { index: 7, pattern: '^BA[ABC]F' } }, p), false);
+});

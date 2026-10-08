@@ -1,7 +1,11 @@
 const { breakdown } = require('../dispense');
 const { buildDdcTransactionReply, buildDdcEmvSegment } = require('../ndc/ddcTransactionReply');
 const { extractRequest } = require('../ndc/transactionRequest');
-const { applyReceipt, fmtDate, fmtTime, DDC_PRINT_HEADER_PAD } = require('../ndc/receipt');
+const { applyReceipt, fmtDate, fmtTime, maskCard, DDC_PRINT_HEADER_PAD } = require('../ndc/receipt');
+const { GS } = require('../constants');
+
+/** 操作码位 6（下标 5）的币种字母：acc-cubc config/cubc/ndc-opcodes.json 的 currencyDigits。 */
+const CURRENCY_DIGITS = { A: 'USD', B: 'KHR' };
 
 /**
  * CUBC/DDC 取款的**第二段**（操作码基码 `AA C`）。主机上一条应答的 `547`（见
@@ -23,6 +27,10 @@ module.exports = function makeDdcWithdrawalStage2(cfg = {}) {
   const declineReceipt = cfg.declineReceipt || { screen: '', printerData: '' };
   const includeCam = cfg.includeCam === true;
   const camArc = cfg.camArc != null ? cfg.camArc : '00';
+  // 出钞字段的组数：DDC 现网 8 组两位（0104000100000000）。不配时按钞箱数（与改动前一致）。
+  const fieldGCassettes = cfg.fieldGCassettes || 0;
+  // 取款后余额（屏幕段 Z000930/931 与凭条 <BALANCE>）。没有账务系统，固定值。
+  const balance = cfg.balance != null ? String(cfg.balance) : '5000.00';
 
   return function ddcWithdrawalStage2(parsed, session, helpers) {
     const req = extractRequest(parsed, { amountFieldIndex });
@@ -30,7 +38,12 @@ module.exports = function makeDdcWithdrawalStage2(cfg = {}) {
     const amount = req.amount / 100; // 分 -> 元/主币种单位，与 cassette 面额同一量纲
 
     const now = helpers.now ? helpers.now() : new Date();
+    const currency = CURRENCY_DIGITS[(parsed.fields[7] || '').charAt(5)];
     const values = {
+      ledger: balance,
+      currency: currency || 'USD',
+      card: maskCard(parsed.fields[5]),
+      balance,
       amount: amount.toFixed(2),
       pan: req.panMasked,
       date: fmtDate(now),
@@ -39,7 +52,7 @@ module.exports = function makeDdcWithdrawalStage2(cfg = {}) {
       luno: req.luno,
     };
 
-    const disp = breakdown(amount, cassettes);
+    const disp = breakdown(amount, cassettes, { currency, slots: fieldGCassettes });
     const declined = (maxAmount != null && amount > maxAmount) || !disp.ok;
 
     if (declined) {
@@ -56,7 +69,11 @@ module.exports = function makeDdcWithdrawalStage2(cfg = {}) {
       luno: req.luno,
       nextState: approvedNextState,
       fieldG: disp.fieldG,
-      screen: applyReceipt(receipt.screen || '', values),
+      // 没配模板时按现网 128 的形状：余额、本笔金额、账面余额（2024-01-14 16:50:37）。
+      screen: receipt.screen
+        ? applyReceipt(receipt.screen, values)
+        : `${String(session.tvn % 10000).padStart(4, '0')};${GS}Z000930${balance} ${currency || 'USD'}`
+          + `${GS}Z000929${values.amount} ${currency || 'USD'}${GS}Z000931${balance} ${currency || 'USD'}`,
       printer: DDC_PRINT_HEADER_PAD + applyReceipt(receipt.printerData || '', values),
       cam: buildDdcEmvSegment(camArc, includeCam),
     });

@@ -6,6 +6,7 @@ const { createDecoder, encodeLength, encodeWire } = require('./src/framing');
 const { parseTransmissionCode, setTransmissionCode } = require('./src/ebcdic');
 const { parse } = require('./src/ndc/parser');
 const { createSession } = require('./src/session');
+const { mergeConfirmation } = require('./src/ndc/confirmation');
 const { createEngine } = require('./src/engine');
 const { parseLibrary } = require('./src/message-library');
 const { createLogger } = require('./src/logging');
@@ -27,6 +28,8 @@ const makeDdcMiniStatementStage1 = require('./src/handlers/ddcMiniStatementStage
 const makeDdcMiniStatementStage2 = require('./src/handlers/ddcMiniStatementStage2');
 const makeDdcTransferOther = require('./src/handlers/ddcTransferOther');
 const makeDdcCardPayment = require('./src/handlers/ddcCardPayment');
+const makeDdcFeeConfirmation = require('./src/handlers/ddcFeeConfirmation');
+const makeDdcStageReply = require('./src/handlers/ddcStageReply');
 
 // 报文库文件是 NCR 给的第三方文件（640KB，不入库，每台机器路径可能不同）。不配路径时
 // 直接返回空数组——引擎的行为跟压根没有 library 参数时完全一样。配了路径但读不到/解析
@@ -85,6 +88,22 @@ function createApp(config) {
     ddcTransferOther: makeDdcTransferOther(config.ddcTransferOther || {}),
     ddcCardPayment: makeDdcCardPayment(config.ddcCardPayment || {}),
   };
+  // 他行卡（方案书 §4.3 后两列）。国际卡 AA?D / BA?F 单段：手续费 ITR，接受后直接出钞 / 回余额，
+  // 复用本行第 2 段的 handler。他行 CSS 卡：手续费段（AA F / BA C / CA D / BB F）接受后回本族的
+  // 阶段确认；授权段（AA G / BA D / CA C / BB D）同样复用本行第 2 段。无现网样本的部分按假设，
+  // 见 acc-cubc docs/cubc/phase3-questions-for-cubc.md。
+  const fee = config.ddcOffUsFee || {};
+  const feeHandler = (onAccept) => makeDdcFeeConfirmation({ ...fee, onAccept });
+  const stage = (nextState) => makeDdcStageReply({ nextState });
+  Object.assign(handlers, {
+    ddcIntlWithdrawal: feeHandler(handlers.ddcWithdrawalStage2),
+    ddcIntlBalance: feeHandler(handlers.ddcBalanceStage2),
+    ddcCssWithdrawalFee: feeHandler(stage('547')),
+    ddcCssBalanceFee: feeHandler(stage('055')),
+    ddcCssMiniStatementFee: feeHandler(stage('085')),
+    ddcCssPinChangeFee: feeHandler(stage('803')),
+    ddcPinChange: makeDdcStageReply(config.ddcPinChange || { nextState: '123' }),
+  });
   const library = loadMessageLibrary(config.messageLibrary);
   const engine = createEngine({ rules: config.rules || [], handlers, library });
   const pushOnConnect = Array.isArray(config.pushOnConnect) ? config.pushOnConnect : [];
@@ -100,13 +119,20 @@ function createApp(config) {
   // FIT 下发（数据命令，报文类 3、报文标识 15）。LUNO/消息序号/响应标志/条目都从这里取，
   // 调用方（控制台的 POST /api/push、命令行脚本）可以逐字段就地覆盖。
   const fitConfig = config.fitDownload || {};
-  function buildFit(spec = {}) {
-    return buildFitDownload({
+  // FIT 按 entriesPerMessage 拆成多条类 3 报文（CUBC 现网主机每条 5 个条目、约 640 字节；
+  // 一条 4KB 的整表会被 ATM 回 A01）。不配时整表一条，与改动前一致。
+  function buildFitMessages(spec = {}) {
+    const entries = spec.entries != null ? spec.entries : fitConfig.entries;
+    const per = spec.entriesPerMessage || fitConfig.entriesPerMessage || (entries ? entries.length : 0) || 1;
+    const chunks = [];
+    for (let i = 0; i < (entries || []).length; i += per) chunks.push(entries.slice(i, i + per));
+    if (chunks.length === 0) chunks.push(entries);
+    return chunks.map((chunk) => buildFitDownload({
       luno: spec.luno != null ? spec.luno : fitConfig.luno,
       msn: spec.msn != null ? spec.msn : fitConfig.msn,
       responseFlag: spec.responseFlag != null ? spec.responseFlag : fitConfig.responseFlag,
-      entries: spec.entries != null ? spec.entries : fitConfig.entries,
-    });
+      entries: chunk,
+    }));
   }
 
   // 把一帧写给某个 socket，顺带记抓包日志、推控制台。所有主动下发都走这里，免得
@@ -123,14 +149,14 @@ function createApp(config) {
     // 先拼字节再遍历 socket：坏参数（比如 FIT 条目里混了非数字）要在一个字节都没发出去
     // 之前就抛出来，由控制台变成 400，而不是发一半再失败。
     const isFit = spec && spec.type === 'fit';
-    const text = isFit ? buildFit(spec) : buildTerminalCommand(spec);
+    const texts = isFit ? buildFitMessages(spec) : [buildTerminalCommand(spec)];
     const meta = isFit
       ? { type: 'DataCommand', rule: 'ui:push:fit' }
       : { type: 'TerminalCommand', rule: 'ui:push' };
     let sent = 0;
     for (const socket of activeSockets) {
       if (socket.destroyed) continue;
-      sendFrame(socket, text, meta);
+      for (const text of texts) sendFrame(socket, text, meta);
       sent += 1;
     }
     return { sent };
@@ -184,7 +210,7 @@ function createApp(config) {
       }
       for (const payload of frames) {
         try {
-          const parsed = parse(payload);
+          const parsed = mergeConfirmation(parse(payload), session);
           session.remember(parsed);
           let result = { payload: null, rule: null };
           try {
@@ -213,7 +239,9 @@ function createApp(config) {
           let gisDelayMs = 0;
           if (fitPrecedesGoInService(result.rule)) {
             try {
-              sendFrame(socket, buildFit(), { type: 'DataCommand', rule: 'fitDownload:beforeGoInService' });
+              for (const text of buildFitMessages()) {
+                sendFrame(socket, text, { type: 'DataCommand', rule: 'fitDownload:beforeGoInService' });
+              }
               gisDelayMs = fitConfig.delayMs || 0;
             } catch (err) {
               console.error(`fitDownload.beforeGoInService skipped: ${err.message}`);
