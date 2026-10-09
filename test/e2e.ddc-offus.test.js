@@ -102,3 +102,14 @@ test('转他人户的 ITR 回送也可以只带 Buffer B：合并到本会话上
     assert.strictEqual((await confirm('C'))[3], '130');
   });
 });
+
+test('跨行转账 DF（他行 CSS 卡）：DFFB → 814 → DFFC → 861 → DFFD → 820 → DFFF → 209 → C → 822 → DFFG → 130', { timeout: 5000 }, async () => {
+  await withApp(async (send, confirm) => {
+    assert.strictEqual((await send('DFFBAB  '))[3], '814');
+    assert.strictEqual((await send('DFFCAB  '))[3], '861');
+    assert.strictEqual((await send('DFFDABC ', '000000200000'))[3], '820');
+    assert.ok(isItr(await send('DFFFABC ', '000000200000')));
+    assert.strictEqual((await confirm('C'))[3], '822');
+    assert.strictEqual((await send('DFFGABC ', '000000200000'))[3], '130');
+  });
+});

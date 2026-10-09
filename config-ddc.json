@@ -401,6 +401,18 @@
       "handler": "ddcPinChange"
     },
     {
+      "name": "ddc-interbank",
+      "match": {
+        "messageClass": "1",
+        "subClass": "1",
+        "field": {
+          "index": 7,
+          "pattern": "^DF[ F][ABCDFG]"
+        }
+      },
+      "handler": "ddcInterbank"
+    },
+    {
       "name": "opcode-library",
       "match": {
         "messageClass": "1",
@@ -713,5 +725,46 @@
   },
   "ddcCssFee": {
     "fee": "0.45"
+  },
+  "_ddcInterbank_comment": "跨行转账 DF（ddcInterbank.js，Diebold trace 2020）：本行 NBC 卡 DF A-G、他行 CSS 卡 DFF B-G。invalidAccount 填一个收款账号时 G 段回 149；fee 按币种。",
+  "ddcInterbank": {
+    "invalidAccount": "",
+    "destName": "",
+    "fee": {
+      "USD": "0.60",
+      "KHR": "2400.00"
+    },
+    "banks": {
+      "102": "JTRUST",
+      "106": "DGB BANK",
+      "112": "WOORI BANK (CAMBODIA) PLC",
+      "041": "ACLEDA BANK PLC.",
+      "056": "SANTHAPANA BANK PLC.",
+      "084": "AMRET MICROFINANCE INSTITUTION PLC.",
+      "088": "PRASAC MICROFINANCE INSTITUTION PLC.",
+      "079": "CAMBODIA POST BANK PLC.",
+      "036": "ADVANCED BANK OF ASIA",
+      "076": "TAIWAN COOPERATIVE BANK",
+      "073": "MEGA INTERNATIONAL COMMERCIAL BANK",
+      "004": "CAMBODIAN PUBLIC BANK PLC.",
+      "071": "BANK OF CHINA (HONG KONG) LIMITED",
+      "003": "CAMBODIAN COMMERCIAL BANK",
+      "043": "VATTANAC BANK",
+      "040": "FIRST COMMERCIAL BANK",
+      "090": "LOLC (CAMBODIA) PLC",
+      "089": "AMK MICROFINANCE INSTITUTION PLC.",
+      "085": "HATTHA BANK",
+      "005": "CANADIA BANK PLC.",
+      "078": "RHB INDOCHINA BANK",
+      "077": "HONG LEONG BANK(CAMBODIA) PLC.",
+      "072": "CIMB BANK(CAMBODIA) PLC.",
+      "058": "PHNOM PENH COMMERCIAL BANK",
+      "095": "CHIEF(CAMBODIA) COMMERCIAL BANK",
+      "081": "PHILLIP BANK PLC.",
+      "096": "PRINCE BANK PLC.",
+      "020": "MAYBANK (CAMBODIA) PLC.",
+      "092": "BRED BANK",
+      "061": "BOOYONG BANK"
+    }
   }
 }

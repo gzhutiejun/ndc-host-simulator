@@ -28,6 +28,7 @@ const makeDdcMiniStatementStage1 = require('./src/handlers/ddcMiniStatementStage
 const makeDdcMiniStatementStage2 = require('./src/handlers/ddcMiniStatementStage2');
 const makeDdcTransferOther = require('./src/handlers/ddcTransferOther');
 const makeDdcCardPayment = require('./src/handlers/ddcCardPayment');
+const makeDdcInterbank = require('./src/handlers/ddcInterbank');
 const makeDdcFeeConfirmation = require('./src/handlers/ddcFeeConfirmation');
 const makeDdcCssFeeStage = require('./src/handlers/ddcCssFeeStage');
 const makeDdcStageReply = require('./src/handlers/ddcStageReply');
@@ -88,6 +89,7 @@ function createApp(config) {
     // CUBC 第三期：转他人户（GD F/G/H）与信用卡缴款（FG A-D），各一个 handler 按操作码第 4 位分段。
     ddcTransferOther: makeDdcTransferOther(config.ddcTransferOther || {}),
     ddcCardPayment: makeDdcCardPayment(config.ddcCardPayment || {}),
+    ddcInterbank: makeDdcInterbank(config.ddcInterbank || {}),
   };
   // 他行卡（方案书 §4.3 后两列）。国际卡 AA?D / BA?F 单段：手续费 ITR，接受后直接出钞 / 回余额，
   // 复用本行第 2 段的 handler。他行 CSS 卡：手续费段（AA F / BA C / CA D / BB F）接受后回本族的
