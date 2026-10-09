@@ -1,4 +1,5 @@
 const { buildInteractiveResponse } = require('./interactiveResponse');
+const { buildDdcTransactionReply } = require('./ddcTransactionReply');
 
 /**
  * CUBC 本行卡第 1 段的账户列表 ITR。形状全部取自 CUBC_Host_Simulator/Reply 的四份样本
@@ -29,6 +30,10 @@ function buildAccountListItr(luno, { screen = '647', toar = true, accounts = DEF
 /** 有 accountList 开关的第 1 段共用：Buffer B 不是列表里的键就回账户列表，是就放行（返回 null）。 */
 function accountListGate(parsed, luno, accounts, opts) {
   const bufferB = (parsed.fields || [])[10] || '';
+  // 持卡人取消：终端回送 E（参数工作簿 Exceptions OTHER EVENTS R3）；回 131 是假设（无样本）。
+  if (bufferB === 'E') {
+    return buildDdcTransactionReply({ luno, nextState: '131', fieldG: '', screen: '', printer: '' });
+  }
   if (accounts.some((a) => a.key === bufferB)) return null;
   return buildAccountListItr(luno, { ...opts, accounts });
 }

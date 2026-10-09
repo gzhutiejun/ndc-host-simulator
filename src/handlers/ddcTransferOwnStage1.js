@@ -35,6 +35,12 @@ module.exports = function makeDdcTransferOwnStage1(cfg = {}) {
       // （屏 648，一个账户）→ 回送 → FTOWN002 882。两次回送只差 Buffer B，按会话记走到哪一张。
       const bufferB = (parsed.fields || [])[BUFFER_B_INDEX] || '';
       const step = session && session.ownTransferList;
+      // 持卡人在账户列表上取消：终端回送 Buffer B = E（参数工作簿 Exceptions OTHER EVENTS R3）。
+      // 主机回什么没有样本，按官方 next state 表假设 131（Your transaction has been cancelled）。
+      if (bufferB === 'E') {
+        if (session) session.ownTransferList = undefined;
+        return buildDdcTransactionReply({ luno: req.luno, nextState: '131', fieldG: '', screen, printer });
+      }
       if (!step || !accounts.concat(destAccounts).some((acc) => acc.key === bufferB)) {
         if (session) session.ownTransferList = 'source';
         return buildAccountListItr(req.luno, { screen: '647', toar: false, accounts });

@@ -69,3 +69,11 @@ test('本人转账 GD C（confirm）：确认屏 209 → C 回 130 / D 回 131',
 test('本人转账 GD C：缺省直接 130', () => {
   assert.strictEqual(makeTransferOwn2({})(req('GD CA C '), createSession(), helpers).split(FS)[3], '130');
 });
+
+test('账户列表上取消：回送 E → 131（假设，无样本）', () => {
+  assert.strictEqual(makeBalance({ accountList: true })(req('BA AA C ', 'E'), createSession(), helpers).split(FS)[3], '131');
+  const s = createSession();
+  const own = makeTransferOwn({ accountList: true });
+  assert.strictEqual(own(req('GD BA CC'), s).split(FS)[0], '3');
+  assert.strictEqual(own(req('GD BA CC', 'E'), s).split(FS)[3], '131');
+});
