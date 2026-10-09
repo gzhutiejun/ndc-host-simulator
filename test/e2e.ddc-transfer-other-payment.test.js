@@ -43,20 +43,20 @@ test('config-ddc.json 为 7 个操作码各配了一条规则', () => {
     ['FG A', 'FG B', 'FG C', 'FG D', 'GD F', 'GD G', 'GD H']);
 });
 
-test('转他人户整段：GD F → ITR → GD F(I) → 430 → GD G → 434 → GD H → ITR → GD H(C) → 130', { timeout: 5000 }, async () => {
+test('转他人户整段：GD F → ITR → GD F(A) → 430 → GD G → 434 → GD H → ITR → GD H(C) → 130', { timeout: 5000 }, async () => {
   await withApp(async (send) => {
     assert.strictEqual((await send('GD FA C ', '000000000000', '', ''))[0], '3');
-    assert.strictEqual((await send('GD FA C ', '000000000000', 'I', ''))[3], '430');
+    assert.strictEqual((await send('GD FA C ', '000000000000', 'A', ''))[3], '430');
     assert.strictEqual((await send('GD GA C ', '000000000258', '01110110281087', ''))[3], '434');
     assert.strictEqual((await send('GD HA C ', '000000000258', '01110110281087', ''))[0], '3');
     assert.strictEqual((await send('GD HA C ', '000000000258', 'C', ''))[3], '130');
   });
 });
 
-test('信用卡缴款整段：FG A → ITR → FG A(I) → 382 → FG B → 385 → FG C → 390 → FG D → 130', { timeout: 5000 }, async () => {
+test('信用卡缴款整段：FG A → ITR → FG A(A) → 382 → FG B → 385 → FG C → 390 → FG D → 130', { timeout: 5000 }, async () => {
   await withApp(async (send) => {
     assert.strictEqual((await send('FG AA C ', '000000000000', '', ''))[0], '3');
-    assert.strictEqual((await send('FG AA C ', '000000000000', 'I', ''))[3], '382');
+    assert.strictEqual((await send('FG AA C ', '000000000000', 'A', ''))[3], '382');
     assert.strictEqual((await send('FG BA C ', '000000000000', '', '4043188686581509'))[3], '385');
     assert.strictEqual((await send('FG CA C ', '000000000658', '', '4043188686581509'))[3], '390');
     assert.strictEqual((await send('FG DA C ', '000000000658', '', '4043188686581509'))[3], '130');
@@ -96,14 +96,14 @@ test('完整 config-ddc.json 规则表：旧规则不被抢，新帧命中新 ha
     // config-ddc.json 打开了 accountList / confirm（样本四份）：GD B 源账户列表 → 目标账户列表 → 882；
     // GD C 确认屏 209 → C → 130。ATM 的回送只有新 MCN + Buffer B（opcode 空），模拟器并回上一条再分派。
     assert.strictEqual((await send('GD BA CC', '', '', ''))[0], '3');
-    assert.strictEqual((await send('', '', 'L', ''))[0], '3');
-    assert.strictEqual((await send('', '', 'I', ''))[3], '882');
+    assert.strictEqual((await send('', '', 'B', ''))[0], '3');
+    assert.strictEqual((await send('', '', 'A', ''))[3], '882');
     assert.strictEqual((await send('GD CA C ', '000000000258', '', ''))[0], '3');
     assert.strictEqual((await send('', '', 'C', ''))[3], '130');
     assert.strictEqual((await send('GD FA C ', '000000000000', '', ''))[0], '3');
     assert.strictEqual((await send('GD GA C ', '000000000258', '01110110281087', ''))[3], '434');
     assert.strictEqual((await send('GD HA C ', '000000000258', 'C', ''))[3], '130');
-    assert.strictEqual((await send('FG AA C ', '000000000000', 'I', ''))[3], '382');
+    assert.strictEqual((await send('FG AA C ', '000000000000', 'A', ''))[3], '382');
     assert.strictEqual((await send('FG BA C ', '000000000000', '', '4043188686581509'))[3], '385');
     assert.strictEqual((await send('FG CA C ', '000000000658', '', '4043188686581509'))[3], '390');
     assert.strictEqual((await send('FG DA C ', '000000000658', '', '4043188686581509'))[3], '130');

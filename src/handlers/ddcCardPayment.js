@@ -1,3 +1,4 @@
+const { isAccountKey } = require('../ndc/accountListItr');
 const { buildDdcTransactionReply } = require('../ndc/ddcTransactionReply');
 const { buildInteractiveResponse } = require('../ndc/interactiveResponse');
 const { extractRequest } = require('../ndc/transactionRequest');
@@ -48,7 +49,7 @@ module.exports = function makeDdcCardPayment(cfg = {}) {
       // 持卡人在账户列表上取消：终端回送 Buffer B = E（参数工作簿 Exceptions OTHER EVENTS R3）。
       // 主机回什么没有样本，按官方 next state 表假设 131（Your transaction has been cancelled）。
       if (bufferB === 'E') return reply('131');
-      if (singleAccount || accounts.some((a) => a.key === bufferB)) return reply('382');
+      if (singleAccount || isAccountKey(accounts, bufferB)) return reply('382');
       return buildInteractiveResponse({
         luno: req.luno, displayFlag: '1', activeKeys: '0110010000', screenTimer: 37,
         screenData: accountListScreen(accounts),

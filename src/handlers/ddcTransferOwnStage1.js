@@ -1,6 +1,6 @@
 const { buildDdcTransactionReply } = require('../ndc/ddcTransactionReply');
 const { extractRequest } = require('../ndc/transactionRequest');
-const { buildAccountListItr, DEFAULT_ACCOUNTS, DEST_ACCOUNTS } = require('../ndc/accountListItr');
+const { buildAccountListItr, DEFAULT_ACCOUNTS, DEST_ACCOUNTS, isAccountKey } = require('../ndc/accountListItr');
 
 const BUFFER_B_INDEX = 10;
 
@@ -41,7 +41,7 @@ module.exports = function makeDdcTransferOwnStage1(cfg = {}) {
         if (session) session.ownTransferList = undefined;
         return buildDdcTransactionReply({ luno: req.luno, nextState: '131', fieldG: '', screen, printer });
       }
-      if (!step || !accounts.concat(destAccounts).some((acc) => acc.key === bufferB)) {
+      if (!step || !(isAccountKey(accounts, bufferB) || isAccountKey(destAccounts, bufferB))) {
         if (session) session.ownTransferList = 'source';
         return buildAccountListItr(req.luno, { screen: '647', toar: false, accounts });
       }

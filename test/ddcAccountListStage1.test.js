@@ -33,8 +33,8 @@ for (const [name, make, opcode, state, screen] of [
     const f = make({ ...cfg, accountList: true })(req(opcode), createSession(), helpers).split(FS);
     assert.deepStrictEqual([f[0], f[3], f[4], f[5]], ['3', '210110010000', '037', screen]);
   });
-  test(`${name}：accountList，回送行号字母 → ${state}`, () => {
-    const f = make({ ...cfg, accountList: true })(req(opcode, 'L'), createSession(), helpers).split(FS);
+  test(`${name}：accountList，回送 FDK 字母 → ${state}`, () => {
+    const f = make({ ...cfg, accountList: true })(req(opcode, 'B'), createSession(), helpers).split(FS);
     assert.deepStrictEqual([f[0], f[3]], ['4', state]);
   });
 }
@@ -48,10 +48,10 @@ test('本人转账 GD B（accountList）：源账户列表 647 → 目标账户�
   const s = createSession();
   const first = h(req('GD BA CC'), s).split(FS);
   assert.deepStrictEqual([first[0], first[3], first[5]], ['3', '210110010000', '\x0c\x1bO647\x1bP6470\x1bH000' + ROWS]);
-  const second = h(req('GD BA CC', 'L'), s).split(FS);
+  const second = h(req('GD BA CC', 'B'), s).split(FS);
   assert.deepStrictEqual([second[0], second[3], second[5]],
     ['3', '210100010000', '\x0c\x1bO648\x1bP6480\x1bH000\x0fI1       0111***61 USD-->']);
-  const third = h(req('GD BA CC', 'I'), s).split(FS);
+  const third = h(req('GD BA CC', 'A'), s).split(FS);
   assert.deepStrictEqual([third[0], third[3]], ['4', '882']);
   // 下一笔从头开始
   assert.strictEqual(h(req('GD BA CC'), s).split(FS)[0], '3');

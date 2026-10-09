@@ -8,8 +8,18 @@ const { buildDdcTransactionReply } = require('./ddcTransactionReply');
  * - 对账单 CA A：屏 047，FF FF + `@TOAR`（只在 _ITR）；
  * - 本人转账 GD B：屏 647，单个 FF、没有 `@TOAR`（四份都有）；接着 FTOWN001：屏 648、只有一个账户、
  *   active keys `0100010000`。
- * 行格式 `<行号字母>1       <掩码账号> <币种>-->`，ATM 回送行号字母（Buffer B）。
+ * 行格式 `<行号字母>1       <掩码账号> <币种>-->`。ATM 回送的不是行号字母，而是按行先后的 FDK 字母
+ * A B C D F G H I（E 是取消）：旧终端应用 NCR 测试页 index.html:145-193，与 active keys 位图
+ * （位 1-4 = FDK A-D、5 = 取消、6-9 = FDK F-I；两行 `0110010000` = A、B、取消）一致。
  */
+const ROW_KEYS = ['A', 'B', 'C', 'D', 'F', 'G', 'H', 'I'];
+
+/** Buffer B 是不是这张列表里某一行的 FDK 字母。 */
+function isAccountKey(accounts, bufferB) {
+  const i = ROW_KEYS.indexOf(bufferB);
+  return i >= 0 && i < accounts.length;
+}
+
 const DEFAULT_ACCOUNTS = [
   { key: 'I', text: '0112***80 USD' },
   { key: 'L', text: '0111***61 USD' },
@@ -34,8 +44,8 @@ function accountListGate(parsed, luno, accounts, opts) {
   if (bufferB === 'E') {
     return buildDdcTransactionReply({ luno, nextState: '131', fieldG: '', screen: '', printer: '' });
   }
-  if (accounts.some((a) => a.key === bufferB)) return null;
+  if (isAccountKey(accounts, bufferB)) return null;
   return buildAccountListItr(luno, { ...opts, accounts });
 }
 
-module.exports = { buildAccountListItr, accountListGate, DEFAULT_ACCOUNTS, DEST_ACCOUNTS };
+module.exports = { buildAccountListItr, accountListGate, isAccountKey, ROW_KEYS, DEFAULT_ACCOUNTS, DEST_ACCOUNTS };

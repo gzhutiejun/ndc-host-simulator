@@ -15,13 +15,13 @@ function req(opcode, { amount = '000000000000', b = '', c = '' } = {}) {
 }
 const helpers = { now: () => new Date(Date.UTC(2026, 9, 8, 10, 0)) };
 
-test('本行 NBC 卡：DF A 账户列表（屏 047）→ 回送行号 → 808', () => {
+test('本行 NBC 卡：DF A 账户列表（屏 047）→ 回送 FDK 字母 → 808', () => {
   const h = makeDdcInterbank({});
   const s = createSession();
   const a = h(req('DF AAD  '), s, helpers).split(FS);
   assert.deepStrictEqual([a[0], a[3]], ['3', '210110010000']);
   assert.ok(a[5].includes('\x1bO047'));
-  assert.strictEqual(h(req('DF AAD  ', { b: 'I' }), s, helpers).split(FS)[3], '808');
+  assert.strictEqual(h(req('DF AAD  ', { b: 'A' }), s, helpers).split(FS)[3], '808');
   assert.strictEqual(h(req('DF AAD  ', { b: 'E' }), s, helpers).split(FS)[3], '131');
 });
 

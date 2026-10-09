@@ -25,7 +25,7 @@ test('GD F，Buffer B 空：回账户列表 ITR（SIM:182 的形状）', () => {
 });
 
 test('GD F，Buffer B = 账户键：回 430', () => {
-  const f = run({}, req('GD FA C ', { amount: '000000000000', b: 'L' }));
+  const f = run({}, req('GD FA C ', { amount: '000000000000', b: 'B' }));
   assert.strictEqual(f[0], '4');
   assert.strictEqual(f[3], '430');
 });

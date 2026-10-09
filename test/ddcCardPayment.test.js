@@ -23,7 +23,7 @@ test('FG A，Buffer B 空：账户列表 ITR（SIM:215 与 SIM:182 相同）', (
 });
 
 test('FG A，选了账户或单账户：382', () => {
-  assert.strictEqual(run({}, req('FG AA C ', { amount: '000000000000', b: 'I' }))[3], '382');
+  assert.strictEqual(run({}, req('FG AA C ', { amount: '000000000000', b: 'A' }))[3], '382');
   assert.strictEqual(run({ singleAccount: true }, req('FG AA C ', { amount: '000000000000' }))[3], '382');
 });
 

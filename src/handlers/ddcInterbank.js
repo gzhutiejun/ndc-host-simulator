@@ -2,7 +2,7 @@ const { buildDdcTransactionReply } = require('../ndc/ddcTransactionReply');
 const { buildInteractiveResponse } = require('../ndc/interactiveResponse');
 const { extractRequest } = require('../ndc/transactionRequest');
 const { applyReceipt, fmtDate, fmtTime, DDC_PRINT_HEADER_PAD } = require('../ndc/receipt');
-const { buildAccountListItr } = require('../ndc/accountListItr');
+const { buildAccountListItr, isAccountKey } = require('../ndc/accountListItr');
 
 const OPCODE_INDEX = 7;
 const BUFFER_B_INDEX = 10;
@@ -48,7 +48,7 @@ module.exports = function makeDdcInterbank(cfg = {}) {
 
     if (stage === 'A') {
       if (bufferB === 'E') return reply('131');
-      if (accounts.some((a) => a.key === bufferB)) return reply('808');
+      if (isAccountKey(accounts, bufferB)) return reply('808');
       return buildAccountListItr(req.luno, { screen: '047', toar: true, accounts });
     }
     if (stage === 'B') {
