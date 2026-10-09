@@ -29,6 +29,7 @@ const makeDdcMiniStatementStage2 = require('./src/handlers/ddcMiniStatementStage
 const makeDdcTransferOther = require('./src/handlers/ddcTransferOther');
 const makeDdcCardPayment = require('./src/handlers/ddcCardPayment');
 const makeDdcFeeConfirmation = require('./src/handlers/ddcFeeConfirmation');
+const makeDdcCssFeeStage = require('./src/handlers/ddcCssFeeStage');
 const makeDdcStageReply = require('./src/handlers/ddcStageReply');
 
 // 报文库文件是 NCR 给的第三方文件（640KB，不入库，每台机器路径可能不同）。不配路径时
@@ -94,14 +95,15 @@ function createApp(config) {
   // 见 acc-cubc docs/cubc/phase3-questions-for-cubc.md。
   const fee = config.ddcOffUsFee || {};
   const feeHandler = (onAccept) => makeDdcFeeConfirmation({ ...fee, onAccept });
-  const stage = (nextState) => makeDdcStageReply({ nextState });
+  const cssFee = (nextState) => makeDdcCssFeeStage({ nextState, fee: (config.ddcCssFee || {}).fee });
   Object.assign(handlers, {
     ddcIntlWithdrawal: feeHandler(handlers.ddcWithdrawalStage2),
     ddcIntlBalance: feeHandler(handlers.ddcBalanceStage2),
-    ddcCssWithdrawalFee: feeHandler(stage('547')),
-    ddcCssBalanceFee: feeHandler(stage('055')),
-    ddcCssMiniStatementFee: feeHandler(stage('085')),
-    ddcCssPinChangeFee: feeHandler(stage('803')),
+    // 他行 CSS 卡手续费段：普通交易应答 + Z000933（Diebold trace 2020，见 ddcCssFeeStage.js）。
+    ddcCssWithdrawalFee: cssFee('551'),
+    ddcCssBalanceFee: cssFee('071'),
+    ddcCssMiniStatementFee: cssFee('089'),
+    ddcCssPinChangeFee: cssFee('102'),
     ddcPinChange: makeDdcStageReply(config.ddcPinChange || { nextState: '123' }),
   });
   const library = loadMessageLibrary(config.messageLibrary);

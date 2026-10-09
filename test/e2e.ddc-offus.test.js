@@ -66,27 +66,27 @@ test('国际卡余额 BA?F：手续费 ITR → C → 063', { timeout: 5000 }, as
   });
 });
 
-test('他行 CSS 卡取款：AAFF → ITR → C → 547 → AAFG → 128', { timeout: 5000 }, async () => {
-  await withApp(async (send, confirm) => {
-    assert.ok(isItr(await send('AAFFAAC ')));
-    assert.strictEqual((await confirm('C'))[3], '547');
-    assert.strictEqual((await send('AAFGAAC ', '000000010000'))[3], '128');
+// 他行 CSS 卡手续费段回普通交易应答（不是 ITR）：551 / 071 / 089 / 102 + Z000933（Diebold trace 2020）。
+test('他行 CSS 卡取款：AAFF → 551（Z000933）→ AAFG → 128', { timeout: 5000 }, async () => {
+  await withApp(async (send) => {
+    const fee = await send('AAFFAAC ', '000000005000');
+    assert.strictEqual(fee[0], '4');
+    assert.strictEqual(fee[3], '551');
+    assert.ok(fee[5].includes('Z0009330.45 USD'));
+    assert.strictEqual((await send('AAFGAAC ', '000000005000'))[3], '128');
   });
 });
 
-test('他行 CSS 卡余额 / 对账单 / 改密：手续费段接受后回本族的阶段确认，授权段给结论', { timeout: 5000 }, async () => {
-  await withApp(async (send, confirm) => {
-    assert.ok(isItr(await send('BAFCA C ')));
-    assert.strictEqual((await confirm('C'))[3], '055');
-    assert.strictEqual((await send('BAFDA C '))[3], '063');
+test('他行 CSS 卡余额 / 对账单 / 改密：手续费段回本族阶段码，授权段给结论（改密 BB F / BB D，位 3 空格）', { timeout: 5000 }, async () => {
+  await withApp(async (send) => {
+    assert.strictEqual((await send('BAFCABC '))[3], '071');
+    assert.strictEqual((await send('BAFDABC '))[3], '063');
 
-    assert.ok(isItr(await send('CAFDA C ')));
-    assert.strictEqual((await confirm('C'))[3], '085');
-    assert.strictEqual((await send('CAFCA C '))[3], '093');
+    assert.strictEqual((await send('CAFDABC '))[3], '089');
+    assert.strictEqual((await send('CAFCABC '))[3], '093');
 
-    assert.ok(isItr(await send('BBFFA C ')));
-    assert.strictEqual((await confirm('C'))[3], '803');
-    assert.strictEqual((await send('BBFDA C '))[3], '123');
+    assert.strictEqual((await send('BB FABC '))[3], '102');
+    assert.strictEqual((await send('BB DABC '))[3], '123');
   });
 });
 

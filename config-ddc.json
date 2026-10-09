@@ -371,7 +371,7 @@
         "subClass": "1",
         "field": {
           "index": 7,
-          "startsWith": "BBFF"
+          "startsWith": "BB F"
         }
       },
       "handler": "ddcCssPinChangeFee"
@@ -384,6 +384,18 @@
         "field": {
           "index": 7,
           "startsWith": "BBFD"
+        }
+      },
+      "handler": "ddcPinChange"
+    },
+    {
+      "name": "ddc-css-pin-change-auth",
+      "match": {
+        "messageClass": "1",
+        "subClass": "1",
+        "field": {
+          "index": 7,
+          "startsWith": "BB D"
         }
       },
       "handler": "ddcPinChange"
@@ -694,9 +706,12 @@
     "invalidCard": "",
     "limitCents": null
   },
-  "_ddcOffUsFee_comment": "他行卡手续费 ITR（ddcFeeConfirmation.js）。fee = ITR 屏幕上 I= 的金额；回送 D 时回 declineNextState（现网 131）。国际卡 AA?D/BA?F 接受后直接出钞/回余额；他行 CSS 卡手续费段接受后回 547/055/085/803（假设，无现网样本）。",
+  "_ddcOffUsFee_comment": "国际卡 AA?D / BA?F 的手续费走 ITR（ddcFeeConfirmation.js，现网 17/17）；他行 CSS 卡的手续费段回普通交易应答 551/071/089/102 + Z000933（ddcCssFeeStage.js，Diebold trace 2020），手续费金额取 ddcCssFee.fee。",
   "ddcOffUsFee": {
     "fee": "1.00",
     "declineNextState": "131"
+  },
+  "ddcCssFee": {
+    "fee": "0.45"
   }
 }
