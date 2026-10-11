@@ -21,6 +21,9 @@ const { FS } = require('../constants');
  *
  * 显示标志：`0` 不显示、`1` 明文、`2` 隐藏输入。
  *
+ * active keys 是 0/1 位图（手册 B006-6180 p.10-90 字段 h）：第 1 位全部数字键，第 2–10 位
+ * 依次 FDK A、B、C、D、Cancel(E)、F、G、H、I；末尾的 `0` 可省。
+ *
  * 出处：Atleos Activate 的 `BusSrv/BusSrvNDC/Source/RHProxyNDC/InteractiveResponse.cs`
  * （`ExtractSector4Fields`..`ExtractSector7Fields`；C# 里 `GetSector(msg, N, FS)` 是 1 基的，
  * 所以 sector 4 = 这里的下标 3）。
@@ -36,6 +39,10 @@ function buildInteractiveResponse({
   if (!activeKeys) throw new Error('buildInteractiveResponse: activeKeys is required');
   if (activeKeys.length > 10) {
     throw new Error(`buildInteractiveResponse: activeKeys "${activeKeys}" exceeds the 10-character maximum`);
+  }
+  // 曾经有场景把它写成按键字母（`AB`），ATM 按位读到的是全部关闭——这里直接拦下。
+  if (!/^[01]+$/.test(activeKeys)) {
+    throw new Error(`buildInteractiveResponse: activeKeys "${activeKeys}" must be a 0/1 bitmap (numeric, FDK A..I)`);
   }
   if (!screenData) throw new Error('buildInteractiveResponse: screenData is required');
   // ATM 侧对这一段有严格的长度校验（不是 3 位就按段长错拒绝整条报文），补零而不是

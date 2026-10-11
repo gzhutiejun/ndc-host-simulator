@@ -89,7 +89,7 @@ test('手续费：先回交互式应答，接受后才给交易应答', { timeou
     async (exchange) => {
       const ir = await exchange(request());
       assert.strictEqual(ir[0], '3', '第一条应答是 Interactive Transaction Response');
-      assert.strictEqual(ir[3], '21AB', '子类 2 + 显示标志 1 + active keys AB');
+      assert.strictEqual(ir[3], '210110000000', '子类 2 + 显示标志 1 + active keys 位图：FDK A、B');
       assert.strictEqual(ir[4].length, 3, '屏幕计时器恰好 3 位');
       assert.match(ir[5], /SURCHARGE/);
       assert.match(ir[5], /Fee=\$2\.00/);
@@ -124,7 +124,7 @@ test('DCC：三个选项，选本币（F）之后照常授权', { timeout: 5000 
     { rules: RULES, withdrawal: WITHDRAWAL, hostConfirmation: { enabled: true, scenario: 'dcc' } },
     async (exchange) => {
       const ir = await exchange(request());
-      assert.strictEqual(ir[3], '21DEF', 'active keys 是三个：外币 D / 拒绝 E / 本币 F');
+      assert.strictEqual(ir[3], '210000111000', 'active keys 位图开三个：外币 D / 拒绝 E / 本币 F');
       assert.match(ir[5], /CONDITIONAL=1800/);
       assert.match(ir[5], /EXCHANGETYPE=DCC/);
       assert.match(ir[5], /TOTALL=ZAR 1850\.00/);

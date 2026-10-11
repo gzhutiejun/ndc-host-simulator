@@ -9,32 +9,37 @@ const BUFFER_B_INDEX = 10;
  * 内置场景。`screenData` 里的标签就是 ATM 侧解析器认的那几个；`accept`/`decline` 是
  * ATM 会放进 Buffer B 的字母。
  *
+ * `activeKeys` 是 0/1 位图，不是字母串（手册 B006-6180 p.10-90 ITR 字段 h）：第 1 位全部
+ * 数字键，第 2–10 位依次 FDK A、B、C、D、Cancel(E)、F、G、H、I。AE 的
+ * `AccountServicesCustomiser.StoreActiveKeys()` 也是逐位按 `"1"` 读的——写成 `AB` 会被读成
+ * 全部关闭，持卡人按什么都没反应。
+ *
  * 字母表出处：Atleos Activate 的
  * `ChnApp/Cnsmr/CnsmrAppAE/Source/Config/Customiser/RequestConfigurationTool.xml`
  * 的 `BufferBConfiguration`（手续费 589-712，汇率 1467-1593）。
  */
 const SCENARIOS = {
   surcharge: {
-    activeKeys: 'AB',
+    activeKeys: '0110000000', // FDK A、B
     screenData: 'SURCHARGE;A SURCHARGE OF $2.00 APPLIES;Fee=$2.00;PRESS A TO ACCEPT B TO CANCEL;',
     accept: ['A'],
     decline: ['B'],
   },
   overdraft: {
-    activeKeys: 'CD',
+    activeKeys: '0001100000', // FDK C、D
     screenData: 'OVERDRAFT FEE;Fee=$35.00;PRESS C TO ACCEPT D TO CANCEL;',
     accept: ['C'],
     decline: ['D'],
   },
   fee0: {
-    activeKeys: 'AB',
+    activeKeys: '0110000000', // FDK A、B
     screenData: 'FEE0;Fee=$1.50;PRESS A TO ACCEPT B TO CANCEL;',
     accept: ['A'],
     decline: ['B'],
   },
   // FX：外币取款，主机报本币金额让持卡人接受或放弃（参考币种只有本币一个）。
   fx: {
-    activeKeys: 'CD',
+    activeKeys: '0001100000', // FDK C、D
     screenData: [
       'CONDITIONAL=1805',
       'EXCHANGETYPE=FX',
@@ -49,7 +54,7 @@ const SCENARIOS = {
   },
   // DCC：让持卡人在两种币种之间选，三个选项（外币 D / 本币 F / 放弃 E）。
   dcc: {
-    activeKeys: 'DEF',
+    activeKeys: '0000111000', // FDK D、E（Cancel）、F
     screenData: [
       'CONDITIONAL=1800',
       'EXCHANGETYPE=DCC',

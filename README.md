@@ -414,13 +414,16 @@ transaction authorization"。
 
 | scenario | active keys | 屏幕文本要点 | 接受 | 拒绝 |
 |---|---|---|---|---|
-| `surcharge` | `AB` | `SURCHARGE;Fee=$2.00;` | `A` | `B` |
-| `overdraft` | `CD` | `OVERDRAFT FEE;Fee=$35.00;` | `C` | `D` |
-| `fee0` | `AB` | `FEE0;Fee=$1.50;` | `A` | `B` |
-| `fx` | `CD` | `CONDITIONAL=1805;EXCHANGETYPE=FX;…` | `C` | `D` |
-| `dcc` | `DEF` | `CONDITIONAL=1800;EXCHANGETYPE=DCC;…` | `D`(外币)/`F`(本币) | `E` |
+| `surcharge` | `0110000000`（A、B） | `SURCHARGE;Fee=$2.00;` | `A` | `B` |
+| `overdraft` | `0001100000`（C、D） | `OVERDRAFT FEE;Fee=$35.00;` | `C` | `D` |
+| `fee0` | `0110000000`（A、B） | `FEE0;Fee=$1.50;` | `A` | `B` |
+| `fx` | `0001100000`（C、D） | `CONDITIONAL=1805;EXCHANGETYPE=FX;…` | `C` | `D` |
+| `dcc` | `0000111000`（D、E、F） | `CONDITIONAL=1800;EXCHANGETYPE=DCC;…` | `D`(外币)/`F`(本币) | `E` |
 
 也可以不用内置场景，直接给 `screenData`/`activeKeys`/`accept`/`decline`。
+
+`activeKeys` 是 0/1 位图，**不是按键字母**（手册 p.10-90）：第 1 位全部数字键，第 2–10 位依次
+FDK A、B、C、D、Cancel(E)、F、G、H、I。写成字母会在组报文时直接抛错。
 
 主机侧三态，靠入站请求的 Buffer B 区分：
 
