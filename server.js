@@ -21,6 +21,7 @@ const makeHostConfirmation = require('./src/handlers/hostConfirmation');
 const makeDdcPinValidation = require('./src/handlers/ddcPinValidation');
 const makeDdcWithdrawalStage1 = require('./src/handlers/ddcWithdrawalStage1');
 const makeDdcWithdrawalStage2 = require('./src/handlers/ddcWithdrawalStage2');
+const makeDdcDeviceFaultReply = require('./src/handlers/ddcDeviceFaultReply');
 const makeDdcBalanceStage1 = require('./src/handlers/ddcBalanceStage1');
 const makeDdcBalanceStage2 = require('./src/handlers/ddcBalanceStage2');
 const makeDdcTransferOwnStage1 = require('./src/handlers/ddcTransferOwnStage1');
@@ -75,6 +76,7 @@ function createApp(config) {
     ddcPinValidation: makeDdcPinValidation(config.ddcPinValidation || {}),
     ddcWithdrawalStage1: makeDdcWithdrawalStage1(config.ddcWithdrawalStage1 || {}),
     ddcWithdrawalStage2: makeDdcWithdrawalStage2(config.ddcWithdrawalStage2 || {}),
+    ddcDeviceFaultReply: makeDdcDeviceFaultReply(config.ddcDeviceFaultReply || {}),
     // 快捷取款第 1 段：操作码基码 "AA A"（不是 "AA B"），阶段确认 next-state 503
     // （不是 547）。复用 ddcWithdrawalStage1 的工厂函数、只换缺省 nextState——同一个
     // handler 逻辑对哪个操作码把它匹配上来的并不关心，跟下面 familyD/familyI 复用

@@ -665,3 +665,10 @@ ISC
 ⚠️ **LUNO**：库里的报文把 LUNO 写死为 `000`，没有模板替换。ATM 侧
 `application.json` 的 `ndcLuno` 也是 `000`，当前一致；若哪天改了 ATM 的 LUNO，
 库驱动的应答会对不上，需要在这里补模板替换。
+
+### DDC 设备故障之后的应答（`ddcDeviceFaultReply`）
+
+终端发出钞机设备故障（冲正，`22<FS>LUNO<FS><FS>8<FS>…`，钞箱段 `标签 + 状态字母 + 2 位张数 + 00000`）之后，
+照 2020 Diebold trace（acc-cubc `docs/cubc/host-messages.md` §3.7）再回一条交易应答：有钞票出来 → 128（不再出钞），
+一张没出 → 142（日志 `DESC: NO NOTES DISPENSED`）。终端回 Ready `B`。读卡器的设备故障不回。
+`config.ddcDeviceFaultReply` 可改 `partialNextState` / `noneNextState`。

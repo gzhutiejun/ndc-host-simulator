@@ -516,6 +516,17 @@
       "handler": "goInService"
     },
     {
+      "name": "ddc-device-fault-reply",
+      "match": {
+        "messageClass": "2",
+        "field": {
+          "index": 3,
+          "startsWith": "8"
+        }
+      },
+      "handler": "ddcDeviceFaultReply"
+    },
+    {
       "name": "ready9-no-reply",
       "match": {
         "messageClass": "2",
