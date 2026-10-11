@@ -49,5 +49,5 @@ test('includeCam appends the EMV boundary segment (off by default)', () => {
   const on = makeDdcPinValidation({ includeCam: true, camArc: '00' })(hhhReq(), createSession(), helpers);
   const f = on.split(FS);
   assert.strictEqual(f.length, 8);
-  assert.strictEqual(f[7], "'9''M'3030");
+  assert.strictEqual(f[7], "'9''M'00201122334455667788303000000");
 });

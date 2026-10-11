@@ -200,7 +200,7 @@ screen, printer]`），跟出厂的取款/余额规则用的是同一套 `respon
 对这几个 next-state 的处理，不是主机侧的风控逻辑。
 
 > **需真 ATM 校准**：`HHH` 的操作码位 5（语言）示例值取自单条现网样本（`HHH A   `），
-> 完整语言表未独立核实。DDC 的 EMV 段内层字段含义未核实（见下节）。
+> 完整语言表未独立核实。
 
 ### DDC 的 EMV 段（应答里的 `'9''M'...`）
 
@@ -211,12 +211,12 @@ acc-cubc 的 `ddc-reply-sectors.ts` 就是靠这个字符判定"打印数据到�
 '9''M'0016B64CEDA6008000000000123230373730
 ```
 
-`buildDdcEmvSegment(arc, include)`（`src/ndc/ddcTransactionReply.js`）只保证**外层
-形状**——两个引号标记 `'9''M'` + 由 `arc` 编出的十六进制——跟标准 NDC 的 `buildCam`
-（`'5CAM8A02'+hex(arc)`）是同一条纪律：让分段逻辑测得到、**不是字节级还原真实密文**。
-内层十六进制数据的字段级含义没有核实，而且 acc-cubc 自己解出这一段之后也只当不透明串
-存着，全仓找不到第二处读它的代码——所以这不是一个亟待补全的精度缺口，是这段数据
-本来就没有已知的消费者。
+`buildDdcEmvSegment(arc, include)`（`src/ndc/ddcTransactionReply.js`）按现网的字段排法拼（acc-cubc
+`docs/cubc/host-messages.md` §3.6，旧终端 `ConvertSector8ReplyFields`）：`'9''M'` + 授权响应码 2 位 +
+发卡行认证数据（2 位十进制长度 + 数据 → tag 91）+ 脚本（3 位长度，这里 `000`）+ 授权码（2 位长度，这里 `00`）。
+91 固定是 `1122334455667788` + ARC 的十六进制：acc-xfs-simulator 的芯片测试卡只认
+`EXTERNAL AUTHENTICATE 008200000A11223344556677883030`，批准时 VM 上的发卡行认证能走通。
+acc-cubc 解析这一段（`core/response/cubc-emv-reply.ts`），把 ARC 与 91 交给第 2 次 GENERATE AC。
 
 已接进两个 handler：`ddcPinValidation`（`includeCam`/`camArc`，见上）与
 `ddcWithdrawalStage2`（同名配置，**只加在批准的应答上**——被拒绝的这一笔本来就没有

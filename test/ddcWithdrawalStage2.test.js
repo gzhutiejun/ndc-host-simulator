@@ -59,7 +59,7 @@ test('includeCam appends the EMV boundary segment on approval only', () => {
   const approved = on(stage2Req('000000020000'), createSession(), helpers);
   const af = approved.split(FS);
   assert.strictEqual(af.length, 8);
-  assert.strictEqual(af[7], "'9''M'3030");
+  assert.strictEqual(af[7], "'9''M'00201122334455667788303000000");
 
   const declined = on(stage2Req('000000000700'), createSession(), helpers); // 凑不出来
   assert.strictEqual(declined.split(FS).length, 7); // 拒绝这条不带 EMV 段

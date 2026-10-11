@@ -46,6 +46,6 @@ test('DDC HHH reply with includeCam carries the EMV boundary segment end-to-end'
   const f = reply.split(FS);
   assert.strictEqual(f[3], '803');
   assert.strictEqual(f.length, 8);
-  assert.strictEqual(f[7], "'9''M'3030");
+  assert.strictEqual(f[7], "'9''M'00201122334455667788303000000");
   await new Promise((resolve) => app.server.close(resolve));
 });

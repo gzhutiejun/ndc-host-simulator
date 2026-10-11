@@ -33,22 +33,23 @@ function buildDdcTransactionReply({
 }
 
 /**
- * DDC 应答里的 EMV 段——`ddcReplySectors()`（acc-cubc 的 `ddc-reply-sectors.ts`）
- * 靠含 `'9'` 的段判定"打印数据到这里为止"，这段就是那个边界。
+ * DDC 应答里的 EMV 段，照现网形状（acc-cubc `docs/cubc/host-messages.md` §3.6，旧终端
+ * `NDCMessageModifier.ConvertSector8ReplyFields`）：`'9''M'` + 授权响应码 2 位 + 发卡行认证数据
+ * （2 位十进制长度 + 数据 → tag 91）+ 发卡行脚本（3 位长度 + 数据）+ 授权码（2 位长度 + 数据）。
+ * 现网例：`'9''M'0016B64CEDA60080000000012323037373730`。
  *
- * 现网真实样本形状：`'9''M'0016B64CEDA6008000000000123230373730`——`'9'` 是边界
- * 标记，`'M'` 紧随其后，再往后是一串十六进制数据。**内层字段级含义没有核实**：
- * acc-cubc 自己解出这一段之后也只当不透明串存着，从没有下游代码真正读它
- * （`ndc-codec.ts` 把它填进 `reply.cam`，全仓找不到第二处引用）。所以这里只保证
- * **外层形状**——两个引号标记 + 由 `arc` 编出的十六进制——跟标准 NDC 的 `buildCam`
- * （`receipt.js`）是同一条纪律：让分段逻辑测得到、不是字节级还原真实密文。
+ * 91 用 `1122334455667788` + ARC 的十六进制（10 字节）：acc-xfs-simulator 的芯片测试卡
+ * （`config/cubc-chip-cards.yaml`）只认 `EXTERNAL AUTHENTICATE 008200000A11223344556677883030`，
+ * 批准（ARC 00）时发卡行认证能在 VM 上走通；拒绝时不匹配，卡片照样给 AAC。不下发脚本，授权码长度 00。
  *
- * @param arc 授权响应码，同 `buildCam` 的用法。
- * @param include 假不返回 `null`（同 `buildCam`，调用方据此决定要不要把这段接进
- *        `buildDdcTransactionReply` 的 `cam` 参数）。
+ * @param arc 授权响应码，2 位数字（`00` 批准、`05` / `51` 拒绝…）。
+ * @param include 假不返回 `null`（调用方据此决定要不要把这段接进 `buildDdcTransactionReply` 的 `cam`）。
  */
 function buildDdcEmvSegment(arc, include) {
-  return include ? `'9''M'${arcToHex(arc)}` : null;
+  if (!include) return null;
+  const a = String(arc).padStart(2, '0').slice(0, 2);
+  const iad = '1122334455667788' + arcToHex(a);
+  return `'9''M'${a}${String(iad.length).padStart(2, '0')}${iad}00000`;
 }
 
 module.exports = { buildDdcTransactionReply, buildDdcEmvSegment };

@@ -40,9 +40,10 @@ test('appends an EMV segment when provided (multi-segment DDC printer shape)', (
 // NDC 的 buildCam（'5CAM8A02'+hex(arc)）是同一条纪律：能让 ddcReplySectors() 正确
 // 切段，不是字节级还原真实密文。
 
-test('buildDdcEmvSegment: shape only, not a byte-accurate replica', () => {
-  assert.strictEqual(buildDdcEmvSegment('00', true), "'9''M'3030");
+test('buildDdcEmvSegment: production layout, 91 = what the VM chip test cards accept', () => {
+  assert.strictEqual(buildDdcEmvSegment('00', true), "'9''M'00201122334455667788303000000");
   assert.strictEqual(buildDdcEmvSegment('00', false), null);
+  assert.strictEqual(buildDdcEmvSegment('05', true), "'9''M'05201122334455667788303500000");
 });
 
 test('buildDdcEmvSegment output contains the boundary marker ddcReplySectors looks for', () => {
