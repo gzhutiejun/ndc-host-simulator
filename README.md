@@ -526,6 +526,16 @@ FIT 拼不出来（没配 `entries`、或条目是坏的）时只在控制台打
 
 FIT 只会发给**当前已连上**的 ATM；一台没连时返回 `{"sent":0}`，这不是错误。
 
+## CUBC / DDC 方言：上电 / 出主管后的整套下载
+
+现网 CUBC 主机（D912）在终端发上电 `12<FS>CUB<FS><FS>1` 或出主管 `12<FS>CUB<FS><FS>300` 之后，逐条下发：换通讯密钥 `30…32` → 配置参数 `30…13` → 状态表 `30…12` ×28 → 屏幕 `30…11` ×31 → FIT `30…15` ×7 → EMV 配置 `30…1A` ×2 → 配置 ID `30…16` → `10 3`（送配置信息）→ `10 ;`（送增强计数），每条都等终端回一条 `22…` 再发下一条；最后看计数里的钞箱状态：`@@@@`（全不可用）发 `10 2`，否则 `10 1` 进服务。见 acc-cubc `docs/cubc/host-messages.md` §5.5。
+
+- 开关：`config-ddc.json` 的 `"ddcDownload": { "enabled": true }`。不配时行为不变。
+- 序列：`messages/ddc-download-sequence.txt`，逐行照抄现网 2024-01-15 08:35:29–08:35:51 的主机报文（`<FS>` `<ESC>` 等写法），只把换密钥的密文换成全 0、去掉结尾的 `10 1`。`ddcDownload.file` 可换文件。
+- 配置 ID 每次下载加 1（`ddcDownload.initialConfigId`，缺省 0，第一次发 `0001`）。
+- FIT：缺省用本配置 `fitDownload.entries` 拼的报文（VM 测试卡按它配）；`"fit": "sample"` 用现网那 7 条。
+- 实现 `src/ddcDownload.js`，测试 `test/ddcDownload.test.js`、`test/e2e.ddc-download.test.js`。
+
 ## 录包
 
 每条收/发报文都会打印 hex dump 并追加到 `captures/session-<时间戳>.log`，

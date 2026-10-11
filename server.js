@@ -12,6 +12,7 @@ const { parseLibrary } = require('./src/message-library');
 const { createLogger } = require('./src/logging');
 const { createUiServer } = require('./src/ui-server');
 const { buildTerminalCommand, buildFitDownload } = require('./src/push');
+const { loadSequence, isDownloadTrigger, createDownload } = require('./src/ddcDownload');
 const goInService = require('./src/handlers/goInService');
 const makeWithdrawal = require('./src/handlers/withdrawal');
 const makeBalance = require('./src/handlers/balance');
@@ -175,6 +176,25 @@ function createApp(config) {
   const goInServiceRules = new Set(
     (config.rules || []).filter((r) => r && r.handler === 'goInService').map((r) => r.name),
   );
+  // CUBC（D912）的整套下载：终端发上电 12…1 / 出主管 12…300 后，照现网逐条下发、逐条等终端的 22…，
+  // 最后按 10 ; 的计数发 10 1 或 10 2（src/ddcDownload.js）。不配 ddcDownload.enabled 时行为不变。
+  const ddcDownloadConfig = config.ddcDownload || {};
+  const ddcSequence = ddcDownloadConfig.enabled === true
+    ? loadSequence(path.join(__dirname, ddcDownloadConfig.file || 'messages/ddc-download-sequence.txt'))
+    : null;
+  let ddcConfigId = ddcDownloadConfig.initialConfigId || 0;
+  function startDdcDownload() {
+    let fitMessages;
+    if (ddcDownloadConfig.fit !== 'sample') {
+      try {
+        fitMessages = buildFitMessages();
+      } catch (err) {
+        console.error(`ddcDownload: config FIT unavailable, using the sample FIT: ${err.message}`);
+      }
+    }
+    return createDownload({ messages: ddcSequence, configId: ddcConfigId, fitMessages });
+  }
+
   function fitPrecedesGoInService(ruleName) {
     return fitConfig.beforeGoInService === true && goInServiceRules.has(ruleName);
   }
@@ -187,6 +207,7 @@ function createApp(config) {
     socket.on('close', () => activeSockets.delete(socket));
     const session = createSession();
     const decoder = createDecoder();
+    let download = null;
 
     // 主动下发：模拟主机索取状态的终端命令（手册 Table 10-1）。
     // 默认 pushOnConnect 为空，行为与不配置时完全一致。
@@ -216,6 +237,26 @@ function createApp(config) {
         try {
           const parsed = mergeConfirmation(parse(payload), session);
           session.remember(parsed);
+          if (ddcSequence) {
+            let text = null;
+            let rule = null;
+            if (isDownloadTrigger(parsed)) {
+              download = startDdcDownload();
+              text = download.start();
+              rule = 'ddcDownload:start';
+            } else if (download) {
+              text = download.next(parsed);
+              rule = download.done ? 'ddcDownload:end' : 'ddcDownload';
+              ddcConfigId = download.configId;
+              if (download.done) download = null;
+            }
+            if (text !== null) {
+              logger.record('RECV', payload, { type: parsed.type, rule });
+              if (ui) ui.publish('RECV', payload, { type: parsed.type, rule });
+              sendFrame(socket, text, { type: 'DataCommand', rule });
+              continue;
+            }
+          }
           let result = { payload: null, rule: null };
           try {
             result = engine.respond(parsed, session);
