@@ -1,0 +1,785 @@
+{
+  "port": 12008,
+  "messageLibrary": "messages/StandardInterface_0300_English_Messages.doc",
+  "enableTLS": false,
+  "transmissionCode": "ASCII",
+  "responseDelayMs": 0,
+  "uiPort": 8080,
+  "pushOnConnect": [],
+  "_fitDownload_comment": "CUBC 现网主机下发的 FIT（终端 008823 MSG.EJ，2024-01～03，34 条，条目号 0-34、无 26）。PSTDX = 卡组：0 号 111222→NDC04 主管卡；1-3 422131/461760/9116080→NDC00 本行借记/NBC；4-13→NDC01 本行信用卡；14-28 911600-911611/911694/911699→NDC02 他行 NBC；29-33 3*/4*/5*/6*/7*→NDC03 国际卡；34 全 F→NDC07 拒卡。测试卡见 acc-xfs-simulator config/cubc-cards.yaml（id 前缀即卡组）。",
+  "ddcDownload": {
+    "enabled": true
+  },
+  "fitDownload": {
+    "luno": "218",
+    "msn": "000",
+    "responseFlag": "0",
+    "beforeGoInService": true,
+    "delayMs": 500,
+    "entries": [
+      "000000017018034255255004000134000015000159015255000000000000000000000000000000000000000000000000000000000000000000000",
+      "001000066033049255255000000134000015000159015255000000000000000000000000000000000000000000000000000000000000000000000",
+      "002000070023096255255000000134000015000159015255000000000000000000000000000000000000000000000000000000000000000000000",
+      "003000145022008015255000000134000015000159015255000000000000000000000000000000000000000000000000000000000000000000000",
+      "004000064067023255255001000134000015000031000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "005000064067024255255001000134000015000031000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "006000066033098255255001000134000015000031000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "007000070115006255255001000134000015000031000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "008000064067025255255001000134000015000031000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "009000064067032255255001000134000015000031000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "010000082033120255255001000134000015000031000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "011000082071001255255001000134000015000031000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "012000082067048255255001000134000015000031000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "013000085036114255255001000134000015000031000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "014000145022000255255002000134000015000031000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "015000145022001255255002000134000015000031000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "016000145022002255255002000134000015000031000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "017000145022003255255002000134000015000031000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "018000145022004255255002000134000015000031000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "019000145022005255255002000134000015000031000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "020000145022006255255002000134000015000031000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "021000145022007255255002000134000015000031000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "022000145022008255255002000134000015000031000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "023000145022009255255002000134000015000031000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "024000145022016255255002000134000015000031000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "025000145022017255255002000134000015000031000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "027000145022148255255002000134000015000031000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "028000145022153255255002000134000015000031000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "029000079255255255255003000140000015000031000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "030000095255255255255003000140000015000031000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "031000111255255255255003000140000015000031000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "032000063255255255255003000140000015000031000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "033000127255255255255003000140000015000031000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "034000255255255255255007000134000015000015000000000000000000000000000000000000000000000000000000000000000000000000000"
+    ],
+    "entriesPerMessage": 5
+  },
+  "tls": {
+    "key": "path/to/key.pem",
+    "cert": "path/to/cert.pem"
+  },
+  "rules": [
+    {
+      "name": "host-confirmation",
+      "match": {
+        "messageClass": "1",
+        "subClass": "1"
+      },
+      "handler": "hostConfirmation"
+    },
+    {
+      "name": "ddc-pin-validation",
+      "match": {
+        "messageClass": "1",
+        "subClass": "1",
+        "field": {
+          "index": 7,
+          "startsWith": "HHH"
+        }
+      },
+      "handler": "ddcPinValidation"
+    },
+    {
+      "name": "ddc-fastcash-stage1",
+      "match": {
+        "messageClass": "1",
+        "subClass": "1",
+        "field": {
+          "index": 7,
+          "startsWith": "AA A"
+        }
+      },
+      "handler": "ddcFastCashStage1"
+    },
+    {
+      "name": "ddc-withdrawal-stage1",
+      "match": {
+        "messageClass": "1",
+        "subClass": "1",
+        "field": {
+          "index": 7,
+          "startsWith": "AA B"
+        }
+      },
+      "handler": "ddcWithdrawalStage1"
+    },
+    {
+      "name": "ddc-withdrawal-stage2",
+      "match": {
+        "messageClass": "1",
+        "subClass": "1",
+        "field": {
+          "index": 7,
+          "startsWith": "AA C"
+        }
+      },
+      "handler": "ddcWithdrawalStage2"
+    },
+    {
+      "name": "ddc-balance-stage1",
+      "match": {
+        "messageClass": "1",
+        "subClass": "1",
+        "field": {
+          "index": 7,
+          "startsWith": "BA A"
+        }
+      },
+      "handler": "ddcBalanceStage1"
+    },
+    {
+      "name": "ddc-balance-stage2",
+      "match": {
+        "messageClass": "1",
+        "subClass": "1",
+        "field": {
+          "index": 7,
+          "startsWith": "BA B"
+        }
+      },
+      "handler": "ddcBalanceStage2"
+    },
+    {
+      "name": "ddc-transfer-own-stage1",
+      "match": {
+        "messageClass": "1",
+        "subClass": "1",
+        "field": {
+          "index": 7,
+          "startsWith": "GD B"
+        }
+      },
+      "handler": "ddcTransferOwnStage1"
+    },
+    {
+      "name": "ddc-transfer-own-stage2",
+      "match": {
+        "messageClass": "1",
+        "subClass": "1",
+        "field": {
+          "index": 7,
+          "startsWith": "GD C"
+        }
+      },
+      "handler": "ddcTransferOwnStage2"
+    },
+    {
+      "name": "ddc-mini-statement-stage1",
+      "match": {
+        "messageClass": "1",
+        "subClass": "1",
+        "field": {
+          "index": 7,
+          "startsWith": "CA A"
+        }
+      },
+      "handler": "ddcMiniStatementStage1"
+    },
+    {
+      "name": "ddc-mini-statement-stage2",
+      "match": {
+        "messageClass": "1",
+        "subClass": "1",
+        "field": {
+          "index": 7,
+          "startsWith": "CA B"
+        }
+      },
+      "handler": "ddcMiniStatementStage2"
+    },
+    {
+      "name": "ddc-transfer-other-source",
+      "match": {
+        "messageClass": "1",
+        "subClass": "1",
+        "field": {
+          "index": 7,
+          "startsWith": "GD F"
+        }
+      },
+      "handler": "ddcTransferOther"
+    },
+    {
+      "name": "ddc-transfer-other-destination",
+      "match": {
+        "messageClass": "1",
+        "subClass": "1",
+        "field": {
+          "index": 7,
+          "startsWith": "GD G"
+        }
+      },
+      "handler": "ddcTransferOther"
+    },
+    {
+      "name": "ddc-transfer-other-auth",
+      "match": {
+        "messageClass": "1",
+        "subClass": "1",
+        "field": {
+          "index": 7,
+          "startsWith": "GD H"
+        }
+      },
+      "handler": "ddcTransferOther"
+    },
+    {
+      "name": "ddc-card-payment-source",
+      "match": {
+        "messageClass": "1",
+        "subClass": "1",
+        "field": {
+          "index": 7,
+          "startsWith": "FG A"
+        }
+      },
+      "handler": "ddcCardPayment"
+    },
+    {
+      "name": "ddc-card-payment-destination",
+      "match": {
+        "messageClass": "1",
+        "subClass": "1",
+        "field": {
+          "index": 7,
+          "startsWith": "FG B"
+        }
+      },
+      "handler": "ddcCardPayment"
+    },
+    {
+      "name": "ddc-card-payment-amount",
+      "match": {
+        "messageClass": "1",
+        "subClass": "1",
+        "field": {
+          "index": 7,
+          "startsWith": "FG C"
+        }
+      },
+      "handler": "ddcCardPayment"
+    },
+    {
+      "name": "ddc-card-payment-auth",
+      "match": {
+        "messageClass": "1",
+        "subClass": "1",
+        "field": {
+          "index": 7,
+          "startsWith": "FG D"
+        }
+      },
+      "handler": "ddcCardPayment"
+    },
+    {
+      "name": "ddc-intl-withdrawal",
+      "match": {
+        "messageClass": "1",
+        "subClass": "1",
+        "field": {
+          "index": 7,
+          "pattern": "^AA[ABC]D"
+        }
+      },
+      "handler": "ddcIntlWithdrawal"
+    },
+    {
+      "name": "ddc-intl-balance",
+      "match": {
+        "messageClass": "1",
+        "subClass": "1",
+        "field": {
+          "index": 7,
+          "pattern": "^BA[ABC]F"
+        }
+      },
+      "handler": "ddcIntlBalance"
+    },
+    {
+      "name": "ddc-css-withdrawal-fee",
+      "match": {
+        "messageClass": "1",
+        "subClass": "1",
+        "field": {
+          "index": 7,
+          "startsWith": "AAFF"
+        }
+      },
+      "handler": "ddcCssWithdrawalFee"
+    },
+    {
+      "name": "ddc-css-withdrawal-auth",
+      "match": {
+        "messageClass": "1",
+        "subClass": "1",
+        "field": {
+          "index": 7,
+          "startsWith": "AAFG"
+        }
+      },
+      "handler": "ddcWithdrawalStage2"
+    },
+    {
+      "name": "ddc-css-balance-fee",
+      "match": {
+        "messageClass": "1",
+        "subClass": "1",
+        "field": {
+          "index": 7,
+          "startsWith": "BAFC"
+        }
+      },
+      "handler": "ddcCssBalanceFee"
+    },
+    {
+      "name": "ddc-css-balance-auth",
+      "match": {
+        "messageClass": "1",
+        "subClass": "1",
+        "field": {
+          "index": 7,
+          "startsWith": "BAFD"
+        }
+      },
+      "handler": "ddcBalanceStage2"
+    },
+    {
+      "name": "ddc-css-mini-statement-fee",
+      "match": {
+        "messageClass": "1",
+        "subClass": "1",
+        "field": {
+          "index": 7,
+          "startsWith": "CAFD"
+        }
+      },
+      "handler": "ddcCssMiniStatementFee"
+    },
+    {
+      "name": "ddc-css-mini-statement-auth",
+      "match": {
+        "messageClass": "1",
+        "subClass": "1",
+        "field": {
+          "index": 7,
+          "startsWith": "CAFC"
+        }
+      },
+      "handler": "ddcMiniStatementStage2"
+    },
+    {
+      "name": "ddc-css-pin-change-fee",
+      "match": {
+        "messageClass": "1",
+        "subClass": "1",
+        "field": {
+          "index": 7,
+          "startsWith": "BB F"
+        }
+      },
+      "handler": "ddcCssPinChangeFee"
+    },
+    {
+      "name": "ddc-pin-change",
+      "match": {
+        "messageClass": "1",
+        "subClass": "1",
+        "field": {
+          "index": 7,
+          "startsWith": "BBFD"
+        }
+      },
+      "handler": "ddcPinChange"
+    },
+    {
+      "name": "ddc-css-pin-change-auth",
+      "match": {
+        "messageClass": "1",
+        "subClass": "1",
+        "field": {
+          "index": 7,
+          "startsWith": "BB D"
+        }
+      },
+      "handler": "ddcPinChange"
+    },
+    {
+      "name": "ddc-interbank",
+      "match": {
+        "messageClass": "1",
+        "subClass": "1",
+        "field": {
+          "index": 7,
+          "pattern": "^DF[ F][ABCDFG]"
+        }
+      },
+      "handler": "ddcInterbank"
+    },
+    {
+      "name": "opcode-library",
+      "match": {
+        "messageClass": "1",
+        "subClass": "1"
+      },
+      "libraryKeyFromField": {
+        "index": 7
+      }
+    },
+    {
+      "name": "withdrawal-request",
+      "match": {
+        "messageClass": "1",
+        "subClass": "1",
+        "field": {
+          "index": 7,
+          "startsWith": "A"
+        }
+      },
+      "libraryKey": "A A  A A"
+    },
+    {
+      "name": "balance-inquiry",
+      "match": {
+        "messageClass": "1",
+        "subClass": "1",
+        "field": {
+          "index": 7,
+          "startsWith": "C"
+        }
+      },
+      "libraryKey": "C A  A A"
+    },
+    {
+      "name": "everlink-ministatement",
+      "match": {
+        "messageClass": "1",
+        "subClass": "1",
+        "field": {
+          "index": 7,
+          "startsWith": "DG"
+        }
+      },
+      "libraryKey": "HAA  A A"
+    },
+    {
+      "name": "h-family-ministatement",
+      "match": {
+        "messageClass": "1",
+        "subClass": "1",
+        "field": {
+          "index": 7,
+          "startsWith": "H"
+        }
+      },
+      "libraryKey": "HAA  A A"
+    },
+    {
+      "name": "d-family-reply",
+      "match": {
+        "messageClass": "1",
+        "subClass": "1",
+        "field": {
+          "index": 7,
+          "startsWith": "D"
+        }
+      },
+      "handler": "familyD"
+    },
+    {
+      "name": "i-family-reply",
+      "match": {
+        "messageClass": "1",
+        "subClass": "1",
+        "field": {
+          "index": 7,
+          "startsWith": "I"
+        }
+      },
+      "handler": "familyI"
+    },
+    {
+      "name": "generic-fallback",
+      "match": {
+        "messageClass": "1",
+        "subClass": "1"
+      },
+      "handler": "generic"
+    },
+    {
+      "name": "powerup-go-in-service",
+      "match": {
+        "messageClass": "1",
+        "subClass": "2",
+        "field": {
+          "index": 3,
+          "startsWith": "B"
+        }
+      },
+      "handler": "goInService"
+    },
+    {
+      "name": "ddc-device-fault-reply",
+      "match": {
+        "messageClass": "2",
+        "field": {
+          "index": 3,
+          "startsWith": "8"
+        }
+      },
+      "handler": "ddcDeviceFaultReply"
+    },
+    {
+      "name": "ready9-no-reply",
+      "match": {
+        "messageClass": "2",
+        "field": {
+          "index": 3,
+          "startsWith": "9"
+        }
+      },
+      "noReply": true
+    },
+    {
+      "name": "ready-b-idle-no-reply",
+      "match": {
+        "messageClass": "2",
+        "field": {
+          "index": 3,
+          "startsWith": "B"
+        }
+      },
+      "noReply": true
+    },
+    {
+      "name": "terminal-state-no-reply",
+      "match": {
+        "messageClass": "2",
+        "field": {
+          "index": 3,
+          "startsWith": "F"
+        }
+      },
+      "noReply": true
+    },
+    {
+      "name": "unsolicited-status-no-reply",
+      "match": {
+        "messageClass": "1",
+        "subClass": "2"
+      },
+      "noReply": true
+    }
+  ],
+  "hostConfirmation": {
+    "enabled": false,
+    "scenario": "surcharge",
+    "declineNextState": "048"
+  },
+  "withdrawal": {
+    "cassettes": [
+      50,
+      100,
+      500,
+      1000
+    ],
+    "approvedNextState": "123",
+    "declineNextState": "048",
+    "maxAmount": null,
+    "returnCard": "0",
+    "amountFieldIndex": 8,
+    "printerFlag": "1",
+    "includeCam": true,
+    "camArc": "00",
+    "receipt": {
+      "screen": "",
+      "printerData": "<GS>1  CASH WITHDRAWAL<LF>  USD <AMOUNT><LF>  <PAN><LF>  <DATE> <TIME><LF>  REF <RECNO><LF><FF>"
+    },
+    "declineReceipt": {
+      "screen": "",
+      "printerData": "<GS>1  WITHDRAWAL DECLINED<LF>  USD <AMOUNT><LF>  <DATE> <TIME><LF><FF>"
+    }
+  },
+  "balance": {
+    "nextState": "074",
+    "amount": "5000.00",
+    "returnCard": "0",
+    "printerFlag": "1",
+    "includeCam": true,
+    "camArc": "00",
+    "receipt": {
+      "screen": "074075<ESC>[20;80m<SI>FG      <BALANCE> ",
+      "printerData": "<GS>1  BALANCE INQUIRY<LF>  AVAIL BAL: USD <BALANCE><LF>  <DATE> <TIME><LF><FF>"
+    }
+  },
+  "generic": {
+    "nextState": "048",
+    "returnCard": "0",
+    "printerFlag": "1",
+    "includeCam": true,
+    "camArc": "00",
+    "receipt": {
+      "screen": "",
+      "printerData": "<GS>1  TRANSACTION CANCELLED<LF>  <DATE> <TIME><LF><FF>"
+    }
+  },
+  "familyD": {
+    "nextState": "698",
+    "returnCard": "0",
+    "printerFlag": "1",
+    "includeCam": true,
+    "camArc": "00",
+    "receipt": {
+      "screen": "",
+      "printerData": "<GS>1  PIN CHANGE<LF>  <DATE> <TIME><LF><FF>"
+    }
+  },
+  "familyI": {
+    "nextState": "175",
+    "returnCard": "0",
+    "printerFlag": "1",
+    "includeCam": true,
+    "camArc": "00",
+    "receipt": {
+      "screen": "",
+      "printerData": "<GS>1  TRANSACTION<LF>  <DATE> <TIME><LF><FF>"
+    }
+  },
+  "ddcPinValidation": {
+    "nextState": "803",
+    "includeCam": true,
+    "camArc": "00"
+  },
+  "ddcFastCashStage1": {
+    "nextState": "503"
+  },
+  "ddcWithdrawalStage1": {
+    "nextState": "547"
+  },
+  "_ddcCubcCash_comment": "钞箱与凭条按 CUBC 现网（终端 008823）：A=USD 50、B=USD 10、C=KHR 50000、D=USD 100，币种取操作码位 6；出钞字段 8 组两位（0104000100000000）；凭条正文照 2024-01-14 16:50:37（取款）与 2024-02-19 07:40:57（余额）的 128/063 应答。要与 XFS 模拟器的钞箱一致，否则主机让 ATM 从错的钞箱出钞。",
+  "ddcWithdrawalStage2": {
+    "cassettes": [
+      {
+        "value": 50,
+        "currency": "USD"
+      },
+      {
+        "value": 10,
+        "currency": "USD"
+      },
+      {
+        "value": 50000,
+        "currency": "KHR"
+      },
+      {
+        "value": 100,
+        "currency": "USD"
+      }
+    ],
+    "approvedNextState": "128",
+    "declineNextState": "048",
+    "amountFieldIndex": 8,
+    "includeCam": true,
+    "camArc": "00",
+    "fieldGCassettes": 8,
+    "balance": "4,810.00",
+    "receipt": {
+      "screen": "",
+      "printerData": "2        TRANSACTION RECEIPT<LF>          CASH WITHDRAWAL<LF><LF> CARD NO       : <CARD><LF> TRANS NO      : <RECNO><LF> DATE          TIME      ATM ID<LF> <DATE>      <TIME>     CUBC<LUNO><LF> TRANS AMOUNT  : <AMOUNT> <CCY><LF> BALANCE       : <BALANCE><CCY><LF> FEE           : 0.00 <CCY><LF><FF>"
+    }
+  },
+  "ddcBalanceStage1": {
+    "nextState": "055",
+    "accountList": false
+  },
+  "ddcBalanceStage2": {
+    "nextState": "063",
+    "amount": "5000.00",
+    "ledgerAmount": "5005.00",
+    "receipt": {
+      "screen": "",
+      "printerData": "2        TRANSACTION RECEIPT<LF>          BALANCE INQUIRY<LF><LF> CARD NO       : <CARD><LF> TRANS NO      : <RECNO><LF> DATE          TIME      ATM ID<LF> <DATE>      <TIME>     CUBC<LUNO><LF> FEE           : 0.00 <CCY><LF><LF> ACCT AVAILABLE BALANCE<LF> <BALANCE> <CCY><LF> ACCT LEDGER BALANCE<LF> <LEDGER> <CCY><LF><LF><FF>"
+    }
+  },
+  "ddcTransferOwnStage1": {
+    "nextState": "882",
+    "accountList": true
+  },
+  "ddcTransferOwnStage2": {
+    "receipt": {
+      "screen": "",
+      "printerData": "2  FUNDS TRANSFER<LF>  <DATE> <TIME><LF>  REF <RECNO><LF><FF>"
+    },
+    "confirm": true
+  },
+  "ddcMiniStatementStage1": {
+    "nextState": "085",
+    "accountList": true
+  },
+  "ddcMiniStatementStage2": {
+    "receipt": {
+      "screen": "",
+      "printerData": "2  MINI STATEMENT<LF>  <DATE> <TIME><LF>  REF <RECNO><LF><FF>"
+    }
+  },
+  "_ddcTransferOther_comment": "开关：singleAccount=true 时 GD F 直接回 430；invalidAccount 填一个目标账号（例 01110110999999，缺省空=关），GD G 收到它回 149；limitCents 填分，GD H 回送 C 时金额超过它回 162。149/162/131 均无真实主机样本，按官方 next state 表假设。",
+  "ddcTransferOther": {
+    "singleAccount": false,
+    "invalidAccount": "",
+    "limitCents": null
+  },
+  "_ddcCardPayment_comment": "开关：singleAccount=true 时 FG A 直接回 382；invalidCard 填一个卡号（例 4000000000000002，缺省空=关），FG B 收到它回 149；limitCents 填分，FG C 金额超过它回 162。149/162 无真实主机样本，按官方 next state 表假设。",
+  "ddcCardPayment": {
+    "singleAccount": false,
+    "invalidCard": "",
+    "limitCents": null
+  },
+  "_ddcOffUsFee_comment": "国际卡 AA?D / BA?F 的手续费走 ITR（ddcFeeConfirmation.js，现网 17/17）；他行 CSS 卡的手续费段回普通交易应答 551/071/089/102 + Z000933（ddcCssFeeStage.js，Diebold trace 2020），手续费金额取 ddcCssFee.fee。",
+  "ddcOffUsFee": {
+    "fee": "1.00",
+    "declineNextState": "131"
+  },
+  "ddcCssFee": {
+    "fee": "0.45"
+  },
+  "_ddcInterbank_comment": "跨行转账 DF（ddcInterbank.js，Diebold trace 2020）：本行 NBC 卡 DF A-G、他行 CSS 卡 DFF B-G。invalidAccount 填一个收款账号时 G 段回 149；fee 按币种。",
+  "ddcInterbank": {
+    "invalidAccount": "",
+    "destName": "",
+    "fee": {
+      "USD": "0.60",
+      "KHR": "2400.00"
+    },
+    "banks": {
+      "102": "JTRUST",
+      "106": "DGB BANK",
+      "112": "WOORI BANK (CAMBODIA) PLC",
+      "041": "ACLEDA BANK PLC.",
+      "056": "SANTHAPANA BANK PLC.",
+      "084": "AMRET MICROFINANCE INSTITUTION PLC.",
+      "088": "PRASAC MICROFINANCE INSTITUTION PLC.",
+      "079": "CAMBODIA POST BANK PLC.",
+      "036": "ADVANCED BANK OF ASIA",
+      "076": "TAIWAN COOPERATIVE BANK",
+      "073": "MEGA INTERNATIONAL COMMERCIAL BANK",
+      "004": "CAMBODIAN PUBLIC BANK PLC.",
+      "071": "BANK OF CHINA (HONG KONG) LIMITED",
+      "003": "CAMBODIAN COMMERCIAL BANK",
+      "043": "VATTANAC BANK",
+      "040": "FIRST COMMERCIAL BANK",
+      "090": "LOLC (CAMBODIA) PLC",
+      "089": "AMK MICROFINANCE INSTITUTION PLC.",
+      "085": "HATTHA BANK",
+      "005": "CANADIA BANK PLC.",
+      "078": "RHB INDOCHINA BANK",
+      "077": "HONG LEONG BANK(CAMBODIA) PLC.",
+      "072": "CIMB BANK(CAMBODIA) PLC.",
+      "058": "PHNOM PENH COMMERCIAL BANK",
+      "095": "CHIEF(CAMBODIA) COMMERCIAL BANK",
+      "081": "PHILLIP BANK PLC.",
+      "096": "PRINCE BANK PLC.",
+      "020": "MAYBANK (CAMBODIA) PLC.",
+      "092": "BRED BANK",
+      "061": "BOOYONG BANK"
+    }
+  }
+}
