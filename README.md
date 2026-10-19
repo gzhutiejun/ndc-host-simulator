@@ -30,6 +30,17 @@ npm test           # 跑单元/端到端测试（node --test）
   `ndcDialect=ddc` 配套。下面各节里"出厂 config.json 不引用这条规则，要用就自己加"的说明，
   指的是 `config.json`；`config-ddc.json` 已经替你加好了。
 
+还有第三份 **`config-ndc-vm.json`**——ITM VM 上给 **acc-ndc-app**（标准 NDC 的 ATM 应用）用的那份
+（VM 上 `node server.js config-ddc-vm.json` 跑的就是它的前身，端口 12008）。它是在 `config-ddc.json`
+之上改出来的：开了 `ddcDownload`、上电先发 FIT、各 DDC 应答带 EMV 段；`ddc-*` 规则之后挂着
+`opcode-library`（按请求操作码直接查报文库作答），acc-ndc-app 的取款 / 余额 / 改密 / 现金存款都由它应答。
+在 VM 原件之上只加了一条 `ndc-check-deposit`：acc-ndc-app 的支票存款操作码 `BA A A A` 以 `BA A`
+开头，原本会先撞上 CUBC 余额第 1 段 `ddc-balance-stage1`、拿到 055（acc-ndc-app 不认，判拒并退票）。
+这条规则用 `pattern: "^BA [ABEO] [AB] A$"`（位 3/5/7 是空格，正是 acc-ndc-app 支票存款与报文库 8 条
+支票存款键的形状；CUBC 的 BA 族位 5 不是空格）排在 `ddc-balance-stage1` 之前，按操作码从报文库取支票
+存款应答（next state 001、Function ID `1` 存款并打印）。`test/e2e.ndc-vm-cheque.test.js` 用两条 VM 上的真实
+请求（支票存款、余额查询）钉住：支票拿到受理应答，余额与 CUBC 的 BA 族应答不变。
+
 ## 配置（config.json）
 
 ```json

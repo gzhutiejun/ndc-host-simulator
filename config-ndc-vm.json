@@ -116,6 +116,21 @@
       "handler": "ddcWithdrawalStage2"
     },
     {
+      "name": "ndc-check-deposit",
+      "_comment": "acc-ndc-app 的支票存款操作码 BA<空格><目标账户><空格><凭条><空格><语言>（ndc-opcodes.json），正好是报文库里 8 条 BA 支票存款键的形状；必须排在 ddc-balance-stage1（BA A）/ ddc-balance-stage2（BA B）之前，否则被当成 CUBC 余额第 1/2 段。CUBC 的 BA 族位 5 不是空格（BA AA C、BAFC…），匹配不上。",
+      "match": {
+        "messageClass": "1",
+        "subClass": "1",
+        "field": {
+          "index": 7,
+          "pattern": "^BA [ABEO] [AB] A$"
+        }
+      },
+      "libraryKeyFromField": {
+        "index": 7
+      }
+    },
+    {
       "name": "ddc-balance-stage1",
       "match": {
         "messageClass": "1",
