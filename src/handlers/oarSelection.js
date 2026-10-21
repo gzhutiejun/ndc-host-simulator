@@ -46,7 +46,7 @@ module.exports = function makeOarSelection(cfg = {}) {
   const direction = cfg.direction != null ? cfg.direction : 'from';
   const includePinChange = cfg.includePinChange === true;
   const cancelNextState = cfg.cancelNextState != null ? cfg.cancelNextState : '048';
-  const cancelPrinter = cfg.cancelPrinter != null ? cfg.cancelPrinter : '<GS>1  TRANSACTION CANCELLED<LF><FF>';
+  const cancelPrinter = cfg.cancelPrinter != null ? cfg.cancelPrinter : 'TRANSACTION CANCELLED<LF><FF>'; // 不带 <GS>，见 replyFee.js DEFAULT_CANCEL_PRINTER
   const screenTimer = cfg.screenTimer != null ? cfg.screenTimer : 30;
   if (enabled && accounts.length === 0) {
     throw new Error('oarSelection: accounts must be a non-empty array of { number, name }');

@@ -48,6 +48,7 @@ test('replyFee: 位 7 为 B / D -> 取消应答 NS 048、凭条 TRANSACTION CANC
     assert.strictEqual(f[6][0], '4');
     assert.strictEqual(f[6][1], '0');
     assert.strictEqual(f[6][2], '3'); // 打印标志 3：凭条 + 日志
+    assert.ok(!f[6].includes('\x1d'), '正文必须在标志 3 那一组里，不能另开 GS 组');
     assert.strictEqual(f[5][4], '5'); // FID 5：ATM 对取消应答拒绝介质 FID
     assert.ok(f[6].includes('TRANSACTION CANCELLED'));
     assert.ok(f[6].includes('FEE DECLINED'));

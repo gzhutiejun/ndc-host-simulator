@@ -63,6 +63,8 @@ test('oarSelection: E -> 取消应答 FID 5、NS 048、凭条 TRANSACTION CANCEL
   assert.strictEqual(f[6][0], '6');
   assert.strictEqual(f[5][4], '5'); // FID 5
   assert.ok(f[6].includes('TRANSACTION CANCELLED'));
+  assert.strictEqual(f[6][2], '3');
+  assert.ok(!f[6].includes('\x1d'));
 });
 
 test('oarSelection: direction auto 下转账 opcode 用 TO;，direction to 恒 TO;', () => {

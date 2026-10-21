@@ -5,7 +5,8 @@ const { extractRequest } = require('../ndc/transactionRequest');
 const OPCODE_INDEX = 7;
 const FEE_POSITION_INDEX = 6;
 
-const DEFAULT_CANCEL_PRINTER = '<GS>1  TRANSACTION CANCELLED<LF>  FEE DECLINED<LF><FF>';
+// 不带 <GS>：GS 在打印字段里开新的一组（后跟打印标志），带上会把正文放进标志 1（只进日志）的第二组。
+const DEFAULT_CANCEL_PRINTER = 'TRANSACTION CANCELLED<LF>FEE DECLINED<LF><FF>';
 
 /**
  * 屏幕段 = TSN(4) + FID(1) + 屏号(3) + 屏幕数据（reply-disposition 取下标 4 为 FID）。
