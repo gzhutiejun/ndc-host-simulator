@@ -34,3 +34,36 @@ test('respects a custom amountFieldIndex', () => {
   assert.strictEqual(r.amount, 750);
   assert.strictEqual(r.mcn, '9');
 });
+
+// Last Transaction Status：Buffer C（段 11）之后、段首为 "2" 的段 = "2" + TSN(4) + 状态(1) + 4×5 位出钞张数。
+function ltsReq(extra) {
+  const fields = ['11', '000', '', '', '17', ';X=X?', '', 'A A  A A', '00010000', '', '', '', ...extra];
+  return parse(encodeText(fields.join(FS)));
+}
+
+test('lts: 26 字符 2 段解析成 tsn / status / dispensed / raw', () => {
+  const seg = '2' + '0042' + '1' + '00001' + '00002' + '00000' + '00010'; // 26 字符
+  assert.strictEqual(seg.length, 26);
+  const r = extractRequest(ltsReq(['', seg]));
+  assert.deepStrictEqual(r.lts, { tsn: '0042', status: 1, dispensed: [1, 2, 0, 10], raw: seg });
+});
+
+test('lts: 没有 2 段（含 Buffer C 之后只有 CAM 5 段）时为 undefined', () => {
+  assert.strictEqual(extractRequest(ltsReq([])).lts, undefined);
+  assert.strictEqual(extractRequest(ltsReq(['', '5CAMDATA'])).lts, undefined);
+  assert.strictEqual(extractRequest(withdrawalReq()).lts, undefined);
+});
+
+test('lts: 段 11 及之前以 2 开头的段（Buffer B / C）不算', () => {
+  const fields = ['11', '000', '', '', '17', ';X=X?', '', 'A A  A A', '00010000', '', '2' + '0'.repeat(25), '2' + '0'.repeat(25)];
+  assert.strictEqual(extractRequest(parse(encodeText(fields.join(FS)))).lts, undefined);
+});
+
+test('lts: 51 字符（有 BNA）同样只取前 26 字符的 tsn / status / 4 段', () => {
+  const seg = '2' + '0007' + '3' + '00000'.repeat(4) + '0'.repeat(25);
+  const r = extractRequest(ltsReq(['', seg]));
+  assert.strictEqual(r.lts.tsn, '0007');
+  assert.strictEqual(r.lts.status, 3);
+  assert.deepStrictEqual(r.lts.dispensed, [0, 0, 0, 0]);
+  assert.strictEqual(r.lts.raw, seg);
+});

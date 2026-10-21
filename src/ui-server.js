@@ -14,6 +14,7 @@
 //   POST /api/push       立刻给所有活跃连接下发一条报文，不等 ATM 先发请求。
 //                        {code, modifier, luno, msn} → 类 1 终端命令（默认）
 //                        {type:"fit", ...}           → 类 3 FIT 下发，缺省字段取 config.fitDownload
+//                        {type:"data", identifier, data, luno, msn} → 类 3 数据命令（如 3/1 A 增强选项），缺 identifier 400
 
 const http = require('node:http');
 const fs = require('node:fs');
@@ -21,6 +22,7 @@ const path = require('node:path');
 const { URL } = require('node:url');
 const { describe } = require('./message-library');
 const { decodeWire } = require('./framing');
+const { extractLts } = require('./ndc/transactionRequest');
 const { FS, GS, RS, SO, SI } = require('./constants');
 
 const INDEX_HTML_PATH = path.join(__dirname, 'ui', 'index.html');
@@ -105,6 +107,8 @@ function createUiServer({ engine, library = [], push } = {}) {
   function publish(direction, buf, meta = {}) {
     if (sseClients.size === 0) return; // 没人在看，省得白解码
     const { text, fields } = decodeFrame(buf);
+    // 请求流里把 Last Transaction Status（2 段）解出来显示；只对 ATM→主机的帧有意义。
+    const lts = direction === 'RECV' ? extractLts(fields) : undefined;
     const frame = {
       direction, // 'RECV' | 'SEND'
       bytes: buf.length,
@@ -112,6 +116,7 @@ function createUiServer({ engine, library = [], push } = {}) {
       fields,
       type: meta.type || null,
       rule: meta.rule || null,
+      lts: lts || null,
       ts: Date.now(),
     };
     const line = `data: ${JSON.stringify(frame)}\n\n`;
@@ -183,9 +188,14 @@ function createUiServer({ engine, library = [], push } = {}) {
     // （server.js 的 pushToActiveSockets）的事。
     //   不带 type / type='command' —— 类 1 终端命令，必须有 code（老契约，逐字节不变）
     //   type='fit'                 —— FIT 下发，报文类 3，没有 code 这个概念
+    //   type='data'                —— 通用数据命令，报文类 3，必须有 identifier（报文标识）
     const type = body && body.type != null ? body.type : 'command';
-    if (type !== 'command' && type !== 'fit') {
-      sendJson(res, 400, { error: `push: unknown type "${type}" (expected "command" or "fit")` });
+    if (type !== 'command' && type !== 'fit' && type !== 'data') {
+      sendJson(res, 400, { error: `push: unknown type "${type}" (expected "command", "fit" or "data")` });
+      return;
+    }
+    if (type === 'data' && (!body || typeof body.identifier !== 'string' || body.identifier === '')) {
+      sendJson(res, 400, { error: 'push type=data requires a non-empty "identifier"' });
       return;
     }
     if (type === 'command' && (!body || typeof body.code !== 'string' || body.code === '')) {

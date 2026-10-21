@@ -240,6 +240,53 @@ test('POST /api/push: type=fit 不需要 code，原样透传给 push handler', a
   }
 });
 
+test('POST /api/push: type=data 透传给 push handler；缺 identifier 返回 400', async () => {
+  const engine = createEngine({ rules: [], handlers: {} });
+  const calls = [];
+  const ui = createUiServer({ engine, push: (spec) => { calls.push(spec); return { sent: 1 }; } });
+  await new Promise((resolve) => ui.listen(0, resolve));
+  const port = ui.server.address().port;
+  try {
+    const bad = await request(port, 'POST', '/api/push', { type: 'data', data: 'x' });
+    assert.strictEqual(bad.status, 400);
+    assert.strictEqual(calls.length, 0);
+    const res = await request(port, 'POST', '/api/push', { type: 'data', identifier: 'A', data: '001', luno: '000' });
+    assert.strictEqual(res.status, 200);
+    assert.strictEqual(calls[0].type, 'data');
+    assert.strictEqual(calls[0].identifier, 'A');
+  } finally {
+    await new Promise((resolve) => ui.close(resolve));
+  }
+});
+
+test('server.js: POST /api/push type=data 经活跃连接下发一帧 class 3 数据命令', async () => {
+  const capDir = fs.mkdtempSync(path.join(os.tmpdir(), 'ndc-ui-pushdata-'));
+  const app = createApp({ enableTLS: false, captureDir: capDir, rules: [], uiPort: 1 });
+  await new Promise((resolve) => app.server.listen(0, resolve));
+  await new Promise((resolve) => app.ui.listen(0, resolve));
+  const ndcPort = app.server.address().port;
+  const uiPort = app.ui.server.address().port;
+  const client = net.createConnection({ port: ndcPort });
+  await new Promise((resolve, reject) => { client.on('connect', resolve); client.on('error', reject); });
+  const decoder = createDecoder();
+  const pushed = new Promise((resolve) => {
+    client.on('data', (d) => {
+      const frames = decoder.push(d);
+      if (frames.length) resolve(frames[0].toString('latin1'));
+    });
+  });
+  try {
+    const res = await request(uiPort, 'POST', '/api/push', { type: 'data', identifier: 'A', data: '001', luno: '000', msn: '000' });
+    assert.strictEqual(res.status, 200);
+    assert.strictEqual(res.body.sent, 1);
+    assert.strictEqual(await pushed, ['3', '000', '000', 'A', '001'].join(FS));
+  } finally {
+    client.destroy();
+    await new Promise((resolve) => app.server.close(resolve));
+    await new Promise((resolve) => app.ui.close(resolve));
+  }
+});
+
 test('POST /api/push: 不认识的 type 返回 400，而不是当成终端命令发出去', async () => {
   const engine = createEngine({ rules: [], handlers: {} });
   const ui = createUiServer({ engine, push: () => ({ sent: 1 }) });

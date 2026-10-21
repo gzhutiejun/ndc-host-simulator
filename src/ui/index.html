@@ -245,6 +245,14 @@
     row.appendChild(bytes);
     row.appendChild(rule);
     row.appendChild(fields);
+    if (frame.lts) {
+      // Last Transaction Status（请求里的 2 段）：TSN / 状态 / 出钞张数
+      var lts = document.createElement('span');
+      lts.className = 'lts';
+      lts.textContent = 'LTS tsn=' + frame.lts.tsn + ' status=' + frame.lts.status + ' dispensed=' + frame.lts.dispensed.join('/');
+      lts.title = frame.lts.raw;
+      row.appendChild(lts);
+    }
     streamLog.appendChild(row);
 
     frameCount += 1;

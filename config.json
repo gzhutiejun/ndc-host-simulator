@@ -42,6 +42,24 @@
       "handler": "settlement"
     },
     {
+      "name": "reply-fee",
+      "_comment": "交易应答里带手续费（ATM 的 ndcFeeAcceptanceInOpcode）：opcode 位 7 空格回手续费应答，A/C 放行，B/D 回取消应答。缺省关（replyFee.enabled）；必须在 opcode-library 之前，否则位 7=B 的取款落到批准出钞。",
+      "match": {
+        "messageClass": "1",
+        "subClass": "1"
+      },
+      "handler": "replyFee"
+    },
+    {
+      "name": "oar-selection",
+      "_comment": "主机 OAR 账户选择：首条请求回 ITR（FROM;AccountANumber=…），Buffer B 为账户字母放行，E 回取消应答。缺省关（oarSelection.enabled）。",
+      "match": {
+        "messageClass": "1",
+        "subClass": "1"
+      },
+      "handler": "oarSelection"
+    },
+    {
       "name": "opcode-library",
       "match": {
         "messageClass": "1",
@@ -284,5 +302,27 @@
       0
     ],
     "autoGisOnP20": true
+  },
+  "replyFee": {
+    "enabled": false,
+    "nextState": "008",
+    "fee": "$2.00",
+    "cancelReplyNextState": "048",
+    "noReplyToCancel": false
+  },
+  "oarSelection": {
+    "enabled": false,
+    "accounts": [
+      {
+        "number": "1234567890",
+        "name": "SAVINGS"
+      },
+      {
+        "number": "2234567890",
+        "name": "CHEQUE"
+      }
+    ],
+    "direction": "auto",
+    "includePinChange": false
   }
 }

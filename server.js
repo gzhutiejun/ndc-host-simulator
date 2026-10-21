@@ -11,7 +11,7 @@ const { createEngine } = require('./src/engine');
 const { parseLibrary } = require('./src/message-library');
 const { createLogger } = require('./src/logging');
 const { createUiServer } = require('./src/ui-server');
-const { buildTerminalCommand, buildFitDownload } = require('./src/push');
+const { buildTerminalCommand, buildFitDownload, buildDataCommand } = require('./src/push');
 const { loadSequence, isDownloadTrigger, createDownload } = require('./src/ddcDownload');
 const goInService = require('./src/handlers/goInService');
 const makeWithdrawal = require('./src/handlers/withdrawal');
@@ -19,6 +19,8 @@ const makeBalance = require('./src/handlers/balance');
 const makeSettlement = require('./src/handlers/settlement');
 const makeGeneric = require('./src/handlers/generic');
 const makeHostConfirmation = require('./src/handlers/hostConfirmation');
+const makeReplyFee = require('./src/handlers/replyFee');
+const makeOarSelection = require('./src/handlers/oarSelection');
 const makeDdcPinValidation = require('./src/handlers/ddcPinValidation');
 const makeDdcWithdrawalStage1 = require('./src/handlers/ddcWithdrawalStage1');
 const makeDdcWithdrawalStage2 = require('./src/handlers/ddcWithdrawalStage2');
@@ -77,6 +79,10 @@ function createApp(config) {
     // 「先确认手续费/汇率再记账」。默认关闭（config.hostConfirmation.enabled 不为 true
     // 时恒返回 null），所以它的规则可以常驻 config.json 而不改变出厂行为。
     hostConfirmation: makeHostConfirmation(config.hostConfirmation || {}),
+    // 交易应答里带手续费 / 拒付取消应答（replyFee），与 ITR 形态的 OAR 账户选择（oarSelection）。
+    // 同样默认关闭：enabled 不为 true 时恒返回 null。
+    replyFee: makeReplyFee(config.replyFee || {}),
+    oarSelection: makeOarSelection(config.oarSelection || {}),
     // CUBC/DDC 方言：主机 PIN 验证（HHH）。跟其它 handler 一样，注册只是让它**可以**被
     // 规则引用——出厂 config.json 不引用它，这一行本身不改变任何现有行为。
     ddcPinValidation: makeDdcPinValidation(config.ddcPinValidation || {}),
@@ -161,10 +167,14 @@ function createApp(config) {
     // 先拼字节再遍历 socket：坏参数（比如 FIT 条目里混了非数字）要在一个字节都没发出去
     // 之前就抛出来，由控制台变成 400，而不是发一半再失败。
     const isFit = spec && spec.type === 'fit';
-    const texts = isFit ? buildFitMessages(spec) : [buildTerminalCommand(spec)];
-    const meta = isFit
-      ? { type: 'DataCommand', rule: 'ui:push:fit' }
-      : { type: 'TerminalCommand', rule: 'ui:push' };
+    const isData = spec && spec.type === 'data';
+    let texts;
+    if (isFit) texts = buildFitMessages(spec);
+    else if (isData) texts = [buildDataCommand(spec)];
+    else texts = [buildTerminalCommand(spec)];
+    let meta = { type: 'TerminalCommand', rule: 'ui:push' };
+    if (isFit) meta = { type: 'DataCommand', rule: 'ui:push:fit' };
+    else if (isData) meta = { type: 'DataCommand', rule: 'ui:push:data' };
     let sent = 0;
     for (const socket of activeSockets) {
       if (socket.destroyed) continue;

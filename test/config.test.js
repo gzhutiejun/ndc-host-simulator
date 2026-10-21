@@ -9,6 +9,8 @@ const { encodeText } = require('../src/framing');
 const { createSession } = require('../src/session');
 const makeHostConfirmation = require('../src/handlers/hostConfirmation');
 const makeGeneric = require('../src/handlers/generic');
+const makeReplyFee = require('../src/handlers/replyFee');
+const makeOarSelection = require('../src/handlers/oarSelection');
 const { FS } = require('../src/constants');
 
 const cfg = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'config.json'), 'utf8'));
@@ -20,6 +22,9 @@ const cfg = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'config.json')
 // 才会真的调用它；前面那些能在库里查到应答的用例在此之前就返回了，注册它不改变它们的结果。
 const handlers = {
   hostConfirmation: makeHostConfirmation(cfg.hostConfirmation || {}),
+  // 出厂 enabled:false，恒返回 null，规则引擎照常落到后面的 libraryKey 规则。
+  replyFee: makeReplyFee(cfg.replyFee || {}),
+  oarSelection: makeOarSelection(cfg.oarSelection || {}),
   generic: makeGeneric(cfg.generic || {}),
   // familyD/familyI 在 server.js 里就是同一个 makeGeneric 的两个实例，这里照搬，
   // 好让"DG 规则不该吃掉整个 D 族"这类护栏用例走得到真正的 D 族路径。

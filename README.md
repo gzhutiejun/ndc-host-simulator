@@ -455,6 +455,15 @@ FDK A、B、C、D、Cancel(E)、F、G、H、I。写成字母会在组报文时�
 > `ChnApp/Cnsmr/CnsmrAppAE/Source/Config/Customiser/`（`RequestConfigurationTool.xml` 的
 > `BufferBConfiguration`、`ReplyState.xml`、`GenericToolConfiguration.xml`）。
 
+## 交易应答手续费 / OAR 账户选择 / 数据命令下发 / LTS（acc-ndc-app 子项目 8a）
+
+三个场景默认关闭（`enabled: false`），规则在两份配置里都排在 `settlement-request` 之后、`opcode-library` 之前。
+
+- `replyFee`：`{ enabled, nextState: "008", fee: "$2.00", cancelReplyNextState: "048", noReplyToCancel: false }`。按 opcode 第 7 位（下标 6）：空格 -> class 4 手续费应答（屏幕段 `TSN(4)+FID 5+000;Fee=…;`）；`A`/`C` -> 放行给后面的规则；`B`/`D` -> 取消应答（NS `cancelReplyNextState`，凭条 `TRANSACTION CANCELLED` / `FEE DECLINED`，FID 5），`noReplyToCancel` 时不应答。
+- `oarSelection`：`{ enabled, accounts: [{number, name}], direction: "from"|"to"|"auto", includePinChange: false }`。首条请求回 ITR（`FROM;AccountANumber=…;AccountAName=…;`，`auto` 下转账 `TO;`），active keys 按账户数开 FDK；Buffer B 为 `A B C D I H G F` 之一放行；`E` 回取消应答（FID 5、NS 048）。账号必须纯数字；存款不发，改密仅 `includePinChange` 时发。
+- `POST /api/push` `{"type":"data","identifier":"A","data":"001","luno":"000","msn":"000"}`：下发类 3 数据命令（3/1 `A` 增强选项，`001` = option 15 开 Last Transaction Status）。缺 `identifier` 回 400。
+- 请求流：请求里 Buffer C 之后的 `2` 段（Last Transaction Status）解析成 `lts`（`tsn` / `status` / `dispensed` / `raw`），控制台在该帧后显示。
+
 ## EBCDIC 传输码
 
 一部分 NDC 主机在线缆上用 **EBCDIC** 而不是 ASCII。把 `config.json` 的
