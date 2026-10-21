@@ -73,6 +73,11 @@ test('oarSelection: direction auto 下转账 opcode 用 TO;，direction to 恒 T
   assert.ok(makeOar({ ...ON, direction: 'to' })(req(WITHDRAW), {}).split(FS)[5].startsWith('TO;'));
 });
 
+test('oarSelection: 存款 opcode 缺省不触发，includeDeposit 才触发', () => {
+  assert.strictEqual(makeOar(ON)(req('BB  A A '), {}), null);
+  assert.ok(makeOar({ ...ON, includeDeposit: true })(req('BB  A A '), {}));
+});
+
 test('oarSelection: 改密 opcode 缺省不触发，includePinChange 才触发', () => {
   assert.strictEqual(makeOar(ON)(req(PIN_CHANGE), {}), null);
   assert.ok(makeOar({ ...ON, includePinChange: true })(req(PIN_CHANGE), {}));

@@ -37,7 +37,8 @@ const isDeposit = (opcode) => opcode.startsWith('BA') || opcode.startsWith('BB')
  *    一律放行，不校验是否越过账户数——不然越界字母会变成重问，ATM 与模拟器对着转圈；
  *  - Buffer B = E：持卡人取消，回取消应答（FID 5、NS 048、凭条 TRANSACTION CANCELLED）。
  *
- * 存款（ATM 自己会对存款的 OAR 回 E）与改密默认不发；改密仅在 includePinChange 时发。
+ * 存款（ATM 自己会对存款的 OAR 回 E）与改密默认不发；改密仅在 includePinChange 时发，存款仅在 includeDeposit 时发
+ * （用来验 ATM 对存款 OAR 自动回 E）。
  * 账号必须是纯数字（ATM 丢弃非数字账号），名字不要含 `;`。默认 **关闭**。
  */
 module.exports = function makeOarSelection(cfg = {}) {
@@ -45,6 +46,7 @@ module.exports = function makeOarSelection(cfg = {}) {
   const accounts = Array.isArray(cfg.accounts) ? cfg.accounts.slice(0, OAR_LETTERS.length) : [];
   const direction = cfg.direction != null ? cfg.direction : 'from';
   const includePinChange = cfg.includePinChange === true;
+  const includeDeposit = cfg.includeDeposit === true;
   const cancelNextState = cfg.cancelNextState != null ? cfg.cancelNextState : '048';
   const cancelPrinter = cfg.cancelPrinter != null ? cfg.cancelPrinter : 'TRANSACTION CANCELLED<LF><FF>'; // 不带 <GS>，见 replyFee.js DEFAULT_CANCEL_PRINTER
   const screenTimer = cfg.screenTimer != null ? cfg.screenTimer : 30;
@@ -56,7 +58,7 @@ module.exports = function makeOarSelection(cfg = {}) {
     if (!enabled) return null;
     const fields = parsed.fields || [];
     const opcode = fields[OPCODE_INDEX] || '';
-    if (isDeposit(opcode)) return null;
+    if (isDeposit(opcode) && !includeDeposit) return null;
     if (isPinChange(opcode) && !includePinChange) return null;
 
     const bufferB = fields[BUFFER_B_INDEX] || '';
