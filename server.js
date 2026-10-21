@@ -16,6 +16,7 @@ const { loadSequence, isDownloadTrigger, createDownload } = require('./src/ddcDo
 const goInService = require('./src/handlers/goInService');
 const makeWithdrawal = require('./src/handlers/withdrawal');
 const makeBalance = require('./src/handlers/balance');
+const makeSettlement = require('./src/handlers/settlement');
 const makeGeneric = require('./src/handlers/generic');
 const makeHostConfirmation = require('./src/handlers/hostConfirmation');
 const makeDdcPinValidation = require('./src/handlers/ddcPinValidation');
@@ -61,8 +62,13 @@ function createApp(config) {
 
   const captureDir = config.captureDir || path.join(__dirname, 'captures');
   const responseDelayMs = config.responseDelayMs || 0;
+  // 报文库要先于 handler 加载：结算 handler 从库里取凭条正文。
+  const library = loadMessageLibrary(config.messageLibrary);
+  const settlementHandlers = makeSettlement(config.settlement || {}, { library });
   const handlers = {
     goInService,
+    settlement: settlementHandlers.settlement,
+    settlementGis: settlementHandlers.settlementGis,
     withdrawal: makeWithdrawal(config.withdrawal || {}),
     balance: makeBalance(config.balance || {}),
     familyD: makeGeneric(config.familyD || { nextState: '698' }),
@@ -111,7 +117,6 @@ function createApp(config) {
     ddcCssPinChangeFee: cssFee('102'),
     ddcPinChange: makeDdcStageReply(config.ddcPinChange || { nextState: '123' }),
   });
-  const library = loadMessageLibrary(config.messageLibrary);
   const engine = createEngine({ rules: config.rules || [], handlers, library });
   const pushOnConnect = Array.isArray(config.pushOnConnect) ? config.pushOnConnect : [];
   const logger = createLogger({ dir: captureDir });

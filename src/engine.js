@@ -121,8 +121,9 @@ function createEngine({ rules = [], handlers = {}, now = () => new Date(), libra
           // 用入站报文里的操作码直接查库。库键是定长 8 字节，报文段末尾的空格
           // 容易丢，所以补齐后再查。
           const raw = (parsed.fields || [])[rule.libraryKeyFromField.index] || '';
-          const key = raw.padEnd(8, ' ');
-          if (libraryIndex.has(key)) {
+          // 库里也有去掉尾空格存的键（如 "JA"），所以补齐键没命中时再试原值和去尾空格值。
+          const key = [raw.padEnd(8, ' '), raw, raw.trimEnd()].find((k) => k && libraryIndex.has(k));
+          if (key !== undefined) {
             return { payload: libraryIndex.get(key), rule: `${rule.name}:${key}` };
           }
           continue; // 库里没有这个操作码：交给后面的规则（家族 handler / generic 兜底）

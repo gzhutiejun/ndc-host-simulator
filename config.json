@@ -30,6 +30,18 @@
       "handler": "hostConfirmation"
     },
     {
+      "name": "settlement-request",
+      "match": {
+        "messageClass": "1",
+        "subClass": "1",
+        "field": {
+          "index": 7,
+          "pattern": "^(J[A-INS]  [ A-G]   |C A     )$"
+        }
+      },
+      "handler": "settlement"
+    },
+    {
       "name": "opcode-library",
       "match": {
         "messageClass": "1",
@@ -165,6 +177,18 @@
       "noReply": true
     },
     {
+      "name": "settlement-p20-go-in-service",
+      "match": {
+        "messageClass": "1",
+        "subClass": "2",
+        "field": {
+          "index": 3,
+          "startsWith": "P20"
+        }
+      },
+      "handler": "settlementGis"
+    },
+    {
       "name": "unsolicited-status-no-reply",
       "match": {
         "messageClass": "1",
@@ -246,5 +270,19 @@
       "screen": "",
       "printerData": "<GS>1  TRANSACTION<LF>  <DATE> <TIME><LF><FF>"
     }
+  },
+  "settlement": {
+    "nextState": "001",
+    "functionId": "5",
+    "cassetteCounts": [
+      2000,
+      2000,
+      2000,
+      2000,
+      0,
+      0,
+      0
+    ],
+    "autoGisOnP20": true
   }
 }

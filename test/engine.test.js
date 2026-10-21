@@ -341,3 +341,14 @@ test('matches: field.pattern 按正则匹配整段（国际卡 AA?D / BA?F）', 
   assert.strictEqual(matches({ field: { index: 7, pattern: '^AA[ABC]D' } }, p), true);
   assert.strictEqual(matches({ field: { index: 7, pattern: '^BA[ABC]F' } }, p), false);
 });
+
+test('libraryKeyFromField：库键存为去尾空格的 "JA"，请求 "JA      " 也命中', () => {
+  const engine = createEngine({
+    library: [{ key: 'JA', payload: 'JA-REPLY' }],
+    rules: [{ name: 'opcode-library', match: {}, libraryKeyFromField: { index: 7 } }],
+  });
+  const parsed = { fields: ['11', '000', '', '', '1=', 't', '', 'JA      '] };
+  const out = engine.respond(parsed, null);
+  assert.strictEqual(out.payload, 'JA-REPLY');
+  assert.strictEqual(out.rule, 'opcode-library:JA');
+});
