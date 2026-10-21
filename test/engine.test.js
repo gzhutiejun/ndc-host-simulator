@@ -46,6 +46,20 @@ test('respond dispatches to a handler', () => {
   assert.strictEqual(out.payload, 'X777');
 });
 
+test('handler 返回 { noReply: true } 时不应答，也不落到后面的规则', () => {
+  const engine = createEngine({
+    rules: [
+      { name: 'silent', match: { type: 'SolicitedStatus' }, handler: 'silent' },
+      { name: 'fallback', match: { type: 'SolicitedStatus' }, template: 'FALLBACK' },
+    ],
+    handlers: { silent: () => ({ noReply: true }) },
+  });
+  const p = parse(encodeText('22' + FS + '777' + FS + FS + '9'));
+  const out = engine.respond(p, createSession());
+  assert.strictEqual(out.payload, null);
+  assert.strictEqual(out.rule, 'silent');
+});
+
 test('respond honours noReply rule (matched but silent)', () => {
   // 真实主机对 ReadyB 心跳不应答，但仍是"匹配到"，不能当未识别
   const engine = createEngine({

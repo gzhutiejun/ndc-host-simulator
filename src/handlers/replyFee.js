@@ -29,7 +29,8 @@ function buildCancelReply({ parsed, session, helpers, nextState, printer }) {
     nextState,
     fieldG: '',
     screen: buildScreen(session, ''),
-    printer: req.mcn + '0' + '1' + text,
+    // 打印标志 3 = 凭条 + 日志（ATM 侧 extract-print-data.ts 的 receiptAndJournal）：取消凭条要随卡出纸。
+    printer: req.mcn + '0' + '3' + text,
   });
 }
 
@@ -69,7 +70,8 @@ module.exports = function makeReplyFee(cfg = {}) {
       });
     }
     if (flag === 'B' || flag === 'D') {
-      if (noReplyToCancel) return null;
+      // 不能返回 null：null 是「本规则不适用」，会落到后面的 withdrawal-request 拿到批准出钞应答。
+      if (noReplyToCancel) return { noReply: true };
       return buildCancelReply({
         parsed, session, helpers, nextState: cancelReplyNextState, printer: cancelPrinter,
       });

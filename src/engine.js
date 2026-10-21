@@ -140,6 +140,8 @@ function createEngine({ rules = [], handlers = {}, now = () => new Date(), libra
             throw new Error(`Rule "${rule.name}" references unknown handler "${rule.handler}"`);
           }
           const payload = fn(parsed, session, { applyTemplate, ctx, constants, now });
+          // handler 返回 { noReply: true }：本规则适用，但这条入站报文不应答（与规则级 noReply 同义）。
+          if (payload != null && typeof payload === 'object' && payload.noReply === true) return { payload: null, rule: rule.name };
           if (payload != null) return { payload, rule: rule.name };
           continue; // handler 返回 null：本规则不适用，试下一条匹配规则
         }
