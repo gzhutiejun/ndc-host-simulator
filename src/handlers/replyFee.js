@@ -1,5 +1,6 @@
 const { buildTransactionReply } = require('../ndc/transactionReply');
 const { extractRequest } = require('../ndc/transactionRequest');
+const { decodeTokens } = require('../ddcDownload');
 
 /** opcode 在段 7；手续费同意位是第 7 位（下标 6）。 */
 const OPCODE_INDEX = 7;
@@ -24,7 +25,8 @@ function buildScreen(session, data) {
  */
 function buildCancelReply({ parsed, session, helpers, nextState, printer }) {
   const req = extractRequest(parsed);
-  const text = helpers && helpers.applyTemplate ? helpers.applyTemplate(printer, {}) : printer;
+  // decodeTokens 认 <LF> / <FF>（引擎的 applyTemplate 不认，会把字面量送进凭条，打印机报 FIELDERROR）。
+  const text = decodeTokens(printer);
   return buildTransactionReply({
     luno: req.luno,
     nextState,
