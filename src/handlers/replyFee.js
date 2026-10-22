@@ -84,3 +84,4 @@ module.exports = function makeReplyFee(cfg = {}) {
 };
 
 module.exports.buildCancelReply = buildCancelReply;
+module.exports.buildScreen = buildScreen;

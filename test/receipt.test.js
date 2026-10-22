@@ -30,3 +30,9 @@ test('arcToHex and buildCam', () => {
   assert.strictEqual(buildCam('00', true), '5CAM8A023030');
   assert.strictEqual(buildCam('00', false), null);
 });
+
+test('buildCam 对象签名：默认 IAD、omit91、脚本', () => {
+  assert.strictEqual(buildCam({}), '5CAM910A11223344556677883030' + '8A023030');
+  assert.strictEqual(buildCam({ omit91: true, arc: '05' }), '5CAM8A023035');
+  assert.strictEqual(buildCam({ omit91: true, scripts: ['72', '73'] }), '5CAM8A02303072' + '73');
+});

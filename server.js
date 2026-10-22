@@ -11,7 +11,7 @@ const { createEngine } = require('./src/engine');
 const { parseLibrary } = require('./src/message-library');
 const { createLogger } = require('./src/logging');
 const { createUiServer } = require('./src/ui-server');
-const { buildTerminalCommand, buildFitDownload, buildDataCommand } = require('./src/push');
+const { buildTerminalCommand, buildFitDownload, buildDataCommand, buildEmvConfigCommand } = require('./src/push');
 const { loadSequence, isDownloadTrigger, createDownload } = require('./src/ddcDownload');
 const goInService = require('./src/handlers/goInService');
 const makeWithdrawal = require('./src/handlers/withdrawal');
@@ -20,6 +20,8 @@ const makeSettlement = require('./src/handlers/settlement');
 const makeGeneric = require('./src/handlers/generic');
 const makeHostConfirmation = require('./src/handlers/hostConfirmation');
 const makeReplyFee = require('./src/handlers/replyFee');
+const makeDigCReply = require('./src/handlers/digCReply');
+const { augmentCam } = require('./src/ndc/camAugment');
 const makeOarSelection = require('./src/handlers/oarSelection');
 const makeDdcPinValidation = require('./src/handlers/ddcPinValidation');
 const makeDdcWithdrawalStage1 = require('./src/handlers/ddcWithdrawalStage1');
@@ -83,6 +85,8 @@ function createApp(config) {
     // 同样默认关闭：enabled 不为 true 时恒返回 null。
     replyFee: makeReplyFee(config.replyFee || {}),
     oarSelection: makeOarSelection(config.oarSelection || {}),
+    // 8b：DIG c 后回新应答（默认关）；cam 段另由 augmentCam 给交易应答补 CAM。
+    digCReply: makeDigCReply((config.cam || {}).digCReply || {}),
     // CUBC/DDC 方言：主机 PIN 验证（HHH）。跟其它 handler 一样，注册只是让它**可以**被
     // 规则引用——出厂 config.json 不引用它，这一行本身不改变任何现有行为。
     ddcPinValidation: makeDdcPinValidation(config.ddcPinValidation || {}),
@@ -168,13 +172,16 @@ function createApp(config) {
     // 之前就抛出来，由控制台变成 400，而不是发一半再失败。
     const isFit = spec && spec.type === 'fit';
     const isData = spec && spec.type === 'data';
+    const isEmv = spec && spec.type === 'emv';
     let texts;
     if (isFit) texts = buildFitMessages(spec);
     else if (isData) texts = [buildDataCommand(spec)];
+    else if (isEmv) texts = [buildEmvConfigCommand(spec)];
     else texts = [buildTerminalCommand(spec)];
     let meta = { type: 'TerminalCommand', rule: 'ui:push' };
     if (isFit) meta = { type: 'DataCommand', rule: 'ui:push:fit' };
     else if (isData) meta = { type: 'DataCommand', rule: 'ui:push:data' };
+    else if (isEmv) meta = { type: 'EmvConfigCommand', rule: 'ui:push:emv' };
     let sent = 0;
     for (const socket of activeSockets) {
       if (socket.destroyed) continue;
@@ -276,7 +283,7 @@ function createApp(config) {
           }
           let result = { payload: null, rule: null };
           try {
-            result = engine.respond(parsed, session);
+            result = augmentCam(parsed, engine.respond(parsed, session), config.cam);
           } catch (err) {
             console.error(`Engine error: ${err.message}`);
           }

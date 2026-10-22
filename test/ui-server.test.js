@@ -469,3 +469,33 @@ test('decodeFrame 在 EBCDIC 传输码下按表 F-1 还原', () => {
     setTransmissionCode('ASCII');
   }
 });
+
+test('POST /api/push: type=emv 缺 subclass 返回 400，带 subclass 透传给 push handler', async () => {
+  const engine = createEngine({ rules: [], handlers: {} });
+  const calls = [];
+  const ui = createUiServer({ engine, push: (spec) => { calls.push(spec); return { sent: 1 }; } });
+  await new Promise((resolve) => ui.listen(0, resolve));
+  const port = ui.server.address().port;
+  try {
+    const bad = await request(port, 'POST', '/api/push', { type: 'emv', data: 'x' });
+    assert.strictEqual(bad.status, 400);
+    assert.strictEqual(calls.length, 0);
+    const ok = await request(port, 'POST', '/api/push', { type: 'emv', subclass: '1', data: 'x' });
+    assert.strictEqual(ok.status, 200);
+    assert.strictEqual(calls[0].subclass, '1');
+  } finally {
+    await new Promise((resolve) => ui.close(resolve));
+  }
+});
+
+test('extractStatusTails: Ready 尾、设备故障尾、DIG c', () => {
+  const { extractStatusTails } = require('../src/ui-server');
+  const GS = '\x1d';
+  assert.deepStrictEqual(extractStatusTails(['22', '000', '', '9' + GS + 'CAM' + GS + '9F270180']), { ready: 'CAM~9F270180' });
+  assert.deepStrictEqual(
+    extractStatusTails(['22', '000', '', '8', 'c1', '2', '0910' + GS + '9F270180']),
+    { deviceFault: '9F270180', digC: true },
+  );
+  assert.strictEqual(extractStatusTails(['22', '000', '', '9']), undefined);
+  assert.strictEqual(extractStatusTails(['11', '000', '', '']), undefined);
+});

@@ -62,4 +62,16 @@ function buildFitDownload({ entries, luno = '', msn = '', responseFlag = '' } = 
   return buildDataCommand({ identifier: FIT_IDENTIFIER, data, luno, msn, responseFlag });
 }
 
-module.exports = { buildTerminalCommand, buildDataCommand, buildFitDownload };
+/**
+ * 组装一条主机→ATM 的 EMV 配置命令（报文类 8，8b N-19）：
+ *
+ *   "8" FS [LUNO] FS <子类> FS <数据>
+ *
+ * 子类 1/2/3 是 AID / 公钥 / 签名等表的下发，数据原样放进去，不校验。
+ */
+function buildEmvConfigCommand({ subclass, data = '', luno = '' } = {}) {
+  if (!subclass) throw new Error('buildEmvConfigCommand: subclass is required');
+  return ['8', luno, subclass, data].join(FS);
+}
+
+module.exports = { buildTerminalCommand, buildDataCommand, buildFitDownload, buildEmvConfigCommand };

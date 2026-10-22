@@ -253,6 +253,30 @@
       lts.title = frame.lts.raw;
       row.appendChild(lts);
     }
+    if (frame.cam) {
+      // 请求里的 CAM 段（5CAM）：标志 + TLV 列表
+      var cam = document.createElement('span');
+      cam.className = 'lts';
+      cam.textContent = 'CAM flags=' + frame.cam.flags + ' ' + frame.cam.tlv.map(function (t) { return t.tag + '=' + t.value; }).join(' ');
+      row.appendChild(cam);
+    }
+    if (frame.lts && frame.lts.camTail) {
+      var camTail = document.createElement('span');
+      camTail.className = 'lts';
+      camTail.textContent = 'LTS CAM tail ' + frame.lts.camTail;
+      row.appendChild(camTail);
+    }
+    if (frame.tails) {
+      // Ready / 设备故障后面的 CAM 回报尾，以及 DIG c
+      var tails = document.createElement('span');
+      tails.className = 'lts';
+      var parts = [];
+      if (frame.tails.ready !== undefined) parts.push('Ready tail ' + frame.tails.ready);
+      if (frame.tails.deviceFault !== undefined) parts.push('DeviceFault tail ' + frame.tails.deviceFault);
+      if (frame.tails.digC) parts.push('DIG c');
+      tails.textContent = parts.join('  ');
+      row.appendChild(tails);
+    }
     streamLog.appendChild(row);
 
     frameCount += 1;

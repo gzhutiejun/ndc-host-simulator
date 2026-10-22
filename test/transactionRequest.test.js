@@ -67,3 +67,25 @@ test('lts: 51 字符（有 BNA）同样只取前 26 字符的 tsn / status / 4 �
   assert.deepStrictEqual(r.lts.dispensed, [0, 0, 0, 0]);
   assert.strictEqual(r.lts.raw, seg);
 });
+
+test('cam: 解出标志与 TLV；无 5 段为 undefined', () => {
+  const GS = '\x1d';
+  assert.strictEqual(extractRequest(withdrawalReq()).cam, undefined);
+  const r = extractRequest(ltsReq(['', '5CAM0004' + '9F270180' + '9F36020001' + '5F2A020710' + '82021980']));
+  assert.strictEqual(r.cam.flags, '0004');
+  assert.deepStrictEqual(r.cam.tlv, [
+    { tag: '9F27', len: 1, value: '80' },
+    { tag: '9F36', len: 2, value: '0001' },
+    { tag: '5F2A', len: 2, value: '0710' },
+    { tag: '82', len: 2, value: '1980' },
+  ]);
+  void GS;
+});
+
+test('lts.camTail: 2 段 GS 之后的原文；没有 GS 则无此键', () => {
+  const GS = '\x1d';
+  const seg = '2' + '0042' + '1' + '00001' + '00002' + '00000' + '00010';
+  const tail = 'CAM' + GS + '9F270180' + GS + '209F180400000001';
+  assert.strictEqual(extractRequest(ltsReq(['', seg + GS + tail])).lts.camTail, tail);
+  assert.ok(!('camTail' in extractRequest(ltsReq(['', seg])).lts));
+});

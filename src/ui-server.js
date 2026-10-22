@@ -14,6 +14,7 @@
 //   POST /api/push       立刻给所有活跃连接下发一条报文，不等 ATM 先发请求。
 //                        {code, modifier, luno, msn} → 类 1 终端命令（默认）
 //                        {type:"fit", ...}           → 类 3 FIT 下发，缺省字段取 config.fitDownload
+//                        {type:"emv", subclass, data, luno} → 报文类 8 EMV 配置命令，缺 subclass 400
 //                        {type:"data", identifier, data, luno, msn} → 类 3 数据命令（如 3/1 A 增强选项），缺 identifier 400
 
 const http = require('node:http');
@@ -22,7 +23,7 @@ const path = require('node:path');
 const { URL } = require('node:url');
 const { describe } = require('./message-library');
 const { decodeWire } = require('./framing');
-const { extractLts } = require('./ndc/transactionRequest');
+const { extractLts, extractCam } = require('./ndc/transactionRequest');
 const { FS, GS, RS, SO, SI } = require('./constants');
 
 const INDEX_HTML_PATH = path.join(__dirname, 'ui', 'index.html');
@@ -49,6 +50,34 @@ function decodeFrame(buf) {
   const text = decodeWire(buf);
   const fields = text.split(FS).map(toVisible);
   return { text: toVisible(text), fields };
+}
+
+/**
+ * 8b：状态报文（报文类 2）里的 CAM 回报尾与 DIG c。入参是**原始**字段（GS 未换成可见符号）。
+ *   ready       Ready 描述符（`9`/`B`）后 GS 之后的原文
+ *   deviceFault 设备故障（字段 3 = `8`）后面字段里第一个 GS 之后的原文
+ *   digC        字段 3 = `8` 且字段 4 以 `c` 开头
+ * 都没有 -> undefined。展示用，值已转可见符号。
+ */
+function extractStatusTails(fields) {
+  if (!fields[0] || fields[0][0] !== '2') return undefined;
+  const f3 = fields[3] || '';
+  const out = {};
+  const after = (text) => {
+    const i = text.indexOf(GS);
+    return i >= 0 ? toVisible(text.slice(i + 1)) : undefined;
+  };
+  if (f3[0] === '9' || f3[0] === 'B') {
+    const t = after(f3);
+    if (t !== undefined) out.ready = t;
+  } else if (f3[0] === '8') {
+    for (let i = 4; i < fields.length; i += 1) {
+      const t = after(fields[i] || '');
+      if (t !== undefined) { out.deviceFault = t; break; }
+    }
+    if ((fields[4] || '').startsWith('c')) out.digC = true;
+  }
+  return Object.keys(out).length ? out : undefined;
 }
 
 function sendJson(res, status, body) {
@@ -108,7 +137,15 @@ function createUiServer({ engine, library = [], push } = {}) {
     if (sseClients.size === 0) return; // 没人在看，省得白解码
     const { text, fields } = decodeFrame(buf);
     // 请求流里把 Last Transaction Status（2 段）解出来显示；只对 ATM→主机的帧有意义。
-    const lts = direction === 'RECV' ? extractLts(fields) : undefined;
+    // GS 在 decodeFrame 的 fields 里已被换成可见符号，所以 LTS 的 camTail / 状态尾要从原始字段取。
+    const rawFields = direction === 'RECV' ? decodeWire(buf).split(FS) : null;
+    const lts = rawFields ? extractLts(rawFields) : undefined;
+    if (lts) {
+      lts.raw = toVisible(lts.raw);
+      if (lts.camTail !== undefined) lts.camTail = toVisible(lts.camTail);
+    }
+    const cam = rawFields ? extractCam(rawFields) : undefined;
+    const tails = rawFields ? extractStatusTails(rawFields) : undefined;
     const frame = {
       direction, // 'RECV' | 'SEND'
       bytes: buf.length,
@@ -117,6 +154,8 @@ function createUiServer({ engine, library = [], push } = {}) {
       type: meta.type || null,
       rule: meta.rule || null,
       lts: lts || null,
+      cam: cam || null,
+      tails: tails || null,
       ts: Date.now(),
     };
     const line = `data: ${JSON.stringify(frame)}\n\n`;
@@ -189,13 +228,18 @@ function createUiServer({ engine, library = [], push } = {}) {
     //   不带 type / type='command' —— 类 1 终端命令，必须有 code（老契约，逐字节不变）
     //   type='fit'                 —— FIT 下发，报文类 3，没有 code 这个概念
     //   type='data'                —— 通用数据命令，报文类 3，必须有 identifier（报文标识）
+    //   type='emv'                 —— EMV 配置命令，报文类 8，必须有 subclass
     const type = body && body.type != null ? body.type : 'command';
-    if (type !== 'command' && type !== 'fit' && type !== 'data') {
-      sendJson(res, 400, { error: `push: unknown type "${type}" (expected "command", "fit" or "data")` });
+    if (type !== 'command' && type !== 'fit' && type !== 'data' && type !== 'emv') {
+      sendJson(res, 400, { error: `push: unknown type "${type}" (expected "command", "fit", "data" or "emv")` });
       return;
     }
     if (type === 'data' && (!body || typeof body.identifier !== 'string' || body.identifier === '')) {
       sendJson(res, 400, { error: 'push type=data requires a non-empty "identifier"' });
+      return;
+    }
+    if (type === 'emv' && (!body || typeof body.subclass !== 'string' || body.subclass === '')) {
+      sendJson(res, 400, { error: 'push type=emv requires a non-empty "subclass"' });
       return;
     }
     if (type === 'command' && (!body || typeof body.code !== 'string' || body.code === '')) {
@@ -236,4 +280,4 @@ function createUiServer({ engine, library = [], push } = {}) {
   };
 }
 
-module.exports = { createUiServer, toVisible, decodeFrame };
+module.exports = { createUiServer, toVisible, decodeFrame, extractStatusTails };

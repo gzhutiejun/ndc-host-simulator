@@ -83,3 +83,10 @@ test('条目里混进非数字时抛错（每字节写成 3 位十进制，只�
 test('条目长度不是 3 的倍数时抛错（凑不齐整字节）', () => {
   assert.throws(() => buildFitDownload({ entries: ['0230'] }), /multiple of 3/);
 });
+
+test('buildEmvConfigCommand: 8 FS luno FS 子类 FS 数据', () => {
+  const { buildEmvConfigCommand } = require('../src/push');
+  assert.strictEqual(buildEmvConfigCommand({ subclass: '1', data: 'ABC', luno: '000' }), ['8', '000', '1', 'ABC'].join(FS));
+  assert.strictEqual(buildEmvConfigCommand({ subclass: '2' }), ['8', '', '2', ''].join(FS));
+  assert.throws(() => buildEmvConfigCommand({ data: 'x' }), /subclass/);
+});

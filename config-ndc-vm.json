@@ -563,6 +563,18 @@
       "handler": "goInService"
     },
     {
+      "name": "digc-reply",
+      "_comment": "8b：卡片层失败（DIG c）后 ATM 等主机新应答；digCReply.enabled 时回 class 4（MCN 0、FID 5、NS=digCReply.nextState、凭条、不带 CAM）。缺省关；必须在 status 规则（ddc-device-fault-reply / ready*-no-reply）之前。",
+      "match": {
+        "messageClass": "2",
+        "field": {
+          "index": 3,
+          "equals": "8"
+        }
+      },
+      "handler": "digCReply"
+    },
+    {
       "name": "ddc-device-fault-reply",
       "match": {
         "messageClass": "2",
@@ -852,6 +864,19 @@
       0
     ],
     "autoGisOnP20": true
+  },
+  "cam": {
+    "enabled": false,
+    "arc": "00",
+    "iad": "11223344556677883030",
+    "scripts": [],
+    "omit": false,
+    "badIad": false,
+    "digCReply": {
+      "enabled": false,
+      "nextState": "048",
+      "receipt": "CARD DECLINED"
+    }
   },
   "replyFee": {
     "enabled": false,

@@ -75,8 +75,22 @@ function arcToHex(arc) {
   return [...String(arc)].map((ch) => ch.charCodeAt(0).toString(16).padStart(2, '0')).join('');
 }
 
-function buildCam(arc, include) {
-  return include ? '5CAM8A02' + arcToHex(arc) : null;
+/**
+ * 应答里的 CAM 段。
+ *  - 旧签名 `buildCam(arc, include)`：DDC / generic 现有调用，`5CAM8A02<arc ASCII hex>`，不带 91。
+ *  - 对象签名 `buildCam({ arc, iad, scripts, omit91 })`（8b）：`5CAM` + [`91` LL iad] + `8A02` + hex(arc) + 脚本连写。
+ *    arc 是两个 ASCII 字符，按字符码转 hex（"00" -> "3030"）；iad 是 hex 串，LL 为其字节数。
+ *    缺省 iad 是 xfssim 芯片卡唯一接受的 EXTERNAL AUTHENTICATE 数据（1122334455667788 + 3030）。
+ */
+function buildCam(arcOrOpts, include) {
+  if (arcOrOpts !== null && typeof arcOrOpts === 'object') {
+    const {
+      arc = '00', iad = '11223344556677883030', scripts = [], omit91 = false,
+    } = arcOrOpts;
+    const iadPart = omit91 ? '' : '91' + (iad.length / 2).toString(16).toUpperCase().padStart(2, '0') + iad;
+    return '5CAM' + iadPart + '8A02' + arcToHex(arc) + scripts.join('');
+  }
+  return include ? '5CAM8A02' + arcToHex(arcOrOpts) : null;
 }
 
 module.exports = {
