@@ -277,6 +277,17 @@
       tails.textContent = parts.join('  ');
       row.appendChild(tails);
     }
+    if (frame.eki) {
+      // 8c-1：EKI 回复 / reject / MAC 加密机错误
+      var eki = document.createElement('span');
+      eki.className = 'lts';
+      var k = frame.eki;
+      if (k.kind === 'newKeyKvv') eki.textContent = '新键 KVV ' + k.kvv;
+      else if (k.kind === 'allKvvs') eki.textContent = 'KVV 主=' + k.master + ' 通讯=' + k.comms + ' MAC=' + k.mac + ' B=' + k.b;
+      else if (k.kind === 'reject') eki.textContent = 'reject ' + k.code;
+      else if (k.kind === 'encryptorMacError') eki.textContent = '加密机错误（MAC）';
+      row.appendChild(eki);
+    }
     streamLog.appendChild(row);
 
     frameCount += 1;

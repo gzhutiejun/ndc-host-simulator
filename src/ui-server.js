@@ -24,6 +24,7 @@ const { URL } = require('node:url');
 const { describe } = require('./message-library');
 const { decodeWire } = require('./framing');
 const { extractLts, extractCam } = require('./ndc/transactionRequest');
+const { HEX_32, HEX_16_OR_32 } = require('./ndc/eki');
 const { FS, GS, RS, SO, SI } = require('./constants');
 
 const INDEX_HTML_PATH = path.join(__dirname, 'ui', 'index.html');
@@ -80,6 +81,31 @@ function extractStatusTails(fields) {
   return Object.keys(out).length ? out : undefined;
 }
 
+/**
+ * 8c-1：ATM 对主机密钥命令（EKI）的回复与 MAC 加密机错误。入参是原始字段。
+ *   23 … 3 FS kvv        新键 KVV
+ *   23 … 4 FS x24        四段 KVV（主 / 通讯 / MAC / B，各 6 位 hex）
+ *   22 … C FS 码         reject 码
+ *   12 … L1              加密机错误（MAC）
+ * 都不是 -> undefined。
+ */
+function extractEkiStatus(fields) {
+  const head = fields[0] || '';
+  if (head[0] === '2' && head[1] === '3') {
+    if (fields[3] === '3') return { kind: 'newKeyKvv', kvv: fields[4] || '' };
+    if (fields[3] === '4' && (fields[4] || '').length === 24) {
+      const v = fields[4];
+      return { kind: 'allKvvs', master: v.slice(0, 6), comms: v.slice(6, 12), mac: v.slice(12, 18), b: v.slice(18, 24) };
+    }
+    return undefined;
+  }
+  if (head[0] === '2' && head[1] === '2' && fields[3] === 'C') {
+    return { kind: 'reject', code: fields[4] || '' };
+  }
+  if (head === '12' && fields[3] === 'L1') return { kind: 'encryptorMacError' };
+  return undefined;
+}
+
 function sendJson(res, status, body) {
   const data = JSON.stringify(body);
   res.writeHead(status, {
@@ -118,7 +144,7 @@ function readJsonBody(req) {
  * @param {(spec: object) => {sent: number}} [opts.push] 立刻下发终端命令的回调，由 server.js
  *   注入（它才知道当前有哪些活跃 socket）；不传时 POST /api/push 返回 503。
  */
-function createUiServer({ engine, library = [], push } = {}) {
+function createUiServer({ engine, library = [], push, ekiMasterKey = '' } = {}) {
   if (!engine || typeof engine.setNextResponse !== 'function') {
     throw new Error('createUiServer: engine with setNextResponse(...) is required');
   }
@@ -146,6 +172,7 @@ function createUiServer({ engine, library = [], push } = {}) {
     }
     const cam = rawFields ? extractCam(rawFields) : undefined;
     const tails = rawFields ? extractStatusTails(rawFields) : undefined;
+    const eki = rawFields ? extractEkiStatus(rawFields) : undefined;
     const frame = {
       direction, // 'RECV' | 'SEND'
       bytes: buf.length,
@@ -156,6 +183,7 @@ function createUiServer({ engine, library = [], push } = {}) {
       lts: lts || null,
       cam: cam || null,
       tails: tails || null,
+      eki: eki || null,
       ts: Date.now(),
     };
     const line = `data: ${JSON.stringify(frame)}\n\n`;
@@ -229,14 +257,27 @@ function createUiServer({ engine, library = [], push } = {}) {
     //   type='fit'                 —— FIT 下发，报文类 3，没有 code 这个概念
     //   type='data'                —— 通用数据命令，报文类 3，必须有 identifier（报文标识）
     //   type='emv'                 —— EMV 配置命令，报文类 8，必须有 subclass
+    //   type='eki'                 —— 主机密钥命令，报文类 3 子类 3/4，masterKey 缺省取配置 eki.masterKey
     const type = body && body.type != null ? body.type : 'command';
-    if (type !== 'command' && type !== 'fit' && type !== 'data' && type !== 'emv') {
-      sendJson(res, 400, { error: `push: unknown type "${type}" (expected "command", "fit", "data" or "emv")` });
+    if (type !== 'command' && type !== 'fit' && type !== 'data' && type !== 'emv' && type !== 'eki') {
+      sendJson(res, 400, { error: `push: unknown type "${type}" (expected "command", "fit", "data", "emv" or "eki")` });
       return;
     }
     if (type === 'data' && (!body || typeof body.identifier !== 'string' || body.identifier === '')) {
       sendJson(res, 400, { error: 'push type=data requires a non-empty "identifier"' });
       return;
+    }
+    if (type === 'eki') {
+      const masterKey = body.masterKey != null ? body.masterKey : ekiMasterKey;
+      if (typeof masterKey !== 'string' || !HEX_32.test(masterKey)) {
+        sendJson(res, 400, { error: 'push type=eki requires masterKey (32 hex) in the body or config eki.masterKey' });
+        return;
+      }
+      if (typeof body.newKey !== 'string' || !HEX_16_OR_32.test(body.newKey)) {
+        sendJson(res, 400, { error: 'push type=eki requires newKey (16 or 32 hex)' });
+        return;
+      }
+      body = { ...body, masterKey };
     }
     if (type === 'emv' && (!body || typeof body.subclass !== 'string' || body.subclass === '')) {
       sendJson(res, 400, { error: 'push type=emv requires a non-empty "subclass"' });
@@ -280,4 +321,4 @@ function createUiServer({ engine, library = [], push } = {}) {
   };
 }
 
-module.exports = { createUiServer, toVisible, decodeFrame, extractStatusTails };
+module.exports = { createUiServer, toVisible, decodeFrame, extractStatusTails, extractEkiStatus };

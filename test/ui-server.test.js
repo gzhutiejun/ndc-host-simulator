@@ -499,3 +499,80 @@ test('extractStatusTails: Ready 尾、设备故障尾、DIG c', () => {
   assert.strictEqual(extractStatusTails(['22', '000', '', '9']), undefined);
   assert.strictEqual(extractStatusTails(['11', '000', '', '']), undefined);
 });
+
+test('extractEkiStatus: 新键 KVV、四段 KVV、reject、加密机错误', () => {
+  const { extractEkiStatus } = require('../src/ui-server');
+  assert.deepStrictEqual(extractEkiStatus(['23', '000', '', '3', 'D2B91C']), { kind: 'newKeyKvv', kvv: 'D2B91C' });
+  assert.deepStrictEqual(
+    extractEkiStatus(['23', '000', '', '4', '08D7B4AAAAAABBBBBBCCCCCC']),
+    { kind: 'allKvvs', master: '08D7B4', comms: 'AAAAAA', mac: 'BBBBBB', b: 'CCCCCC' },
+  );
+  assert.deepStrictEqual(extractEkiStatus(['22', '000', '', 'C', 'B03']), { kind: 'reject', code: 'B03' });
+  assert.deepStrictEqual(extractEkiStatus(['12', '000', '', 'L1', '2']), { kind: 'encryptorMacError' });
+  assert.strictEqual(extractEkiStatus(['22', '000', '', 'F']), undefined);
+  assert.strictEqual(extractEkiStatus(['23', '000', '', '4', 'short']), undefined);
+});
+
+test('POST /api/push: type=eki 透传（masterKey 缺省取配置）；缺 / 坏 masterKey、坏 newKey 返回 400', async () => {
+  const engine = createEngine({ rules: [], handlers: {} });
+  const calls = [];
+  const master = '0123456789ABCDEFFEDCBA9876543210';
+  const newKey = '11111111111111112222222222222222';
+  const push = (spec) => { calls.push(spec); return { sent: 1, expectedKvv: 'D2B91C' }; };
+
+  const noMaster = createUiServer({ engine, push });
+  await new Promise((resolve) => noMaster.listen(0, resolve));
+  try {
+    const port = noMaster.server.address().port;
+    const bad = await request(port, 'POST', '/api/push', { type: 'eki', subclass: '3', modifier: '2', newKey });
+    assert.strictEqual(bad.status, 400);
+    const bad2 = await request(port, 'POST', '/api/push', { type: 'eki', subclass: '3', modifier: '2', newKey, masterKey: 'zz' });
+    assert.strictEqual(bad2.status, 400);
+    const ok = await request(port, 'POST', '/api/push', { type: 'eki', subclass: '3', modifier: '2', newKey, masterKey: master });
+    assert.strictEqual(ok.status, 200);
+    assert.strictEqual(calls.length, 1);
+  } finally {
+    await new Promise((resolve) => noMaster.close(resolve));
+  }
+
+  const withCfg = createUiServer({ engine, push, ekiMasterKey: master });
+  await new Promise((resolve) => withCfg.listen(0, resolve));
+  try {
+    const port = withCfg.server.address().port;
+    const badKey = await request(port, 'POST', '/api/push', { type: 'eki', subclass: '3', modifier: '2', newKey: '12' });
+    assert.strictEqual(badKey.status, 400);
+    const ok = await request(port, 'POST', '/api/push', { type: 'eki', subclass: '3', modifier: '2', newKey });
+    assert.strictEqual(ok.status, 200);
+    assert.strictEqual(calls[1].masterKey, master);
+  } finally {
+    await new Promise((resolve) => withCfg.close(resolve));
+  }
+});
+
+test('server.js: POST /api/push type=eki 经活跃连接下发 3 子类 3 命令并回 expectedKvv', async () => {
+  const capDir = fs.mkdtempSync(path.join(os.tmpdir(), 'ndc-ui-pusheki-'));
+  const app = createApp({ enableTLS: false, captureDir: capDir, rules: [], uiPort: 1, eki: { masterKey: '0123456789ABCDEFFEDCBA9876543210' } });
+  await new Promise((resolve) => app.server.listen(0, resolve));
+  await new Promise((resolve) => app.ui.listen(0, resolve));
+  const ndcPort = app.server.address().port;
+  const uiPort = app.ui.server.address().port;
+  const client = net.createConnection({ port: ndcPort });
+  await new Promise((resolve, reject) => { client.on('connect', resolve); client.on('error', reject); });
+  const decoder = createDecoder();
+  const pushed = new Promise((resolve) => {
+    client.on('data', (d) => {
+      const frames = decoder.push(d);
+      if (frames.length) resolve(frames[0].toString('latin1'));
+    });
+  });
+  try {
+    const res = await request(uiPort, 'POST', '/api/push', { type: 'eki', subclass: '3', modifier: '2', newKey: '11111111111111112222222222222222', luno: '000', msn: '000' });
+    assert.strictEqual(res.status, 200);
+    assert.strictEqual(res.body.expectedKvv, 'D2B91C');
+    assert.strictEqual(await pushed, ['3', '000', '000', '32', '155058123136058016015115180171162187121028080231'].join(FS));
+  } finally {
+    client.destroy();
+    await new Promise((resolve) => app.server.close(resolve));
+    await new Promise((resolve) => app.ui.close(resolve));
+  }
+});

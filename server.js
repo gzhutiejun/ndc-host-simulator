@@ -11,6 +11,7 @@ const { createEngine } = require('./src/engine');
 const { parseLibrary } = require('./src/message-library');
 const { createLogger } = require('./src/logging');
 const { createUiServer } = require('./src/ui-server');
+const { buildEki } = require('./src/ndc/eki');
 const { buildTerminalCommand, buildFitDownload, buildDataCommand, buildEmvConfigCommand } = require('./src/push');
 const { loadSequence, isDownloadTrigger, createDownload } = require('./src/ddcDownload');
 const goInService = require('./src/handlers/goInService');
@@ -173,22 +174,29 @@ function createApp(config) {
     const isFit = spec && spec.type === 'fit';
     const isData = spec && spec.type === 'data';
     const isEmv = spec && spec.type === 'emv';
+    const isEki = spec && spec.type === 'eki';
+    let expectedKvv;
     let texts;
     if (isFit) texts = buildFitMessages(spec);
     else if (isData) texts = [buildDataCommand(spec)];
     else if (isEmv) texts = [buildEmvConfigCommand(spec)];
-    else texts = [buildTerminalCommand(spec)];
+    else if (isEki) {
+      const eki = buildEki(spec);
+      expectedKvv = eki.expectedKvv;
+      texts = [buildDataCommand({ identifier: eki.identifier, data: eki.data, luno: spec.luno, msn: spec.msn })];
+    } else texts = [buildTerminalCommand(spec)];
     let meta = { type: 'TerminalCommand', rule: 'ui:push' };
     if (isFit) meta = { type: 'DataCommand', rule: 'ui:push:fit' };
     else if (isData) meta = { type: 'DataCommand', rule: 'ui:push:data' };
     else if (isEmv) meta = { type: 'EmvConfigCommand', rule: 'ui:push:emv' };
+    else if (isEki) meta = { type: 'DataCommand', rule: 'ui:push:eki' };
     let sent = 0;
     for (const socket of activeSockets) {
       if (socket.destroyed) continue;
       for (const text of texts) sendFrame(socket, text, meta);
       sent += 1;
     }
-    return { sent };
+    return isEki ? { sent, expectedKvv } : { sent };
   }
 
   // 上电时"先装 FIT 再进服务"。真实主机是先把 FIT 装载下去、ATM 才进服务，所以 FIT 抢在
@@ -222,7 +230,12 @@ function createApp(config) {
   function fitPrecedesGoInService(ruleName) {
     return fitConfig.beforeGoInService === true && goInServiceRules.has(ruleName);
   }
-  const ui = config.uiPort ? createUiServer({ engine, library, push: pushToActiveSockets }) : null;
+  const ui = config.uiPort ? createUiServer({
+    engine,
+    library,
+    push: pushToActiveSockets,
+    ekiMasterKey: (config.eki && config.eki.masterKey) || '',
+  }) : null;
 
   const server = createTransport(config, (socket) => {
     const peer = `${socket.remoteAddress}:${socket.remotePort}`;
