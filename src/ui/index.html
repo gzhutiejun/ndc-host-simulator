@@ -243,8 +243,10 @@
     span.className = 'lts';
     function yn(v) { return v ? '1' : '0'; }
     function line(a, b) {
-      return '监督 ' + yn(a.supervisor) + ' 门 ' + yn(a.door) + ' 防撬 ' + yn(a.enclosure) + ' 静默 ' + yn(a.silentSignal) +
-        ' 振动/热 ' + yn(a.vibrationHeat) + ' | 卡仓 ' + yn(b.cardBin) + ' 废钞箱 ' + yn(b.rejectBin) +
+      var head = '监督 ' + yn(a.supervisor) + ' 门 ' + yn(a.door) + ' 防撬 ' + yn(a.enclosure) + ' 静默 ' + yn(a.silentSignal) +
+        ' 振动/热 ' + yn(a.vibrationHeat);
+      if (!b) return head;
+      return head + ' | 卡仓 ' + yn(b.cardBin) + ' 废钞箱 ' + yn(b.rejectBin) +
         ' 钞箱 ' + b.cassettes.map(yn).join('');
     }
     if (tamper) {
