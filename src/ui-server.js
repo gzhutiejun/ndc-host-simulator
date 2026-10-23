@@ -11,10 +11,12 @@
 //                        选中后靠 key 让 engine 去查，不用把 602 字节的载荷都传一遍）
 //   GET  /api/stream     SSE，收发的每一帧推一条 `data: {...}\n\n`
 //   POST /api/next       设置/撤销一次性覆盖，body 就是 engine.setNextResponse() 的参数
+//   GET/POST /api/config 运行时开关：{settlement:{autoGisOnP20:boolean}}
 //   POST /api/push       立刻给所有活跃连接下发一条报文，不等 ATM 先发请求。
 //                        {code, modifier, luno, msn} → 类 1 终端命令（默认）
 //                        {type:"fit", ...}           → 类 3 FIT 下发，缺省字段取 config.fitDownload
 //                        {type:"emv", subclass, data, luno} → 报文类 8 EMV 配置命令，缺 subclass 400
+//                        {type:"reply", luno, nextState, tsn, functionId, printer} → 类 4 交易应答
 //                        {type:"data", identifier, data, luno, msn} → 类 3 数据命令（如 3/1 A 增强选项），缺 identifier 400
 
 const http = require('node:http');
@@ -27,6 +29,8 @@ const { extractLts, extractCam } = require('./ndc/transactionRequest');
 const { HEX_32, HEX_16_OR_32 } = require('./ndc/eki');
 const { VERSIONS: TR31_VERSIONS } = require('./ndc/tr31');
 const { FS, GS, RS, SO, SI } = require('./constants');
+const { parseSupplyCountersStatus } = require('./ndc/supplyCounters');
+const { buildTransactionReply } = require('./ndc/transactionReply');
 
 const INDEX_HTML_PATH = path.join(__dirname, 'ui', 'index.html');
 
@@ -156,7 +160,7 @@ function readJsonBody(req) {
  * @param {(spec: object) => {sent: number}} [opts.push] 立刻下发终端命令的回调，由 server.js
  *   注入（它才知道当前有哪些活跃 socket）；不传时 POST /api/push 返回 503。
  */
-function createUiServer({ engine, library = [], push, ekiMasterKey = '', ekiKbpk = '' } = {}) {
+function createUiServer({ engine, library = [], push, ekiMasterKey = '', ekiKbpk = '', settlement } = {}) {
   if (!engine || typeof engine.setNextResponse !== 'function') {
     throw new Error('createUiServer: engine with setNextResponse(...) is required');
   }
@@ -185,6 +189,9 @@ function createUiServer({ engine, library = [], push, ekiMasterKey = '', ekiKbpk
     const cam = rawFields ? extractCam(rawFields) : undefined;
     const tails = rawFields ? extractStatusTails(rawFields) : undefined;
     const eki = rawFields ? extractEkiStatus(rawFields) : undefined;
+    const supplyCounters = rawFields && rawFields[0] === '22' && rawFields[3] === 'F'
+      ? parseSupplyCountersStatus(rawFields[4] || '')
+      : undefined;
     const tr31 = direction === 'SEND' ? extractTr31Header(decodeWire(buf).split(FS)) : undefined;
     const frame = {
       direction, // 'RECV' | 'SEND'
@@ -197,6 +204,7 @@ function createUiServer({ engine, library = [], push, ekiMasterKey = '', ekiKbpk
       cam: cam || null,
       tails: tails || null,
       eki: eki || null,
+      supplyCounters: supplyCounters || null,
       tr31: tr31 || null,
       ts: Date.now(),
     };
@@ -274,8 +282,8 @@ function createUiServer({ engine, library = [], push, ekiMasterKey = '', ekiKbpk
     //   type='eki'                 —— 主机密钥命令，报文类 3 子类 3/4，masterKey 缺省取配置 eki.masterKey
     //   type='tr31'                —— TR-31 密钥命令 4e/4f/4l，kbpk 缺省取配置 eki.kbpk，再缺省 eki.masterKey
     const type = body && body.type != null ? body.type : 'command';
-    if (type !== 'command' && type !== 'fit' && type !== 'data' && type !== 'emv' && type !== 'eki' && type !== 'tr31') {
-      sendJson(res, 400, { error: `push: unknown type "${type}" (expected "command", "fit", "data", "emv", "eki" or "tr31")` });
+    if (type !== 'command' && type !== 'fit' && type !== 'data' && type !== 'emv' && type !== 'eki' && type !== 'tr31' && type !== 'reply') {
+      sendJson(res, 400, { error: `push: unknown type "${type}" (expected "command", "fit", "data", "emv", "eki", "tr31" or "reply")` });
       return;
     }
     if (type === 'data' && (!body || typeof body.identifier !== 'string' || body.identifier === '')) {
@@ -314,6 +322,21 @@ function createUiServer({ engine, library = [], push, ekiMasterKey = '', ekiKbpk
       }
       body = { ...body, kbpk };
     }
+    if (type === 'reply') {
+      const b = body || {};
+      if (b.tsn != null && !/^\d{4}$/.test(b.tsn)) {
+        sendJson(res, 400, { error: 'push type=reply tsn must be 4 digits' });
+        return;
+      }
+      if (b.functionId != null && !(typeof b.functionId === 'string' && b.functionId.length === 1)) {
+        sendJson(res, 400, { error: 'push type=reply functionId must be 1 character' });
+        return;
+      }
+      if (b.nextState != null && !/^\d{3}$/.test(b.nextState)) {
+        sendJson(res, 400, { error: 'push type=reply nextState must be 3 digits' });
+        return;
+      }
+    }
     if (type === 'emv' && (!body || typeof body.subclass !== 'string' || body.subclass === '')) {
       sendJson(res, 400, { error: 'push type=emv requires a non-empty "subclass"' });
       return;
@@ -330,6 +353,31 @@ function createUiServer({ engine, library = [], push, ekiMasterKey = '', ekiKbpk
     }
   }
 
+  function serveConfig(res) {
+    sendJson(res, 200, { settlement: { autoGisOnP20: settlement ? settlement.autoGisOnP20() : false } });
+  }
+
+  async function handleConfig(req, res) {
+    if (!settlement) {
+      sendJson(res, 503, { error: 'settlement handle not wired up' });
+      return;
+    }
+    let body;
+    try {
+      body = await readJsonBody(req);
+    } catch (err) {
+      sendJson(res, 400, { error: err.message });
+      return;
+    }
+    const v = body && body.settlement && body.settlement.autoGisOnP20;
+    if (typeof v !== 'boolean') {
+      sendJson(res, 400, { error: 'config: settlement.autoGisOnP20 must be a boolean' });
+      return;
+    }
+    settlement.setAutoGisOnP20(v);
+    serveConfig(res);
+  }
+
   function requestListener(req, res) {
     const url = new URL(req.url, 'http://localhost');
     if (req.method === 'GET' && url.pathname === '/') return serveIndex(res);
@@ -337,6 +385,8 @@ function createUiServer({ engine, library = [], push, ekiMasterKey = '', ekiKbpk
     if (req.method === 'GET' && url.pathname === '/api/stream') return serveStream(req, res);
     if (req.method === 'POST' && url.pathname === '/api/next') return handleNext(req, res);
     if (req.method === 'POST' && url.pathname === '/api/push') return handlePush(req, res);
+    if (req.method === 'GET' && url.pathname === '/api/config') return serveConfig(res);
+    if (req.method === 'POST' && url.pathname === '/api/config') return handleConfig(req, res);
     sendJson(res, 404, { error: `no route for ${req.method} ${url.pathname}` });
   }
 

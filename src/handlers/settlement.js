@@ -13,7 +13,7 @@ module.exports = function makeSettlement(cfg = {}, { library = [] } = {}) {
   const nextState = cfg.nextState != null ? cfg.nextState : '001';
   const functionId = cfg.functionId != null ? cfg.functionId : '5';
   const cassetteCounts = Array.isArray(cfg.cassetteCounts) ? cfg.cassetteCounts : [2000, 2000, 2000, 2000, 0, 0, 0];
-  const autoGisOnP20 = cfg.autoGisOnP20 !== false;
+  let autoGisOnP20 = cfg.autoGisOnP20 !== false;
 
   const index = new Map();
   for (const entry of library) {
@@ -48,5 +48,9 @@ module.exports = function makeSettlement(cfg = {}, { library = [] } = {}) {
     return autoGisOnP20 ? goInService(parsed, session, helpers) : null;
   }
 
-  return { settlement, settlementGis };
+  function setAutoGisOnP20(b) {
+    autoGisOnP20 = b === true;
+  }
+
+  return { settlement, settlementGis, setAutoGisOnP20, autoGisOnP20: () => autoGisOnP20 };
 };

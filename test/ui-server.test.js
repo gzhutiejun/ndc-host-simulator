@@ -656,3 +656,95 @@ test('server.js: POST /api/push type=tr31 下发 4e/4f/4l 帧，header 等于块
     await new Promise((resolve) => app.ui.close(resolve));
   }
 });
+
+test('GET/POST /api/config: autoGisOnP20 运行时开关，非布尔 400', async () => {
+  const makeSettlement = require('../src/handlers/settlement');
+  const settlement = makeSettlement({ autoGisOnP20: false });
+  const engine = createEngine({ rules: [], handlers: {} });
+  const ui = createUiServer({ engine, settlement });
+  await new Promise((resolve) => ui.listen(0, resolve));
+  const port = ui.server.address().port;
+  try {
+    const g0 = await request(port, 'GET', '/api/config');
+    assert.deepStrictEqual(g0.body, { settlement: { autoGisOnP20: false } });
+    const bad = await request(port, 'POST', '/api/config', { settlement: { autoGisOnP20: 'no' } });
+    assert.strictEqual(bad.status, 400);
+    assert.strictEqual(settlement.autoGisOnP20(), false);
+    const ok = await request(port, 'POST', '/api/config', { settlement: { autoGisOnP20: true } });
+    assert.strictEqual(ok.status, 200);
+    const g1 = await request(port, 'GET', '/api/config');
+    assert.strictEqual(g1.body.settlement.autoGisOnP20, true);
+  } finally {
+    await new Promise((resolve) => ui.close(resolve));
+  }
+});
+
+test('POST /api/push: type=reply 门卫（tsn / functionId / nextState）', async () => {
+  const engine = createEngine({ rules: [], handlers: {} });
+  const calls = [];
+  const ui = createUiServer({ engine, push: (spec) => { calls.push(spec); return { sent: 1 }; } });
+  await new Promise((resolve) => ui.listen(0, resolve));
+  const port = ui.server.address().port;
+  try {
+    for (const body of [{ tsn: '12a4' }, { tsn: '123' }, { functionId: '55' }, { functionId: '' }, { nextState: '1' }]) {
+      const r = await request(port, 'POST', '/api/push', { type: 'reply', ...body });
+      assert.strictEqual(r.status, 400, JSON.stringify(body));
+    }
+    assert.strictEqual(calls.length, 0);
+    const ok = await request(port, 'POST', '/api/push', { type: 'reply' });
+    assert.strictEqual(ok.status, 200);
+    assert.strictEqual(calls.length, 1);
+  } finally {
+    await new Promise((resolve) => ui.close(resolve));
+  }
+});
+
+test('server.js: POST /api/push type=reply 缺省下发 next state 001、屏段 0001+5+000 的类 4 应答', async () => {
+  const capDir = fs.mkdtempSync(path.join(os.tmpdir(), 'ndc-ui-pushreply-'));
+  const app = createApp({ enableTLS: false, captureDir: capDir, rules: [], uiPort: 1 });
+  await new Promise((resolve) => app.server.listen(0, resolve));
+  await new Promise((resolve) => app.ui.listen(0, resolve));
+  const ndcPort = app.server.address().port;
+  const uiPort = app.ui.server.address().port;
+  const client = net.createConnection({ port: ndcPort });
+  await new Promise((resolve, reject) => { client.on('connect', resolve); client.on('error', reject); });
+  const decoder = createDecoder();
+  const pushed = new Promise((resolve) => {
+    client.on('data', (d) => {
+      const frames = decoder.push(d);
+      if (frames.length) resolve(frames[0].toString('latin1'));
+    });
+  });
+  try {
+    const res = await request(uiPort, 'POST', '/api/push', { type: 'reply' });
+    assert.strictEqual(res.status, 200);
+    assert.strictEqual(res.body.sent, 1);
+    const f = (await pushed).split(FS);
+    assert.strictEqual(f[0], '4');
+    assert.strictEqual(f[3], '001');
+    assert.ok(f[5].startsWith('00015000'));
+  } finally {
+    client.destroy();
+    await new Promise((resolve) => app.server.close(resolve));
+    await new Promise((resolve) => app.ui.close(resolve));
+  }
+});
+
+test('publish: RECV 22…F…7A… 帧附 supplyCounters（扩展）', async () => {
+  const engine = createEngine({ rules: [], handlers: {} });
+  const ui = createUiServer({ engine });
+  await new Promise((resolve) => ui.listen(0, resolve));
+  const port = ui.server.address().port;
+  try {
+    const { sse, req } = await openSse(port);
+    const framePromise = sse.next();
+    const raw = ['22', '000', '', 'F', '7A00120001234' + GS + 'B00003'].join(FS);
+    ui.publish('RECV', Buffer.from(raw, 'latin1'), {});
+    const frame = await framePromise;
+    assert.strictEqual(frame.supplyCounters.kind, 'extended');
+    assert.strictEqual(frame.supplyCounters.groups.B.captured, 3);
+    req.destroy();
+  } finally {
+    await new Promise((resolve) => ui.close(resolve));
+  }
+});

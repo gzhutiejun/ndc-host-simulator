@@ -54,3 +54,13 @@ test('settlementGis：缺省返回 GIS 帧，autoGisOnP20:false 返回 null', ()
   assert.strictEqual(makeSettlement().settlementGis({}, null, helpers), '1' + FS + FS + FS + '1');
   assert.strictEqual(makeSettlement({ autoGisOnP20: false }).settlementGis({}, null, helpers), null);
 });
+
+test('autoGisOnP20 运行时切换：false 起 -> 无应答，setAutoGisOnP20(true) 后回 GIS', () => {
+  const h = makeSettlement({ autoGisOnP20: false });
+  const helpers = { applyTemplate: (t) => t.replace(/<FS>/g, FS), ctx: {} };
+  assert.strictEqual(h.autoGisOnP20(), false);
+  assert.strictEqual(h.settlementGis({}, null, helpers), null);
+  h.setAutoGisOnP20(true);
+  assert.strictEqual(h.autoGisOnP20(), true);
+  assert.notStrictEqual(h.settlementGis({}, null, helpers), null);
+});

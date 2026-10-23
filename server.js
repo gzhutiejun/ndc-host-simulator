@@ -13,6 +13,7 @@ const { createLogger } = require('./src/logging');
 const { createUiServer } = require('./src/ui-server');
 const { buildEki } = require('./src/ndc/eki');
 const { buildTr31, DEFAULTS: TR31_DEFAULTS } = require('./src/ndc/tr31');
+const { buildTransactionReply } = require('./src/ndc/transactionReply');
 const { buildTerminalCommand, buildFitDownload, buildDataCommand, buildEmvConfigCommand } = require('./src/push');
 const { loadSequence, isDownloadTrigger, createDownload } = require('./src/ddcDownload');
 const goInService = require('./src/handlers/goInService');
@@ -177,12 +178,22 @@ function createApp(config) {
     const isEmv = spec && spec.type === 'emv';
     const isEki = spec && spec.type === 'eki';
     const isTr31 = spec && spec.type === 'tr31';
+    const isReply = spec && spec.type === 'reply';
     let expectedKvv;
     let header;
     let texts;
     if (isFit) texts = buildFitMessages(spec);
     else if (isData) texts = [buildDataCommand(spec)];
     else if (isEmv) texts = [buildEmvConfigCommand(spec)];
+    else if (isReply) {
+      texts = [buildTransactionReply({
+        luno: spec.luno != null ? spec.luno : '',
+        nextState: spec.nextState != null ? spec.nextState : '001',
+        fieldG: '',
+        screen: (spec.tsn != null ? spec.tsn : '0001') + (spec.functionId != null ? spec.functionId : '5') + '000',
+        printer: spec.printer != null ? spec.printer : '',
+      })];
+    }
     else if (isEki) {
       const eki = buildEki(spec);
       expectedKvv = eki.expectedKvv;
@@ -201,6 +212,7 @@ function createApp(config) {
     if (isFit) meta = { type: 'DataCommand', rule: 'ui:push:fit' };
     else if (isData) meta = { type: 'DataCommand', rule: 'ui:push:data' };
     else if (isEmv) meta = { type: 'EmvConfigCommand', rule: 'ui:push:emv' };
+    else if (isReply) meta = { type: 'TransactionReply', rule: 'ui:push:reply' };
     else if (isEki) meta = { type: 'DataCommand', rule: 'ui:push:eki' };
     else if (isTr31) meta = { type: 'DataCommand', rule: 'ui:push:tr31' };
     let sent = 0;
@@ -248,6 +260,7 @@ function createApp(config) {
     engine,
     library,
     push: pushToActiveSockets,
+    settlement: settlementHandlers,
     ekiMasterKey: (config.eki && config.eki.masterKey) || '',
     ekiKbpk: (config.eki && config.eki.kbpk) || '',
   }) : null;

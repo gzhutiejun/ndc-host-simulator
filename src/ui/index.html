@@ -176,6 +176,15 @@
         </div>
         <div class="hint">对应 Table 10-1 的命令码；1=Go In Service，2=Go Out Of Service。</div>
       </div>
+
+      <div class="control-group">
+        <h2>结算 / Supply 测试</h2>
+        <div class="btn-row">
+          <label><input id="auto-gis" type="checkbox"> 收到 P20 后自动回 Go In Service</label>
+          <button id="push-reply">推交易应答（C03 用例）</button>
+        </div>
+        <div class="hint">关闭自动 GIS 可让终端停在 Supply；推交易应答发一条 next state 001、功能标识 5 的类 4 报文。</div>
+      </div>
     </div>
   </section>
 </main>
@@ -188,6 +197,67 @@
   function encodeVisible(str) {
     return String(str).replace(/[|~^<>]/g, function (ch) { return VISIBLE_TO_CONTROL[ch]; });
   }
+
+  // ---- 供应计数表（基本 / 扩展 7） ----
+  function renderSupplyCounters(sc) {
+    var table = document.createElement('table');
+    table.className = 'lts';
+    function addRow(cells) {
+      var tr = document.createElement('tr');
+      cells.forEach(function (c) {
+        var td = document.createElement('td');
+        td.textContent = String(c);
+        td.style.padding = '0 8px';
+        tr.appendChild(td);
+      });
+      table.appendChild(tr);
+    }
+    if (sc.error) { addRow(['供应计数', sc.error]); return table; }
+    if (sc.kind === 'basic') {
+      addRow(['基本', 'TSN ' + sc.tsn, '累计 ' + sc.accumulated, '吞卡 ' + sc.cardsCaptured]);
+      sc.cassettes.forEach(function (c, i) {
+        addRow(['类型 ' + (i + 1), '箱内 ' + c.notes, '拒钞 ' + c.rejected, '已付 ' + c.dispensed, '上笔 ' + c.last]);
+      });
+      return table;
+    }
+    var g = sc.groups;
+    if (g.A) addRow(['A', 'TSN ' + g.A.tsn, '累计 ' + g.A.accumulated]);
+    if (g.B) addRow(['B', '吞卡 ' + g.B.captured]);
+    if (g.C) g.C.types.forEach(function (t) {
+      addRow(['C 类型 ' + t.type, '箱内 ' + t.notes, '拒钞 ' + t.rejected, '已付 ' + t.dispensed, '上笔 ' + t.last, '已存入 ' + t.deposited]);
+    });
+    if (g.I) g.I.cassettes.forEach(function (u) {
+      addRow(['I 单元 ' + u.type, '箱内 ' + u.notes, u.noteTypes.map(function (n) { return n.id + '×' + n.count; }).join(' ')]);
+    });
+    if (g.J) g.J.bins.forEach(function (b) { addRow(['J 仓 ' + b.bin, '张数 ' + b.count]); });
+    if (g.K) addRow(['K', '退 ' + g.K.refunded, '拒 ' + g.K.rejected, '入 ' + g.K.encashed, '暂 ' + g.K.escrowed]);
+    if (sc.unknownGroups.length) addRow(['未知组', sc.unknownGroups.join(',')]);
+    if (sc.trailingGs) addRow(['末尾带 GS']);
+    sc.errors.forEach(function (e) { addRow(['错误', e]); });
+    return table;
+  }
+
+  // ---- 运行时开关 ----
+  var autoGis = document.getElementById('auto-gis');
+  fetch('/api/config').then(function (r) { return r.json(); }).then(function (c) {
+    autoGis.checked = !!(c.settlement && c.settlement.autoGisOnP20);
+  }).catch(function () {});
+  autoGis.addEventListener('change', function () {
+    fetch('/api/config', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ settlement: { autoGisOnP20: autoGis.checked } }),
+    }).then(function (r) { return r.json(); }).then(function (c) {
+      autoGis.checked = !!(c.settlement && c.settlement.autoGisOnP20);
+    }).catch(function () {});
+  });
+  document.getElementById('push-reply').addEventListener('click', function () {
+    fetch('/api/push', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ type: 'reply' }),
+    }).catch(function () {});
+  });
 
   // ---- 实时流 ----
   var streamLog = document.getElementById('stream-log');
@@ -287,6 +357,9 @@
       else if (k.kind === 'reject') eki.textContent = 'reject ' + k.code;
       else if (k.kind === 'encryptorMacError') eki.textContent = '加密机错误（MAC）';
       row.appendChild(eki);
+    }
+    if (frame.supplyCounters) {
+      row.appendChild(renderSupplyCounters(frame.supplyCounters));
     }
     if (frame.tr31) {
       // 8c-2：主机发出的 TR-31 密钥命令（只读头 16 字符）
