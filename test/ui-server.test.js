@@ -679,6 +679,17 @@ test('GET/POST /api/config: autoGisOnP20 运行时开关，非布尔 400', async
   }
 });
 
+test('GET /api/config: 没接 settlement 句柄 -> 503', async () => {
+  const ui = createUiServer({ engine: createEngine({ rules: [], handlers: {} }) });
+  await new Promise((resolve) => ui.listen(0, resolve));
+  try {
+    const r = await request(ui.server.address().port, 'GET', '/api/config');
+    assert.strictEqual(r.status, 503);
+  } finally {
+    await new Promise((resolve) => ui.close(resolve));
+  }
+});
+
 test('POST /api/push: type=reply 门卫（tsn / functionId / nextState）', async () => {
   const engine = createEngine({ rules: [], handlers: {} });
   const calls = [];

@@ -48,23 +48,36 @@ test('扩展：C 组体长 27 -> errors；末尾 GS -> trailingGs', () => {
   assert.deepStrictEqual(u.unknownGroups, ['Z']);
 });
 
-test('基本格式 112 位解码，111 位报错', () => {
+test('基本格式 112 位按字段主序解码（四类型箱内 / 拒钞 / 已付 / 上笔依次排列），111 位与非数字报错', () => {
   const c = (n) => String(n).padStart(5, '0');
+  // 应用 buildSupplyCountersStatusInfo：g4 四类型箱内、g5 四类型拒钞、g6 四类型已付、g7 四类型上笔，再 g8..g11
+  const notes = [500, 1000, 0, 7];
+  const rejected = [12, 0, 0, 8];
+  const dispensed = [200, 40, 0, 9];
+  const last = [2, 0, 0, 6];
   const info = '2' + '0012' + '0001234'
-    + [[500, 12, 200, 2], [1000, 0, 40, 0], [0, 0, 0, 0], [0, 0, 0, 0]].map((a) => a.map(c).join('')).join('')
-    + c(3) + c(0) + c(0) + c(0);
+    + [notes, rejected, dispensed, last].map((a) => a.map(c).join('')).join('')
+    + c(3) + c(4) + c(5) + c(6);
   assert.strictEqual(info.length, 112);
   const r = parseSupplyCountersStatus(info);
   assert.strictEqual(r.kind, 'basic');
   assert.strictEqual(r.tsn, '0012');
   assert.strictEqual(r.accumulated, 1234);
   assert.deepStrictEqual(r.cassettes[0], { notes: 500, rejected: 12, dispensed: 200, last: 2 });
-  assert.strictEqual(r.cassettes[1].dispensed, 40);
-  assert.strictEqual(r.cardsCaptured, 3);
-  assert.strictEqual(r.envelopes, 0);
+  assert.deepStrictEqual(r.cassettes[1], { notes: 1000, rejected: 0, dispensed: 40, last: 0 });
+  assert.deepStrictEqual(r.cassettes[3], { notes: 7, rejected: 8, dispensed: 9, last: 6 });
+  assert.deepStrictEqual([r.cardsCaptured, r.envelopes, r.camera, r.lastEnvelope], [3, 4, 5, 6]);
   const short = parseSupplyCountersStatus(info.slice(0, 111));
   assert.strictEqual(short.kind, 'basic');
   assert.ok(short.error);
+  assert.ok(parseSupplyCountersStatus(info.slice(0, 50) + 'x' + info.slice(51)).error);
+});
+
+test('扩展：非数字计数字段进 errors，不产生 NaN', () => {
+  const r = parseSupplyCountersStatus('7A0012000123x' + GS + 'B0000y');
+  assert.ok(r.errors.length >= 2);
+  assert.strictEqual(Number.isNaN(r.groups.A.accumulated), false);
+  assert.strictEqual(Number.isNaN(r.groups.B.captured), false);
 });
 
 test('非供应计数首字符 -> undefined', () => {

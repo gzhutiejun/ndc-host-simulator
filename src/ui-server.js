@@ -354,7 +354,11 @@ function createUiServer({ engine, library = [], push, ekiMasterKey = '', ekiKbpk
   }
 
   function serveConfig(res) {
-    sendJson(res, 200, { settlement: { autoGisOnP20: settlement ? settlement.autoGisOnP20() : false } });
+    if (!settlement) {
+      sendJson(res, 503, { error: 'settlement handle not wired up' });
+      return;
+    }
+    sendJson(res, 200, { settlement: { autoGisOnP20: settlement.autoGisOnP20() } });
   }
 
   async function handleConfig(req, res) {

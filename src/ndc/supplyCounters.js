@@ -15,16 +15,16 @@ function parseBasic(info) {
   if (info.length !== BASIC_LENGTH) {
     return { kind: 'basic', error: `basic supply counters must be ${BASIC_LENGTH} chars, got ${info.length}` };
   }
-  const cassettes = [];
-  for (let i = 0; i < 4; i += 1) {
-    const o = 12 + i * 20;
-    cassettes.push({
-      notes: num(info.slice(o, o + 5)),
-      rejected: num(info.slice(o + 5, o + 10)),
-      dispensed: num(info.slice(o + 10, o + 15)),
-      last: num(info.slice(o + 15, o + 20)),
-    });
+  if (!/^\d+$/.test(info.slice(1))) {
+    return { kind: 'basic', error: 'basic supply counters contain non-digit characters' };
   }
+  // 字段为主序（见应用 ndc-supply-counters.ts）：四个类型的箱内、再四个拒钞、再四个已付、再四个上笔。
+  const field = (base) => [0, 1, 2, 3].map((i) => num(info.slice(base + 5 * i, base + 5 * i + 5)));
+  const notes = field(12);
+  const rejected = field(32);
+  const dispensed = field(52);
+  const last = field(72);
+  const cassettes = notes.map((n, i) => ({ notes: n, rejected: rejected[i], dispensed: dispensed[i], last: last[i] }));
   return {
     kind: 'basic',
     tsn: info.slice(1, 5),
@@ -37,7 +37,7 @@ function parseBasic(info) {
   };
 }
 
-function parseI(body, errors) {
+function parseI(body, errors, num) {
   const cassettes = [];
   let p = 0;
   while (p < body.length) {
@@ -64,6 +64,13 @@ function parseExtended(info) {
   const groups = {};
   const unknownGroups = [];
   const errors = [];
+  const num = (str) => {
+    if (!/^\d+$/.test(str)) {
+      errors.push(`non-digit numeric field "${str}"`);
+      return 0;
+    }
+    return parseInt(str, 10);
+  };
   for (const chunk of chunks) {
     if (chunk === '') continue;
     const id = chunk[0];
@@ -94,7 +101,7 @@ function parseExtended(info) {
         break;
       }
       case 'I':
-        groups.I = parseI(body, errors);
+        groups.I = parseI(body, errors, num);
         break;
       case 'J': {
         if (body.length % 6 !== 0) { errors.push(`J: body length ${body.length} is not a multiple of 6`); break; }
