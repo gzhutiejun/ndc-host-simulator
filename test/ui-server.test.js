@@ -576,3 +576,83 @@ test('server.js: POST /api/push type=eki 经活跃连接下发 3 子类 3 命令
     await new Promise((resolve) => app.ui.close(resolve));
   }
 });
+
+test('extractTr31Header：4e/4f/4l 的 000<块> 读头；其它 -> undefined', () => {
+  const { extractTr31Header } = require('../src/ui-server');
+  const blk = 'B0080M3TG00N00004C94C822B6EA2923';
+  assert.deepStrictEqual(extractTr31Header(['3', '000', '000', '4f', '000' + blk]), { version: 'B', usage: 'M3', mode: 'G' });
+  assert.strictEqual(extractTr31Header(['3', '000', '000', '4g', '000' + blk]), undefined);
+  assert.strictEqual(extractTr31Header(['3', '000', '000', '32', '000' + blk]), undefined);
+  assert.strictEqual(extractTr31Header(['3', '000', '000', '4e', 'xyz']), undefined);
+});
+
+test('POST /api/push: type=tr31 透传（kbpk 缺省取配置，再取 masterKey）；坏参数返回 400', async () => {
+  const engine = createEngine({ rules: [], handlers: {} });
+  const calls = [];
+  const kbpk = '33333333333333333333333333333333';
+  const key = '0123456789ABCDEFFEDCBA9876543210';
+  const push = (spec) => { calls.push(spec); return { sent: 1, expectedKvv: '08D7B4', header: 'B0080P0TE00N0000' }; };
+
+  const bare = createUiServer({ engine, push });
+  await new Promise((resolve) => bare.listen(0, resolve));
+  try {
+    const port = bare.server.address().port;
+    const noKbpk = await request(port, 'POST', '/api/push', { type: 'tr31', modifier: 'e', key });
+    assert.strictEqual(noKbpk.status, 400);
+    assert.strictEqual((await request(port, 'POST', '/api/push', { type: 'tr31', modifier: 'g', key, kbpk })).status, 400);
+    assert.strictEqual((await request(port, 'POST', '/api/push', { type: 'tr31', modifier: 'e', key: key.slice(1), kbpk })).status, 400);
+    assert.strictEqual((await request(port, 'POST', '/api/push', { type: 'tr31', modifier: 'e', key, kbpk, version: 'D' })).status, 400);
+    assert.strictEqual(calls.length, 0);
+    const ok = await request(port, 'POST', '/api/push', { type: 'tr31', modifier: 'e', key: key.toLowerCase(), kbpk: kbpk.toLowerCase() });
+    assert.strictEqual(ok.status, 200);
+    assert.strictEqual(ok.body.expectedKvv, '08D7B4');
+  } finally {
+    await new Promise((resolve) => bare.close(resolve));
+  }
+
+  const withMaster = createUiServer({ engine, push, ekiMasterKey: kbpk });
+  await new Promise((resolve) => withMaster.listen(0, resolve));
+  try {
+    const port = withMaster.server.address().port;
+    assert.strictEqual((await request(port, 'POST', '/api/push', { type: 'tr31', modifier: 'f', key })).status, 200);
+    assert.strictEqual(calls[1].kbpk, kbpk);
+  } finally {
+    await new Promise((resolve) => withMaster.close(resolve));
+  }
+});
+
+test('server.js: POST /api/push type=tr31 下发 4e/4f/4l 帧，header 等于块前 16 字符，缺省用途 / 模式按修饰符', async () => {
+  const capDir = fs.mkdtempSync(path.join(os.tmpdir(), 'ndc-ui-pushtr31-'));
+  const kbpk = '33'.repeat(16);
+  const app = createApp({ enableTLS: false, captureDir: capDir, rules: [], uiPort: 1, eki: { kbpk } });
+  await new Promise((resolve) => app.server.listen(0, resolve));
+  await new Promise((resolve) => app.ui.listen(0, resolve));
+  const ndcPort = app.server.address().port;
+  const uiPort = app.ui.server.address().port;
+  const client = net.createConnection({ port: ndcPort });
+  await new Promise((resolve, reject) => { client.on('connect', resolve); client.on('error', reject); });
+  const decoder = createDecoder();
+  const frames = [];
+  client.on('data', (d) => { for (const f of decoder.push(d)) frames.push(f.toString('latin1')); });
+  try {
+    const expectHeader = { e: 'B0080P0TE00N0000', f: 'B0080M3TG00N0000', l: 'B0080M3TC00N0000' };
+    for (const modifier of ['e', 'f', 'l']) {
+      const res = await request(uiPort, 'POST', '/api/push', { type: 'tr31', modifier, key: 'FEDCBA987654321089ABCDEF01234567', luno: '000', msn: '000' });
+      assert.strictEqual(res.status, 200);
+      assert.strictEqual(res.body.header, expectHeader[modifier]);
+      assert.strictEqual(res.body.expectedKvv, '2B9517');
+    }
+    for (let i = 0; i < 50 && frames.length < 3; i += 1) await new Promise((r) => setTimeout(r, 10));
+    assert.strictEqual(frames.length, 3);
+    ['e', 'f', 'l'].forEach((m, i) => {
+      const fields = frames[i].split(FS);
+      assert.deepStrictEqual(fields.slice(0, 4), ['3', '000', '000', `4${m}`]);
+      assert.strictEqual(fields[4].slice(0, 3), '000');
+      assert.strictEqual(fields[4].slice(3, 19), expectHeader[m]);
+    });
+  } finally {
+    client.destroy();
+    await new Promise((resolve) => app.server.close(resolve));
+    await new Promise((resolve) => app.ui.close(resolve));
+  }
+});

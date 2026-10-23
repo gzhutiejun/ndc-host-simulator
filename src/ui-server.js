@@ -25,6 +25,7 @@ const { describe } = require('./message-library');
 const { decodeWire } = require('./framing');
 const { extractLts, extractCam } = require('./ndc/transactionRequest');
 const { HEX_32, HEX_16_OR_32 } = require('./ndc/eki');
+const { VERSIONS: TR31_VERSIONS } = require('./ndc/tr31');
 const { FS, GS, RS, SO, SI } = require('./constants');
 
 const INDEX_HTML_PATH = path.join(__dirname, 'ui', 'index.html');
@@ -106,6 +107,17 @@ function extractEkiStatus(fields) {
   return undefined;
 }
 
+/**
+ * 8c-2：主机下发的 TR-31 密钥命令（3 … 4e|4f|4l FS 000<块>）。入参是原始字段，只读头 16 字符。
+ * 不是 -> undefined。
+ */
+function extractTr31Header(fields) {
+  if (fields[0] !== '3' || !/^4[efl]$/.test(fields[3] || '')) return undefined;
+  const m = /^000([ABCD])(\d{4})([0-9A-Z]{2})([0-9A-Z])([0-9A-Z])/.exec(fields[4] || '');
+  if (!m) return undefined;
+  return { version: m[1], usage: m[3], mode: m[5] };
+}
+
 function sendJson(res, status, body) {
   const data = JSON.stringify(body);
   res.writeHead(status, {
@@ -144,7 +156,7 @@ function readJsonBody(req) {
  * @param {(spec: object) => {sent: number}} [opts.push] 立刻下发终端命令的回调，由 server.js
  *   注入（它才知道当前有哪些活跃 socket）；不传时 POST /api/push 返回 503。
  */
-function createUiServer({ engine, library = [], push, ekiMasterKey = '' } = {}) {
+function createUiServer({ engine, library = [], push, ekiMasterKey = '', ekiKbpk = '' } = {}) {
   if (!engine || typeof engine.setNextResponse !== 'function') {
     throw new Error('createUiServer: engine with setNextResponse(...) is required');
   }
@@ -173,6 +185,7 @@ function createUiServer({ engine, library = [], push, ekiMasterKey = '' } = {}) 
     const cam = rawFields ? extractCam(rawFields) : undefined;
     const tails = rawFields ? extractStatusTails(rawFields) : undefined;
     const eki = rawFields ? extractEkiStatus(rawFields) : undefined;
+    const tr31 = direction === 'SEND' ? extractTr31Header(decodeWire(buf).split(FS)) : undefined;
     const frame = {
       direction, // 'RECV' | 'SEND'
       bytes: buf.length,
@@ -184,6 +197,7 @@ function createUiServer({ engine, library = [], push, ekiMasterKey = '' } = {}) 
       cam: cam || null,
       tails: tails || null,
       eki: eki || null,
+      tr31: tr31 || null,
       ts: Date.now(),
     };
     const line = `data: ${JSON.stringify(frame)}\n\n`;
@@ -258,9 +272,10 @@ function createUiServer({ engine, library = [], push, ekiMasterKey = '' } = {}) 
     //   type='data'                —— 通用数据命令，报文类 3，必须有 identifier（报文标识）
     //   type='emv'                 —— EMV 配置命令，报文类 8，必须有 subclass
     //   type='eki'                 —— 主机密钥命令，报文类 3 子类 3/4，masterKey 缺省取配置 eki.masterKey
+    //   type='tr31'                —— TR-31 密钥命令 4e/4f/4l，kbpk 缺省取配置 eki.kbpk，再缺省 eki.masterKey
     const type = body && body.type != null ? body.type : 'command';
-    if (type !== 'command' && type !== 'fit' && type !== 'data' && type !== 'emv' && type !== 'eki') {
-      sendJson(res, 400, { error: `push: unknown type "${type}" (expected "command", "fit", "data", "emv" or "eki")` });
+    if (type !== 'command' && type !== 'fit' && type !== 'data' && type !== 'emv' && type !== 'eki' && type !== 'tr31') {
+      sendJson(res, 400, { error: `push: unknown type "${type}" (expected "command", "fit", "data", "emv", "eki" or "tr31")` });
       return;
     }
     if (type === 'data' && (!body || typeof body.identifier !== 'string' || body.identifier === '')) {
@@ -278,6 +293,26 @@ function createUiServer({ engine, library = [], push, ekiMasterKey = '' } = {}) 
         return;
       }
       body = { ...body, masterKey };
+    }
+    if (type === 'tr31') {
+      if (!['e', 'f', 'l'].includes(body.modifier)) {
+        sendJson(res, 400, { error: 'push type=tr31 requires modifier e, f or l' });
+        return;
+      }
+      const kbpk = body.kbpk != null ? body.kbpk : (ekiKbpk || ekiMasterKey);
+      if (typeof kbpk !== 'string' || !HEX_32.test(kbpk)) {
+        sendJson(res, 400, { error: 'push type=tr31 requires kbpk (32 hex) in the body or config eki.kbpk / eki.masterKey' });
+        return;
+      }
+      if (typeof body.key !== 'string' || !HEX_32.test(body.key)) {
+        sendJson(res, 400, { error: 'push type=tr31 requires key (32 hex)' });
+        return;
+      }
+      if (body.version != null && !TR31_VERSIONS.includes(body.version)) {
+        sendJson(res, 400, { error: 'push type=tr31 version must be A, B or C' });
+        return;
+      }
+      body = { ...body, kbpk };
     }
     if (type === 'emv' && (!body || typeof body.subclass !== 'string' || body.subclass === '')) {
       sendJson(res, 400, { error: 'push type=emv requires a non-empty "subclass"' });
@@ -321,4 +356,4 @@ function createUiServer({ engine, library = [], push, ekiMasterKey = '' } = {}) 
   };
 }
 
-module.exports = { createUiServer, toVisible, decodeFrame, extractStatusTails, extractEkiStatus };
+module.exports = { createUiServer, toVisible, decodeFrame, extractStatusTails, extractEkiStatus, extractTr31Header };

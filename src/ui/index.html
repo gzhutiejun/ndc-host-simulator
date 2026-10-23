@@ -288,6 +288,13 @@
       else if (k.kind === 'encryptorMacError') eki.textContent = '加密机错误（MAC）';
       row.appendChild(eki);
     }
+    if (frame.tr31) {
+      // 8c-2：主机发出的 TR-31 密钥命令（只读头 16 字符）
+      var tr = document.createElement('span');
+      tr.className = 'lts';
+      tr.textContent = 'TR-31 ' + frame.tr31.usage + '/' + frame.tr31.mode + ' 版本 ' + frame.tr31.version;
+      row.appendChild(tr);
+    }
     streamLog.appendChild(row);
 
     frameCount += 1;

@@ -4,7 +4,7 @@
   "enableTLS": false,
   "transmissionCode": "ASCII",
   "responseDelayMs": 0,
-  "eki": { "masterKey": "" },
+  "eki": { "masterKey": "", "kbpk": "" },
   "uiPort": 8080,
   "pushOnConnect": [],
   "fitDownload": {

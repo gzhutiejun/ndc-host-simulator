@@ -12,6 +12,7 @@ const { parseLibrary } = require('./src/message-library');
 const { createLogger } = require('./src/logging');
 const { createUiServer } = require('./src/ui-server');
 const { buildEki } = require('./src/ndc/eki');
+const { buildTr31, DEFAULTS: TR31_DEFAULTS } = require('./src/ndc/tr31');
 const { buildTerminalCommand, buildFitDownload, buildDataCommand, buildEmvConfigCommand } = require('./src/push');
 const { loadSequence, isDownloadTrigger, createDownload } = require('./src/ddcDownload');
 const goInService = require('./src/handlers/goInService');
@@ -175,7 +176,9 @@ function createApp(config) {
     const isData = spec && spec.type === 'data';
     const isEmv = spec && spec.type === 'emv';
     const isEki = spec && spec.type === 'eki';
+    const isTr31 = spec && spec.type === 'tr31';
     let expectedKvv;
+    let header;
     let texts;
     if (isFit) texts = buildFitMessages(spec);
     else if (isData) texts = [buildDataCommand(spec)];
@@ -184,18 +187,29 @@ function createApp(config) {
       const eki = buildEki(spec);
       expectedKvv = eki.expectedKvv;
       texts = [buildDataCommand({ identifier: eki.identifier, data: eki.data, luno: spec.luno, msn: spec.msn })];
+    } else if (isTr31) {
+      const d = TR31_DEFAULTS[spec.modifier];
+      if (!d) throw new Error('tr31: modifier must be e, f or l');
+      const tr31 = buildTr31({
+        kbpk: spec.kbpk, key: spec.key, usage: spec.usage || d.usage, mode: spec.mode || d.mode, version: spec.version || 'B', pad: spec.pad,
+      });
+      expectedKvv = tr31.kcv;
+      header = tr31.block.slice(0, 16);
+      texts = [buildDataCommand({ identifier: `4${spec.modifier}`, data: `000${tr31.block}`, luno: spec.luno, msn: spec.msn })];
     } else texts = [buildTerminalCommand(spec)];
     let meta = { type: 'TerminalCommand', rule: 'ui:push' };
     if (isFit) meta = { type: 'DataCommand', rule: 'ui:push:fit' };
     else if (isData) meta = { type: 'DataCommand', rule: 'ui:push:data' };
     else if (isEmv) meta = { type: 'EmvConfigCommand', rule: 'ui:push:emv' };
     else if (isEki) meta = { type: 'DataCommand', rule: 'ui:push:eki' };
+    else if (isTr31) meta = { type: 'DataCommand', rule: 'ui:push:tr31' };
     let sent = 0;
     for (const socket of activeSockets) {
       if (socket.destroyed) continue;
       for (const text of texts) sendFrame(socket, text, meta);
       sent += 1;
     }
+    if (isTr31) return { sent, expectedKvv, header };
     return isEki ? { sent, expectedKvv } : { sent };
   }
 
@@ -235,6 +249,7 @@ function createApp(config) {
     library,
     push: pushToActiveSockets,
     ekiMasterKey: (config.eki && config.eki.masterKey) || '',
+    ekiKbpk: (config.eki && config.eki.kbpk) || '',
   }) : null;
 
   const server = createTransport(config, (socket) => {
