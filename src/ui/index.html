@@ -237,6 +237,29 @@
     return table;
   }
 
+  // ---- 传感器状态（P3 / P1 / P2x 与 74 的 K 段）一行徽标 ----
+  function renderSensors(sn, tamper) {
+    var span = document.createElement('span');
+    span.className = 'lts';
+    function yn(v) { return v ? '1' : '0'; }
+    function line(a, b) {
+      return '监督 ' + yn(a.supervisor) + ' 门 ' + yn(a.door) + ' 防撬 ' + yn(a.enclosure) + ' 静默 ' + yn(a.silentSignal) +
+        ' 振动/热 ' + yn(a.vibrationHeat) + ' | 卡仓 ' + yn(b.cardBin) + ' 废钞箱 ' + yn(b.rejectBin) +
+        ' 钞箱 ' + b.cassettes.map(yn).join('');
+    }
+    if (tamper) {
+      span.textContent = tamper.errors.length ? '74 传感器 错误: ' + tamper.errors.join('; ')
+        : '74 传感器 ' + line(tamper.a, tamper.b);
+    } else if (sn.errors && sn.errors.length) {
+      span.textContent = '传感器 错误: ' + sn.errors.join('; ');
+    } else if (sn.kind === 'mode') {
+      span.textContent = 'Supervisor 模式 ' + (sn.entered ? '进入' : '退出') + (sn.aer ? ' (AER)' : '');
+    } else {
+      span.textContent = '传感器 ' + sn.kind + ' ' + line(sn, sn);
+    }
+    return span;
+  }
+
   // ---- 运行时开关 ----
   var autoGis = document.getElementById('auto-gis');
   fetch('/api/config').then(function (r) { return r.json(); }).then(function (c) {
@@ -360,6 +383,9 @@
     }
     if (frame.supplyCounters) {
       row.appendChild(renderSupplyCounters(frame.supplyCounters));
+    }
+    if (frame.sensors || frame.tamperSensor) {
+      row.appendChild(renderSensors(frame.sensors, frame.tamperSensor));
     }
     if (frame.tr31) {
       // 8c-2：主机发出的 TR-31 密钥命令（只读头 16 字符）

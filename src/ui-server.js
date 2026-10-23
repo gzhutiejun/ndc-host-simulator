@@ -30,6 +30,7 @@ const { HEX_32, HEX_16_OR_32 } = require('./ndc/eki');
 const { VERSIONS: TR31_VERSIONS } = require('./ndc/tr31');
 const { FS, GS, RS, SO, SI } = require('./constants');
 const { parseSupplyCountersStatus } = require('./ndc/supplyCounters');
+const { parseSensorsStatus, parseTamperSensorStatus } = require('./ndc/sensors');
 const { buildTransactionReply } = require('./ndc/transactionReply');
 
 const INDEX_HTML_PATH = path.join(__dirname, 'ui', 'index.html');
@@ -192,6 +193,12 @@ function createUiServer({ engine, library = [], push, ekiMasterKey = '', ekiKbpk
     const supplyCounters = rawFields && rawFields[0] === '22' && rawFields[3] === 'F'
       ? parseSupplyCountersStatus(rawFields[4] || '')
       : undefined;
+    const sensors = rawFields && rawFields[0] === '12' && rawFields[3] && rawFields[3][0] === 'P'
+      ? parseSensorsStatus(rawFields[3])
+      : undefined;
+    const tamperSensor = rawFields && rawFields[0] === '22' && rawFields[3] === 'F' && rawFields[4] && rawFields[4][0] === 'K'
+      ? parseTamperSensorStatus(rawFields.slice(4))
+      : undefined;
     const tr31 = direction === 'SEND' ? extractTr31Header(decodeWire(buf).split(FS)) : undefined;
     const frame = {
       direction, // 'RECV' | 'SEND'
@@ -205,6 +212,8 @@ function createUiServer({ engine, library = [], push, ekiMasterKey = '', ekiKbpk
       tails: tails || null,
       eki: eki || null,
       supplyCounters: supplyCounters || null,
+      sensors: sensors || null,
+      tamperSensor: tamperSensor || null,
       tr31: tr31 || null,
       ts: Date.now(),
     };

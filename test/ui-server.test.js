@@ -759,3 +759,40 @@ test('publish: RECV 22…F…7A… 帧附 supplyCounters（扩展）', async () 
     await new Promise((resolve) => ui.close(resolve));
   }
 });
+
+async function publishedFrame(raw) {
+  const engine = createEngine({ rules: [], handlers: {} });
+  const ui = createUiServer({ engine });
+  await new Promise((resolve) => ui.listen(0, resolve));
+  const port = ui.server.address().port;
+  try {
+    const { sse, req } = await openSse(port);
+    const framePromise = sse.next();
+    ui.publish('RECV', Buffer.from(raw, 'latin1'), {});
+    const frame = await framePromise;
+    req.destroy();
+    return frame;
+  } finally {
+    await new Promise((resolve) => ui.close(resolve));
+  }
+}
+
+test('publish: RECV 12…P3… 帧附 sensors', async () => {
+  const frame = await publishedFrame(['12', '000', '', 'P3001000111111'].join(FS));
+  assert.strictEqual(frame.sensors.kind, 'alarm');
+  assert.strictEqual(frame.sensors.door, true);
+  assert.strictEqual(frame.tamperSensor, null);
+});
+
+test('publish: RECV 12…P21 帧附 sensors（模式）', async () => {
+  const frame = await publishedFrame(['12', '000', '', 'P21'].join(FS));
+  assert.strictEqual(frame.sensors.kind, 'mode');
+  assert.strictEqual(frame.sensors.entered, true);
+});
+
+test('publish: RECV 22…F…K 帧附 tamperSensor', async () => {
+  const frame = await publishedFrame(['22', '000', '', 'F', 'KA00000', 'B0111111000000'].join(FS));
+  assert.strictEqual(frame.tamperSensor.b.cardBin, true);
+  assert.deepStrictEqual(frame.tamperSensor.errors, []);
+  assert.strictEqual(frame.sensors, null);
+});
