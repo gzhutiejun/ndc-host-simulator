@@ -72,6 +72,9 @@ test('parseTamperSensorStatus：supervisor + 门开；C 段原文；坏格式', 
   assert.strictEqual(r.a.supervisor, true);
   assert.strictEqual(r.a.door, true);
   assert.strictEqual(r.c, 'C12');
-  assert.ok(parseTamperSensorStatus(['KA00000']).errors.length > 0);
+  const noB = parseTamperSensorStatus(['KA00000']);
+  assert.deepEqual(noB.errors, []);
+  assert.equal(noB.b, undefined);
+  assert.ok(parseTamperSensorStatus(['KA00000', 'B01']).errors.length > 0);
   assert.ok(parseTamperSensorStatus(['KA0000', 'B0111111000000']).errors.length > 0);
 });

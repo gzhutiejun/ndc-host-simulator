@@ -48,7 +48,9 @@ function parseTamperSensorStatus(fields) {
     const x = (i) => af[2 + i] === '1';
     out.a = { supervisor: x(0), vibrationHeat: x(1), door: x(2), silentSignal: x(3), enclosure: x(4) };
   }
-  if (!bf || !/^B[01]{13}$/.test(bf)) {
+  if (bf === undefined) {
+    // B 段可选：开关关时 74 回 KA00000（无 B 段）。
+  } else if (!/^B[01]{13}$/.test(bf)) {
     errors.push('B segment must be "B" + 13 chars of 0/1');
   } else {
     const x = (i) => bf[1 + i] === '1';
