@@ -27,6 +27,7 @@ const makeReplyFee = require('./src/handlers/replyFee');
 const makeDigCReply = require('./src/handlers/digCReply');
 const { augmentCam } = require('./src/ndc/camAugment');
 const makeOarSelection = require('./src/handlers/oarSelection');
+const makeGenericSelection = require('./src/handlers/genericSelection');
 const makeDdcPinValidation = require('./src/handlers/ddcPinValidation');
 const makeDdcWithdrawalStage1 = require('./src/handlers/ddcWithdrawalStage1');
 const makeDdcWithdrawalStage2 = require('./src/handlers/ddcWithdrawalStage2');
@@ -89,6 +90,8 @@ function createApp(config) {
     // 同样默认关闭：enabled 不为 true 时恒返回 null。
     replyFee: makeReplyFee(config.replyFee || {}),
     oarSelection: makeOarSelection(config.oarSelection || {}),
+    // N-13：ITR / 交易应答 071 的 CONDITIONAL 通用选择（缺省关）。
+    genericSelection: makeGenericSelection(config.genericSelection || {}),
     // 8b：DIG c 后回新应答（默认关）；cam 段另由 augmentCam 给交易应答补 CAM。
     digCReply: makeDigCReply((config.cam || {}).digCReply || {}),
     // CUBC/DDC 方言：主机 PIN 验证（HHH）。跟其它 handler 一样，注册只是让它**可以**被

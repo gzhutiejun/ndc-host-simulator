@@ -24,6 +24,28 @@ for (const file of ['config.json', 'config-ndc-vm.json']) {
       client.on('error', reject);
     });
   }
+  // 会话随连接走：跟进要在同一条连接上发，存底才拿得到。每帧等一条应答（超时记 null）再发下一帧。
+  function sendMany(port, texts, timeoutMs = 400) {
+    return new Promise((resolve, reject) => {
+      const dec = createDecoder();
+      const replies = [];
+      let timer = null;
+      const client = net.createConnection({ port }, () => next());
+      function next() {
+        if (replies.length === texts.length) { client.end(); resolve(replies); return; }
+        client.write(encodeLength(Buffer.from(texts[replies.length], 'latin1')));
+        timer = setTimeout(() => { replies.push(null); next(); }, timeoutMs);
+      }
+      client.on('data', (d) => {
+        for (const frame of dec.push(d)) {
+          clearTimeout(timer);
+          replies.push(frame.toString('latin1'));
+          next();
+        }
+      });
+      client.on('error', reject);
+    });
+  }
   async function withApp(overrides, fn) {
     const config = {
       ...baseConfig, ...overrides, port: 0, uiPort: 0, pushOnConnect: [],
@@ -37,14 +59,17 @@ for (const file of ['config.json', 'config-ndc-vm.json']) {
     try { await fn(app.server.address().port); } finally { await new Promise((r) => app.server.close(r)); }
   }
   const req = (opcode, bufferB = '') => ['11', '000', '', '', '17', ';X=X?', '', opcode, '00010000', '', bufferB, ''].join(FS);
+  // ATM 剥过字段的跟进：generic 清段 5–9，oar 另清段 11。
+  const stripped = (bufferB, mcn = '18') => ['11', '000', '', '', mcn, '', '', '', '', '', bufferB, ''].join(FS);
 
   test(`${file}: 规则在 settlement-request 之后、opcode-library 之前，且两个场景缺省关闭`, () => {
     const names = baseConfig.rules.map((r) => r.name);
     const s = names.indexOf('settlement-request');
     const lib = names.indexOf('opcode-library');
-    assert.deepStrictEqual(names.slice(s + 1, lib), ['reply-fee', 'oar-selection']);
+    assert.deepStrictEqual(names.slice(s + 1, lib), ['reply-fee', 'oar-selection', 'generic-selection']);
     assert.strictEqual(baseConfig.replyFee.enabled, false);
     assert.strictEqual(baseConfig.oarSelection.enabled, false);
+    assert.strictEqual(baseConfig.genericSelection.enabled, false);
   });
 
   test(`${file}: 缺省关闭时取款请求照旧落到后面的规则（不被 replyFee / oarSelection 截走）`, { timeout: 5000 }, async () => {
@@ -78,6 +103,24 @@ for (const file of ['config.json', 'config-ndc-vm.json']) {
       const cancelled = (await send(port, req('A A  A A', 'E'))).split(FS);
       assert.strictEqual(cancelled[0], '4');
       assert.strictEqual(cancelled[3], '048');
+    });
+  });
+
+  test(`${file}: genericSelection 打开（itr）：首条回 ITR，剥过的跟进（B=A）落到后面的规则拿到取款应答（类 4，非 ITR）`, { timeout: 5000 }, async () => {
+    await withApp({ genericSelection: { ...baseConfig.genericSelection, enabled: true } }, async (port) => {
+      const [itr, reply] = await sendMany(port, [req('A A  A A'), stripped('A')]);
+      const f = itr.split(FS);
+      assert.strictEqual(f[0], '3');
+      assert.ok(f[5].startsWith('CONDITIONAL=LITERAL;'));
+      assert.ok(reply, '跟进要有应答');
+      assert.strictEqual(reply.split(FS)[0], '4');
+    });
+  });
+
+  test(`${file}: genericSelection 打开（itr）：剥过的跟进 B=E 回取消应答`, { timeout: 5000 }, async () => {
+    await withApp({ genericSelection: { ...baseConfig.genericSelection, enabled: true } }, async (port) => {
+      const [, cancel] = await sendMany(port, [req('A A  A A'), stripped('E')]);
+      assert.strictEqual(cancel.split(FS)[3], '048');
     });
   });
 }

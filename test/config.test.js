@@ -11,6 +11,7 @@ const makeHostConfirmation = require('../src/handlers/hostConfirmation');
 const makeGeneric = require('../src/handlers/generic');
 const makeReplyFee = require('../src/handlers/replyFee');
 const makeOarSelection = require('../src/handlers/oarSelection');
+const makeGenericSelection = require('../src/handlers/genericSelection');
 const { FS } = require('../src/constants');
 
 const cfg = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'config.json'), 'utf8'));
@@ -25,6 +26,7 @@ const handlers = {
   // 出厂 enabled:false，恒返回 null，规则引擎照常落到后面的 libraryKey 规则。
   replyFee: makeReplyFee(cfg.replyFee || {}),
   oarSelection: makeOarSelection(cfg.oarSelection || {}),
+  genericSelection: makeGenericSelection(cfg.genericSelection || {}),
   generic: makeGeneric(cfg.generic || {}),
   // familyD/familyI 在 server.js 里就是同一个 makeGeneric 的两个实例，这里照搬，
   // 好让"DG 规则不该吃掉整个 D 族"这类护栏用例走得到真正的 D 族路径。

@@ -84,3 +84,7 @@ module.exports = function makeOarSelection(cfg = {}) {
     });
   };
 };
+
+module.exports.FDK_BIT = FDK_BIT;
+module.exports.isDeposit = isDeposit;
+module.exports.isPinChange = isPinChange;

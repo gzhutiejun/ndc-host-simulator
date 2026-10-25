@@ -61,6 +61,15 @@
       "handler": "oarSelection"
     },
     {
+      "name": "generic-selection",
+      "_comment": "CONDITIONAL 通用选择（N-13）：首条请求回 ITR 或交易应答 NS 071（genericSelection.path），剥字段的跟进 B=E 回取消应答，其余补回段 5–9 放行。缺省关（genericSelection.enabled）；不要与 reply-fee / oar-selection 同时开。",
+      "match": {
+        "messageClass": "1",
+        "subClass": "1"
+      },
+      "handler": "genericSelection"
+    },
+    {
       "name": "opcode-library",
       "match": {
         "messageClass": "1",
@@ -350,5 +359,26 @@
     ],
     "direction": "auto",
     "includePinChange": false
+  },
+  "genericSelection": {
+    "enabled": false,
+    "path": "itr",
+    "nextState": "071",
+    "conditional": "LITERAL",
+    "message": "Opt in?",
+    "buttons": [
+      {
+        "letter": "A",
+        "text": "Yes"
+      },
+      {
+        "letter": "B",
+        "text": "No"
+      }
+    ],
+    "screenTimer": 30,
+    "cancelNextState": "048",
+    "includePinChange": false,
+    "includeDeposit": false
   }
 }
