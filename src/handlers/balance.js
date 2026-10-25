@@ -3,7 +3,7 @@ const { extractRequest } = require('../ndc/transactionRequest');
 const { applyReceipt, fmtDate, fmtTime, buildCam } = require('../ndc/receipt');
 
 module.exports = function makeBalance(cfg = {}) {
-  const nextState = cfg.nextState != null ? cfg.nextState : '074';
+  const nextState = cfg.nextState != null ? cfg.nextState : '001';
   const amount = cfg.amount != null ? cfg.amount : '5000.00';
   const returnCard = cfg.returnCard != null ? cfg.returnCard : '0';
   const printerFlag = cfg.printerFlag != null ? cfg.printerFlag : '1';

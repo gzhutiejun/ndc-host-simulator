@@ -598,7 +598,7 @@
     }
   },
   "balance": {
-    "nextState": "074",
+    "nextState": "001",
     "amount": "5000.00",
     "returnCard": "0",
     "printerFlag": "1",
