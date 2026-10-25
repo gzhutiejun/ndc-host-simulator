@@ -123,4 +123,18 @@ for (const file of ['config.json', 'config-ndc-vm.json']) {
       assert.strictEqual(cancel.split(FS)[3], '048');
     });
   });
+
+  test(`${file}: oarSelection reply 模式：首条回类 4 NS 071，剥过的跟进 B=1 拿到取款应答`, { timeout: 5000 }, async () => {
+    await withApp({ oarSelection: { ...baseConfig.oarSelection, enabled: true, path: 'reply' } }, async (port) => {
+      const [first, reply] = await sendMany(port, [req('A A  A A'), stripped('1')]);
+      const f = first.split(FS);
+      assert.strictEqual(f[0], '4');
+      assert.strictEqual(f[3], '071');
+      assert.ok(f[5].includes(';Account1Number='));
+      assert.ok(reply, '跟进要有应答');
+      const r = reply.split(FS);
+      assert.strictEqual(r[0], '4');
+      assert.ok(!['071', '073', '048'].includes(r[3]), `NS ${r[3]}`);
+    });
+  });
 }

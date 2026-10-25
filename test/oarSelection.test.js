@@ -82,3 +82,80 @@ test('oarSelection: 改密 opcode 缺省不触发，includePinChange 才触发',
   assert.strictEqual(makeOar(ON)(req(PIN_CHANGE), {}), null);
   assert.ok(makeOar({ ...ON, includePinChange: true })(req(PIN_CHANGE), {}));
 });
+
+// ---- path: "reply"（交易应答 NS 071 / 073）----
+/** ATM 的 OAR 跟进：段 5–9 与 11 清空，Buffer B = 账户键。 */
+function stripped(bufferB, mcn = '4') {
+  const fields = ['11', '000', '', '', '1' + mcn, '', '', '', '', '', bufferB, ''];
+  return parse(encodeText(fields.join(FS)));
+}
+function reqWithC(opcode, mcn = '3') {
+  const fields = ['11', '000', '', '', '1' + mcn, ';X=X?', '', opcode, '00010000', '', '', 'BUFC'];
+  return parse(encodeText(fields.join(FS)));
+}
+const REPLY = { ...ON, path: 'reply' };
+
+test('oarSelection reply: 首条取款 -> 类 4，NS 071，FID 5 屏 Account<n> 键', () => {
+  const f = makeOar(REPLY)(req(WITHDRAW, '', '6'), {}).split(FS);
+  assert.strictEqual(f[0], '4');
+  assert.strictEqual(f[3], '071');
+  assert.strictEqual(f[5][4], '5');
+  assert.ok(f[5].includes(';Account1Number=1234567890;Account1Name=SAVINGS;Account2Number=2234567890;Account2Name=CHEQUE;'));
+  assert.strictEqual(f[6], '60');
+});
+
+test('oarSelection reply: direction to -> 073；auto 下转账 073、取款 071；NS 可配', () => {
+  assert.strictEqual(makeOar({ ...REPLY, direction: 'to' })(req(WITHDRAW), {}).split(FS)[3], '073');
+  assert.strictEqual(makeOar({ ...REPLY, direction: 'auto' })(req(TRANSFER), {}).split(FS)[3], '073');
+  assert.strictEqual(makeOar({ ...REPLY, direction: 'auto' })(req(WITHDRAW), {}).split(FS)[3], '071');
+  assert.strictEqual(makeOar({ ...REPLY, fromNextState: '072' })(req(WITHDRAW), {}).split(FS)[3], '072');
+});
+
+test('oarSelection reply: 账户上限 10', () => {
+  const accounts = Array.from({ length: 12 }, (_, i) => ({ number: String(i + 1), name: 'N' + (i + 1) }));
+  const screen = makeOar({ ...REPLY, accounts })(req(WITHDRAW), {}).split(FS)[5];
+  assert.ok(screen.includes('Account10Number=10;'));
+  assert.ok(!screen.includes('Account11Number'));
+});
+
+test('oarSelection reply: 跟进 B=2 -> null，段 5–9 与 11 补回', () => {
+  const h = makeOar(REPLY);
+  const session = {};
+  h(reqWithC(WITHDRAW), session);
+  const parsed = stripped('2');
+  assert.strictEqual(h(parsed, session), null);
+  assert.strictEqual(parsed.fields[7], WITHDRAW);
+  assert.strictEqual(parsed.fields[8], '00010000');
+  assert.strictEqual(parsed.fields[11], 'BUFC');
+  assert.strictEqual(parsed.fields[10], '2');
+});
+
+test('oarSelection reply: 跟进 B=10 也放行', () => {
+  const h = makeOar(REPLY);
+  const session = {};
+  h(req(WITHDRAW), session);
+  assert.strictEqual(h(stripped('10'), session), null);
+});
+
+test('oarSelection reply: 跟进 E -> 取消应答 NS 048；其余键也取消，不落到批准', () => {
+  const h = makeOar(REPLY);
+  const s1 = {};
+  h(req(WITHDRAW), s1);
+  const f = h(stripped('E', '5'), s1).split(FS);
+  assert.strictEqual(f[0], '4');
+  assert.strictEqual(f[3], '048');
+  assert.ok(f[6].includes('TRANSACTION CANCELLED'));
+  assert.strictEqual(s1.hostSelectionOriginal, undefined);
+  for (const key of ['', 'A', '11']) {
+    const s = {};
+    h(req(WITHDRAW), s);
+    assert.strictEqual(h(stripped(key), s).split(FS)[3], '048', `key ${JSON.stringify(key)}`);
+  }
+});
+
+test('oarSelection reply: 存款 / 改密 include 开关同 ITR 模式', () => {
+  assert.strictEqual(makeOar(REPLY)(req('BB  A A '), {}), null);
+  assert.strictEqual(makeOar({ ...REPLY, includeDeposit: true })(req('BB  A A '), {}).split(FS)[3], '071');
+  assert.strictEqual(makeOar(REPLY)(req(PIN_CHANGE), {}), null);
+  assert.ok(makeOar({ ...REPLY, includePinChange: true })(req(PIN_CHANGE), {}));
+});

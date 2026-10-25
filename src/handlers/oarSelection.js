@@ -1,5 +1,8 @@
 const { buildInteractiveResponse } = require('../ndc/interactiveResponse');
-const { buildCancelReply } = require('./replyFee');
+const { buildTransactionReply } = require('../ndc/transactionReply');
+const { extractRequest } = require('../ndc/transactionRequest');
+const { buildCancelReply, buildScreen } = require('./replyFee');
+const { rememberOriginal, isStrippedFollowUp, rehydrate, clearOriginal } = require('../ndc/followUp');
 
 /** Buffer B 在段 10；opcode 在段 7。 */
 const BUFFER_B_INDEX = 10;
@@ -10,6 +13,9 @@ const OAR_LETTERS = ['A', 'B', 'C', 'D', 'I', 'H', 'G', 'F'];
 /** 屏幕上的键名 Account<A-H>：按顺序编号，与 Buffer B 字母是两套。 */
 const SCREEN_LETTERS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
 const CANCEL_KEY = 'E';
+/** 交易应答模式：账户键 1..10（ATM 的账户屏最多 10 个），屏上 Account<n> 按 1 基编号。 */
+const REPLY_MAX_ACCOUNTS = 10;
+const REPLY_KEYS = Array.from({ length: REPLY_MAX_ACCOUNTS }, (_, i) => String(i + 1));
 
 /**
  * active keys 位图（手册 B006-6180 p.10-90，见 hostConfirmation.js 注释）：第 1 位数字键，
@@ -40,10 +46,23 @@ const isDeposit = (opcode) => opcode.startsWith('BA') || opcode.startsWith('BB')
  * 存款（ATM 自己会对存款的 OAR 回 E）与改密默认不发；改密仅在 includePinChange 时发，存款仅在 includeDeposit 时发
  * （用来验 ATM 对存款 OAR 自动回 E）。
  * 账号必须是纯数字（ATM 丢弃非数字账号），名字不要含 `;`。默认 **关闭**。
+ *
+ * `path: "reply"`（缺省 `"itr"`，上面是 itr 的行为、字节不变）：交易应答 NS 071 / 073 的 OAR。
+ *  - 首条请求：存底，回类 4 应答，NS = 转入方向 ? toNextState(073) : fromNextState(071)，FID 5 屏
+ *    `Account1Number=…;Account1Name=…;…`（最多 10 个）；
+ *  - 剥过字段的跟进（段 5–9 与 11 空）B ∈ 1..10：补回字段后返回 null，交给后面的规则作答；
+ *  - 跟进的其余键（E 及认不出的）一律回取消应答——不能让它落到批准。
  */
 module.exports = function makeOarSelection(cfg = {}) {
   const enabled = cfg.enabled === true;
-  const accounts = Array.isArray(cfg.accounts) ? cfg.accounts.slice(0, OAR_LETTERS.length) : [];
+  const path = cfg.path != null ? cfg.path : 'itr';
+  if (path !== 'itr' && path !== 'reply') {
+    throw new Error(`oarSelection: path must be "itr" or "reply", got "${path}"`);
+  }
+  const maxAccounts = path === 'reply' ? REPLY_MAX_ACCOUNTS : OAR_LETTERS.length;
+  const accounts = Array.isArray(cfg.accounts) ? cfg.accounts.slice(0, maxAccounts) : [];
+  const fromNextState = cfg.fromNextState != null ? cfg.fromNextState : '071';
+  const toNextState = cfg.toNextState != null ? cfg.toNextState : '073';
   const direction = cfg.direction != null ? cfg.direction : 'from';
   const includePinChange = cfg.includePinChange === true;
   const includeDeposit = cfg.includeDeposit === true;
@@ -60,14 +79,37 @@ module.exports = function makeOarSelection(cfg = {}) {
     const opcode = fields[OPCODE_INDEX] || '';
     if (isDeposit(opcode) && !includeDeposit) return null;
     if (isPinChange(opcode) && !includePinChange) return null;
+    const cancel = () => buildCancelReply({
+      parsed, session, helpers, nextState: cancelNextState, printer: cancelPrinter,
+    });
+
+    if (path === 'reply') {
+      if (isStrippedFollowUp(parsed, session)) {
+        if (REPLY_KEYS.includes(fields[BUFFER_B_INDEX] || '')) {
+          rehydrate(parsed, session, 'oar');
+          return null;
+        }
+        clearOriginal(session);
+        return cancel();
+      }
+      rememberOriginal(session, fields);
+      const req = extractRequest(parsed);
+      const toward = direction === 'to' || (direction === 'auto' && isTransfer(opcode));
+      const data = accounts
+        .map((a, i) => `Account${i + 1}Number=${a.number};Account${i + 1}Name=${a.name}`)
+        .join(';');
+      return buildTransactionReply({
+        luno: req.luno,
+        nextState: toward ? toNextState : fromNextState,
+        fieldG: '',
+        screen: buildScreen(session, data),
+        printer: req.mcn + '0',
+      });
+    }
 
     const bufferB = fields[BUFFER_B_INDEX] || '';
     if (OAR_LETTERS.includes(bufferB)) return null;
-    if (bufferB === CANCEL_KEY) {
-      return buildCancelReply({
-        parsed, session, helpers, nextState: cancelNextState, printer: cancelPrinter,
-      });
-    }
+    if (bufferB === CANCEL_KEY) return cancel();
 
     const toward = direction === 'to' || (direction === 'auto' && isTransfer(opcode));
     const lines = [toward ? 'TO' : 'FROM'];

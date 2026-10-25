@@ -358,7 +358,10 @@
       }
     ],
     "direction": "auto",
-    "includePinChange": false
+    "includePinChange": false,
+    "path": "itr",
+    "fromNextState": "071",
+    "toNextState": "073"
   },
   "genericSelection": {
     "enabled": false,
