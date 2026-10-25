@@ -89,4 +89,6 @@ test('buildEmvConfigCommand: 8 FS luno FS 子类 FS 数据', () => {
   assert.strictEqual(buildEmvConfigCommand({ subclass: '1', data: 'ABC', luno: '000' }), ['8', '000', '1', 'ABC'].join(FS));
   assert.strictEqual(buildEmvConfigCommand({ subclass: '2' }), ['8', '', '2', ''].join(FS));
   assert.throws(() => buildEmvConfigCommand({ data: 'x' }), /subclass/);
+  assert.strictEqual(buildEmvConfigCommand({ subclass: '5', entries: ['01', '02'] }), ['8', '', '5', '01\x1d02'].join(FS));
+  assert.throws(() => buildEmvConfigCommand({ subclass: '5', data: 'x', entries: ['01'] }), /data.*entries|entries.*data/);
 });

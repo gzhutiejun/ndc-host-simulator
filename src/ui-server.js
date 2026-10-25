@@ -15,7 +15,7 @@
 //   POST /api/push       立刻给所有活跃连接下发一条报文，不等 ATM 先发请求。
 //                        {code, modifier, luno, msn} → 类 1 终端命令（默认）
 //                        {type:"fit", ...}           → 类 3 FIT 下发，缺省字段取 config.fitDownload
-//                        {type:"emv", subclass, data, luno} → 报文类 8 EMV 配置命令，缺 subclass 400
+//                        {type:"emv", subclass, data?|entries?, luno} → 报文类 8 EMV 配置命令（entries 为字符串数组，GS 连接），缺 subclass 或 data 与 entries 同给 400
 //                        {type:"reply", luno, nextState, tsn, functionId, printer} → 类 4 交易应答
 //                        {type:"tr34", modifier, data?, luno?} → TR-34 远程装键命令（报文类 3 / 4x，base94 + 固定 DER 样本），未知 modifier 400
 //                        {type:"data", identifier, data, luno, msn} → 类 3 数据命令（如 3/1 A 增强选项），缺 identifier 400
@@ -291,7 +291,7 @@ function createUiServer({ engine, library = [], push, ekiMasterKey = '', ekiKbpk
     //   不带 type / type='command' —— 类 1 终端命令，必须有 code（老契约，逐字节不变）
     //   type='fit'                 —— FIT 下发，报文类 3，没有 code 这个概念
     //   type='data'                —— 通用数据命令，报文类 3，必须有 identifier（报文标识）
-    //   type='emv'                 —— EMV 配置命令，报文类 8，必须有 subclass
+    //   type='emv'                 —— EMV 配置命令，报文类 8，必须有 subclass；可带 data 或 entries（GS 连接），不能同给
     //   type='eki'                 —— 主机密钥命令，报文类 3 子类 3/4，masterKey 缺省取配置 eki.masterKey
     //   type='tr31'                —— TR-31 密钥命令 4e/4f/4l，kbpk 缺省取配置 eki.kbpk，再缺省 eki.masterKey
     const type = body && body.type != null ? body.type : 'command';
@@ -358,6 +358,14 @@ function createUiServer({ engine, library = [], push, ekiMasterKey = '', ekiKbpk
     }
     if (type === 'emv' && (!body || typeof body.subclass !== 'string' || body.subclass === '')) {
       sendJson(res, 400, { error: 'push type=emv requires a non-empty "subclass"' });
+      return;
+    }
+    if (type === 'emv' && body.data !== undefined && body.entries !== undefined) {
+      sendJson(res, 400, { error: 'push type=emv takes either "data" or "entries", not both' });
+      return;
+    }
+    if (type === 'emv' && body.entries !== undefined && (!Array.isArray(body.entries) || body.entries.some((e) => typeof e !== 'string'))) {
+      sendJson(res, 400, { error: 'push type=emv "entries" must be an array of strings' });
       return;
     }
     if (type === 'command' && (!body || typeof body.code !== 'string' || body.code === '')) {

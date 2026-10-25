@@ -483,6 +483,12 @@ test('POST /api/push: type=emv 缺 subclass 返回 400，带 subclass 透传给 
     const ok = await request(port, 'POST', '/api/push', { type: 'emv', subclass: '1', data: 'x' });
     assert.strictEqual(ok.status, 200);
     assert.strictEqual(calls[0].subclass, '1');
+    const both = await request(port, 'POST', '/api/push', { type: 'emv', subclass: '5', entries: ['01'], data: 'x' });
+    assert.strictEqual(both.status, 400);
+    assert.strictEqual(calls.length, 1);
+    const ent = await request(port, 'POST', '/api/push', { type: 'emv', subclass: '5', entries: ['01', '02'] });
+    assert.strictEqual(ent.status, 200);
+    assert.deepStrictEqual(calls[1].entries, ['01', '02']);
   } finally {
     await new Promise((resolve) => ui.close(resolve));
   }

@@ -1,4 +1,4 @@
-const { FS } = require('./constants');
+const { FS, GS } = require('./constants');
 
 /**
  * 组装一条主机→ATM 的终端命令。
@@ -67,11 +67,14 @@ function buildFitDownload({ entries, luno = '', msn = '', responseFlag = '' } = 
  *
  *   "8" FS [LUNO] FS <子类> FS <数据>
  *
- * 子类 1/2/3 是 AID / 公钥 / 签名等表的下发，数据原样放进去，不校验。
+ * 子类 1 货币数据对象、2 交易数据对象、3 语言支持、4 终端数据对象、5 终端可接受 AID 表（条目间 GS）。
+ * 数据原样放进去，不校验。可给 data（原样）或 entries（字符串数组，用 GS 连接），不能同时给。
  */
-function buildEmvConfigCommand({ subclass, data = '', luno = '' } = {}) {
+function buildEmvConfigCommand({ subclass, data, entries, luno = '' } = {}) {
   if (!subclass) throw new Error('buildEmvConfigCommand: subclass is required');
-  return ['8', luno, subclass, data].join(FS);
+  if (data !== undefined && entries !== undefined) throw new Error('buildEmvConfigCommand: give either data or entries, not both');
+  const body = entries !== undefined ? entries.join(GS) : (data === undefined ? '' : data);
+  return ['8', luno, subclass, body].join(FS);
 }
 
 module.exports = { buildTerminalCommand, buildDataCommand, buildFitDownload, buildEmvConfigCommand };
