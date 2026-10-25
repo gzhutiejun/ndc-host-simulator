@@ -17,6 +17,7 @@
 //                        {type:"fit", ...}           → 类 3 FIT 下发，缺省字段取 config.fitDownload
 //                        {type:"emv", subclass, data, luno} → 报文类 8 EMV 配置命令，缺 subclass 400
 //                        {type:"reply", luno, nextState, tsn, functionId, printer} → 类 4 交易应答
+//                        {type:"tr34", modifier, data?, luno?} → TR-34 远程装键命令（报文类 3 / 4x，base94 + 固定 DER 样本），未知 modifier 400
 //                        {type:"data", identifier, data, luno, msn} → 类 3 数据命令（如 3/1 A 增强选项），缺 identifier 400
 
 const http = require('node:http');
@@ -28,6 +29,7 @@ const { decodeWire } = require('./framing');
 const { extractLts, extractCam } = require('./ndc/transactionRequest');
 const { HEX_32, HEX_16_OR_32 } = require('./ndc/eki');
 const { VERSIONS: TR31_VERSIONS } = require('./ndc/tr31');
+const { extractTr34Reply, MODIFIERS: TR34_MODIFIERS } = require('./ndc/tr34');
 const { FS, GS, RS, SO, SI } = require('./constants');
 const { parseSupplyCountersStatus } = require('./ndc/supplyCounters');
 const { parseSensorsStatus, parseTamperSensorStatus } = require('./ndc/sensors');
@@ -200,6 +202,7 @@ function createUiServer({ engine, library = [], push, ekiMasterKey = '', ekiKbpk
       ? parseTamperSensorStatus(rawFields.slice(4))
       : undefined;
     const tr31 = direction === 'SEND' ? extractTr31Header(decodeWire(buf).split(FS)) : undefined;
+    const tr34 = rawFields ? extractTr34Reply(rawFields) : undefined;
     const frame = {
       direction, // 'RECV' | 'SEND'
       bytes: buf.length,
@@ -215,6 +218,7 @@ function createUiServer({ engine, library = [], push, ekiMasterKey = '', ekiKbpk
       sensors: sensors || null,
       tamperSensor: tamperSensor || null,
       tr31: tr31 || null,
+      tr34: tr34 || null,
       ts: Date.now(),
     };
     const line = `data: ${JSON.stringify(frame)}\n\n`;
@@ -291,8 +295,8 @@ function createUiServer({ engine, library = [], push, ekiMasterKey = '', ekiKbpk
     //   type='eki'                 —— 主机密钥命令，报文类 3 子类 3/4，masterKey 缺省取配置 eki.masterKey
     //   type='tr31'                —— TR-31 密钥命令 4e/4f/4l，kbpk 缺省取配置 eki.kbpk，再缺省 eki.masterKey
     const type = body && body.type != null ? body.type : 'command';
-    if (type !== 'command' && type !== 'fit' && type !== 'data' && type !== 'emv' && type !== 'eki' && type !== 'tr31' && type !== 'reply') {
-      sendJson(res, 400, { error: `push: unknown type "${type}" (expected "command", "fit", "data", "emv", "eki", "tr31" or "reply")` });
+    if (type !== 'command' && type !== 'fit' && type !== 'data' && type !== 'emv' && type !== 'eki' && type !== 'tr31' && type !== 'tr34' && type !== 'reply') {
+      sendJson(res, 400, { error: `push: unknown type "${type}" (expected "command", "fit", "data", "emv", "eki", "tr31", "tr34" or "reply")` });
       return;
     }
     if (type === 'data' && (!body || typeof body.identifier !== 'string' || body.identifier === '')) {
@@ -330,6 +334,12 @@ function createUiServer({ engine, library = [], push, ekiMasterKey = '', ekiKbpk
         return;
       }
       body = { ...body, kbpk };
+    }
+    if (type === 'tr34') {
+      if (!body || !TR34_MODIFIERS.has(body.modifier)) {
+        sendJson(res, 400, { error: 'push type=tr34 requires a known modifier' });
+        return;
+      }
     }
     if (type === 'reply') {
       const b = body || {};

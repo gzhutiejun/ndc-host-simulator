@@ -396,6 +396,12 @@
       tr.textContent = 'TR-31 ' + frame.tr31.usage + '/' + frame.tr31.mode + ' 版本 ' + frame.tr31.version;
       row.appendChild(tr);
     }
+    if (frame.tr34) {
+      var t34 = document.createElement('span');
+      t34.className = 'lts';
+      t34.textContent = frame.tr34.text;
+      row.appendChild(t34);
+    }
     streamLog.appendChild(row);
 
     frameCount += 1;

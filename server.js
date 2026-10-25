@@ -12,6 +12,7 @@ const { parseLibrary } = require('./src/message-library');
 const { createLogger } = require('./src/logging');
 const { createUiServer } = require('./src/ui-server');
 const { buildEki } = require('./src/ndc/eki');
+const { buildTr34Command } = require('./src/ndc/tr34');
 const { buildTr31, DEFAULTS: TR31_DEFAULTS } = require('./src/ndc/tr31');
 const { buildTransactionReply } = require('./src/ndc/transactionReply');
 const { buildTerminalCommand, buildFitDownload, buildDataCommand, buildEmvConfigCommand } = require('./src/push');
@@ -178,6 +179,7 @@ function createApp(config) {
     const isEmv = spec && spec.type === 'emv';
     const isEki = spec && spec.type === 'eki';
     const isTr31 = spec && spec.type === 'tr31';
+    const isTr34 = spec && spec.type === 'tr34';
     const isReply = spec && spec.type === 'reply';
     let expectedKvv;
     let header;
@@ -185,6 +187,7 @@ function createApp(config) {
     if (isFit) texts = buildFitMessages(spec);
     else if (isData) texts = [buildDataCommand(spec)];
     else if (isEmv) texts = [buildEmvConfigCommand(spec)];
+    else if (isTr34) texts = [buildTr34Command({ modifier: spec.modifier, data: spec.data, luno: spec.luno })];
     else if (isReply) {
       texts = [buildTransactionReply({
         luno: spec.luno != null ? spec.luno : '',
@@ -215,6 +218,7 @@ function createApp(config) {
     else if (isReply) meta = { type: 'TransactionReply', rule: 'ui:push:reply' };
     else if (isEki) meta = { type: 'DataCommand', rule: 'ui:push:eki' };
     else if (isTr31) meta = { type: 'DataCommand', rule: 'ui:push:tr31' };
+    else if (isTr34) meta = { type: 'DataCommand', rule: 'ui:push:tr34' };
     let sent = 0;
     for (const socket of activeSockets) {
       if (socket.destroyed) continue;

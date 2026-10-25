@@ -796,3 +796,20 @@ test('publish: RECV 22…F…K 帧附 tamperSensor', async () => {
   assert.deepStrictEqual(frame.tamperSensor.errors, []);
   assert.strictEqual(frame.sensors, null);
 });
+
+test('POST /api/push: type=tr34 透传；未知 modifier 返回 400', async () => {
+  const engine = createEngine({ rules: [], handlers: {} });
+  const calls = [];
+  const ui = createUiServer({ engine, push: (spec) => { calls.push(spec); return { sent: 1 }; } });
+  await new Promise((resolve) => ui.listen(0, resolve));
+  try {
+    const port = ui.server.address().port;
+    assert.strictEqual((await request(port, 'POST', '/api/push', { type: 'tr34', modifier: '?' })).status, 400);
+    assert.strictEqual((await request(port, 'POST', '/api/push', { type: 'tr34' })).status, 400);
+    assert.strictEqual(calls.length, 0);
+    assert.strictEqual((await request(port, 'POST', '/api/push', { type: 'tr34', modifier: 'X' })).status, 200);
+    assert.strictEqual(calls[0].modifier, 'X');
+  } finally {
+    await new Promise((resolve) => ui.close(resolve));
+  }
+});
