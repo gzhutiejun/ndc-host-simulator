@@ -366,3 +366,27 @@ test('libraryKeyFromField：库键存为去尾空格的 "JA"，请求 "JA      "
   assert.strictEqual(out.payload, 'JA-REPLY');
   assert.strictEqual(out.rule, 'opcode-library:JA');
 });
+
+test('override: 带 match 时留到匹配的报文才用，不匹配的照常走规则', () => {
+  const engine = createEngine({
+    rules: [{ name: 'gis', match: { messageClass: '2', field: { index: 3, startsWith: '9' } }, template: '1<FS><FS><FS>1' }],
+    handlers: {},
+  });
+  engine.setNextResponse({ payload: 'DENIED', match: '\\|BA BA' });
+  const ready = parse(encodeText('22' + FS + '123' + FS + FS + '9'));
+  const first = engine.respond(ready, createSession());
+  assert.strictEqual(first.rule, 'gis'); // Ready 不匹配，没吃掉覆盖
+
+  const tx = parse(encodeText('11' + FS + '123' + FS + FS + FS + '12' + FS + 'TRACK' + FS + FS + 'BA BA C '));
+  const second = engine.respond(tx, createSession());
+  assert.strictEqual(second.payload, 'DENIED');
+  assert.strictEqual(second.rule, 'override:payload');
+
+  const third = engine.respond(ready, createSession());
+  assert.strictEqual(third.rule, 'gis'); // 用一次就清
+});
+
+test('override: match 不是合法正则时 setNextResponse 就抛错', () => {
+  const engine = createEngine({ rules: [], handlers: {} });
+  assert.throws(() => engine.setNextResponse({ payload: 'X', match: '(' }), /bad match regex/);
+});

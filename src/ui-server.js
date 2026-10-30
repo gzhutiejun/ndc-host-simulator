@@ -11,6 +11,7 @@
 //                        选中后靠 key 让 engine 去查，不用把 602 字节的载荷都传一遍）
 //   GET  /api/stream     SSE，收发的每一帧推一条 `data: {...}\n\n`
 //   POST /api/next       设置/撤销一次性覆盖，body 就是 engine.setNextResponse() 的参数
+//                        （可带 match：正则，留到字段以 | 连起来匹配它的入站报文才用，见 engine.js）
 //   GET/POST /api/config 运行时开关：{settlement:{autoGisOnP20:boolean}}
 //   POST /api/push       立刻给所有活跃连接下发一条报文，不等 ATM 先发请求。
 //                        {code, modifier, luno, msn} → 类 1 终端命令（默认）

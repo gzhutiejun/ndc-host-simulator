@@ -75,17 +75,28 @@ function createEngine({ rules = [], handlers = {}, now = () => new Date(), libra
     //   { payload: '<原始报文文本>' } —— 原样使用，不套 applyTemplate。
     //   { noReply: true } —— 下一条入站报文不应答，用来测 ATM 自己的主机应答超时。
     //   null/undefined —— 撤销已设置但还没用掉的覆盖（不消耗一次使用）。
+    // 前三种可另带 match（正则字符串）：覆盖留着，直到一条入站报文的字段以 | 连起来匹配它才用掉；
+    // 不匹配的报文照常走规则。自动化测试要拒绝「下一条交易请求」时用——ATM 在交易请求前一刻会
+    // 补发上一段的 Ready（22…B），不带 match 的覆盖会被那条 Ready 吃掉。
     setNextResponse(override) {
       if (override == null) {
         nextResponse = null;
         return;
       }
+      let match = null;
+      if (override.match != null) {
+        try {
+          match = new RegExp(override.match);
+        } catch (err) {
+          throw new Error(`setNextResponse: bad match regex: ${err.message}`);
+        }
+      }
       if (override.noReply === true) {
-        nextResponse = { kind: 'noReply' };
+        nextResponse = { kind: 'noReply', match };
         return;
       }
       if (typeof override.payload === 'string') {
-        nextResponse = { kind: 'payload', payload: override.payload, label: 'override:payload' };
+        nextResponse = { kind: 'payload', payload: override.payload, label: 'override:payload', match };
         return;
       }
       if (typeof override.key === 'string') {
@@ -93,7 +104,7 @@ function createEngine({ rules = [], handlers = {}, now = () => new Date(), libra
         if (payload === undefined) {
           throw new Error(`setNextResponse: unknown library key "${override.key}"`);
         }
-        nextResponse = { kind: 'payload', payload, label: `override:key:${override.key}` };
+        nextResponse = { kind: 'payload', payload, label: `override:key:${override.key}`, match };
         return;
       }
       throw new Error('setNextResponse: override must be { key }, { payload }, { noReply: true }, or null/undefined to clear');
@@ -102,7 +113,7 @@ function createEngine({ rules = [], handlers = {}, now = () => new Date(), libra
       // 覆盖检查放在规则循环之前、任何匹配逻辑之前：一旦设置了覆盖，它必须赢过规则
       // （包括 noReply 规则）。没设置时（nextResponse === null，默认状态）这个 if 直接
       // 跳过，下面的规则循环是改动前的原样代码，行为逐字节不变。
-      if (nextResponse !== null) {
+      if (nextResponse !== null && (!nextResponse.match || nextResponse.match.test((parsed.fields || []).join('|')))) {
         const override = nextResponse;
         nextResponse = null; // 用掉即清：不管这次匹配与否，覆盖只吃一条入站报文
         if (override.kind === 'noReply') return { payload: null, rule: 'override:noReply' };
