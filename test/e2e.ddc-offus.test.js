@@ -96,6 +96,12 @@ test('本行改密 BBFD → 123（现网 [BBFDB C ] →(123)）', { timeout: 500
   });
 });
 
+test('本行 NBC 卡改密 BBHD → 123（Diebold trace 9116080 BBHDA ×2；以前没规则、落到通用 048）', { timeout: 5000 }, async () => {
+  await withApp(async (send) => {
+    assert.strictEqual((await send('BBHDA   '))[3], '123');
+  });
+});
+
 test('转他人户的 ITR 回送也可以只带 Buffer B：合并到本会话上一条 GD H', { timeout: 5000 }, async () => {
   await withApp(async (send, confirm) => {
     assert.ok(isItr(await send('GD HA C ', '000000000258')));

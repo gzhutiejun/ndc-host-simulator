@@ -49,7 +49,9 @@ module.exports = function makeDdcInterbank(cfg = {}) {
     if (stage === 'A') {
       if (bufferB === 'E') return reply('131');
       if (isAccountKey(accounts, bufferB)) return reply('808');
-      return buildAccountListItr(req.luno, { screen: '047', toar: true, accounts });
+      // 行文本照 Diebold trace（`100*********160 USD C`），所以行格式也照真实主机：没有样本的「1」和「-->」。
+      // 两种混用（`I1  100…160 USD C-->`）ATM 认不出，回 E01（acc-cubc e2e 2026-10-30）。
+      return buildAccountListItr(req.luno, { screen: '047', toar: true, accounts, hostRows: true });
     }
     if (stage === 'B') {
       s.interbankBank = bufferC;

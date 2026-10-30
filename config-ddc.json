@@ -390,6 +390,18 @@
       "handler": "ddcPinChange"
     },
     {
+      "name": "ddc-pin-change-nbc",
+      "match": {
+        "messageClass": "1",
+        "subClass": "1",
+        "field": {
+          "index": 7,
+          "startsWith": "BBHD"
+        }
+      },
+      "handler": "ddcPinChange"
+    },
+    {
       "name": "ddc-css-pin-change-auth",
       "match": {
         "messageClass": "1",

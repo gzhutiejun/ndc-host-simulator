@@ -21,6 +21,9 @@ test('本行 NBC 卡：DF A 账户列表（屏 047）→ 回送 FDK 字母 → 8
   const a = h(req('DF AAD  '), s, helpers).split(FS);
   assert.deepStrictEqual([a[0], a[3]], ['3', '210110010000']);
   assert.ok(a[5].includes('\x1bO047'));
+  // 真实主机的行格式（Diebold trace）：行号字母直接接文本，没有「1」和「-->」
+  assert.ok(a[5].includes('\x0fI100*********160 USD C\x0fL100*********051 KHR S'));
+  assert.ok(!a[5].includes('-->'));
   assert.strictEqual(h(req('DF AAD  ', { b: 'A' }), s, helpers).split(FS)[3], '808');
   assert.strictEqual(h(req('DF AAD  ', { b: 'E' }), s, helpers).split(FS)[3], '131');
 });
