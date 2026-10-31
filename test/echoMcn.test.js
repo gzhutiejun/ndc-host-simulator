@@ -10,9 +10,14 @@ test('交易应答的打印字段通配 0 换成请求的 MCN', () => {
   assert.strictEqual(echoMcn(req('1<'), reply).split(FS)[6], '<02 RECEIPT');
 });
 
-test('打印字段为空、已带具体 MCN、不是交易应答、请求没 MCN 时不动', () => {
+test('打印字段为空或缺的补成 <MCN>00（o/p/q 必填）', () => {
   const empty = ['4', 'CUB', '', '547', '', '', ''].join(FS);
-  assert.strictEqual(echoMcn(req('1<'), empty), empty);
+  assert.strictEqual(echoMcn(req('1<'), empty).split(FS)[6], '<00');
+  const short = ['4', 'CUB', '', '547'].join(FS);
+  assert.deepStrictEqual(echoMcn(req('1<'), short).split(FS), ['4', 'CUB', '', '547', '', '', '<00']);
+});
+
+test('已带具体 MCN、不是交易应答、请求没 MCN 时不动', () => {
   const already = ['4', 'CUB', '', '063', '', '', '702'].join(FS);
   assert.strictEqual(echoMcn(req('1<'), already), already);
   const itr = ['3', 'CUB', '', '210110010000', '037', 'X'].join(FS);
