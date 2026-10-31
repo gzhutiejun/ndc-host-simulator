@@ -7,6 +7,7 @@ const { parseTransmissionCode, setTransmissionCode } = require('./src/ebcdic');
 const { parse } = require('./src/ndc/parser');
 const { createSession } = require('./src/session');
 const { mergeConfirmation } = require('./src/ndc/confirmation');
+const { echoMcn } = require('./src/ndc/echoMcn');
 const { createEngine } = require('./src/engine');
 const { parseLibrary } = require('./src/message-library');
 const { createLogger } = require('./src/logging');
@@ -332,6 +333,11 @@ function createApp(config) {
           let result = { payload: null, rule: null };
           try {
             result = augmentCam(parsed, engine.respond(parsed, session), config.cam);
+            // CUBC（DDC 规则）的交易应答回显请求的 MCN（现网主机如此，ATM 据此认应答）。报文库原样应答
+            // （acc-ndc-app 用）和控制台覆盖不动 —— 后者好让测试发一条 MCN 不对的应答。
+            if (result.payload != null && String(result.rule || '').startsWith('ddc')) {
+              result = { ...result, payload: echoMcn(parsed, result.payload) };
+            }
           } catch (err) {
             console.error(`Engine error: ${err.message}`);
           }
