@@ -9,7 +9,8 @@ module.exports = function makeBalance(cfg = {}) {
   const printerFlag = cfg.printerFlag != null ? cfg.printerFlag : '1';
   const includeCam = cfg.includeCam === true;
   const camArc = cfg.camArc != null ? cfg.camArc : '00';
-  const receipt = cfg.receipt || { screen: '', printerData: '' };
+  // 扇区 6 = TSN(4) + FID(1) + 屏号(3)：余额 NS 001 要配 FID 4/5 终端才判成功。
+  const receipt = cfg.receipt || { screen: '00005000', printerData: '' };
 
   return function balance(parsed, session, helpers) {
     const req = extractRequest(parsed);

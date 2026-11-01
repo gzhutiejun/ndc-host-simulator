@@ -69,7 +69,8 @@ module.exports = function makeReplyFee(cfg = {}) {
         nextState,
         fieldG: '',
         screen: buildScreen(session, 'Fee=' + fee),
-        printer: req.mcn + '0',
+        // o / p / q 三个都必填（终端不足 3 个字符回 A01）：q = 0 不打印。
+        printer: req.mcn + '0' + '0',
       });
     }
     if (flag === 'B' || flag === 'D') {

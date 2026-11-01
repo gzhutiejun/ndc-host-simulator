@@ -1,6 +1,7 @@
 const { buildInteractiveResponse } = require('../ndc/interactiveResponse');
 const { buildTransactionReply } = require('../ndc/transactionReply');
 const { extractRequest } = require('../ndc/transactionRequest');
+const { buildScreen } = require('./replyFee');
 
 /** Transaction Request 里 Buffer B 的段下标（字段 m）。 */
 const BUFFER_B_INDEX = 10;
@@ -133,7 +134,8 @@ module.exports = function makeHostConfirmation(cfg = {}) {
         luno: req.luno,
         nextState: declineNextState,
         fieldG: '',
-        screen: '',
+        // 扇区 6 不能空（终端回 A01）：TSN + FID 5 + 屏 000。
+        screen: buildScreen(session, ''),
         printer,
       });
     }

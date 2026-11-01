@@ -42,7 +42,7 @@ test('genericSelection: path reply 首条 -> 类 4，NS 071，FID 5 屏含 CONDI
   assert.strictEqual(f[5][4], '5');
   assert.ok(f[5].includes(';CONDITIONAL=LITERAL;'));
   assert.ok(f[5].endsWith(';BUTTONBTEXT=No;'));
-  assert.strictEqual(f[6], '60');
+  assert.strictEqual(f[6], '600'); // MCN + 卡标志 + 打印标志 0（o/p/q 必填）
 });
 
 test('genericSelection: 跟进 B=A -> null，段 5–9 补回原值', () => {

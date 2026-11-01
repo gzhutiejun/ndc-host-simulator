@@ -13,8 +13,9 @@ module.exports = function makeWithdrawal(cfg = {}) {
   const maxAmount = cfg.maxAmount != null ? cfg.maxAmount : null;
   const includeCam = cfg.includeCam === true;
   const camArc = cfg.camArc != null ? cfg.camArc : '00';
-  const receipt = cfg.receipt || { screen: '', printerData: '' };
-  const declineReceipt = cfg.declineReceipt || { screen: '', printerData: '' };
+  // 扇区 6 = TSN(4) + FID(1) + 屏号(3)：终端少于 5 个字符回 A01。批准 FID 2（出钞并打印），拒绝 FID 5。
+  const receipt = cfg.receipt || { screen: '00002000', printerData: '' };
+  const declineReceipt = cfg.declineReceipt || { screen: '00005000', printerData: '' };
 
   return function withdrawal(parsed, session, helpers) {
     const req = extractRequest(parsed, { amountFieldIndex });

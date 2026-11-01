@@ -83,7 +83,8 @@ module.exports = function makeGenericSelection(cfg = {}) {
         nextState,
         fieldG: '',
         screen: buildScreen(session, data),
-        printer: req.mcn + '0',
+        // o / p / q 三个都必填（终端不足 3 个字符回 A01）：q = 0 不打印。
+        printer: req.mcn + '0' + '0',
       });
     }
     return buildInteractiveResponse({

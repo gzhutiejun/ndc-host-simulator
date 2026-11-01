@@ -8,7 +8,8 @@ module.exports = function makeGeneric(cfg = {}) {
   const printerFlag = cfg.printerFlag != null ? cfg.printerFlag : '1';
   const includeCam = cfg.includeCam === true;
   const camArc = cfg.camArc != null ? cfg.camArc : '00';
-  const receipt = cfg.receipt || { screen: '', printerData: '' };
+  // 扇区 6 = TSN(4) + FID(1) + 屏号(3)：终端少于 5 个字符回 A01。FID 5 = 置下一状态并打印。
+  const receipt = cfg.receipt || { screen: '00005000', printerData: '' };
 
   return function generic(parsed, session, helpers) {
     const req = extractRequest(parsed);

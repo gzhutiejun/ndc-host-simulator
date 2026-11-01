@@ -670,11 +670,11 @@
     "includeCam": true,
     "camArc": "00",
     "receipt": {
-      "screen": "",
+      "screen": "00002000",
       "printerData": "<GS>1  CASH WITHDRAWAL<LF>  USD <AMOUNT><LF>  <PAN><LF>  <DATE> <TIME><LF>  REF <RECNO><LF><FF>"
     },
     "declineReceipt": {
-      "screen": "",
+      "screen": "00005000",
       "printerData": "<GS>1  WITHDRAWAL DECLINED<LF>  USD <AMOUNT><LF>  <DATE> <TIME><LF><FF>"
     }
   },
@@ -686,7 +686,7 @@
     "includeCam": true,
     "camArc": "00",
     "receipt": {
-      "screen": "074075<ESC>[20;80m<SI>FG      <BALANCE> ",
+      "screen": "00005074075<ESC>[20;80m<SI>FG      <BALANCE> ",
       "printerData": "<GS>1  BALANCE INQUIRY<LF>  AVAIL BAL: USD <BALANCE><LF>  <DATE> <TIME><LF><FF>"
     }
   },
@@ -697,7 +697,7 @@
     "includeCam": true,
     "camArc": "00",
     "receipt": {
-      "screen": "",
+      "screen": "00005000",
       "printerData": "<GS>1  TRANSACTION CANCELLED<LF>  <DATE> <TIME><LF><FF>"
     }
   },
@@ -708,7 +708,7 @@
     "includeCam": true,
     "camArc": "00",
     "receipt": {
-      "screen": "",
+      "screen": "00005000",
       "printerData": "<GS>1  PIN CHANGE<LF>  <DATE> <TIME><LF><FF>"
     }
   },
@@ -719,7 +719,7 @@
     "includeCam": true,
     "camArc": "00",
     "receipt": {
-      "screen": "",
+      "screen": "00005000",
       "printerData": "<GS>1  TRANSACTION<LF>  <DATE> <TIME><LF><FF>"
     }
   },

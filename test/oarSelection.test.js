@@ -101,7 +101,7 @@ test('oarSelection reply: 首条取款 -> 类 4，NS 071，FID 5 屏 Account<n> 
   assert.strictEqual(f[3], '071');
   assert.strictEqual(f[5][4], '5');
   assert.ok(f[5].includes(';Account1Number=1234567890;Account1Name=SAVINGS;Account2Number=2234567890;Account2Name=CHEQUE;'));
-  assert.strictEqual(f[6], '60');
+  assert.strictEqual(f[6], '600'); // MCN + 卡标志 + 打印标志 0（o/p/q 必填）
 });
 
 test('oarSelection reply: direction to -> 073；auto 下转账 073、取款 071；NS 可配', () => {

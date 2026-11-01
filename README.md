@@ -103,6 +103,10 @@ npm test           # 跑单元/端到端测试（node --test）
 - **includeCam** / **camArc**：是否在 reply 追加 CAM/EMV 缓冲及授权响应码（默认关）。
 - **receipt.screen** / **receipt.printerData**：屏幕/凭条模板，支持占位符
   `<AMOUNT> <PAN> <DATE> <TIME> <RECNO> <LUNO>` 与控制字 `<LF> <FF> <SO> <SI> <GS>`。
+- **扇区 6 不能空**：`receipt.screen` / `declineReceipt.screen` 就是应答的扇区 6，必须以
+  TSN(4) + FID(1) + 屏号(3) 开头——acc-ndc-app 对不足 5 个字符的扇区 6 回 A01（不重发，交易超时）。
+  出厂批准 `"00002000"`（FID 2 出钞并打印）、拒绝 `"00005000"`（FID 5 置下一状态并打印）；余额与兜底
+  见下文。NS 0/1 时终端还看 FID：取款批准要用成功集里的 FID（`2` 等），`5` + NS 001 会被判拒绝。
 
 > **需用真实 ATM 校准的项**（种子取自 AJMN1301 抓包，终端相关）：
 > ① 取款识别谓词 `field[7]=="ADC     "` 与金额索引 `8`；② 出钞用贪心分解（金额吻合但
@@ -119,6 +123,8 @@ npm test           # 跑单元/端到端测试（node --test）
 - **amount**：返回的固定余额（默认 `"5000.00"`），填入 screen/printer 模板的 `<BALANCE>`。
 - **returnCard** / **printerFlag** / **includeCam** / **camArc**：同取款。
 - **receipt.screen** / **receipt.printerData**：屏幕/凭条模板，支持 `<BALANCE> <PAN> <DATE> <TIME> <RECNO> <LUNO>` 与控制字 `<LF> <FF> <ESC> <SO> <SI> <GS>`。
+  出厂 `receipt.screen` 是 `"00005074075<ESC>[20;80m<SI>FG      <BALANCE> "`：TSN `0000` + FID `5` + 屏 `074`，
+  其后是屏幕更新。余额 NS 001 必须配 FID 4/5，终端才判成功（换别的 FID 会被判拒绝）。
 
 **取款拒绝**：`withdrawal` 块新增 `maxAmount`（默认 `null`=不主动限额）与 `declineNextState`
 （默认 `"048"`）、`declineReceipt`。当取款金额超过 `maxAmount`，或金额无法用磁箱面额凑出时，
@@ -147,6 +153,7 @@ npm test           # 跑单元/端到端测试（node --test）
 - **returnCard** / **printerFlag** / **includeCam** / **camArc**：同取款/余额。
 - **receipt.screen** / **receipt.printerData**：屏幕/凭条模板，支持 `<PAN> <DATE> <TIME> <RECNO> <LUNO>`
   与控制字 `<LF> <FF> <ESC> <SO> <SI> <GS>`。
+  出厂 `receipt.screen` 是 `"00005000"`（TSN + FID 5 + 屏 000；`familyD` / `familyI` 同），扇区 6 不能空。
 
 **规则优先级**（engine 取首个匹配）：`withdrawal-request`(A) → `balance-inquiry`(C) →
 `generic-fallback`(class1-sub1 兜底，必须最后)。generic 是 sub1，与 `unsolicited-status-no-reply`(sub2)
