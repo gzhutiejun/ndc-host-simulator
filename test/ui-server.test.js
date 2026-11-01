@@ -287,6 +287,47 @@ test('server.js: POST /api/push type=data 经活跃连接下发一帧 class 3 �
   }
 });
 
+test('server.js: POST /api/push type=raw 原样下发，| ~ ^ 换成 FS GS RS', async () => {
+  const capDir = fs.mkdtempSync(path.join(os.tmpdir(), 'ndc-ui-pushraw-'));
+  const app = createApp({ enableTLS: false, captureDir: capDir, rules: [], uiPort: 1 });
+  await new Promise((resolve) => app.server.listen(0, resolve));
+  await new Promise((resolve) => app.ui.listen(0, resolve));
+  const ndcPort = app.server.address().port;
+  const uiPort = app.ui.server.address().port;
+  const client = net.createConnection({ port: ndcPort });
+  await new Promise((resolve, reject) => { client.on('connect', resolve); client.on('error', reject); });
+  const decoder = createDecoder();
+  const pushed = new Promise((resolve) => {
+    client.on('data', (d) => {
+      const frames = decoder.push(d);
+      if (frames.length) resolve(frames[0].toString('latin1'));
+    });
+  });
+  try {
+    const res = await request(uiPort, 'POST', '/api/push', { type: 'raw', text: '7|000||X~Y^Z' });
+    assert.strictEqual(res.status, 200);
+    assert.strictEqual(res.body.sent, 1);
+    assert.strictEqual(await pushed, '7' + FS + '000' + FS + FS + 'X' + GS + 'Y' + RS + 'Z');
+  } finally {
+    client.destroy();
+    await new Promise((resolve) => app.server.close(resolve));
+    await new Promise((resolve) => app.ui.close(resolve));
+  }
+});
+
+test('POST /api/push: type=raw 缺 text 返回 400', async () => {
+  const engine = createEngine({ rules: [], handlers: {} });
+  const ui = createUiServer({ engine, push: () => ({ sent: 1 }) });
+  await new Promise((resolve) => ui.listen(0, resolve));
+  const port = ui.server.address().port;
+  try {
+    const res = await request(port, 'POST', '/api/push', { type: 'raw' });
+    assert.strictEqual(res.status, 400);
+  } finally {
+    await new Promise((resolve) => ui.close(resolve));
+  }
+});
+
 test('POST /api/push: 不认识的 type 返回 400，而不是当成终端命令发出去', async () => {
   const engine = createEngine({ rules: [], handlers: {} });
   const ui = createUiServer({ engine, push: () => ({ sent: 1 }) });

@@ -20,6 +20,7 @@
 //                        {type:"reply", luno, nextState, tsn, functionId, printer} → 类 4 交易应答
 //                        {type:"tr34", modifier, data?, luno?} → TR-34 远程装键命令（报文类 3 / 4x，base94 + 固定 DER 样本），未知 modifier 400
 //                        {type:"data", identifier, data, luno, msn} → 类 3 数据命令（如 3/1 A 增强选项），缺 identifier 400
+//                        {type:"raw", text}         → 原样下发（| = FS、~ = GS、^ = RS），缺 text 400
 
 const http = require('node:http');
 const fs = require('node:fs');
@@ -295,9 +296,14 @@ function createUiServer({ engine, library = [], push, ekiMasterKey = '', ekiKbpk
     //   type='emv'                 —— EMV 配置命令，报文类 8，必须有 subclass；可带 data 或 entries（GS 连接），不能同给
     //   type='eki'                 —— 主机密钥命令，报文类 3 子类 3/4，masterKey 缺省取配置 eki.masterKey
     //   type='tr31'                —— TR-31 密钥命令 4e/4f/4l，kbpk 缺省取配置 eki.kbpk，再缺省 eki.masterKey
+    //   type='raw'                 —— 原样下发 text（| = FS、~ = GS、^ = RS），测试终端对未知 / 畸形报文的应答用
     const type = body && body.type != null ? body.type : 'command';
-    if (type !== 'command' && type !== 'fit' && type !== 'data' && type !== 'emv' && type !== 'eki' && type !== 'tr31' && type !== 'tr34' && type !== 'reply') {
-      sendJson(res, 400, { error: `push: unknown type "${type}" (expected "command", "fit", "data", "emv", "eki", "tr31", "tr34" or "reply")` });
+    if (type !== 'command' && type !== 'fit' && type !== 'data' && type !== 'emv' && type !== 'eki' && type !== 'tr31' && type !== 'tr34' && type !== 'reply' && type !== 'raw') {
+      sendJson(res, 400, { error: `push: unknown type "${type}" (expected "command", "fit", "data", "emv", "eki", "tr31", "tr34", "reply" or "raw")` });
+      return;
+    }
+    if (type === 'raw' && (!body || typeof body.text !== 'string' || body.text === '')) {
+      sendJson(res, 400, { error: 'push type=raw requires a non-empty "text"' });
       return;
     }
     if (type === 'data' && (!body || typeof body.identifier !== 'string' || body.identifier === '')) {
